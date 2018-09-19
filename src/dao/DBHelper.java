@@ -9,11 +9,11 @@ package dao;
  */
 public class DBHelper {
 
-
 //    private static Logger _log = LogManager.getLogger();
-//
 //    private Connection _con = null;
-//    private String _url = "jdbc:postgresql://localhost:5432/testdb";
+//    private Stringfinal _url = "jdbc:postgresql://ipアドレス:5432/KATUNEDB";
+//    private Stringfinal _user = "ユーザ名";
+//    private Stringfinal _password = "パスワード";
 //
 //    /**
 //     * データベースへの接続をおこなう.
