@@ -24,4 +24,5 @@ public class MessageHolder {
 	public static final String EM36 = "利用停止終了日時は利用停止開始日時より後の日時を入力してください";
 	public static final String EM37 = "カテゴリ名を選択してください";
 	public static final String EM38 = "日付が正しく入力されていません";
+	public static final String EM39 = "ログインがタイムアウト（時間切れ）となりました。再度ログインしてください";
 }
