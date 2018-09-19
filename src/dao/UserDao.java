@@ -8,7 +8,6 @@ import dto.User;
 
 /**
  * @author リコーITソリューションズ株式会社 KAT-UNE
- *
  */
 public class UserDao {
 

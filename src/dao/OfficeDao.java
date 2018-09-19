@@ -9,7 +9,6 @@ import java.util.List;
 
 /**
  * @author リコーITソリューションズ株式会社 KAT-UNE
- *
  */
 public class OfficeDao {
 	private Connection _con = null;

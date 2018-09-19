@@ -10,7 +10,6 @@ import dto.Resource;
 
 /**
  * @author リコーITソリューションズ株式会社 KAT-UNE
- *
  */
 public class ResourceDao {
 
