@@ -25,4 +25,8 @@ public class MessageHolder {
 	public static final String EM37 = "カテゴリ名を選択してください";
 	public static final String EM38 = "日付が正しく入力されていません";
 	public static final String EM39 = "ログインがタイムアウト（時間切れ）となりました。再度ログインしてください";
+
+	private MessageHolder(){
+
+	}
 }
