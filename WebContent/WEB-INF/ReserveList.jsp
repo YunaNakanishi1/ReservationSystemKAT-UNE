@@ -14,9 +14,10 @@
 </header>
 
 <div class="contents">
-<p>ダミーページ（予約一覧）</p>
-
-
+<h2>ダミーページ（予約一覧）</h2>
+<form action="resourcelist" method="post">
+<input type="submit" name="reserveList" value="リソース一覧">
+</form>
 </div>
 
 
