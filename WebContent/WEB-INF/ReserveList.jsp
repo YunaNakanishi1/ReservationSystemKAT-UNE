@@ -1,12 +1,27 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<!DOCTYPE html>
+<html lang="ja">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<meta charset="UTF-8">
+<title>リソース詳細</title>
+<link rel="stylesheet" href="deco.css">
+<link rel="stylesheet" href="header_footer.css">
 </head>
-<body>
+<body class="body">
+
+<div class="div">
+<header class="header"><p>会議室・備品予約システム</p>
+<input class="logintop" type="submit" value="ログアウト">
+</header>
+
+<div class="contents">
+<p>ダミーページ（予約一覧）</p>
+
+
+</div>
+
+
+<div class="footer1"><footer class="fotter2">copyright🄫KAT-UNE</footer></div>
+</div>
 
 </body>
 </html>

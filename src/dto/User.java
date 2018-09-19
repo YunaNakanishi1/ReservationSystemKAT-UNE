@@ -20,15 +20,15 @@ public class User {
 		this._authority = _authority;
 	}
 
-	public String get_userId() {
+	public String getUserId() {
 		return _userId;
 	}
 
-	public String get_password() {
+	public String getPassword() {
 		return _password;
 	}
 
-	public String get_authority() {
+	public String getAuthority() {
 		return _authority;
 	}
 
