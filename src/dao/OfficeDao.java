@@ -1,10 +1,11 @@
-/**
- *
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
  */
 package dao;
 
 /**
- * @author p000527259
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
 public class OfficeDao {
