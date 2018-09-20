@@ -63,3 +63,4 @@ public class DeleteResourceHandler implements Handler {
 	}
 
 }
+
