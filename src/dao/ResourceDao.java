@@ -5,6 +5,7 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -79,6 +80,8 @@ public class ResourceDao {
 						e1.printStackTrace();
 						 _log.error("displayAll() Exception e1");
 					}
+
+	            	// ResultSetのクローズ
 	            	try {
 						dbHelper.closeResource(rs);
 					} catch (Exception e2) {
@@ -106,7 +109,107 @@ public class ResourceDao {
 		return 0;
 	}
 
-	public Resource displayDetails(String resourceId) {
+	/**
+	  * リソース詳細を表示するために必要なDao.
+	  * @param resourceId
+	  * @return resourceをリターン
+	 * @throws SQLException
+	  */
+	public Resource displayDetails(String resourceId) throws SQLException {
+		DBHelper dbHelper = new DBHelper();
+
+		_con = dbHelper.connectDb(); //データベースに接続
+
+		PreparedStatement pstmt = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs = null;
+		ResultSet rs2 = null;
+
+		final String sql = "select resource_name,office_name,category_name,"
+				+ "capacity,usage_stop_start_date "
+				+ "from resources,offices,categories "
+				+ "where offices.office_id = resources.office_id "
+				+ "and categories.category_id = resources.category_id "
+				+ "and resource_id = ?;";
+
+		final String sql2 = "select resource_characteristic_name "
+				+ "from resource_features,resource_characteristics "
+				+ "where resource_id=? and "
+				+ "resource_features.resource_characteristic_id "
+				+ "= resource_characteristics.resource_characteristic_id "
+				+ "order by resource_features.resource_characteristic_id;";
+
+		if(_con != null){
+
+			String resourceName = "";
+			String officeName = "";
+			String category = "";
+			int capacity = 0;
+			String supplement = "";
+			Timestamp usageStopStartDate = null;
+			Timestamp usageStopEndDate = null;
+
+			List<String> facilityList = new ArrayList<String>();
+
+			try{
+
+				//選んだリソースの詳細を表示するためにIDをもとにデータベースからresourceDTO
+				//をとってくる
+				pstmt = _con.prepareStatement(sql);
+				pstmt.setString(1, resourceId);
+
+				rs = pstmt.executeQuery(); //実行
+
+				while(rs.next()){
+					resourceName = rs.getString("resource_name");
+					officeName = rs.getString("office_name");
+					category = rs.getString("category");
+					capacity = rs.getInt("capacity");
+					supplement = rs.getString("supplement");
+					usageStopStartDate = rs.getTimestamp("usage_stop_start_date");
+					usageStopEndDate = rs.getTimestamp("usage_stop_end_date");
+				}
+
+				//設備表示のために設備のリストを作成
+				pstmt2 = _con.prepareStatement(sql2);
+				pstmt2.setString(2, resourceId);
+
+				rs2 = pstmt2.executeQuery(); //実行
+
+				while(rs2.next()){
+					String facility = rs2.getString("resource_characteristic_name");
+					facilityList.add(facility);
+				}
+
+				Resource resource = new Resource(resourceId, resourceName, officeName,
+						category, capacity, supplement, 0, facilityList, usageStopStartDate, usageStopEndDate);
+
+				return resource;
+
+
+			}finally{
+				// PreparedStatementのクローズ
+            	try {
+					dbHelper.closeResource(pstmt);
+				} catch (Exception e3) {
+					e3.printStackTrace();
+					 _log.error("displayAll() Exception e3");
+				}
+
+            	// ResultSetのクローズ
+            	try {
+					dbHelper.closeResource(rs);
+				} catch (Exception e4) {
+					e4.printStackTrace();
+					_log.error("displayAll() Exception e4");
+				}
+
+                // ヘルパーに接続解除を依頼
+                dbHelper.closeDb();
+			}
+
+		}
+
 		return null;
 	}
 

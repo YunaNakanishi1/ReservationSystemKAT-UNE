@@ -20,6 +20,13 @@ public class ShowResourceListHandler implements Handler{
         //セッションから権限を取得
         int authority = 0; //0 権限あり 1 なし
 
+        //全部出来上がったらコメントアウトをもとに戻す！
+//        HttpSession httpSession = request.getSession(false);
+//
+//        //セッショは存在する
+//        authority = (int) httpSession.getAttribute("authority");
+
+
         ShowResourceListService service = new ShowResourceListService();
         if(service.validate()){
             try {
