@@ -122,14 +122,15 @@ public class ResourceDao {
 
 		PreparedStatement pstmt = null;
 		PreparedStatement pstmt2 = null;
+		PreparedStatement pstmt3 = null;
 		ResultSet rs = null;
 		ResultSet rs2 = null;
+		ResultSet rs3 = null;
 
-		final String sql = "select resource_name,office_name,category_name,"
-				+ "capacity,usage_stop_start_date "
-				+ "from resources,offices,categories "
+		final String sql = "select resource_name,office_name,"
+				+ "capacity,usage_stop_start_date,usage_stop_end_date,supplement "
+				+ "from resources,offices "
 				+ "where offices.office_id = resources.office_id "
-				+ "and categories.category_id = resources.category_id "
 				+ "and resource_id = ?;";
 
 		final String sql2 = "select resource_characteristic_name "
@@ -139,17 +140,22 @@ public class ResourceDao {
 				+ "= resource_characteristics.resource_characteristic_id "
 				+ "order by resource_features.resource_characteristic_id;";
 
+		final String sql3 = "select category_name "
+				+ "from resources,categories "
+				+ "where resource_id=? and categories.category_id=resources.category_id "
+				+ "order by categories.category_id;";
+
 		if(_con != null){
 
 			String resourceName = "";
 			String officeName = "";
-			String category = "";
 			int capacity = 0;
 			String supplement = "";
 			Timestamp usageStopStartDate = null;
 			Timestamp usageStopEndDate = null;
 
 			List<String> facilityList = new ArrayList<String>();
+			List<String> categoryList = new ArrayList<String>();
 
 			try{
 
@@ -163,7 +169,6 @@ public class ResourceDao {
 				while(rs.next()){
 					resourceName = rs.getString("resource_name");
 					officeName = rs.getString("office_name");
-					category = rs.getString("category");
 					capacity = rs.getInt("capacity");
 					supplement = rs.getString("supplement");
 					usageStopStartDate = rs.getTimestamp("usage_stop_start_date");
@@ -172,7 +177,7 @@ public class ResourceDao {
 
 				//設備表示のために設備のリストを作成
 				pstmt2 = _con.prepareStatement(sql2);
-				pstmt2.setString(2, resourceId);
+				pstmt2.setString(1, resourceId);
 
 				rs2 = pstmt2.executeQuery(); //実行
 
@@ -181,8 +186,21 @@ public class ResourceDao {
 					facilityList.add(facility);
 				}
 
+				//カテゴリ表示のためにカテゴリのリストを作成
+				//設備表示のために設備のリストを作成
+				pstmt3 = _con.prepareStatement(sql3);
+				pstmt3.setString(1, resourceId);
+
+				rs3 = pstmt3.executeQuery(); //実行
+
+				while(rs3.next()){
+					String category = rs3.getString("category_name");
+					categoryList.add(category);
+				}
+
+
 				Resource resource = new Resource(resourceId, resourceName, officeName,
-						category, capacity, supplement, 0, facilityList, usageStopStartDate, usageStopEndDate);
+						categoryList, capacity, supplement, 0, facilityList, usageStopStartDate, usageStopEndDate);
 
 				return resource;
 

@@ -54,7 +54,7 @@ public class ShowResourceListHandler implements Handler{
                         request.setAttribute("Emessage", "検索結果は0件です。");
                     }
                     request.setAttribute("resourceList", resourceList);
-                    request.setAttribute("resourceListSize", 0);
+                    request.setAttribute("resourceListSize", resourceList.size());
 
                 }
                 return ViewHolder.RESOURCE_LIST;

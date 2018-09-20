@@ -17,6 +17,7 @@ public class Resource {
 	private String _resourceName;
 	private String _officeName;
 	private String _category;
+	private List<String> _categoryList; //これいるよね？
 	private int _capacity;
 	private String _supplement;
 	private int _deleted;
@@ -37,6 +38,22 @@ public class Resource {
 		this._facility = _facility;
 		this._usageStopStartDate = _usageStopStartDate;
 		this._usageStopEndDate = _usageStopEndDate;
+	}
+
+	//カテゴリリストのあるコンストラクタを作成しまし
+	public Resource(String resourceId, String resourceName, String officeName, List<String> categoryList, int capacity,
+			String supplement, int deleted, List<String> facilityList, Timestamp usageStopStartDate,
+			Timestamp usageStopEndDate) {
+		this._resourceId = resourceId;
+		this._resourceName = resourceName;
+		this._officeName = officeName;
+		this._categoryList = categoryList;
+		this._capacity = capacity;
+		this._supplement = supplement;
+		this._deleted = deleted;
+		this._facility = facilityList;
+		this._usageStopStartDate = usageStopStartDate;
+		this._usageStopEndDate = usageStopEndDate;
 	}
 
 	public String getResourceId() {
