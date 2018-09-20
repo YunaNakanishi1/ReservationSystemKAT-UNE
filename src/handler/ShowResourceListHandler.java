@@ -35,16 +35,20 @@ public class ShowResourceListHandler implements Handler{
                         request.setAttribute("Emessage", "検索結果は0件です。");
                     }
                     request.setAttribute("resourceList", forNotAuthorityResourceList);
+                    request.setAttribute("resourceListSize", forNotAuthorityResourceList.size());
                 }else{
                     //権限のあるユーザの処理
                     if(resourceList.size() == 0){
                         request.setAttribute("Emessage", "検索結果は0件です。");
                     }
                     request.setAttribute("resourceList", resourceList);
+                    request.setAttribute("resourceListSize", 0);
+
                 }
                 return ViewHolder.RESOURCE_LIST;
 
             } catch (SQLException e) {
+            	e.printStackTrace();
                 return ViewHolder.ERROR_PAGE;
             }
         }else{

@@ -41,9 +41,12 @@ $(document).ready(function(){
 <div class="contents">
 
 <h2>リソース一覧</h2>
-<p><font color = "blue">${message}"</font></p>
+<p><font color = "blue">${Emessage}</font></p>
 <p><a href = "xxx">予約一覧に戻る</a></p>
 <input class="submit" type = "submit" value = "リソース登録">
+
+<!-- リソースが0件の場合は以下を表示しない -->
+<c:if test="${resourceListSize != 0}">
 <table id="design-table" class="table table-striped table-bordered" style="width:90%">
 <thead>
 <tr>
@@ -56,14 +59,6 @@ $(document).ready(function(){
 </tr>
 </thead>
 <tbody>
-<tr>
-<td><a href = "...">晴海4205会議室</a></td>
-<td>晴海事業所</td>
-<td>会議室</td>
-<td>10名</td>
-<td></td>
-<td>利用可能</td>
-</tr>
 
 <c:forEach var="obj" items="${resourceList}" varStatus="status">
 <tr>
@@ -78,6 +73,7 @@ $(document).ready(function(){
 
 </tbody>
 </table>
+</c:if>
 
 </div>
 
