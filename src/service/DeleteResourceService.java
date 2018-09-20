@@ -1,5 +1,9 @@
 package service;
 
+import java.sql.SQLException;
+
+import dao.ResourceDao;
+
 public class DeleteResourceService implements Service{
 
 	private String _resourceId;
@@ -14,10 +18,12 @@ public class DeleteResourceService implements Service{
 		return true;
 	}
 
-	public void execute(){
+	public void execute() throws SQLException {
+		ResourceDao resourceDao = new ResourceDao();
+		_result = resourceDao.delete(_resourceId);
 	}
 
 	public int getResult(){
-		return 1;
+		return _result;
 	}
 }
