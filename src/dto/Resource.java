@@ -71,6 +71,9 @@ public class Resource {
 	public String getCategory() {
 		return _category;
 	}
+	public List<String> getCategoryList(){
+		return _categoryList; //カテゴリリストのゲッター追加したお
+	}
 
 	public int getCapacity() {
 		return _capacity;
