@@ -12,6 +12,9 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import dto.Resource;
 
 /**
@@ -19,14 +22,14 @@ import dto.Resource;
  */
 public class ResourceDao {
 
-
+	private static Logger _log = LogManager.getLogger(); //これはクラス図にはないんですが
 	Connection _con = null;
 
 	/**
 	  * リソース全件の一覧を表示するためのDaoメソッド.
 	  * @return resourceを返す
 	  */
-	public List<Resource> displayAll() {
+	public List<Resource> displayAll() throws SQLException{
 		DBHelper dbHelper = new DBHelper();
 
 		_con = dbHelper.connectDb(); //データベースに接続
@@ -43,13 +46,13 @@ public class ResourceDao {
 		Statement stmt = null;
 		ResultSet rs = null;
 
+		//空のresourceListを用意
+        List<Resource> resourceList = new ArrayList<Resource>();
 
 		 if (_con != null) {
 	            try {
 	                stmt = _con.createStatement();
 	                rs = stmt.executeQuery(sql); //実行
-
-	                List<Resource> resourceList = new ArrayList<Resource>();
 
 	                while(rs.next()){
 	                	String resourceId = rs.getString("resource_id");
@@ -67,32 +70,29 @@ public class ResourceDao {
 	                			categoryName, capacity, supplement, deleted, null,
 	                			usageStopStartDate, usageStopEndDate));
 
-	            		return resourceList;
-
 	                }
-	            } catch (SQLException e) {
-	                e.printStackTrace();
 	            } finally {
 	                // Statementのクローズ
-	            	if(stmt!= null){
-	            		try {
-		                    dbHelper.closeResource(stmt);
-		                } catch (Exception e) {
-		                    // SQLException以外の例外が発生
-		                    e.printStackTrace();
-		                }
-	            	}
-
+	            	try {
+						dbHelper.closeResource(stmt);
+					} catch (Exception e1) {
+						e1.printStackTrace();
+						 _log.error("displayAll() Exception e1");
+					}
+	            	try {
+						dbHelper.closeResource(rs);
+					} catch (Exception e2) {
+						e2.printStackTrace();
+						_log.error("displayAll() Exception e2");
+					}
 
 	                // ヘルパーに接続解除を依頼
 	                dbHelper.closeDb();
 	            }
-	        } else {
-	        	//_conがnullです
-	        	return null;
 	        }
-		 return null;
+ 		return resourceList;
 	}
+
 
 	public int regist(Resource resource) {
 		return 0;
