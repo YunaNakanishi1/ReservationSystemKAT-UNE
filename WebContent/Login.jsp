@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,11 +23,11 @@
 <br>
 <div class="contents1">
 <div class="haikei">
-<p class="error">エラーメッセージ</p>
+<p class="error"><c:out value ="${Emessage}"/></p>
 <form action="login" method="get">
 <table class="table">
 <tr><td>ID:</td><td><input type="text" name="userId"></td></tr>
-<tr><td>パスワード:</td><td><input type="text" name="password"></td></tr>
+<tr><td>パスワード:</td><td><input type="password" name="password"></td></tr>
 </table>
 <p><input class="submit" type="submit" value="ログイン"></p>
 </form>

@@ -23,16 +23,27 @@ public class LogInHandler implements Handler {
 	    password = password.replaceAll("<","&lt;");
 	    password = password.replaceAll(">","&gt;");
 
+	    CommonValidator commonValidator = new CommonValidator();
+	    if (commonValidator.notSetOn(userId)) {
+            request.setAttribute("Emessage", EM01);
+            return LOG_IN;
+        }
+	    if (commonValidator.notSetOn(password)) {
+            request.setAttribute("Emessage", EM02);
+            return LOG_IN;
+        }
 
 		//入力されたユーザ情報
 		User user = new User(userId, password, 0);
 		LogInService loginService = new LogInService(user);
+
 
 		//入力チェック
 		if (loginService.validate()) {
 			try {
 				loginService.execute();
 				User resultUser = loginService.getResultUser();
+
 				if (resultUser != null) {
 					HttpSession session = request.getSession(true);
 					session.setAttribute("userId", resultUser.getUserId());
