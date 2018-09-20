@@ -31,10 +31,7 @@
 </tr>
 <tr>
 <td class="dialog"><b>カテゴリ</b></td>
-<td class="right2"><c:forEach var="obj" items="${resource.categoryList}" varStatus="status">
-<c:out value="${obj}" />
-<br>
-</c:forEach></td>
+<td class="right2"><c:out value="${resource.category}" /></td>
 </tr>
 <tr>
 <td class="dialog"><b>定員</b></td>
