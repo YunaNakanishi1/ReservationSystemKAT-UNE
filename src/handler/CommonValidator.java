@@ -1,5 +1,10 @@
 package handler;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class CommonValidator {
 	/**
      * 引数valの内容が設定されているかどうかチェックする.
@@ -46,8 +51,36 @@ public class CommonValidator {
      *
      * @return intValフィールド
      */
-    protected int getIntVal() {
+    protected int getNumber() {
         return _number;
+    }
+
+    private Timestamp _date;
+
+    protected boolean notDateOn(String date ,String hour,String minute){
+    	SimpleDateFormat inputFormat =new SimpleDateFormat("yyyy/MM/dd");
+    	SimpleDateFormat timestampFormat =new SimpleDateFormat("yyyy-MM-dd");
+    	try{
+    		_date=Timestamp.valueOf(timestampFormat.format(inputFormat.parse(date))+" "+hour+":"+minute);
+
+    	}catch(ParseException e){
+    		inputFormat = new SimpleDateFormat("MM/dd");
+    		timestampFormat =new SimpleDateFormat("MM-dd");
+    		Calendar cal = Calendar.getInstance();
+    		int year = cal.get(Calendar.YEAR);
+    		try {
+				_date=Timestamp.valueOf(year + timestampFormat.format(inputFormat.parse(date))+" "+hour+":"+minute);
+
+			} catch (ParseException e1) {
+				return true;
+			}
+    	}
+    	return false;
+
+    }
+
+    protected Timestamp getDate(){
+    	return _date;
     }
 
 }
