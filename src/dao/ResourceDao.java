@@ -176,12 +176,13 @@ public class ResourceDao {
 			String resourceName = "";
 			String officeName = "";
 			int capacity = 0;
+			String category = "";
 			String supplement = "";
 			Timestamp usageStopStartDate = null;
 			Timestamp usageStopEndDate = null;
 
 			List<String> facilityList = new ArrayList<String>();
-			List<String> categoryList = new ArrayList<String>();
+
 
 			try{
 
@@ -220,13 +221,12 @@ public class ResourceDao {
 				rs3 = pstmt3.executeQuery(); //実行
 
 				while(rs3.next()){
-					String category = rs3.getString("category_name");
-					categoryList.add(category);
+					category = rs3.getString("category_name");
 				}
 
 
 				Resource resource = new Resource(resourceId, resourceName, officeName,
-						categoryList, capacity, supplement, 0, facilityList, usageStopStartDate, usageStopEndDate);
+						category, capacity, supplement, 0, facilityList, usageStopStartDate, usageStopEndDate);
 
 				return resource;
 
