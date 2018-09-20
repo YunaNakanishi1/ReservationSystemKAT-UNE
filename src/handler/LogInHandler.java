@@ -17,19 +17,25 @@ public class LogInHandler implements Handler {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 
-		///////////タグ文字を置き換え
+		//クロスサイトスクリプティング対策まだだよ～
 	    userId = userId.replaceAll("<","&lt;");
 	    userId = userId.replaceAll(">","&gt;");
+	    userId = userId.replaceAll("\"","&quot;");
 	    password = password.replaceAll("<","&lt;");
 	    password = password.replaceAll(">","&gt;");
 
+	    //再表示用
+	    request.setAttribute("userId", userId);
+
 	    CommonValidator commonValidator = new CommonValidator();
+
+	    //入力されているかチェック
 	    if (commonValidator.notSetOn(userId)) {
             request.setAttribute("Emessage", EM01);
             return LOG_IN;
         }
 	    if (commonValidator.notSetOn(password)) {
-            request.setAttribute("Emessage", EM02);
+            request.setAttribute("Emessage", EM04);
             return LOG_IN;
         }
 
