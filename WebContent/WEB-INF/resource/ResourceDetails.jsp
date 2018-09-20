@@ -68,7 +68,10 @@
 </tbody>
 </table>
 <p>
-<input class="submit" class="dialog" type = "submit" value = "変更">　<input class="submit" type = "submit" value = "削除">
+<input class="submit" class="dialog" type = "submit" value = "変更">　
+<form action = "deleteresource" method = "post">
+<input type="hidden" name="resourceId" value = "<c:out value = "${resource.resourceId}"/>" >
+<input class="submit" type = "submit" value = "削除"></form>
 </p>
 <a class="dialog" href = "xxx">一覧に戻る</a>
 
