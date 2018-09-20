@@ -6,9 +6,14 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import dto.Resource;
 import service.ShowResourceListService;
 public class ShowResourceListHandler implements Handler{
+
+    private static Logger _log = LogManager.getLogger(); //これはクラス図にはないんですが
 
     @Override
     public String handleService(HttpServletRequest request) {
@@ -56,9 +61,11 @@ public class ShowResourceListHandler implements Handler{
 
             } catch (SQLException e) {
             	e.printStackTrace();
+                _log.error("SQLException");
                 return ViewHolder.ERROR_PAGE;
             }
         }else{
+            _log.error("validateError");
             return ViewHolder.ERROR_PAGE;
         }
 
