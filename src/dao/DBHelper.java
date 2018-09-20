@@ -18,9 +18,9 @@ public class DBHelper {
 
     private static Logger _log = LogManager.getLogger();
     private Connection _con = null;
-    private static final String _url = "jdbc:postgresql://10.63.148.5:5432/KATUNEDB";
-    private static final String _user = "ユーザ名";
-    private static final String _password = "パスワード";
+    private final String _url = "jdbc:postgresql://10.63.148.5:5432/KATUNEDB";
+    private final String _user = "ユーザ名";
+    private final String _password = "パスワード";
 
     /**
      * データベースへの接続をおこなう.
@@ -31,7 +31,7 @@ public class DBHelper {
         // データベースに接続
         try {
             Class.forName("org.postgresql.Driver");
-            _con = DriverManager.getConnection(_url, "postgres", "postgres");
+            _con = DriverManager.getConnection(_url,_user,_password );
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             _log.error("connectDb() ClassNotFoundException");
