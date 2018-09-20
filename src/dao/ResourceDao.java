@@ -82,7 +82,7 @@ public class ResourceDao {
 		                    e.printStackTrace();
 		                }
 	            	}
-	                
+
 
 	                // ヘルパーに接続解除を依頼
 	                dbHelper.closeDb();
@@ -91,6 +91,7 @@ public class ResourceDao {
 	        	//_conがnullです
 	        	return null;
 	        }
+		 return null;
 	}
 
 	public int regist(Resource resource) {
