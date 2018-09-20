@@ -9,13 +9,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import dto.User;
 
 /**
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 public class UserDao {
-
+	private static Logger _log = LogManager.getLogger(); //これはクラス図にはないんですが
 	private Connection _con = null;
 
 	public User getUser(User user) throws SQLException{
@@ -44,18 +47,20 @@ public class UserDao {
             // PreparedStatementのクローズ
             try {
                 dbHelper.closeResource(stmt);
-            } catch (Exception e) {
+            } catch (Exception e1) {
                 // SQLException以外の例外が発生
-                e.printStackTrace();
+                e1.printStackTrace();
                 // LOGへ記録
+                _log.error("displayAll() Exception e1");
             }
             // ResultSetのクローズ
             try {
                 dbHelper.closeResource(rs);
-            } catch (Exception e) {
+            } catch (Exception e2) {
                 // SQLException以外の例外が発生
-                e.printStackTrace();
+                e2.printStackTrace();
                 // LOGへ記録
+                _log.error("displayAll() Exception e2");
             }
             dbHelper.closeDb();
         }
