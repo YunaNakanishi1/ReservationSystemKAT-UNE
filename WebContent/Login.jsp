@@ -26,7 +26,7 @@
 <p class="error"><c:out value ="${Emessage}"/></p>
 <form action="login" method="get">
 <table class="table">
-<tr><td>ID:</td><td><input type="text" name="userId" value = "<c:out value = "${userId}"/>"></td></tr>
+<tr><td>ID:</td><td><input type="text" name="userId" value = "<c:out value = "${requestScope.userId}"/>"></td></tr>
 <tr><td>パスワード:</td><td><input type="password" name="password"></td></tr>
 </table>
 <p><input class="submit" type="submit" value="ログイン"></p>
