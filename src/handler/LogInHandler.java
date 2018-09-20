@@ -17,9 +17,10 @@ public class LogInHandler implements Handler {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 
-		///////////タグ文字を置き換え
+		//クロスサイトスクリプティング対策まだだよ～
 	    userId = userId.replaceAll("<","&lt;");
 	    userId = userId.replaceAll(">","&gt;");
+	    userId = userId.replaceAll("\"","&quot;");
 	    password = password.replaceAll("<","&lt;");
 	    password = password.replaceAll(">","&gt;");
 
