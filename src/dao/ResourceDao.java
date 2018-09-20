@@ -125,18 +125,19 @@ public class ResourceDao {
 		ResultSet rs = null;
 		ResultSet rs2 = null;
 
-//		final String sql = "select resource_name,office_name,category_name,capacity,usage_stop_start_date
-// from resources,offices,categories
-// where offices.office_id = resources.office_id and
-//categories.category_id = resources.category_id and
-// resource_id = ?;";
+		final String sql = "select resource_name,office_name,category_name,"
+				+ "capacity,usage_stop_start_date "
+				+ "from resources,offices,categories "
+				+ "where offices.office_id = resources.office_id "
+				+ "and categories.category_id = resources.category_id "
+				+ "and resource_id = ?;";
 
 		final String sql2 = "select resource_characteristic_name "
-				+ "from resource_features,resource_characteristic"
+				+ "from resource_features,resource_characteristics "
 				+ "where resource_id=? and "
-				+ "resource_features.resource_characteristic_id"
-				+ "=resource_characteristics.resource_characteristic_id "
-				+ "order by resource_features.resource_characteristic_id";
+				+ "resource_features.resource_characteristic_id "
+				+ "= resource_characteristics.resource_characteristic_id "
+				+ "order by resource_features.resource_characteristic_id;";
 
 		if(_con != null){
 
