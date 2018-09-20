@@ -8,12 +8,18 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import dto.User;
 import service.LogInService;
 
 public class LogInHandler implements Handler {
+	private static Logger _log = LogManager.getLogger(); //これはクラス図にはないんですが
+
 
 	public String handleService(HttpServletRequest request) {
+
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 
@@ -61,6 +67,7 @@ public class LogInHandler implements Handler {
 					return LOG_IN;
 				}
 			} catch(SQLException e) {
+				_log.error("SQLException");
 				return ERROR_PAGE;
 			}
 		} else {
