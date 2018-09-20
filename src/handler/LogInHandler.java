@@ -18,10 +18,17 @@ public class LogInHandler implements Handler {
 		String password = request.getParameter("password");
 
 		///////////タグ文字を置き換え
+	    userId = userId.replaceAll("<","&lt;");
+	    userId = userId.replaceAll(">","&gt;");
+	    password = password.replaceAll("<","&lt;");
+	    password = password.replaceAll(">","&gt;");
 
+
+		//入力されたユーザ情報
 		User user = new User(userId, password, 0);
 		LogInService loginService = new LogInService(user);
 
+		//入力チェック
 		if (loginService.validate()) {
 			try {
 				loginService.execute();

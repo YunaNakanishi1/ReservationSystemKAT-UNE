@@ -45,6 +45,7 @@ public class LogInService implements Service {
 	@Override
 	public void execute() throws SQLException {
 		UserDao ud = new UserDao();
+		//認証されたユーザ情報
 		_resultUser = ud.getUser(_inputUser);
 		if (_resultUser == null) {
 			_validationMessage = EM06;
