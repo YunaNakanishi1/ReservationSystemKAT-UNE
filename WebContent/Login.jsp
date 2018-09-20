@@ -23,7 +23,7 @@
 <div class="contents1">
 <div class="haikei">
 <p class="error">エラーメッセージ</p>
-<form>
+<form action="login" method="get">
 <table class="table">
 <tr><td>ID:</td><td><input type="text" name="userId"></td></tr>
 <tr><td>パワード:</td><td><input type="text" name="password"></td></tr>
