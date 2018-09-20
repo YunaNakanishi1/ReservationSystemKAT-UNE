@@ -58,11 +58,11 @@
 </tr>
 <tr>
 <td class="dialog"><b>利用停止開始日時</b></td>
-<td class="right2"><c:out value="${resource.usageStopStartDate}" /></td>
+<td class="right2"><c:out value="${stopStartDate}" /></td>
 </tr>
 <tr>
 <td><b>利用停止終了日時</b></td>
-<td class="right2"><c:out value="${resource.usageStopEndDate}" /></td>
+<td class="right2"><c:out value="${stopEndDate}" /></td>
 </tr>
 <tr>
 <td class="dialog"><b>詳細</b></td>
