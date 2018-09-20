@@ -16,9 +16,6 @@ import javax.servlet.annotation.WebFilter;
 @WebFilter("/encodefilter")
 public class EncodingFilter implements Filter {
 
-    /**
-     * Default constructor.
-     */
     public EncodingFilter() {
         // TODO Auto-generated constructor stub
     }
@@ -29,6 +26,7 @@ public class EncodingFilter implements Filter {
 	public void destroy() {
 		// TODO Auto-generated method stub
 	}
+
 
 	/**
 	 * @see Filter#doFilter(ServletRequest, ServletResponse, FilterChain)
