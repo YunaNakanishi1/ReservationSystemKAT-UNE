@@ -20,4 +20,5 @@ public class DeleteResourceService implements Service{
 	public int getResult(){
 		return 1;
 	}
+
 }
