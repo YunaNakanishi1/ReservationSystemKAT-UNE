@@ -10,4 +10,5 @@ public interface Handler {
      * @return サービスを実行した結果に応じたViewの名前
      */
     String handleService(HttpServletRequest request);
+
 }

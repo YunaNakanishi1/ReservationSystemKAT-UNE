@@ -21,4 +21,5 @@ public class LogOutHandler implements Handler {
 
 		return LOG_IN;
 	}
+
 }
