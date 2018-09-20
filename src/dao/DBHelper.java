@@ -18,9 +18,9 @@ public class DBHelper {
 
     private static Logger _log = LogManager.getLogger();
     private Connection _con = null;
-    private final String _url = "jdbc:postgresql://10.63.148.5:5432/KATUNEDB";
-    private final String _user = "ユーザ名";
-    private final String _password = "パスワード";
+    private final String _url = "jdbc:postgresql://10.63.148.5:5432/postgres";
+    private final String _user = "postgres";
+    private final String _password = "postgres";
 
     /**
      * データベースへの接続をおこなう.
