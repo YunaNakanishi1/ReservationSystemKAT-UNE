@@ -30,20 +30,20 @@ public class DeleteResourceHandler implements Handler {
         			deleteResourceService.execute();
         			int result = deleteResourceService.getResult();
 
-        			if(result == 1){
+        			if (result == 1) {
         				request.setAttribute("Pmessage",PM08);
         				return SHOW_RESOURCE_LIST_SERVLET;
-        			}else{
+        			} else {
         				//ログを残す
         				return ERROR_PAGE;
         			}
 
-        		} catch(SQLException e) {
+        		} catch (SQLException e) {
         			//ログを残す
         			return ERROR_PAGE;
         		}
         	}
-        }else{
+        } else {
         	//ログを残す
         	return ERROR_PAGE;
         }
