@@ -25,7 +25,8 @@ public class DeleteResourceHandler implements Handler {
 //      authority = (int) httpSession.getAttribute("authority");
 
         if (authority == 0) {
-        	DeleteResourceService deleteResourceService = new DeleteResourceService(request.getParameter("resourceId"));
+        	String deleteId = request.getParameter("resourceId");
+        	DeleteResourceService deleteResourceService = new DeleteResourceService(deleteId);
 
         	if (deleteResourceService.validate()) {
         		try {
