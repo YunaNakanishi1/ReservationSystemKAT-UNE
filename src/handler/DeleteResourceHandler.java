@@ -8,9 +8,13 @@ import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import service.DeleteResourceService;
 
 public class DeleteResourceHandler implements Handler {
+	private static Logger _log = LogManager.getLogger(); //これはクラス図にはないんですが
 
 	public String handleService(HttpServletRequest request) {
 		//セッションから権限を取得
@@ -34,21 +38,25 @@ public class DeleteResourceHandler implements Handler {
         			} else {
         				//ログを残す
         				//deleteフラグ立て失敗
+        				_log.error("deleteError");
         				return ERROR_PAGE;
         			}
 
         		} catch(SQLException e) {
         			//ログを残す
+        			_log.error("SQLException");
         			return ERROR_PAGE;
         		}
         	} else {
 	        	//ログを残す
         		//validate失敗
+        		_log.error("validateError");
 	        	return ERROR_PAGE;
         	}
         } else {
         	//ログを残す
         	//authorityエラー
+        	_log.error("authorityError");
         	return ERROR_PAGE;
         }
 
