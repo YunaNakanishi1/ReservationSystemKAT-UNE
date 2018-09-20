@@ -17,7 +17,7 @@ public class LogInHandler implements Handler {
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
 
-		/////////タグ文字を置き換え
+		///////////タグ文字を置き換え
 
 		User user = new User(userId, password, 0);
 		LogInService loginService = new LogInService(user);

@@ -32,5 +32,4 @@ public class User {
 		return _authority;
 	}
 
-
 }

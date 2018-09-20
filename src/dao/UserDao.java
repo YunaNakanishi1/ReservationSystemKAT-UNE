@@ -57,7 +57,6 @@ public class UserDao {
                 e.printStackTrace();
                 // LOGへ記録
             }
-
             dbHelper.closeDb();
         }
 

@@ -70,5 +70,4 @@ public class LogInService implements Service {
 		return _validationMessage;
 	}
 
-
 }
