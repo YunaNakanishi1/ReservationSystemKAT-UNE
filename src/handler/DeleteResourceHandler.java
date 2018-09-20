@@ -42,7 +42,7 @@ public class DeleteResourceHandler implements Handler {
         				return ERROR_PAGE;
         			}
 
-        		} catch(SQLException e) {
+        		} catch (SQLException e) {
         			//ログを残す
         			_log.error("SQLException");
         			return ERROR_PAGE;
@@ -63,3 +63,4 @@ public class DeleteResourceHandler implements Handler {
 	}
 
 }
+
