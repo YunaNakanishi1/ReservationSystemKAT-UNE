@@ -29,7 +29,7 @@ public class LogInHandler implements Handler {
             return LOG_IN;
         }
 	    if (commonValidator.notSetOn(password)) {
-            request.setAttribute("Emessage", EM02);
+            request.setAttribute("Emessage", EM04);
             return LOG_IN;
         }
 
