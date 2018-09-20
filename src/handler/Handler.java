@@ -1,16 +1,7 @@
-/* Copyright© Ricoh IT Solutions Co.,Ltd.
- * All Rights Reserved.
- */
 package handler;
 
 import javax.servlet.http.HttpServletRequest;
 
-/**
- * Handlerインターフェースの定義. サーブレットが利用するハンドラーのインターフェース
- *
- * @author jinsen
- *
- */
 public interface Handler {
 
     /**
