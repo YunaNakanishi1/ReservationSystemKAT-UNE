@@ -1,9 +1,11 @@
 package handler;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import dto.Resource;
 import service.ShowResourceListService;
 public class ShowResourceListHandler implements Handler{
 
@@ -12,12 +14,15 @@ public class ShowResourceListHandler implements Handler{
         ShowResourceListService service = new ShowResourceListService();
         if(service.validate()){
             try {
-                service.execute();
+               service.execute();
+               List<Resource> resourceList = service.getResourceList();
+               request.setAttribute("resourceList", resourceList);
+               return null;
             } catch (SQLException e) {
-                return ;
+                return ViewHolder.ERROR_PAGE;
             }
         }else{
-
+                return ViewHolder.ERROR_PAGE;
         }
     }
 
