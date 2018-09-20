@@ -24,7 +24,6 @@ public class LogInServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        request.setCharacterEncoding("UTF-8");
         Handler loginHandler = new LogInHandler();
 
         //遷移先URL
