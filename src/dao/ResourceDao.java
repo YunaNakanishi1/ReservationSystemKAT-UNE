@@ -38,10 +38,10 @@ public class ResourceDao {
 				+ "category_name,capacity,supplement,usage_stop_start_date,"
 				+ "usage_stop_end_date,deleted "
 				+ "from resources,categories,offices "
-				+ "where resources.category_id = categories.category_id , "
-				+ "resources.office_id = officers.office_id "
-				+ "order by officers.office_id asc and categories.category_id asc "
-				+ "and resources.resource_id asc;";
+				+ "where resources.category_id = categories.category_id and "
+				+ "resources.office_id = offices.office_id "
+				+ "order by offices.office_id asc , categories.category_id asc "
+				+ ", resources.resource_id asc;";
 
 		Statement stmt = null;
 		ResultSet rs = null;
@@ -60,7 +60,7 @@ public class ResourceDao {
 	                	String officeName = rs.getString("office_name");
 	                	String categoryName = rs.getString("category_name");
 	                	int capacity = rs.getInt("capacity");
-	                	String supplement = rs.getString("spplement");
+	                	String supplement = rs.getString("supplement");
 	                	int deleted = rs.getInt("deleted");
 	                	Timestamp usageStopStartDate = rs.getTimestamp("usage_stop_start_date");
 	                	Timestamp usageStopEndDate = rs.getTimestamp("usage_stop_end_date");
