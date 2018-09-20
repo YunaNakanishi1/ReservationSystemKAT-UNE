@@ -12,9 +12,9 @@ public class User {
 
 	private String _userId;
 	private String _password;
-	private String _authority;
+	private int _authority;
 
-	public User(String _userId, String _password, String _authority) {
+	public User(String _userId, String _password, int _authority) {
 		this._userId = _userId;
 		this._password = _password;
 		this._authority = _authority;
@@ -28,7 +28,7 @@ public class User {
 		return _password;
 	}
 
-	public String getAuthority() {
+	public int getAuthority() {
 		return _authority;
 	}
 
