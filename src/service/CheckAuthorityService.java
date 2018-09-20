@@ -9,6 +9,7 @@ public class CheckAuthorityService implements Service{
 	private int _authority;
 
 
+
 	public int getAuthority() {
 		return _authority;
 	}
