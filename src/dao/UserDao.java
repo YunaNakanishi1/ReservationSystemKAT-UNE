@@ -63,7 +63,48 @@ public class UserDao {
 		return returnUser;
 	}
 
-	public int getAuthority(String userId) {
-		return 0;
+	public int getAuthority(String userId) throws SQLException{
+		String sql = "SELECT authority FROM users WHERE user_id = ?";
+
+		DBHelper dbHelper = new DBHelper();
+        // ヘルパーに接続を依頼
+        _con = dbHelper.connectDb();
+
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        int authority=-1;
+
+        try{
+        	stmt = _con.prepareStatement(sql);
+
+        	stmt.setString(1, userId);
+
+        	rs = stmt.executeQuery();
+
+        	if(rs.next()){
+        		authority = rs.getInt(1);
+        	}
+        }finally{
+        	// PreparedStatementのクローズ
+            try {
+                dbHelper.closeResource(stmt);
+            } catch (Exception e) {
+                // SQLException以外の例外が発生
+                e.printStackTrace();
+                // LOGへ記録
+            }
+            // ResultSetのクローズ
+            try {
+                dbHelper.closeResource(rs);
+            } catch (Exception e) {
+                // SQLException以外の例外が発生
+                e.printStackTrace();
+                // LOGへ記録
+            }
+            dbHelper.closeDb();
+        }
+
+        return authority;
 	}
 }

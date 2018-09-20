@@ -1,6 +1,7 @@
 package filter;
 
 import java.io.IOException;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -12,11 +13,11 @@ import javax.servlet.annotation.WebFilter;
 /**
  * Servlet Filter implementation class ReservationSystemFilter
  */
-@WebFilter("/reservesystemfilter")
+@WebFilter("/login/*")
 public class ReservationSystemFilter implements Filter {
 
     /**
-     * Default constructor. 
+     * Default constructor.
      */
     public ReservationSystemFilter() {
         // TODO Auto-generated constructor stub
