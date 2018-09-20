@@ -24,16 +24,19 @@ public class LogInService implements Service {
 		String userId = _inputUser.getUserId();
 		String password = _inputUser.getPassword();
 
+		//id半角チェック
 		if (!checkHalfWidthChar(userId)) {
 			_validationMessage = EM02;
 			return false;
 		}
 
+		//id8文字チェック
 		if (userId.length() != 8) {
 			_validationMessage = EM03;
 			return false;
 		}
 
+		//password半角チェック
 		if (!checkHalfWidthChar(password)) {
 			_validationMessage = EM05;
 			return false;

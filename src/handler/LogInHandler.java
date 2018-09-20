@@ -23,7 +23,12 @@ public class LogInHandler implements Handler {
 	    password = password.replaceAll("<","&lt;");
 	    password = password.replaceAll(">","&gt;");
 
+	    //再表示用
+	    request.setAttribute("userId", userId);
+
 	    CommonValidator commonValidator = new CommonValidator();
+
+	    //入力されているかチェック
 	    if (commonValidator.notSetOn(userId)) {
             request.setAttribute("Emessage", EM01);
             return LOG_IN;
