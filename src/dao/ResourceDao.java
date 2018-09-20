@@ -105,8 +105,34 @@ public class ResourceDao {
 		return 0;
 	}
 
-	public int delete(String resourceId) {
-		return 0;
+
+	public int delete(String resourceId) throws SQLException {
+		int result = 0;
+		DBHelper dbHelper = new DBHelper();
+		_con = dbHelper.connectDb(); //データベースに接続
+		PreparedStatement stmt = null;
+		String sql = "UPDATE resources SET deleted = 1 WHERE resource_id = ?";
+
+		if (_con != null) {
+			try {
+				stmt = _con.prepareStatement(sql);
+                stmt.setString(1, resourceId);
+                result = stmt.executeUpdate();
+			} finally {
+				// Statementのクローズ
+            	try {
+					dbHelper.closeResource(stmt);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+					 _log.error("displayAll() Exception e1");
+				}
+			}
+
+            // ヘルパーに接続解除を依頼
+            dbHelper.closeDb();
+		}
+
+		return result;
 	}
 
 	/**
