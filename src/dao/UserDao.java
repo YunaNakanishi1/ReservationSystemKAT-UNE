@@ -21,6 +21,7 @@ public class UserDao {
 	private static Logger _log = LogManager.getLogger(); //これはクラス図にはないんですが
 	private Connection _con = null;
 
+
 	public User getUser(User user) throws SQLException{
 		String sql = "SELECT user_id, password, authority FROM users WHERE (user_id = ?) AND (password = ?)";
 		User returnUser = null;

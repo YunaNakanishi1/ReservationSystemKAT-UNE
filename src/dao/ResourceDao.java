@@ -107,7 +107,6 @@ public class ResourceDao {
 
 
 	public int delete(String resourceId) throws SQLException {
-
 		int result = 0;
 		DBHelper dbHelper = new DBHelper();
 		_con = dbHelper.connectDb(); //データベースに接続
