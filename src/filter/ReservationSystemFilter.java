@@ -18,7 +18,7 @@ import handler.SessionUpdateHandler;
 /**
  * Servlet Filter implementation class ReservationSystemFilter
  */
-@WebFilter("/login/*")
+@WebFilter("/reservesystem/*")
 public class ReservationSystemFilter implements Filter {
 
     /**
