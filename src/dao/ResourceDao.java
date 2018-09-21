@@ -41,6 +41,8 @@ public class ResourceDao {
         try {
             _con = dbHelper.connectDb(); //データベースに接続
 
+
+
             String sql = "select resources.resource_id,resource_name,office_name,"
                     + "category_name,capacity,supplement,usage_stop_start_date,"
                     + "usage_stop_end_date,deleted "
@@ -148,14 +150,21 @@ public class ResourceDao {
     public Resource displayDetails(String resourceId) throws SQLException {
         DBHelper dbHelper = new DBHelper();
 
-        _con = dbHelper.connectDb(); //データベースに接続
-
         PreparedStatement pstmt = null;
         PreparedStatement pstmt2 = null;
         PreparedStatement pstmt3 = null;
         ResultSet rs = null;
         ResultSet rs2 = null;
         ResultSet rs3 = null;
+
+        try{
+        _con = dbHelper.connectDb(); //データベースに接続
+
+        if (_con == null) {
+            _log.error("DatabaseConnectError");
+            throw new SQLException();
+        }
+
 
         final String sql = "select resource_name,office_name,"
                 + "capacity,usage_stop_start_date,usage_stop_end_date,supplement "
@@ -175,7 +184,7 @@ public class ResourceDao {
                 + "where resource_id=? and categories.category_id=resources.category_id "
                 + "order by categories.category_id;";
 
-        if(_con != null){
+
 
             String resourceName = "";
             String officeName = "";
@@ -188,7 +197,7 @@ public class ResourceDao {
             List<String> facilityList = new ArrayList<String>();
 
 
-            try{
+
 
                 //選んだリソースの詳細を表示するためにIDをもとにデータベースからresourceDTO
                 //をとってくる
@@ -229,13 +238,14 @@ public class ResourceDao {
                 }
 
 
+
+
                 Resource resource = new Resource(resourceId, resourceName, officeName,
                         category, capacity, supplement, 0, facilityList, usageStopStartDate, usageStopEndDate);
 
                 return resource;
 
-
-            }finally{
+        }finally{
                 // PreparedStatementのクローズ
                 try {
                     dbHelper.closeResource(pstmt);
@@ -255,10 +265,6 @@ public class ResourceDao {
                 // ヘルパーに接続解除を依頼
                 dbHelper.closeDb();
             }
-
-        }
-
-        return null;
     }
 
     public String getMaxId() {
