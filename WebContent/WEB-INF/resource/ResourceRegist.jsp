@@ -15,7 +15,6 @@
 <header class="header"><p>会議室・備品予約システム</p>
 <input class="logintop" type="submit" value="ログアウト">
 </header>
-
 <div class="contents">
 <div class="dialog">
 <h2>リソース入力</h2>
@@ -31,8 +30,8 @@
 
 <td class="right2">
 <input type="text" name="resourceName"
-<c:if test="${resource !=null}">
- value=" <c:out value="${resource.resourceName}" /> "
+<c:if test="${checkDisplay}">
+ value=" <c:out value="${resourceName}" /> "
  </c:if>
  >
  </td>
@@ -41,44 +40,52 @@
 <td class="dialog"><b>カテゴリ</b></td>
 <td class="right2">
 <select name ="category">
-<c:forEach var="categoryName" items="${categoryList}" varStatus="status">
-<!-- optionが閉じれないエラー -->
-<option value="${categoryName}">
-<!--
-<c:if test="${resource != null }">
-<c:if test="${resource.category == categoryName }">
+<c:forEach var="obj" items="${categoryList}" varStatus="status">
+
+<option value="${obj}"
+<c:if test="${checkDisplay && category == obj}">
  selected
 </c:if>
-</c:if>
 >
--->
-
-
- <c:out value="${categoryName}"/></option>
+<c:out value="${obj}"/></option>
 </c:forEach>
 </select>
-<input type="" name="resourceName"
-<c:if test="${resource !=null}">
- value=" <c:out value="${category.resourceName}" /> "
- </c:if>
- >
  </td>
 </tr>
 <tr>
 <td class="dialog"><b>定員</b></td>
-<td class="right2"><c:out value="${resource.capacity}" /></td>
+<td class="right2">
+<input type="text" name="capacity"
+<c:if test="${checkDisplay}">
+ value=" <c:out value="${capacity}" /> "
+ </c:if>
+ >
+</td>
 </tr>
 <tr>
 <td class="dialog"><b>事業所</b></td>
-<td class="right2"><c:out value="${resource.officeName}" /></td>
+<td class="right2">
+<select name ="officeName">
+<c:forEach var="obj" items="${officeList}" varStatus="status">
+<option value="${obj}"
+<c:if test="${checkDisplay && officeName == obj}">
+ selected
+</c:if>
+>
+<c:out value="${office}"/></option>
+</c:forEach>
+</select>
+</td>
 </tr>
 <tr>
 <td class="dialog"><b>設備</b></td>
-<td><div class="scroll3"><!-- ホワイトボード有<br>
-						プロジェクタ有<br>来客優先<br>
-						UCS常設<br>TV会議システム<br>
-						OAボード -->
-<c:forEach var="obj" items="${resource.facility}" varStatus="status">
+<td><div class="scroll3">
+<c:forEach var="obj" items="${facilityList}" varStatus="status">
+<input type="checkbox" name = "facility" value = <c:out value="${obj}" />
+<c:if test ="${checkDisplay && selectedFacility[status.index]}">
+checked
+</c:if>
+>
 <c:out value="${obj}" />
 <br>
 </c:forEach>
@@ -86,12 +93,47 @@
 </tr>
 <tr>
 <td class="dialog"><b>利用停止開始日時</b></td>
-<td class="right2"><c:out value="${stopStartDate}" /></td>
+<td class="right2">
+<input type="text" name="stopStartDay"
+<c:if test ="${checkDisplay && stopStartDay!= null}">
+value="${stopStartDay}"
+</c:if>
+>
+</td>
 </tr>
 <tr>
-<td><b>利用停止終了日時</b></td>
-<td class="right2"><c:out value="${stopEndDate}" /></td>
+<td></td>
+<td class="right2">
+※年は省略可
+</td>
 </tr>
+<tr>
+<!--
+<td><b>利用停止開始時間</b></td>
+<td class="right2">
+<select name = "stopStartHour">
+<c:forEach begin="0" end="9"  varStatus="status">
+
+<option value= <c:out value="${'0'+status.index}">>
+<c:out value="${'0'+status.index}">
+</option>
+</c:forEach>
+</select>
+</td>
+</tr>
+ -->
+<tr>
+<td><b>利用停止終了日時</b></td>
+<td class="right2">
+<input type="text" name="stopEndDay"
+<c:if test ="${checkDisplay && stopEndDay!= null}">
+value="${stopEndDay}"
+</c:if>
+>
+</td>
+</tr>
+
+
 <tr>
 <td class="dialog"><b>詳細</b></td>
 <td><div class="scroll2"><c:out value="${resource.supplement}" /></div></td>
