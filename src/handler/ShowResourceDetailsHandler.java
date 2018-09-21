@@ -36,12 +36,11 @@ public class ShowResourceDetailsHandler implements Handler{
                 return ViewHolder.ERROR_PAGE;
             }
 
+            if( (resource.getUsageStopStartDate() != null) && (resource.getUsageStopEndDate() != null) ){
             //利用停止期間をフォーマットに即して変換してセット
             String format = "yyyy/MM/dd　H時m分";
             String stopStartDate = new SimpleDateFormat(format).format(resource.getUsageStopStartDate());
             String stopEndDate = new SimpleDateFormat(format).format(resource.getUsageStopEndDate());
-            String initFormat = "0001/01/01　0時0分";
-            if( !(initFormat.equals(stopStartDate) && initFormat.equals(stopEndDate)) ){
                 request.setAttribute("stopStartDate", stopStartDate);
                 request.setAttribute("stopEndDate", stopEndDate);
             }

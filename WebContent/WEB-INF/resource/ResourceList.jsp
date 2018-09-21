@@ -68,7 +68,7 @@ $(document).ready(function(){
 <td><c:out value="${obj.category}" /></td>
 <td><c:out value="${obj.capacity}" /></td>
 <td><c:out value="${obj.supplement}" /></td>
-<td><c:out value="${statusList[status.count]}" /></td>
+<td><c:out value="${statusList[status.count-1]}" /></td>
 </tr>
 </c:forEach>
 </tbody>

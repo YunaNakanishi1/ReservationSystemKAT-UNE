@@ -16,7 +16,7 @@ import service.LogInService;
 
 public class LogInHandler implements Handler {
 	private static Logger _log = LogManager.getLogger();
-
+	static final int SESSION_INTERVAL = 1800;
 
 	public String handleService(HttpServletRequest request) {
 
@@ -56,13 +56,14 @@ public class LogInHandler implements Handler {
 				if (resultUser != null) {
 					HttpSession session = request.getSession(true);
 					session.setAttribute("userId", resultUser.getUserId());
-					session.setAttribute("autority", resultUser.getAuthority());
-					session.setMaxInactiveInterval(1800);
+					session.setAttribute("authority", resultUser.getAuthority());
+					session.setMaxInactiveInterval(SESSION_INTERVAL);
 					return RESERVE_LIST;
 
 				} else {
 					//ユーザ認証失敗
-					request.setAttribute("Emessage", EM06);
+					String message = loginService.getValidationMessage();
+					request.setAttribute("Emessage", message);
 					return LOG_IN;
 				}
 
