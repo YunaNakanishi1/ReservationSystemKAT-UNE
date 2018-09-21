@@ -41,9 +41,9 @@ public class UserDao {
         String userId = user.getUserId();
         String password = user.getPassword();
 
-        userId = userId.replace("&", "&amp;").replace("'", "&#39;");
-        System.out.println(userId);
-
+        //SQLインジェクション対策
+        userId = userId.replace("'", "''").replace("\\", "\\\\").replace(";", "");
+        password = password.replace("'", "''").replace("\\", "\\\\").replace(";", "");
 
         try {
             stmt = _con.prepareStatement(sql);

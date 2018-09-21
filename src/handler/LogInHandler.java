@@ -12,6 +12,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dto.User;
+import service.CheckAuthorityService;
 import service.LogInService;
 
 public class LogInHandler implements Handler {
@@ -46,39 +47,59 @@ public class LogInHandler implements Handler {
 		LogInService loginService = new LogInService(user);
 
 
-		//入力チェック
-		if (loginService.validate()) {
-			try {
-				loginService.execute();
-				User resultUser = loginService.getResultUser();
+		//権限チェック
+		CheckAuthorityService checkAuthorityService =new CheckAuthorityService(userId);
 
-				//ユーザ認証成功
-				if (resultUser != null) {
-					HttpSession session = request.getSession(true);
-					session.setAttribute("userId", resultUser.getUserId());
-					session.setAttribute("authority", resultUser.getAuthority());
-					session.setMaxInactiveInterval(SESSION_INTERVAL);
-					return RESERVE_LIST;
+		if(checkAuthorityService.validate()){
+			try{
+				checkAuthorityService.execute();
+				int authority = checkAuthorityService.getAuthority();
+				if(authority == 0 || authority == 1){
+					//入力チェック
+					if (loginService.validate()) {
+						try {
+							loginService.execute();
+							User resultUser = loginService.getResultUser();
 
-				} else {
-					//ユーザ認証失敗
-					String message = loginService.getValidationMessage();
-					request.setAttribute("Emessage", message);
-					return LOG_IN;
+							//ユーザ認証成功
+							if (resultUser != null) {
+								HttpSession session = request.getSession(true);
+								session.setAttribute("userId", resultUser.getUserId());
+								session.setAttribute("authority", resultUser.getAuthority());
+								session.setMaxInactiveInterval(SESSION_INTERVAL);
+								return RESERVE_LIST;
+
+							} else {
+								//ユーザ認証失敗
+								String message = loginService.getValidationMessage();
+								request.setAttribute("Emessage", message);
+								return LOG_IN;
+							}
+
+						} catch(SQLException e) {
+							_log.error("SQLException");
+							e.printStackTrace();
+							return ERROR_PAGE;
+						}
+
+					} else {
+						//validateエラー
+						request.setAttribute("Emessage", loginService.getValidationMessage());
+						return LOG_IN;
+					}
+
+				}else{
+					return ERROR_PAGE;
 				}
 
-			} catch(SQLException e) {
-				_log.error("SQLException");
-				e.printStackTrace();
+			}catch (SQLException e){
+				//ログを残す
 				return ERROR_PAGE;
 			}
-
-		} else {
-			//validateエラー
-			request.setAttribute("Emessage", loginService.getValidationMessage());
-			return LOG_IN;
+		}else{
+			//権限が0,1以外の時
+			return ERROR_PAGE;
 		}
-
 	}
 
 }
