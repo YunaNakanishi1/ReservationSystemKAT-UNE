@@ -15,13 +15,13 @@
 <header class="header"><p>会議室・備品予約システム</p>
 <input class="logintop" type="submit" value="">
 </header>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
 <div class="contents1">
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <div class="haikei">
 <p class="error"><c:out value ="${Emessage}"/></p>
 <form action="login" method="get">
@@ -32,19 +32,24 @@
 <p><input class="submit" type="submit" value="ログイン"></p>
 </form>
 </div>
-</div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 
 <br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+</div>
+
+
 <div class="footer1"><footer class="fotter2">copyright🄫KAT-UNE</footer></div>
 
 </body>
