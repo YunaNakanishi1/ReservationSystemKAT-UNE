@@ -18,9 +18,8 @@ import dto.User;
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 public class UserDao {
-	private static Logger _log = LogManager.getLogger(); //これはクラス図にはないんですが
+	private static Logger _log = LogManager.getLogger();
 	private Connection _con = null;
-
 
 	/**
 	 * ユーザ認証を行うメソッド.
@@ -34,7 +33,6 @@ public class UserDao {
 
 		// ヘルパーに接続を依頼
 		DBHelper dbHelper = new DBHelper();
-
         _con = dbHelper.connectDb();
         PreparedStatement stmt = null;
         ResultSet rs = null;
