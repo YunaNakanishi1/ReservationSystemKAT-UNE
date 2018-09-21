@@ -24,11 +24,11 @@ public class LogInHandler implements Handler {
 		String password = request.getParameter("password");
 
 		//クロスサイトスクリプティング対策まだだよ～
-	    userId = userId.replaceAll("<","&lt;");
-	    userId = userId.replaceAll(">","&gt;");
-	    userId = userId.replaceAll("\"","&quot;");
-	    password = password.replaceAll("<","&lt;");
-	    password = password.replaceAll(">","&gt;");
+//	    userId = userId.replaceAll("<","&lt;");
+//	    userId = userId.replaceAll(">","&gt;");
+//	    userId = userId.replaceAll("\"","&quot;");
+//	    password = password.replaceAll("<","&lt;");
+//	    password = password.replaceAll(">","&gt;");
 
 	    //再表示用
 	    request.setAttribute("userId", userId);
@@ -68,6 +68,7 @@ public class LogInHandler implements Handler {
 				}
 			} catch(SQLException e) {
 				_log.error("SQLException");
+				e.printStackTrace();
 				return ERROR_PAGE;
 			}
 		} else {
