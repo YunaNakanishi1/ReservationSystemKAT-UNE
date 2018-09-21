@@ -18,32 +18,40 @@ import dto.User;
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 public class UserDao {
-	private static Logger _log = LogManager.getLogger(); //これはクラス図にはないんですが
+	private static Logger _log = LogManager.getLogger();
 	private Connection _con = null;
 
-
+	/**
+	 * ユーザ認証を行うメソッド.
+	 * @param user 入力されたユーザ情報
+	 * @return returnUser 認証されたユーザ情報. 認証されなかった場合null
+	 * @throws SQLException
+	 */
 	public User getUser(User user) throws SQLException {
 		String sql = "SELECT user_id, password, authority FROM users WHERE (user_id = ?) AND (password = ?)";
 		User returnUser = null;
 
+		// ヘルパーに接続を依頼
 		DBHelper dbHelper = new DBHelper();
-        // ヘルパーに接続を依頼
         _con = dbHelper.connectDb();
-
-        String userId = user.getUserId();
-        String password = user.getPassword();
-
         PreparedStatement stmt = null;
         ResultSet rs = null;
+
+        //入力されたユーザ情報
+        String userId = user.getUserId();
+        String password = user.getPassword();
 
         try {
             stmt = _con.prepareStatement(sql);
             stmt.setString(1, userId);
             stmt.setString(2, password);
             rs = stmt.executeQuery();
+
+            //認証出来た場合, authority含むユーザ情報作成
             if (rs.next()) {
             	returnUser = new User(rs.getString(1), rs.getString(2), rs.getInt(3));
             }
+
         } finally {
             // PreparedStatementのクローズ
             try {

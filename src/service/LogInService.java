@@ -14,6 +14,7 @@ public class LogInService implements Service {
 	private String _validationMessage;
 	private User _inputUser;
 	private User _resultUser;
+	static final int ID_CHARACTER_NUMBER = 8;
 
 	public LogInService(User user) {
 		_inputUser = user;
@@ -31,7 +32,7 @@ public class LogInService implements Service {
 		}
 
 		//id8文字チェック
-		if (userId.length() != 8) {
+		if (userId.length() != ID_CHARACTER_NUMBER) {
 			_validationMessage = EM03;
 			return false;
 		}
