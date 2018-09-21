@@ -3,8 +3,6 @@ package service;
 import static handler.MessageHolder.*;
 
 import java.sql.SQLException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import dao.UserDao;
 import dto.User;
@@ -62,10 +60,11 @@ public class LogInService implements Service {
 	 * @return 半角の場合true
 	 */
 	public boolean checkHalfWidthChar(String line) {
-		Pattern p = Pattern.compile("^\\w*$");
-		//Pattern p = Pattern.compile("^[0-9a-zA-Z!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]*$");
-		Matcher m = p.matcher(line);
-		return m.find();
+	    if (line.getBytes().length == line.length()) {
+	        return true;
+	    } else {
+	        return false;
+	    }
 	}
 
 	public User getResultUser() {
