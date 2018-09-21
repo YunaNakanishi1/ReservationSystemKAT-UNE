@@ -14,7 +14,7 @@ public class LogInService implements Service {
 	private String _validationMessage;
 	private User _inputUser;
 	private User _resultUser;
-	static final int ID_CHARACTER_NUMBER = 8;
+	static final int ID_LENGTH = 8;
 
 	public LogInService(User user) {
 		_inputUser = user;
@@ -32,7 +32,7 @@ public class LogInService implements Service {
 		}
 
 		//id8文字チェック
-		if (userId.length() != ID_CHARACTER_NUMBER) {
+		if (userId.length() != ID_LENGTH) {
 			_validationMessage = EM03;
 			return false;
 		}
@@ -63,6 +63,7 @@ public class LogInService implements Service {
 	 */
 	public boolean checkHalfWidthChar(String line) {
 		Pattern p = Pattern.compile("^\\w*$");
+		//Pattern p = Pattern.compile("^[0-9a-zA-Z!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]*$");
 		Matcher m = p.matcher(line);
 		return m.find();
 	}
