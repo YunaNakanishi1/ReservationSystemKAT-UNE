@@ -38,13 +38,11 @@ public class ShowResourceDetailsHandler implements Handler{
 
             //利用停止期間をフォーマットに即して変換してセット
             String format = "yyyy/MM/dd　H時m分";
-
             String stopStartDate = new SimpleDateFormat(format).format(resource.getUsageStopStartDate());
             String stopEndDate = new SimpleDateFormat(format).format(resource.getUsageStopEndDate());
-            if(!"0001/01/01　0時0分".equals(stopStartDate)){
+            String initFormat = "0001/01/01　0時0分";
+            if( !(initFormat.equals(stopStartDate) && initFormat.equals(stopEndDate)) ){
                 request.setAttribute("stopStartDate", stopStartDate);
-            }
-            if(!"0001/01/01　0時0分".equals(stopEndDate)){
                 request.setAttribute("stopEndDate", stopEndDate);
             }
 
