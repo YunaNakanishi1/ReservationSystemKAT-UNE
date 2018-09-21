@@ -64,7 +64,6 @@ public class CommonValidator {
     	timestampFormat.setLenient(false);
     	try{
     		_date=Timestamp.valueOf(timestampFormat.format(inputFormat.parse(date))+" "+hour+":"+minute);
-
     	}catch(ParseException e){
     		inputFormat = new SimpleDateFormat("MM/dd");
     		inputFormat.setLenient(false);
