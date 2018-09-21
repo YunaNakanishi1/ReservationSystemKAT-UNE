@@ -59,13 +59,17 @@ public class CommonValidator {
 
     protected boolean notDateOn(String date ,String hour,String minute){
     	SimpleDateFormat inputFormat =new SimpleDateFormat("yyyy/MM/dd");
+    	inputFormat.setLenient(false);
     	SimpleDateFormat timestampFormat =new SimpleDateFormat("yyyy-MM-dd");
+    	timestampFormat.setLenient(false);
     	try{
     		_date=Timestamp.valueOf(timestampFormat.format(inputFormat.parse(date))+" "+hour+":"+minute);
 
     	}catch(ParseException e){
     		inputFormat = new SimpleDateFormat("MM/dd");
+    		inputFormat.setLenient(false);
     		timestampFormat =new SimpleDateFormat("MM-dd");
+    		timestampFormat.setLenient(false);
     		Calendar cal = Calendar.getInstance();
     		int year = cal.get(Calendar.YEAR);
     		try {
