@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -22,11 +23,9 @@ public class ShowResourceListHandler implements Handler{
         //セッションから権限を取得
         int authority = 0; //0 権限あり 1 なし
 
-        //全部出来上がったらコメントアウトをもとに戻す！
-//        HttpSession httpSession = request.getSession(false);
-//
-//        //セッショは存在する
-//        authority = (int) httpSession.getAttribute("authority");
+        HttpSession httpSession = request.getSession(false);
+        //フィルタを通しているのでセッションは必ず存在する
+        authority = (int) httpSession.getAttribute("authority");
 
 
         ShowResourceListService service = new ShowResourceListService();
