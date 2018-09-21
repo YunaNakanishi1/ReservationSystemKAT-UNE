@@ -23,7 +23,8 @@ public class LogInServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Handler loginHandler = new LogInHandler();
+
+		Handler loginHandler = new LogInHandler();
 
         //遷移先URL
         String view = loginHandler.handleService(request);
