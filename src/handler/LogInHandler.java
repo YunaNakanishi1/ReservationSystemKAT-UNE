@@ -29,6 +29,7 @@ public class LogInHandler implements Handler {
 //	    userId = userId.replaceAll("\"","&quot;");
 //	    password = password.replaceAll("<","&lt;");
 //	    password = password.replaceAll(">","&gt;");
+
 	    //再表示用
 	    request.setAttribute("userId", userId);
 
