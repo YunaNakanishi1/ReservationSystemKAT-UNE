@@ -46,9 +46,13 @@ public class ShowResourceRegistHandler implements Handler{
 						request.setAttribute("returnPage",RESOURCE_DETAILS_SERVLET);;
 
 					}
+					//それぞれのリストをセットして入力画面に遷移する
+					request.setAttribute("categoryList", categoryList);
+					request.setAttribute("officeList", officeList);
+					request.setAttribute("facilityList", facilityList);
 					return RESOURCE_REGIST;
 				}catch(SQLException e){
-					_log.error("validateError");
+					_log.error("SQLException");
 					return ERROR_PAGE;
 
 
@@ -59,7 +63,7 @@ public class ShowResourceRegistHandler implements Handler{
 			}
 
 		}else{
-			_log.error("validateError");
+			_log.error("No authority");
             return ERROR_PAGE;
 		}
 
