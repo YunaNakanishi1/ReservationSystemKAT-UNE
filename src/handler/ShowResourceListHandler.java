@@ -34,6 +34,11 @@ public class ShowResourceListHandler implements Handler{
             try {
                 //実行
                 service.execute();
+            } catch (SQLException e) {
+                e.printStackTrace();
+                _log.error("SQLException");
+                return ViewHolder.ERROR_PAGE;
+            }
                 List<Resource> resourceList = service.getResourceList();
 
                 if(authority != 0){
@@ -82,11 +87,6 @@ public class ShowResourceListHandler implements Handler{
                 //}
                 return ViewHolder.RESOURCE_LIST;
 
-            } catch (SQLException e) {
-            	e.printStackTrace();
-                _log.error("SQLException");
-                return ViewHolder.ERROR_PAGE;
-            }
         }else{
             _log.error("validateError");
             return ViewHolder.ERROR_PAGE;
