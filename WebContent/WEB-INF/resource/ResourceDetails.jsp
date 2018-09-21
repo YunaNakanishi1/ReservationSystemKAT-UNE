@@ -55,11 +55,11 @@
 </tr>
 <tr>
 <td class="dialog"><b>利用停止開始日時</b></td>
-<td class="right2"><c:out value="${resource.usageStopStartDate}" /></td>
+<td class="right2"><c:out value="${stopStartDate}" /></td>
 </tr>
 <tr>
 <td><b>利用停止終了日時</b></td>
-<td class="right2"><c:out value="${resource.usageStopEndDate}" /></td>
+<td class="right2"><c:out value="${stopEndDate}" /></td>
 </tr>
 <tr>
 <td class="dialog"><b>詳細</b></td>
@@ -67,12 +67,18 @@
 </tr>
 </tbody>
 </table>
-<p>
-<input class="submit" class="dialog" type = "submit" value = "変更">　
-<form action = "deleteresource" method = "post">
+<br>
+<table class="table">
+<tr>
+<td><input class="submit" class="dialog" type = "submit" value = "変更"></td>
+<td>　</td>
+<td><form action = "deleteresource" method = "post">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resource.resourceId}"/>" >
 <input class="submit" type = "submit" value = "削除"></form>
-</p>
+</td>
+</tr>
+</table>
+<br>
 <a class="dialog" href = "xxx">一覧に戻る</a>
 
 </div>

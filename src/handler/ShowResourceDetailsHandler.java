@@ -1,6 +1,7 @@
 package handler;
 
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -34,6 +35,17 @@ public class ShowResourceDetailsHandler implements Handler{
                 _log.error("This record has been deleted");
                 return ViewHolder.ERROR_PAGE;
             }
+
+            //利用停止期間をフォーマットに即して変換してセット
+            String format = "yyyy/MM/dd　H時m分";
+            String stopStartDate = new SimpleDateFormat(format).format(resource.getUsageStopStartDate());
+            String stopEndDate = new SimpleDateFormat(format).format(resource.getUsageStopEndDate());
+            String initFormat = "0001/01/01　0時0分";
+            if( !(initFormat.equals(stopStartDate) && initFormat.equals(stopEndDate)) ){
+                request.setAttribute("stopStartDate", stopStartDate);
+                request.setAttribute("stopEndDate", stopEndDate);
+            }
+
             //取得したリソースをセット
             request.setAttribute("resource", resource);
         }else{
