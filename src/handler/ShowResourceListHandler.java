@@ -79,8 +79,12 @@ public class ShowResourceListHandler implements Handler{
         Date now = Calendar.getInstance().getTime();
 
         for (Resource resource : resourceList) {
+
             if(resource.getDeleted() == 1){
                 statusList.add("削除済み");
+            }
+            else if(resource.getUsageStopStartDate() == null || resource.getUsageStopEndDate() == null){
+                statusList.add("利用可能");
             }
             else if(resource.getUsageStopStartDate().after(now) && resource.getUsageStopEndDate().before(now)){
                 statusList.add("利用停止");
