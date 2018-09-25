@@ -108,20 +108,36 @@ value="${stopStartDay}"
 </td>
 </tr>
 <tr>
-<!--
+
 <td><b>利用停止開始時間</b></td>
 <td class="right2">
 <select name = "stopStartHour">
 <c:forEach begin="0" end="9"  varStatus="status">
-
-<option value= <c:out value="${'0'+status.index}">>
-<c:out value="${'0'+status.index}">
+<option value= "<c:out value="${'0'+status.index}"/>">
+<c:out value="${'0'+status.index}"/>
+</option>
+</c:forEach>
+<c:forEach begin="10" end="23"  varStatus="status">
+<option value= "<c:out value="${status.index}"/>">
+<c:out value="${status.index}"/>
 </option>
 </c:forEach>
 </select>
+時
+<select name = "stopStartMinute">
+<c:forEach begin="0" end="5" varStatus="status">
+<option value="<c:out value="${status.index+'0'}" />">
+<c:out value="${status.index+'0'}" />
+</option>
+</c:forEach>
+</select>
+分
 </td>
+
+
+
+
 </tr>
- -->
 <tr>
 <td><b>利用停止終了日時</b></td>
 <td class="right2">
