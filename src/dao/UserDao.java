@@ -44,7 +44,6 @@ public class UserDao {
         //SQLインジェクション対策
         userId = LineConverter.convertSingleMark(userId);
         password = LineConverter.convertSingleMark(password);
-        System.out.println(userId + " " + password);
 
         try {
             stmt = _con.prepareStatement(sql);
