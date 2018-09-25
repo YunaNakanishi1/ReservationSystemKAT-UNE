@@ -157,6 +157,10 @@ public class ResourceDao {
 		ResultSet rs2 = null;
 		ResultSet rs3 = null;
 
+		boolean foundResource = false;
+
+		Resource resource = null ;
+
 		try{
 			_con = dbHelper.connectDb(); //データベースに接続
 
@@ -213,6 +217,8 @@ public class ResourceDao {
 				supplement = rs.getString("supplement");
 				usageStopStartDate = rs.getTimestamp("usage_stop_start_date");
 				usageStopEndDate = rs.getTimestamp("usage_stop_end_date");
+
+				foundResource = true; //ResourceIdが一致したのでtrueで上書き
 			}
 
 			//設備表示のために設備のリストを作成
@@ -237,11 +243,11 @@ public class ResourceDao {
 				category = rs3.getString("category_name");
 			}
 
-
-
-
-			Resource resource = new Resource(resourceId, resourceName, officeName,
+			//ResourceIdが一致した場合はクリエイト
+			if(foundResource==true){
+			resource = new Resource(resourceId, resourceName, officeName,
 					category, capacity, supplement, 0, facilityList, usageStopStartDate, usageStopEndDate);
+			}
 
 			return resource;
 

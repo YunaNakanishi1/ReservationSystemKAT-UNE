@@ -20,13 +20,6 @@
 
 
 <div class="contents1">
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
 <div class="haikei">
 <p class="error"><c:out value ="${Emessage}"/></p>
 <form action="login" method="get">
@@ -37,23 +30,6 @@
 <p><input class="submit" type="submit" value="ログイン"></p>
 </form>
 </div>
-
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-
-<br>
 </div>
 
 
