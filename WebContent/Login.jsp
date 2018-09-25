@@ -9,12 +9,16 @@
 <link rel="stylesheet" href="deco.css">
 <link rel="stylesheet" href="header_footer.css">
 </head>
-<body>
 
-<body class="body1">
+
+<body class="body1" background="kaigi.jpg">
+
+<div id="div">
 <header class="header"><p>会議室・備品予約システム</p>
 <input class="logintop" type="submit" value="">
 </header>
+
+
 <div class="contents1">
 <br>
 <br>
@@ -22,6 +26,7 @@
 <br>
 <br>
 <br>
+
 <div class="haikei">
 <p class="error"><c:out value ="${Emessage}"/></p>
 <form action="login" method="get">
@@ -32,6 +37,8 @@
 <p><input class="submit" type="submit" value="ログイン"></p>
 </form>
 </div>
+
+
 <br>
 <br>
 <br>
@@ -52,7 +59,8 @@
 
 <div class="footer1"><footer class="fotter2">copyright🄫KAT-UNE</footer></div>
 
-</body>
+</div>
+
 
 </body>
 </html>

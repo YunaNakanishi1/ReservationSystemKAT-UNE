@@ -10,11 +10,13 @@
 .body1{
 	font-family: Lato, "Noto Sans JP", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 	height:100%;
-	background-image:url("kaigi.jpg");
+	min-height: 700px;
 	background-size: cover;
-	/*background-color:red;*/
+	padding:0;
+	margin:0;
+	/*background-color:red; 便宜上追加中*/
 }
-.div{
+.div{	/*ヘッダーの上に追加*/
 	min-width:500px;
 	width: 100%;
 	min-height: 100%;
@@ -23,7 +25,8 @@
 	bottom:0;
 
 }
-.contents1{
+
+.contents1{		/*ログイン画面用*/
 	margin-left:1%;
 	margin-right:1%;
 	padding-bottom: 20px;
@@ -52,7 +55,7 @@
 	left:0;
 	margin:0 auto;
 }
-.table2{
+.table2{	/*リソース詳細テーブル*/
 	right:0;
 	left:0;
 	margin:0 auto;
@@ -60,7 +63,7 @@
 	width:50%;
 }
 .dialog{
-	line-height:0.5;
+	line-height:0.6;
 }
 
 .submit{
@@ -79,6 +82,7 @@
 	background-color:white;
 	opacity:0.8;
 	width:30%;
+	min-width:400px;
 	right:0;
 	left:0;
 	margin:0 auto;
