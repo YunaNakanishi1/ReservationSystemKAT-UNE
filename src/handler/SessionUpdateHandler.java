@@ -45,7 +45,7 @@ public class SessionUpdateHandler implements Handler{
 
 
 		}else{
-			request.setAttribute("errorMessage", EM39);
+			request.setAttribute("EMessage", EM39);
 			return LOG_IN;
 		}
 
