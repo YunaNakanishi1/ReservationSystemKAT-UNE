@@ -42,7 +42,7 @@ $(document).ready(function(){
 <div class="contents">
 
 <h2>リソース一覧</h2>
-<p><font color = "blue">${Emessage}</font></p>
+<p><font color = "blue">${Pmessage}</font></p>
 <p><a href = "xxx">予約一覧に戻る</a></p>
 <form action = "resourceregist" method="get">
 <input type="hidden" name ="type" value="regist">

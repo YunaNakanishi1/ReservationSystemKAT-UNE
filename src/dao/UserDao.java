@@ -37,6 +37,12 @@ public class UserDao {
 		// ヘルパーに接続を依頼
 		DBHelper dbHelper = new DBHelper();
         _con = dbHelper.connectDb();
+
+		if (_con == null) {
+			_log.error("DatabaseConnectError");
+			throw new SQLException();
+		}
+
         PreparedStatement stmt = null;
         ResultSet rs = null;
 

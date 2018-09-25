@@ -72,9 +72,11 @@
 <tr>
 <td><input class="submit" class="dialog" type = "submit" value = "変更"></td>
 <td>　</td>
-<td><form action = "deleteresource" method = "post">
-<input type="hidden" name="resourceId" value = "<c:out value = "${resource.resourceId}"/>" >
-<input class="submit" type = "submit" value = "削除"></form>
+<td>
+<form action = "deleteresource" method = "post">
+<input type = "hidden" name = "resourceId" value = "${resource.resourceId}" >
+<input class="submit" type = "submit" value = "削除">
+</form>
 </td>
 </tr>
 </table>
