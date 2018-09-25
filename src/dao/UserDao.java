@@ -30,6 +30,9 @@ public class UserDao {
 	public User getUser(User user) throws SQLException {
 		String sql = "SELECT user_id, password, authority FROM users WHERE (user_id = ?) AND (password = ?)";
 		User returnUser = null;
+		if (user == null) {
+			return null;
+		}
 
 		// ヘルパーに接続を依頼
 		DBHelper dbHelper = new DBHelper();
@@ -40,10 +43,6 @@ public class UserDao {
         //入力されたユーザ情報
         String userId = user.getUserId();
         String password = user.getPassword();
-
-        //SQLインジェクション対策
-        userId = LineConverter.convertSingleMark(userId);
-        password = LineConverter.convertSingleMark(password);
 
         try {
             stmt = _con.prepareStatement(sql);

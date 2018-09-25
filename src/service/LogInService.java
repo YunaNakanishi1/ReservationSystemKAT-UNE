@@ -60,11 +60,12 @@ public class LogInService implements Service {
 	 * @return 半角の場合true
 	 */
 	public boolean checkHalfWidthChar(String line) {
-	    if (line.getBytes().length == line.length()) {
-	        return true;
-	    } else {
-	        return false;
-	    }
+		if (line != null) {
+		    if (line.getBytes().length == line.length()) {
+		        return true;
+		    }
+		}
+		return false;
 	}
 
 	public User getResultUser() {

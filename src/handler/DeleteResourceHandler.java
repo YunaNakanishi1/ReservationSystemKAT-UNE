@@ -7,6 +7,7 @@ import static handler.ViewHolder.*;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -20,9 +21,9 @@ public class DeleteResourceHandler implements Handler {
 		//セッションから権限を取得
         int authority = 0; //0 権限あり 1 なし
 
-//      HttpSession httpSession = request.getSession(false);
-//      //セッションは存在する
-//      authority = (int) httpSession.getAttribute("authority");
+      HttpSession httpSession = request.getSession(false);
+      //セッションは存在する
+      authority = (int) httpSession.getAttribute("authority");
 
         if (authority == 0) {
         	String deleteId = request.getParameter("resourceId");
