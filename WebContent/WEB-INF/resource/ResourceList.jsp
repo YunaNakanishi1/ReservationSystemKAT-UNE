@@ -42,9 +42,16 @@ $(document).ready(function(){
 <div class="contents">
 
 <h2>リソース一覧</h2>
+<<<<<<< HEAD
 <p><font color = "blue">${Pmessage}</font></p>
 <p><a href = "xxx">予約一覧に戻る</a></p>
 <form action = "resourceregist" method="get">
+=======
+<p><font color = "blue">${Emessage}</font></p>
+<p><a href = "<%=request.getContextPath()%>/login">予約一覧に戻る</a></p>
+
+<form action = "<%=request.getContextPath()%>/resourceregist" method="get">
+>>>>>>> refs/remotes/origin/develop
 <input type="hidden" name ="type" value="regist">
 <input class="submit" type = "submit" value = "リソース登録">
 </form>

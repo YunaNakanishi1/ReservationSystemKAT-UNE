@@ -32,8 +32,12 @@ public class FacilityDao {
 		Statement stmt=null;
 		ResultSet rs=null;
 
-		if(_con !=null){
+
 			try{
+				if (_con == null) {
+					_log.error("DatabaseConnectError");
+					throw new SQLException();
+				}
 				stmt=_con.createStatement();
 				rs=stmt.executeQuery(sql);
 
@@ -58,7 +62,7 @@ public class FacilityDao {
 				 dbHelper.closeDb();
 			}
 
-		}
+
 
 		return facilityList;
 	}

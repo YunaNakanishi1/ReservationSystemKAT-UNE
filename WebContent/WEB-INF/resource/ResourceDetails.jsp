@@ -70,7 +70,8 @@
 <br>
 <table class="table">
 <tr>
-<td><input class="submit" class="dialog" type = "submit" value = "変更"></td>
+<td><form action = "<%=request.getContextPath()%>/resourcechange" method = "post">
+<input class="submit" class="dialog" type = "submit" value = "変更"></form></td>
 <td>　</td>
 <td>
 <form action = "deleteresource" method = "post">
@@ -81,7 +82,7 @@
 </tr>
 </table>
 <br>
-<a class="dialog" href = "xxx">一覧に戻る</a>
+<a class="dialog" href = "<%=request.getContextPath()%>/resourcelist">一覧に戻る</a>
 
 </div>
 

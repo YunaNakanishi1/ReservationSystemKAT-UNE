@@ -26,15 +26,21 @@ public class CategoryDao {
 	public List<String> category() throws SQLException {
 		List<String> categoryList=new ArrayList<String>();
 		DBHelper dbHelper =new DBHelper();
-		_con=dbHelper.connectDb();
 
-		String sql="select category_name from categories order by category_id";
+			_con=dbHelper.connectDb();
 
-		Statement stmt=null;
-		ResultSet rs=null;
+			String sql="select category_name from categories order by category_id";
 
-		if(_con !=null){
+			Statement stmt=null;
+			ResultSet rs=null;
+
+
 			try{
+
+				if (_con == null) {
+					_log.error("DatabaseConnectError");
+					throw new SQLException();
+				}
 				stmt=_con.createStatement();
 				rs=stmt.executeQuery(sql);
 
@@ -59,7 +65,7 @@ public class CategoryDao {
 				 dbHelper.closeDb();
 			}
 
-		}
+
 
 		return categoryList;
 	}
