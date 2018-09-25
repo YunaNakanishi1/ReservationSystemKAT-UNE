@@ -113,12 +113,20 @@ value="${stopStartDay}"
 <td class="right2">
 <select name = "stopStartHour">
 <c:forEach begin="0" end="9"  varStatus="status">
-<option value= "<c:out value="${'0'+status.index}"/>">
+<option value= "<c:out value="${'0'+status.index}"/>"
+<c:if test="${checkDisplay && stopStartHour == '0'+status.index }">
+selected
+</c:if>
+>
 <c:out value="${'0'+status.index}"/>
 </option>
 </c:forEach>
 <c:forEach begin="10" end="23"  varStatus="status">
-<option value= "<c:out value="${status.index}"/>">
+<option value= "<c:out value="${status.index}"/>"
+<c:if test="${checkDisplay && stopStartHour == status.index }">
+selected
+</c:if>
+>
 <c:out value="${status.index}"/>
 </option>
 </c:forEach>
@@ -126,7 +134,11 @@ value="${stopStartDay}"
 時
 <select name = "stopStartMinute">
 <c:forEach begin="0" end="5" varStatus="status">
-<option value="<c:out value="${status.index+'0'}" />">
+<option value="<c:out value="${status.index+'0'}" />"
+<c:if test="${checkDisplay && stopStartMinute == status.index+'0' }">
+selected
+</c:if>
+>
 <c:out value="${status.index+'0'}" />
 </option>
 </c:forEach>
@@ -139,7 +151,7 @@ value="${stopStartDay}"
 
 </tr>
 <tr>
-<td><b>利用停止終了日時</b></td>
+<td class="dialog"><b>利用停止終了日時</b></td>
 <td class="right2">
 <input type="text" name="stopEndDay"
 <c:if test ="${checkDisplay && stopEndDay!= null}">
@@ -148,28 +160,80 @@ value="${stopEndDay}"
 >
 </td>
 </tr>
+<tr>
+<td></td>
+<td class="right2">
+※年は省略可
+</td>
+</tr>
+<tr>
+
+<td><b>利用停止終了時間</b></td>
+<td class="right2">
+<select name = "stopEndHour">
+<c:forEach begin="0" end="9"  varStatus="status">
+<option value= "<c:out value="${'0'+status.index}"/>"
+<c:if test="${checkDisplay && stopEndHour =='0'+status.index }">
+selected
+</c:if>
+>
+<c:out value="${'0'+status.index}"/>
+</option>
+</c:forEach>
+<c:forEach begin="10" end="23"  varStatus="status">
+<option value= "<c:out value="${status.index}"/>"
+<c:if test="${checkDisplay && stopEndHour ==status.index }">
+selected
+</c:if>
+>
+<c:out value="${status.index}"/>
+</option>
+</c:forEach>
+</select>
+時
+<select name = "stopEndMinute">
+<c:forEach begin="0" end="5" varStatus="status">
+<option value="<c:out value="${status.index+'0'}" />"
+<c:if test="${checkDisplay && stopEndMinute ==status.index +'0'}">
+selected
+</c:if>
+>
+<c:out value="${status.index+'0'}" />
+</option>
+</c:forEach>
+</select>
+分
+</td>
+
+</tr>
 
 
 <tr>
 <td class="dialog"><b>詳細</b></td>
-<td><div class="scroll2"><c:out value="${resource.supplement}" /></div></td>
+<td><div class="scroll2">
+<textarea name="supplement">
+<c:if test="${checkDisplay && resource.supplement != null}">
+<c:out value="${resource.supplement}" />
+</c:if>
+</textarea>
+</div></td>
 </tr>
 </tbody>
 </table>
 <br>
 <table class="table">
 <tr>
-<td><input class="submit" class="dialog" type = "submit" value = "変更"></td>
+<td><input class="submit" class="dialog" type = "submit" value = "登録"></td>
 </form>
 <td>　</td>
-<td><form action = "deleteresource" method = "post">
+<td><form action = "${returnPage}" method = "post">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resource.resourceId}"/>" >
-<input class="submit" type = "submit" value = "削除"></form>
+<input class="submit" type = "submit" value = "戻る"></form>
 </td>
 </tr>
 </table>
 <br>
-<a class="dialog" href = "xxx">一覧に戻る</a>
+
 
 </div>
 

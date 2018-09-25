@@ -26,6 +26,11 @@ public class ShowResourceRegistHandler implements Handler{
 		int authority=(int) session.getAttribute("authority");
 
 		if(authority==0){
+
+			Boolean checkDisplay = (Boolean)request.getAttribute("checkDisplay");
+			if(checkDisplay==null){
+				request.setAttribute("checkDisplay", false);
+			}
 			String type=request.getParameter("type");
 			request.setAttribute("type", type);
 
