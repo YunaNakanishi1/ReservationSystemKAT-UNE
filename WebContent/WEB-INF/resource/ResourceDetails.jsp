@@ -54,12 +54,12 @@
 </div></td>
 </tr>
 <tr>
-<td class="dialog"><b>利用停止開始日時</b></td>
-<td class="right2"><c:out value="${stopStartDate}" /></td>
+<td><b>利用停止開始日時</b></td>
+<td class="right2" class="dialog"><c:out value="${stopStartDate}" /></td>
 </tr>
 <tr>
 <td><b>利用停止終了日時</b></td>
-<td class="right2"><c:out value="${stopEndDate}" /></td>
+<td class="right2" class="dialog"><c:out value="${stopEndDate}" /></td>
 </tr>
 <tr>
 <td class="dialog"><b>詳細</b></td>
