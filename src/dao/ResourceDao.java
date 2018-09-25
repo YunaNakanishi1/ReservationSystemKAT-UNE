@@ -119,19 +119,21 @@ public class ResourceDao {
 		PreparedStatement stmt = null;
 		String sql = "UPDATE resources SET deleted = 1 WHERE resource_id = ?";
 
-		if (_con != null) {
+		try {
+			if (_con == null) {
+				_log.error("DatabaseConnectError");
+				throw new SQLException();
+			}
+			stmt = _con.prepareStatement(sql);
+			stmt.setString(1, resourceId);
+			result = stmt.executeUpdate();
+		} finally {
+			// Statementのクローズ
 			try {
-				stmt = _con.prepareStatement(sql);
-				stmt.setString(1, resourceId);
-				result = stmt.executeUpdate();
-			} finally {
-				// Statementのクローズ
-				try {
-					dbHelper.closeResource(stmt);
-				} catch (Exception e1) {
-					e1.printStackTrace();
-					_log.error("displayAll() Exception e1");
-				}
+				dbHelper.closeResource(stmt);
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				_log.error("displayAll() Exception e1");
 			}
 
 			// ヘルパーに接続解除を依頼

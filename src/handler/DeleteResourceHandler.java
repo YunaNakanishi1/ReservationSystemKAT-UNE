@@ -27,6 +27,7 @@ public class DeleteResourceHandler implements Handler {
 
         if (authority == 0) {
         	String deleteId = request.getParameter("resourceId");
+
         	DeleteResourceService deleteResourceService = new DeleteResourceService(deleteId);
 
         	if (deleteResourceService.validate()) {
@@ -36,6 +37,7 @@ public class DeleteResourceHandler implements Handler {
 
         			if (result == 1) {
         				request.setAttribute("Pmessage",PM08);
+
         				return SHOW_RESOURCE_LIST_SERVLET;
         			} else {
         				//ログを残す

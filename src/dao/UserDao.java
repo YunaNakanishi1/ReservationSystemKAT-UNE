@@ -37,6 +37,7 @@ public class UserDao {
 		// ヘルパーに接続を依頼
 		DBHelper dbHelper = new DBHelper();
         _con = dbHelper.connectDb();
+
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -45,6 +46,10 @@ public class UserDao {
         String password = user.getPassword();
 
         try {
+    		if (_con == null) {
+    			_log.error("DatabaseConnectError");
+    			throw new SQLException();
+    		}
             stmt = _con.prepareStatement(sql);
             stmt.setString(1, userId);
             stmt.setString(2, password);
