@@ -43,7 +43,6 @@ $(document).ready(function(){
 
 <h2>リソース一覧</h2>
 <p><font color = "blue">${Pmessage}</font></p>
-<p><a href = "xxx">予約一覧に戻る</a></p>
 <p><a href = "<%=request.getContextPath()%>/login">予約一覧に戻る</a></p>
 <form action = "<%=request.getContextPath()%>/resourceregist" method="get">
 <input type="hidden" name ="type" value="regist">
