@@ -27,7 +27,7 @@ public class FacilityDao {
 		DBHelper dbHelper =new DBHelper();
 		_con=dbHelper.connectDb();
 
-		String sql="select resourse_characteristics_name from resourse_characteristics order by resourse_characteristics_id";
+		String sql="select resource_characteristic_name from resource_characteristics order by resource_characteristic_id";
 
 		Statement stmt=null;
 		ResultSet rs=null;
@@ -60,6 +60,6 @@ public class FacilityDao {
 
 		}
 
-		return null;
+		return facilityList;
 	}
 }

@@ -67,12 +67,12 @@
 <td class="right2">
 <select name ="officeName">
 <c:forEach var="obj" items="${officeList}" varStatus="status">
-<option value="${obj}"
+<option value="<${obj}"
 <c:if test="${checkDisplay && officeName == obj}">
  selected
 </c:if>
 >
-<c:out value="${office}"/></option>
+<c:out value="${obj}"/></option>
 </c:forEach>
 </select>
 </td>
@@ -113,12 +113,12 @@ value="${stopStartDay}"
 <td class="right2">
 <select name = "stopStartHour">
 <c:forEach begin="0" end="9"  varStatus="status">
-<option value= "<c:out value="${'0'+status.index}"/>"
-<c:if test="${checkDisplay && stopStartHour == '0'+status.index }">
+<option value= "0<c:out value="${status.index}"/>"
+<c:if test="${checkDisplay && stopStartHour == 0 + status.index }">
 selected
 </c:if>
 >
-<c:out value="${'0'+status.index}"/>
+0<c:out value="${status.index}"/>
 </option>
 </c:forEach>
 <c:forEach begin="10" end="23"  varStatus="status">
@@ -134,12 +134,12 @@ selected
 時
 <select name = "stopStartMinute">
 <c:forEach begin="0" end="5" varStatus="status">
-<option value="<c:out value="${status.index+'0'}" />"
+<option value="<c:out value="${status.index}" />0"
 <c:if test="${checkDisplay && stopStartMinute == status.index+'0' }">
 selected
 </c:if>
 >
-<c:out value="${status.index+'0'}" />
+<c:out value="${status.index}" />0
 </option>
 </c:forEach>
 </select>
@@ -172,12 +172,12 @@ value="${stopEndDay}"
 <td class="right2">
 <select name = "stopEndHour">
 <c:forEach begin="0" end="9"  varStatus="status">
-<option value= "<c:out value="${'0'+status.index}"/>"
+<option value= "0<c:out value="${status.index}"/>"
 <c:if test="${checkDisplay && stopEndHour =='0'+status.index }">
 selected
 </c:if>
 >
-<c:out value="${'0'+status.index}"/>
+0<c:out value="${status.index}"/>
 </option>
 </c:forEach>
 <c:forEach begin="10" end="23"  varStatus="status">
@@ -193,12 +193,12 @@ selected
 時
 <select name = "stopEndMinute">
 <c:forEach begin="0" end="5" varStatus="status">
-<option value="<c:out value="${status.index+'0'}" />"
+<option value="<c:out value="${status.index}" />0"
 <c:if test="${checkDisplay && stopEndMinute ==status.index +'0'}">
 selected
 </c:if>
 >
-<c:out value="${status.index+'0'}" />
+<c:out value="${status.index}" />0
 </option>
 </c:forEach>
 </select>
