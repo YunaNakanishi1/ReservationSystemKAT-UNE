@@ -44,8 +44,10 @@ $(document).ready(function(){
 <h2>リソース一覧</h2>
 <p><font color = "blue">${Emessage}</font></p>
 <p><a href = "xxx">予約一覧に戻る</a></p>
+<form action = "resourceregist" method="get">
+<input type="hidden" name ="type" value="regist">
 <input class="submit" type = "submit" value = "リソース登録">
-
+</form>
 <!-- リソースが0件の場合は以下を表示しない -->
 <c:if test="${resourceListSize != 0}">
 <table id="design-table" class="table table-striped table-bordered" style="width:90%">
