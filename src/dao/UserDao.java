@@ -42,8 +42,9 @@ public class UserDao {
         String password = user.getPassword();
 
         //SQLインジェクション対策
-        userId = userId.replace("'", "''").replace("\\", "\\\\").replace(";", "");
-        password = password.replace("'", "''").replace("\\", "\\\\").replace(";", "");
+        userId = LineConverter.convertSingleMark(userId);
+        password = LineConverter.convertSingleMark(password);
+        System.out.println(userId + " " + password);
 
         try {
             stmt = _con.prepareStatement(sql);
