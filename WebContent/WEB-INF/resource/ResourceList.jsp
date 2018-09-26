@@ -47,10 +47,12 @@ $(document).ready(function(){
 
 
 <!-- リソース管理者にのみこのボタンは表示される -->
-<form action = "<%=request.getContextPath()%>/resourceregist" method="get">
-<input type="hidden" name ="type" value="regist">
-<input class="submit" type = "submit" value = "リソース登録">
-</form>
+<c:if test="${authority == 0}">
+	<form action = "<%=request.getContextPath()%>/resourceregist" method="get">
+	<input type="hidden" name ="type" value="regist">
+	<input class="submit" type = "submit" value = "リソース登録">
+	</form>
+</c:if>
 
 
 <!-- リソースが0件の場合は以下を表示しない -->
