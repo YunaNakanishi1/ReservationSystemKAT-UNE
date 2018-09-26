@@ -87,6 +87,12 @@
 </c:if>
 <a class="dialog" href = "<%=request.getContextPath()%>/resourcelist">一覧に戻る</a>
 
+<form action="resourcelist" name="form1" method="post" >
+    <input type="hidden">
+    <a href="javascript:form1.submit()">一覧に戻る</a>
+</form>
+
+
 </div>
 
 

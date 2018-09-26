@@ -20,6 +20,7 @@ public class DeleteResourceService implements Service{
 
 	public void execute() throws SQLException {
 		ResourceDao resourceDao = new ResourceDao();
+		//削除フラグ立て処理
 		_result = resourceDao.delete(_resourceId);
 	}
 
