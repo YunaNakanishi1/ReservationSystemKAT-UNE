@@ -85,7 +85,7 @@
 
 <form action="resourcelist" name="form1" method="post" >
     <input type="hidden">
-    <a href="javascript:form1.submit()"">一覧に戻る</a>
+    <a href="javascript:form1.submit()">一覧に戻る</a>
 </form>
 
 

@@ -44,10 +44,15 @@ $(document).ready(function(){
 <h2>リソース一覧</h2>
 <p><font color = "blue">${Pmessage}</font></p>
 <p><a href = "<%=request.getContextPath()%>/login">予約一覧に戻る</a></p>
+
+
+<!-- リソース管理者にのみこのボタンは表示される -->
 <form action = "<%=request.getContextPath()%>/resourceregist" method="get">
 <input type="hidden" name ="type" value="regist">
 <input class="submit" type = "submit" value = "リソース登録">
 </form>
+
+
 <!-- リソースが0件の場合は以下を表示しない -->
 <c:if test="${resourceListSize != 0}">
 <table id="design-table" class="table table-striped table-bordered" style="width:90%">
