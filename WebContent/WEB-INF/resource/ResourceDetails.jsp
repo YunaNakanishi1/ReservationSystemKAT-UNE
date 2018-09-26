@@ -68,6 +68,8 @@
 </tbody>
 </table>
 <br>
+
+<c:if test="${authority == 0}">
 <table class="table">
 <tr>
 <td><form action = "<%=request.getContextPath()%>/resourcechange" method = "post">
@@ -82,6 +84,7 @@
 </tr>
 </table>
 <br>
+</c:if>
 <a class="dialog" href = "<%=request.getContextPath()%>/resourcelist">一覧に戻る</a>
 
 </div>
