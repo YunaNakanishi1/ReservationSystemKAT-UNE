@@ -40,7 +40,9 @@
 	width:100%;
 	min-width:500px;
 	margin-bottom:0;
-
+	margin-top:20px;
+	height:20px;
+	position:absolute;
 }
 
 .fotter{
@@ -51,9 +53,8 @@
     color: white;
     border:solid;
     border-color:#FF8C00;
-    position:absolute;
+	position:absolute;
     bottom:0;
-    margin-bottom:0;
     right:0;
 	left:0;
 	margin:0 auto;

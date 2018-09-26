@@ -4,7 +4,8 @@
 
 .body {
     font-family: Lato, "Noto Sans JP", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-	height:100%;
+	min-height:100vh;
+	padding:0;
 }
 
 .body1{
@@ -24,10 +25,11 @@
 .div{	/*ヘッダーの上に追加*/
 	min-width:500px;
 	width: 100%;
-	min-height: 100%;
-	height: auto !important;
+	min-height: 100vh;
 	height: 100%;
 	bottom:0;
+	margin-bottom:-20px;
+	position:relative;
 }
 
 .contents1{		/*ログイン画面用*/
