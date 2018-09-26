@@ -24,7 +24,9 @@
 <table class="table2">
 <tbody>
 <form action="resourseregist" method="post">
-
+<c:if test="${hasResourceData }">
+<input type="hidden" name = "resourceId" value="${resourceId }">
+</c:if>
 <tr>
 <td class="one" class="dialog"><b>リソース名</b></td>
 
@@ -227,7 +229,9 @@ selected
 </form>
 <td>　</td>
 <td><form action = "${returnPage}" method = "post">
-<input type="hidden" name="resourceId" value = "<c:out value = "${resource.resourceId}"/>" >
+<c:if test="${hasResourceData }">
+<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
+</c:if>
 <input class="submit" type = "submit" value = "戻る"></form>
 </td>
 </tr>
