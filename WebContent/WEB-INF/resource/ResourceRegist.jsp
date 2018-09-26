@@ -104,10 +104,8 @@ value="${stopStartDay}"
 </td>
 </tr>
 <tr>
-<td></td>
-<td class="right2">
-※年は省略可
-</td>
+<td class="dialog">　</td>
+<td class="right2">※年は省略可</td>
 </tr>
 <tr>
 
@@ -163,10 +161,8 @@ value="${stopEndDay}"
 </td>
 </tr>
 <tr>
-<td></td>
-<td class="right2">
-※年は省略可
-</td>
+<td class="dialog">　</td>
+<td class="right2">※年は省略可</td>
 </tr>
 <tr>
 
@@ -212,13 +208,13 @@ selected
 
 <tr>
 <td class="dialog"><b>詳細</b></td>
-<td><div class="scroll2">
-<textarea name="supplement">
+<td>
+<textarea class="scroll2" name="supplement">
 <c:if test="${hasResourceData && resource.supplement != null}">
 <c:out value="${resource.supplement}" />
 </c:if>
 </textarea>
-</div></td>
+</td>
 </tr>
 </tbody>
 </table>

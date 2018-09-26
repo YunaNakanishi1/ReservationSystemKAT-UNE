@@ -133,13 +133,15 @@
 	min-width:180px;
 
 }
-.scroll2{	/*リソース詳細の詳細ボックス*/
-	height: 8em;  /* 高さを制限(※) */
+.scroll2{	/*リソース詳細・入力の詳細ボックス*/
+	height: 6em;  /* 高さを制限(※) */
     overflow: scroll; /* スクロールバーを表示(※) */
     overflow-x: hidden;
     text-align:left;
     white-space:pre-wrap;	/*連続で並ぶ半角スペースやtabは1つの空白文字にまとまるが、改行（enter）は反映される*/
     border: blue 1px dashed;  /* 枠線を追加 */
+	width:auto;
+	min-width:100px;
     margin-left:4em;
     /*background-color:green;*/	/*実験用*/
 }
