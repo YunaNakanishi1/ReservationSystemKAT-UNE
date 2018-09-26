@@ -3,6 +3,7 @@ package handler;
 import static handler.ViewHolder.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +28,6 @@ public class ShowResourceChangeHandler implements Handler{
 		int authority=(int) session.getAttribute("authority");
 
 		if(authority==0){
-
 
 				request.setAttribute("hasResourceData", true);
 
@@ -69,6 +69,23 @@ public class ShowResourceChangeHandler implements Handler{
 					request.setAttribute("categoryList", categoryList);
 					request.setAttribute("officeList", officeList);
 					request.setAttribute("facilityList", facilityList);
+
+					request.setAttribute("resourceId", resource.getResourceId());
+					request.setAttribute("resourceName", resource.getResourceName());
+					request.setAttribute("category", resource.getCategory());
+					request.setAttribute("capacity", resource.getCapacity());
+					request.setAttribute("officeName", resource.getOfficeName());
+					request.setAttribute("stopStartDate", resource.getUsageStopStartDate());
+					request.setAttribute("stopEndDate", resource.getUsageStopEndDate());
+
+					List<String> facility = resource.getFacility();
+					List<Boolean> selectedFacility = new ArrayList<Boolean>();
+					for(String fac:facilityList){
+						selectedFacility.add(facility.contains(fac));
+					}
+
+					request.setAttribute("selectedFacility", selectedFacility);
+
 					return RESOURCE_REGIST;
 				}catch(SQLException e){
 					_log.error("SQLException");
