@@ -6,8 +6,8 @@ import dao.ResourceDao;
 
 public class DeleteResourceService implements Service{
 
-	private String _resourceId;
-	private int  _result;
+	private String _resourceId;   //リソースID
+	private int  _result;         //削除結果
 
 	public DeleteResourceService(String resourceId){
 		_resourceId = resourceId;
