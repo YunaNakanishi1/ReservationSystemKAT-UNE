@@ -75,7 +75,7 @@
 <c:if test="${authority == 0}">
 <table class="table">
 <tr>
-<td><form action = "<%=request.getContextPath()%>/resourcechange" method = "post">
+<td><form action = "<%=request.getContextPath()%>/resourcechange" method = "get">
 <input class="submit" class="dialog" type = "submit" value = "変更"></form></td>
 <td>　</td>
 <td>
