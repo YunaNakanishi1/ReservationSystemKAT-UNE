@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -68,6 +68,8 @@
 </tbody>
 </table>
 <br>
+
+<c:if test="${authority == 0}">
 <table class="table">
 <tr>
 <td><form action = "<%=request.getContextPath()%>/resourcechange" method = "post">
@@ -82,7 +84,14 @@
 </tr>
 </table>
 <br>
+</c:if>
 <a class="dialog" href = "<%=request.getContextPath()%>/resourcelist">一覧に戻る</a>
+
+<form action="resourcelist" name="form1" method="post" >
+    <input type="hidden">
+    <a href="javascript:form1.submit()">一覧に戻る</a>
+</form>
+
 
 </div>
 
