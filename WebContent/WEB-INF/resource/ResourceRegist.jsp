@@ -30,7 +30,7 @@
 
 <td class="right2">
 <input type="text" name="resourceName"
-<c:if test="${checkDisplay}">
+<c:if test="${hasResourceData}">
  value=" <c:out value="${resourceName}" /> "
  </c:if>
  >
@@ -43,7 +43,7 @@
 <c:forEach var="obj" items="${categoryList}" varStatus="status">
 
 <option value="${obj}"
-<c:if test="${checkDisplay && category == obj}">
+<c:if test="${hasResourceData && category == obj}">
  selected
 </c:if>
 >
@@ -56,7 +56,7 @@
 <td class="dialog"><b>定員</b></td>
 <td class="right2">
 <input type="text" name="capacity"
-<c:if test="${checkDisplay}">
+<c:if test="${hasResourceData}">
  value=" <c:out value="${capacity}" /> "
  </c:if>
  >
@@ -68,7 +68,7 @@
 <select name ="officeName">
 <c:forEach var="obj" items="${officeList}" varStatus="status">
 <option value="<${obj}"
-<c:if test="${checkDisplay && officeName == obj}">
+<c:if test="${hasResourceData && officeName == obj}">
  selected
 </c:if>
 >
@@ -82,7 +82,7 @@
 <td><div class="scroll3">
 <c:forEach var="obj" items="${facilityList}" varStatus="status">
 <input type="checkbox" name = "facility" value = <c:out value="${obj}" />
-<c:if test ="${checkDisplay && selectedFacility[status.index]}">
+<c:if test ="${hasResourceData && selectedFacility[status.index]}">
 checked
 </c:if>
 >
@@ -95,7 +95,7 @@ checked
 <td class="dialog"><b>利用停止開始日時</b></td>
 <td class="right2">
 <input type="text" name="stopStartDay"
-<c:if test ="${checkDisplay && stopStartDay!= null}">
+<c:if test ="${hasResourceData && stopStartDay!= null}">
 value="${stopStartDay}"
 </c:if>
 >
@@ -114,7 +114,7 @@ value="${stopStartDay}"
 <select name = "stopStartHour">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
-<c:if test="${checkDisplay && stopStartHour == 0 + status.index }">
+<c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
 selected
 </c:if>
 >
@@ -123,7 +123,7 @@ selected
 </c:forEach>
 <c:forEach begin="10" end="23"  varStatus="status">
 <option value= "<c:out value="${status.index}"/>"
-<c:if test="${checkDisplay && stopStartHour == status.index }">
+<c:if test="${hasResourceData && stopStartHour == status.index }">
 selected
 </c:if>
 >
@@ -135,7 +135,7 @@ selected
 <select name = "stopStartMinute">
 <c:forEach begin="0" end="5" varStatus="status">
 <option value="<c:out value="${status.index}" />0"
-<c:if test="${checkDisplay && stopStartMinute == status.index+'0' }">
+<c:if test="${hasResourceData && stopStartMinute == status.index+'0' }">
 selected
 </c:if>
 >
@@ -154,7 +154,7 @@ selected
 <td class="dialog"><b>利用停止終了日時</b></td>
 <td class="right2">
 <input type="text" name="stopEndDay"
-<c:if test ="${checkDisplay && stopEndDay!= null}">
+<c:if test ="${hasResourceData && stopEndDay!= null}">
 value="${stopEndDay}"
 </c:if>
 >
@@ -173,7 +173,7 @@ value="${stopEndDay}"
 <select name = "stopEndHour">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
-<c:if test="${checkDisplay && stopEndHour =='0'+status.index }">
+<c:if test="${hasResourceData && stopEndHour =='0'+status.index }">
 selected
 </c:if>
 >
@@ -182,7 +182,7 @@ selected
 </c:forEach>
 <c:forEach begin="10" end="23"  varStatus="status">
 <option value= "<c:out value="${status.index}"/>"
-<c:if test="${checkDisplay && stopEndHour ==status.index }">
+<c:if test="${hasResourceData && stopEndHour ==status.index }">
 selected
 </c:if>
 >
@@ -194,7 +194,7 @@ selected
 <select name = "stopEndMinute">
 <c:forEach begin="0" end="5" varStatus="status">
 <option value="<c:out value="${status.index}" />0"
-<c:if test="${checkDisplay && stopEndMinute ==status.index +'0'}">
+<c:if test="${hasResourceData && stopEndMinute ==status.index +'0'}">
 selected
 </c:if>
 >
@@ -212,7 +212,7 @@ selected
 <td class="dialog"><b>詳細</b></td>
 <td><div class="scroll2">
 <textarea name="supplement">
-<c:if test="${checkDisplay && resource.supplement != null}">
+<c:if test="${hasResourceData && resource.supplement != null}">
 <c:out value="${resource.supplement}" />
 </c:if>
 </textarea>
