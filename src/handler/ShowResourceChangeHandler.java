@@ -75,6 +75,7 @@ public class ShowResourceChangeHandler implements Handler{
 					request.setAttribute("category", resource.getCategory());
 					request.setAttribute("capacity", resource.getCapacity());
 					request.setAttribute("officeName", resource.getOfficeName());
+
 					request.setAttribute("stopStartDate", resource.getUsageStopStartDate());
 					request.setAttribute("stopEndDate", resource.getUsageStopEndDate());
 

@@ -73,6 +73,7 @@
 <table class="table">
 <tr>
 <td><form action = "<%=request.getContextPath()%>/resourcechange" method = "get">
+<input type="hidden" name="resourceId" value="${resource.resourceId }">
 <input class="submit" class="dialog" type = "submit" value = "変更"></form></td>
 <td>　</td>
 <td>
