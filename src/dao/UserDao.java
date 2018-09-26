@@ -31,7 +31,7 @@ public class UserDao {
 		String sql = "SELECT user_id, password, authority FROM users WHERE (user_id = ?) AND (password = ?)";
 		User returnUser = null;
 		if (user == null) {
-			return null;
+			return returnUser;
 		}
 
 		// ヘルパーに接続を依頼
