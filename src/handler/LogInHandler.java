@@ -12,7 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dto.User;
-import service.CheckAuthorityService;
 import service.LogInService;
 
 public class LogInHandler implements Handler {
@@ -24,6 +23,7 @@ public class LogInHandler implements Handler {
 		//入力されたuserId, passwordを取得
 		String userId = request.getParameter("userId");
 		String password = request.getParameter("password");
+		int authority = 0;
 
 	    //userId再表示用
 	    request.setAttribute("userId", userId);
@@ -43,7 +43,7 @@ public class LogInHandler implements Handler {
         }
 
 		//入力されたユーザ情報
-		User user = new User(userId, password, 0);
+		User user = new User(userId, password, authority);
 		LogInService loginService = new LogInService(user);
 
 
@@ -55,35 +55,19 @@ public class LogInHandler implements Handler {
 
 				//ユーザ認証成功
 				if (resultUser != null) {
-					CheckAuthorityService checkAuthorityService =new CheckAuthorityService(userId);
+					authority = resultUser.getAuthority();
 
 					//権限チェック
-					if(checkAuthorityService.validate()){
-						try {
-							checkAuthorityService.execute();
-							int authority = checkAuthorityService.getAuthority();
-							if(authority == 0 || authority == 1){
+					if(authority == 0 || authority == 1) {
+						HttpSession session = request.getSession(true);
+						session.setAttribute("userId", resultUser.getUserId());
+						session.setAttribute("authority", authority);
+						session.setMaxInactiveInterval(SESSION_INTERVAL);
+						return RESERVE_LIST;
 
-								HttpSession session = request.getSession(true);
-								session.setAttribute("userId", resultUser.getUserId());
-								session.setAttribute("authority", resultUser.getAuthority());
-								session.setMaxInactiveInterval(SESSION_INTERVAL);
-								return RESERVE_LIST;
-
-							} else {
-								//権限が0,1以外の時
-								_log.error("authorityError");
-								return ERROR_PAGE;
-							}
-
-						} catch (SQLException e) {
-							_log.error("SQLException");
-							e.printStackTrace();
-							return ERROR_PAGE;
-						}
 					} else {
-						//権限validateエラー
-						_log.error("authorityValidate");
+						//権限が0,1以外の時
+						_log.error("authorityError");
 						return ERROR_PAGE;
 					}
 
@@ -109,3 +93,5 @@ public class LogInHandler implements Handler {
 	}
 
 }
+
+
