@@ -45,10 +45,10 @@ public class ShowResourceRegistHandler implements Handler{
 
 					if("regist".equals(type)){
 						//戻るボタンが押下された場合（新規登録時）
-						request.setAttribute("returnPage",SHOW_RESOURCE_LIST_SERVLET);;
+						request.setAttribute("returnPage",SHOW_RESOURCE_LIST_SERVLET);
 					}else{
 						//戻るボタンが押下された場合（変更時）
-						request.setAttribute("returnPage",RESOURCE_DETAILS_SERVLET);;
+						request.setAttribute("returnPage",RESOURCE_DETAILS_SERVLET);
 
 					}
 					//それぞれのリストをセットして入力画面に遷移する
