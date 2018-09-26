@@ -8,6 +8,8 @@
 <link rel="stylesheet" href="deco.css">
 <link rel="stylesheet" href="header_footer.css">
 </head>
+
+
 <body class="body">
 
 <div class="div">
@@ -23,7 +25,7 @@
 </div>
 
 
-<div class="footer1"><footer class="fotter2">copyright🄫KAT-UNE</footer></div>
+<div class="footer1"><footer class="fotter">copyright🄫KAT-UNE</footer></div>
 </div>
 
 </body>
