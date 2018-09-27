@@ -59,6 +59,7 @@ public class DeleteResourceHandler implements Handler {
         			_log.error("SQLException");
         			return ERROR_PAGE;
         		}
+
         	} else {
 	        	//ログを残す
         		//validate失敗

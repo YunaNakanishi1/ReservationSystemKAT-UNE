@@ -139,7 +139,7 @@ public class ResourceDao {
                 _log.error("displayAll() Exception e1");
             }
 
-            // ヘルパーに接続解除を依頼
+        // ヘルパーに接続解除を依頼
         dbHelper.closeDb();
         }
 
