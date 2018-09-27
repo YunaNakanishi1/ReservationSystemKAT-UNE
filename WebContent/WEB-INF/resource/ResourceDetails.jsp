@@ -66,14 +66,16 @@
 </tr>
 <tr>
 <td class="dialog"><b>詳細</b></td>
-<td><div class="scroll2"><c:out value="${resource.supplement}" /></div></td>
+<td class="right2"><div class="scroll2"><c:out value="${resource.supplement}" /></div></td>
 </tr>
 </tbody>
 </table>
 <br>
 
 <c:if test="${authority == 0}">
-<table class="table">
+
+
+<table class="table3">
 <tr>
 <td><form action = "<%=request.getContextPath()%>/resourcechange" method = "get">
 <input type="hidden" name="resourceId" value="${resource.resourceId }">

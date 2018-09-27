@@ -208,7 +208,7 @@ selected
 
 <tr>
 <td class="dialog"><b>詳細</b></td>
-<td>
+<td class="right2">
 <textarea class="scroll2" name="supplement">
 <c:if test="${hasResourceData && resource.supplement != null}">
 <c:out value="${resource.supplement}" />
@@ -219,7 +219,9 @@ selected
 </tbody>
 </table>
 <br>
-<table class="table">
+
+
+<table class="table3">
 <tr>
 <td><input class="submit" class="dialog" type = "submit" value = "登録"></td>
 </form>

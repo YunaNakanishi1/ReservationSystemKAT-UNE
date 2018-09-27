@@ -55,20 +55,26 @@
 .error{
 	color:red;
 }
-.table{
+.table{	/*リソース詳細テーブル*/
 	right:0;
 	left:0;
 	margin:0 auto;
+	min-width:500px;
 }
-.table2{	/*リソース詳細テーブル*/
+.table2{	/*リソース入力テーブル*/
 	right:0;
 	left:0;
 	margin:0 auto;
 	/*background-color:red;*/
 	width:50%;
 	min-width:500px;
-
 }
+.table3{	/*ボタン覧に使用*/
+	right:0;
+	left:0;
+	margin:0 auto;
+}
+
 .dialog{
 	line-height:0.6;
 }
@@ -130,19 +136,19 @@
 }
 .one{
 	width:50%;
-	min-width:180px;
+	min-width:250px;
 
 }
 .scroll2{	/*リソース詳細・入力の詳細ボックス*/
 	height: 6em;  /* 高さを制限(※) */
     overflow: scroll; /* スクロールバーを表示(※) */
     overflow-x: hidden;
-    text-align:left;
     white-space:pre-wrap;	/*連続で並ぶ半角スペースやtabは1つの空白文字にまとまるが、改行（enter）は反映される*/
     border: blue 1px dashed;  /* 枠線を追加 */
-	width:auto;
+	width:240px;
 	min-width:100px;
-    margin-left:4em;
+	text-align:left;
+	padding:0;
     /*background-color:green;*/	/*実験用*/
 }
 .scroll3{	/*リソース詳細のテーブル内、設備ボックスで使用*/
