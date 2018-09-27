@@ -27,7 +27,7 @@ public class ShowResourceRegistHandler implements Handler{
 
 		if(authority==0){
 
-		
+
 			Boolean hasResourceData = (Boolean)request.getAttribute("hasResourceData");
 			if(hasResourceData==null){
 				request.setAttribute("hasResourceData", false);
@@ -48,8 +48,12 @@ public class ShowResourceRegistHandler implements Handler{
 		//登録時で「戻る」が押された場合→リソース一覧画面に遷移
 		//変更時で「戻る」が押された場合→リソース詳細画面に遷移
 					if("regist".equals(type)){
+						//戻るボタンが押下された場合（新規登録時）
+						request.setAttribute("returnPage",SHOW_RESOURCE_LIST_SERVLET);
 						request.setAttribute("returnPage",SHOW_RESOURCE_LIST_SERVLET);;
 					}else{
+						//戻るボタンが押下された場合（変更時）
+						request.setAttribute("returnPage",RESOURCE_DETAILS_SERVLET);
 						request.setAttribute("returnPage",RESOURCE_DETAILS_SERVLET);;
 
 					}

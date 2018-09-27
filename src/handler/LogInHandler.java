@@ -88,7 +88,7 @@ public class LogInHandler implements Handler {
 					}
 
 				} else {
-					//ユーザ認証失敗
+					//ユーザ認証失敗(EM06)
 					String message = loginService.getValidationMessage();
 					request.setAttribute("Emessage", message);
 					return LOG_IN;
