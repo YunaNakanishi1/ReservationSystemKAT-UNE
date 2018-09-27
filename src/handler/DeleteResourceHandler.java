@@ -46,6 +46,7 @@ public class DeleteResourceHandler implements Handler {
         			if (result == 1) {
         				request.setAttribute("Pmessage",PM08);
         				return SHOW_RESOURCE_LIST_SERVLET;
+
         			} else {
         				//ログを残す
         				//deleteフラグ立て失敗

@@ -121,7 +121,6 @@ public class ResourceDao {
         PreparedStatement stmt = null;
         String sql = "UPDATE resources SET deleted = 1 WHERE resource_id = ?";
 
-
         try {
             if (_con == null) {
                 _log.error("DatabaseConnectError");
