@@ -3,7 +3,6 @@ package handler;
 import static handler.ViewHolder.*;
 
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,15 +29,12 @@ public class ShowResourceChangeHandler implements Handler{
 
 		if(authority==0){
 
-
-
-			request.setAttribute("checkDisplay", true);
+				request.setAttribute("hasResourceData", true);
 
 			String type=request.getParameter("type");
 			request.setAttribute("type", type);
 
-			//選択されたリソースのIDを取り出す
-			String resourceId=request.getParameter("resourceId");
+			String resourceId = request.getParameter("resourceId");
 
 			ShowResourceChangeService showResourceChangeService=new ShowResourceChangeService(resourceId);
 			if(showResourceChangeService.validate()){
@@ -48,49 +44,49 @@ public class ShowResourceChangeHandler implements Handler{
 					List<String> categoryList=showResourceChangeService.getCategoryList();
 					List<String> officeList=showResourceChangeService.getOfficeList();
 					List<String> facilityList=showResourceChangeService.getFacilityList();
-					Resource resource=showResourceChangeService.getResource();
 
-					//各要素をすべて取り出す
-					resourceId=resource.getResourceId();
-					String resourceName=resource.getResourceName();
-					String officeName=resource.getOfficeName();
-					String category =resource.getCategory();
-					int  capacity=resource.getCapacity();
-					String supplement=resource.getSupplement();
-					int deleted = resource.getDeleted();
-					List<String> facility=resource.getFacility();
-					Timestamp stopStartDate=resource.getUsageStopStartDate();
-					Timestamp stopEndDate=resource.getUsageStopEndDate();
+					Resource resource = showResourceChangeService.getResource();
 
-					//それぞれの値をリクエストにセットする
-					request.setAttribute("resourceId", resourceId);
-					request.setAttribute("resourceName", resourceName);
-					request.setAttribute("officeName", officeName);
-					request.setAttribute("category", category );
-					request.setAttribute("capacity",capacity );
-					request.setAttribute("supplement",supplement );
-					request.setAttribute("deleted ",deleted  );
-					request.setAttribute("facility",facility );
-					request.setAttribute("stopStartDate",stopStartDate );
-					request.setAttribute("stopEndDate",stopEndDate);
-
-					List<Boolean> selectedFacility=new ArrayList<Boolean>();
-
-					for(String fac:facilityList)
-					{selectedFacility.add(facility.contains(fac));}
+					if(resource==null){
+						_log.error("no Resource");
+						return ERROR_PAGE;
+					}
+					if(resource.getDeleted()!=0){
+						_log.error("Resource is deleted");
+						return ERROR_PAGE;
+					}
 
 
-					request.setAttribute("selectedFacility",selectedFacility);
+					if("regist".equals(type)){
+						//戻るボタンが押下された場合（新規登録時）
+						request.setAttribute("returnPage",SHOW_RESOURCE_LIST_SERVLET);;
+					}else{
+						//戻るボタンが押下された場合（変更時）
+						request.setAttribute("returnPage",RESOURCE_DETAILS_SERVLET);;
 
-
-					//変更時で「戻る」が押された場合→リソース詳細画面に遷移
-					request.setAttribute("returnPage",RESOURCE_DETAILS_SERVLET);
-
-
+					}
 					//それぞれのリストをセットして入力画面に遷移する
 					request.setAttribute("categoryList", categoryList);
 					request.setAttribute("officeList", officeList);
 					request.setAttribute("facilityList", facilityList);
+
+					request.setAttribute("resourceId", resource.getResourceId());
+					request.setAttribute("resourceName", resource.getResourceName());
+					request.setAttribute("category", resource.getCategory());
+					request.setAttribute("capacity", resource.getCapacity());
+					request.setAttribute("officeName", resource.getOfficeName());
+
+					request.setAttribute("stopStartDate", resource.getUsageStopStartDate());
+					request.setAttribute("stopEndDate", resource.getUsageStopEndDate());
+
+					List<String> facility = resource.getFacility();
+					List<Boolean> selectedFacility = new ArrayList<Boolean>();
+					for(String fac:facilityList){
+						selectedFacility.add(facility.contains(fac));
+					}
+
+					request.setAttribute("selectedFacility", selectedFacility);
+
 					return RESOURCE_REGIST;
 				}catch(SQLException e){
 					_log.error("SQLException");
@@ -99,17 +95,19 @@ public class ShowResourceChangeHandler implements Handler{
 
 				}
 			}else{
-				_log.error("No authority");
+				_log.error("validateError");
 	            return ERROR_PAGE;
 			}
 
-
-
-	}else{
-		_log.error("No authority");
-        return ERROR_PAGE;
-	}
-
+		}else{
+			_log.error("No authority");
+            return ERROR_PAGE;
+		}
 
 	}
+
+
+
+
+
 }

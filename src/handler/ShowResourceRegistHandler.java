@@ -27,10 +27,10 @@ public class ShowResourceRegistHandler implements Handler{
 
 		if(authority==0){
 
-
-			Boolean checkDisplay = (Boolean)request.getAttribute("checkDisplay");
-			if(checkDisplay==null){
-				request.setAttribute("checkDisplay", false);
+		
+			Boolean hasResourceData = (Boolean)request.getAttribute("hasResourceData");
+			if(hasResourceData==null){
+				request.setAttribute("hasResourceData", false);
 			}
 			String type=request.getParameter("type");
 			request.setAttribute("type", type);
