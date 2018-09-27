@@ -178,9 +178,6 @@ public class ResourceDao {
                     + "= resource_characteristics.resource_characteristic_id "
                     + "order by resource_features.resource_characteristic_id;";
 
-            //			final String sql3 = "select category_name " + "from resources,categories "
-            //					+ "where resource_id=? and categories.category_id=resources.category_id "
-            //					+ "order by categories.category_id;";
 
             String resourceName = "";
             String officeName = "";
@@ -223,17 +220,6 @@ public class ResourceDao {
                     String facility = rs2.getString("resource_characteristic_name");
                     facilityList.add(facility);
                 }
-
-                // カテゴリ表示のためにカテゴリのリストを作成
-                // 設備表示のために設備のリストを作成
-                //			pstmt3 = _con.prepareStatement(sql3);
-                //			pstmt3.setString(1, resourceId);
-                //
-                //			rs3 = pstmt3.executeQuery(); // 実行
-                //
-                //			while (rs3.next()) {
-                //				category = rs3.getString("category_name");
-                //			}
 
 
                 resource = new Resource(resourceId, resourceName, officeName, category, capacity, supplement, 0,
