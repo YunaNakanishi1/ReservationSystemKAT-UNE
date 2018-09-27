@@ -30,17 +30,13 @@ public class UserDao {
 	public User getUser(User user) throws SQLException {
 		String sql = "SELECT user_id, password, authority FROM users WHERE (user_id = ?) AND (password = ?)";
 		User returnUser = null;
-
 		if (user == null) {
-			return returnUser;
-		} else if (user.getUserId() == null || user.getPassword() == null) {
-			return returnUser;
+			return null;
 		}
 
 		// ヘルパーに接続を依頼
 		DBHelper dbHelper = new DBHelper();
         _con = dbHelper.connectDb();
-
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -49,10 +45,6 @@ public class UserDao {
         String password = user.getPassword();
 
         try {
-    		if (_con == null) {
-    			_log.error("DatabaseConnectError");
-    			throw new SQLException();
-    		}
             stmt = _con.prepareStatement(sql);
             stmt.setString(1, userId);
             stmt.setString(2, password);
