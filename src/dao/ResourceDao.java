@@ -28,7 +28,6 @@ public class ResourceDao {
 
     /**
      * リソース全件の一覧を表示するためのDaoメソッド.
-     *
      * @return resourceを返す
      */
     public List<Resource> displayAll() throws SQLException {
@@ -43,10 +42,15 @@ public class ResourceDao {
             _con = dbHelper.connectDb(); // データベースに接続
 
             String sql = "select resources.resource_id,resource_name,office_name,"
-                    + "category_name,capacity,supplement,usage_stop_start_date," + "usage_stop_end_date,deleted "
-                    + "from resources,categories,offices " + "where resources.category_id = categories.category_id and "
+					+ "category_name,capacity,supplement,usage_stop_start_date,"
+					+ "usage_stop_end_date,deleted "
+					+ "from resources,categories,offices "
+					+ "where resources.category_id = categories.category_id and "
                     + "resources.office_id = offices.office_id "
-                    + "order by offices.office_id asc , categories.category_id asc " + ", resources.resource_id asc;";
+					+ "order by offices.office_id asc , categories.category_id asc "
+					+ ", resources.resource_id asc;";
+
+
 
             if (_con == null) {
                 _log.error("DatabaseConnectError");
@@ -67,8 +71,9 @@ public class ResourceDao {
                 Timestamp usageStopEndDate = rs.getTimestamp("usage_stop_end_date");
 
                 // リストに追加
-                resourceList.add(new Resource(resourceId, resourceName, officeName, categoryName, capacity, supplement,
-                        deleted, null, usageStopStartDate, usageStopEndDate));
+				resourceList.add(new Resource(resourceId, resourceName, officeName,
+						categoryName, capacity, supplement, deleted, null,
+						usageStopStartDate, usageStopEndDate));
 
             }
 
@@ -110,11 +115,8 @@ public class ResourceDao {
         PreparedStatement stmt = null;
         String sql = "UPDATE resources SET deleted = 1 WHERE resource_id = ?";
 
+		if (_con != null) {
         try {
-            if (_con == null) {
-                _log.error("DatabaseConnectError");
-                throw new SQLException();
-            }
             stmt = _con.prepareStatement(sql);
             stmt.setString(1, resourceId);
             result = stmt.executeUpdate();
@@ -126,6 +128,7 @@ public class ResourceDao {
                 e1.printStackTrace();
                 _log.error("displayAll() Exception e1");
             }
+			}
 
             // ヘルパーに接続解除を依頼
             dbHelper.closeDb();
