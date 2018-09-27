@@ -18,6 +18,7 @@ public class DeleteResourceHandler implements Handler {
 	private static Logger _log = LogManager.getLogger();
 
 	public String handleService(HttpServletRequest request) {
+
       HttpSession httpSession = request.getSession(false);
       //セッションは存在する
       int authority = (int) httpSession.getAttribute("authority");
@@ -31,45 +32,44 @@ public class DeleteResourceHandler implements Handler {
           return ERROR_PAGE;
       }
 
+      authority = (int) httpSession.getAttribute("authority");
+
       //権限がある場合
       if (authority == 0) {
     	  DeleteResourceService deleteResourceService = new DeleteResourceService(deleteId);
 
-    	  if (deleteResourceService.validate()) {
-    		  try {
-    			  //delteフラグ立て
-    			  deleteResourceService.execute();
-    			  int result = deleteResourceService.getResult();
+        	if (deleteResourceService.validate()) {
+        		try {
+        			deleteResourceService.execute();
+        			int result = deleteResourceService.getResult();
 
-    			  //正常にdeleteフラグが立った場合
-    			  if (result == 1) {
-    				  request.setAttribute("Pmessage",PM08);
-    				  return SHOW_RESOURCE_LIST_SERVLET;
+        			if (result == 1) {
+        				request.setAttribute("Pmessage",PM08);
+        				return SHOW_RESOURCE_LIST_SERVLET;
+        			} else {
+        				//ログを残す
+        				//deleteフラグ立て失敗
+        				_log.error("deleteError");
+        				return ERROR_PAGE;
+        			}
 
-    			  } else {
-    				  //ログを残す
-    				  //deleteフラグ立て失敗
-    				  _log.error("deleteError");
-    				  return ERROR_PAGE;
-    			  }
-
-    		  } catch (SQLException e) {
-    			  //ログを残す
-    			  _log.error("SQLException");
-    			  return ERROR_PAGE;
-    		  }
-    	  } else {
-    		  //ログを残す
-    		  //validate失敗
-    		  _log.error("validateError");
-    		  return ERROR_PAGE;
-    	  }
-      } else {
-    	  //ログを残す
-    	  //authorityエラー
-    	  _log.error("authorityError");
-    	  return ERROR_PAGE;
-      }
+        		} catch (SQLException e) {
+        			//ログを残す
+        			_log.error("SQLException");
+        			return ERROR_PAGE;
+        		}
+        	} else {
+	        	//ログを残す
+        		//validate失敗
+        		_log.error("validateError");
+	        	return ERROR_PAGE;
+        	}
+        } else {
+        	//ログを残す
+        	//authorityエラー
+        	_log.error("authorityError");
+        	return ERROR_PAGE;
+        }
 
 	}
 }

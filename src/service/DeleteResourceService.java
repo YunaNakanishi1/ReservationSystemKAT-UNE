@@ -6,8 +6,8 @@ import dao.ResourceDao;
 
 public class DeleteResourceService implements Service{
 
-	private String _resourceId;   //リソースID
-	private int  _result;         //削除結果
+	private String _resourceId;
+	private int  _result;
 
 	public DeleteResourceService(String resourceId){
 		_resourceId = resourceId;
@@ -20,7 +20,6 @@ public class DeleteResourceService implements Service{
 
 	public void execute() throws SQLException {
 		ResourceDao resourceDao = new ResourceDao();
-		//削除フラグ立て処理
 		_result = resourceDao.delete(_resourceId);
 	}
 

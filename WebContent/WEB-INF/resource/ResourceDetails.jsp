@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -10,9 +10,6 @@
 <link rel="stylesheet" href="deco.css">
 <link rel="stylesheet" href="header_footer.css">
 </head>
-
-
-
 <body class="body">
 
 <div class="div">
@@ -66,35 +63,30 @@
 </tr>
 <tr>
 <td class="dialog"><b>詳細</b></td>
-<td><div class="scroll2"><c:out value="${resource.supplement}" /></div></td>
+<td class="right2"><div class="scroll2"><c:out value="${resource.supplement}" /></div></td>
 </tr>
 </tbody>
 </table>
 <br>
 
 <c:if test="${authority == 0}">
-<table class="table">
+
+
+<table class="table3">
 <tr>
-<td><form action = "<%=request.getContextPath()%>/resourcechange" method = "get">
-<input type="hidden" name="resourceId" value="${resource.resourceId }">
-<input class="submit" class="dialog" type = "submit" value = "変更"></form></td>
+<td><input class="submit" class="dialog" type = "submit" value = "変更"></td>
 <td>　</td>
-<td>
-<form action = "deleteresource" method = "post">
-<input type = "hidden" name = "resourceId" value = "${resource.resourceId}" >
-<input class="submit" type = "submit" value = "削除">
-</form>
+<td><form action = "deleteresource" method = "post">
+<input type="hidden" name="resourceId" value = "<c:out value = "${resource.resourceId}"/>" >
+<input class="submit" type = "submit" value = "削除"></form>
 </td>
 </tr>
 </table>
-<br>
+
 </c:if>
+<br>
 
-<form action="resourcelist" name="form1" method="post" >
-    <input type="hidden">
-    <a href="javascript:form1.submit()">一覧に戻る</a>
-</form>
-
+<a class="dialog" href = "resourcelist" method="post">一覧に戻る</a>
 
 </div>
 
