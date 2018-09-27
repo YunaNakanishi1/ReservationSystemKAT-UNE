@@ -3,6 +3,8 @@ package handler;
 import static handler.ViewHolder.*;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,14 +59,9 @@ public class ShowResourceChangeHandler implements Handler{
 					}
 
 
-					if("regist".equals(type)){
-						//戻るボタンが押下された場合（新規登録時）
-						request.setAttribute("returnPage",SHOW_RESOURCE_LIST_SERVLET);;
-					}else{
-						//戻るボタンが押下された場合（変更時）
-						request.setAttribute("returnPage",RESOURCE_DETAILS_SERVLET);;
 
-					}
+					request.setAttribute("returnPage",RESOURCE_DETAILS_SERVLET);;
+
 					//それぞれのリストをセットして入力画面に遷移する
 					request.setAttribute("categoryList", categoryList);
 					request.setAttribute("officeList", officeList);
@@ -75,6 +72,22 @@ public class ShowResourceChangeHandler implements Handler{
 					request.setAttribute("category", resource.getCategory());
 					request.setAttribute("capacity", resource.getCapacity());
 					request.setAttribute("officeName", resource.getOfficeName());
+
+
+					Timestamp stopStartDate=resource.getUsageStopStartDate();
+					Timestamp stopEndDate=resource.getUsageStopEndDate();
+
+					SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
+					request.setAttribute("stopStartDay", format.format(stopStartDate));
+					request.setAttribute("stopEndDay", format.format(stopEndDate));
+
+					format=new SimpleDateFormat("hh");
+					request.setAttribute("stopStartHour", format.format(stopStartDate));
+					request.setAttribute("stopEndHour", format.format(stopEndDate));
+
+					format=new SimpleDateFormat("mm");
+					request.setAttribute("stopStartMinute", format.format(stopStartDate));
+					request.setAttribute("stopEndMinute", format.format(stopEndDate));
 
 					request.setAttribute("stopStartDate", resource.getUsageStopStartDate());
 					request.setAttribute("stopEndDate", resource.getUsageStopEndDate());
