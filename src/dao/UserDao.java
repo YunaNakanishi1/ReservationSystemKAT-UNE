@@ -24,11 +24,11 @@ public class UserDao {
 	/**
 	 * ユーザ認証を行うメソッド.
 	 * @param user 入力されたユーザ情報
-	 * @return returnUser 認証されたユーザ情報. 認証されなかった場合null
+	 * @return returnUser 認証されたユーザ情報. 認証されなかった場合、権限が無い場合null
 	 * @throws SQLException
 	 */
 	public User getUser(User user) throws SQLException {
-		String sql = "SELECT user_id, password, authority FROM users WHERE (user_id = ?) AND (password = ?)";
+		String sql = "SELECT user_id, password, authority FROM users WHERE (user_id = ?) AND (password = ?) AND ((authority = 1) OR (authority = 0))";
 		User returnUser = null;
 		if (user == null) {
 			return null;

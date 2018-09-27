@@ -31,6 +31,30 @@ $(document).ready(function(){
 	});
 
 </script>
+
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    var $setElm = $('.the_number_of_characters_cut');
+    var cutFigure = '30'; // カットする文字数
+    var afterTxt = '…'; // 文字カット後に表示するテキスト
+
+    $setElm.each(function(){
+        var textLength = $(this).text().length;
+        var textTrim = $(this).text().substr(0,(cutFigure))
+
+        if(cutFigure < textLength) {
+            $(this).html(textTrim + afterTxt).css({visibility:'visible'});
+        } else if(cutFigure >= textLength) {
+            $(this).css({visibility:'visible'});
+        }
+    });
+});
+</script>
+
+
+
 </head>
 <body>
 
@@ -48,6 +72,7 @@ $(document).ready(function(){
 <input type="hidden" name ="type" value="regist">
 <input class="submit" type = "submit" value = "リソース登録">
 </form>
+<br>
 <!-- リソースが0件の場合は以下を表示しない -->
 <c:if test="${resourceListSize != 0}">
 <table id="design-table" class="table table-striped table-bordered" style="width:90%">
@@ -69,7 +94,7 @@ $(document).ready(function(){
 <td><c:out value="${obj.officeName}" /></td>
 <td><c:out value="${obj.category}" /></td>
 <td><c:out value="${obj.capacity}" /></td>
-<td><c:out value="${obj.supplement}" /></td>
+<td  class="the_number_of_characters_cut"><c:out value="${obj.supplement}" /></td>
 <td><c:out value="${statusList[status.count-1]}" /></td>
 </tr>
 </c:forEach>
