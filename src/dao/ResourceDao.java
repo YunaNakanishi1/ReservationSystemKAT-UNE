@@ -205,7 +205,7 @@ public class ResourceDao {
 
             rs = pstmt.executeQuery(); // 実行
 
-            while (rs.next()) {
+            if (rs.next() == true) {
                 resourceName = rs.getString("resource_name");
                 officeName = rs.getString("office_name");
                 capacity = rs.getInt("capacity");
