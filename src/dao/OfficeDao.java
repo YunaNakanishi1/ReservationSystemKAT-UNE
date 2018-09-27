@@ -49,14 +49,14 @@ public class OfficeDao {
 
 				}catch(Exception e1){
 					e1.printStackTrace();
-					 _log.error("category() Exception e1");
+					 _log.error("officeName() Exception e1");
 				}
 
 				try {
 					dbHelper.closeResource(rs);
 				} catch (Exception e2) {
 					e2.printStackTrace();
-					_log.error("category() Exception e2");
+					_log.error("officeName() Exception e2");
 				}
 				 dbHelper.closeDb();
 			}
