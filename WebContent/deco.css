@@ -163,3 +163,7 @@
     min-width:100px;
     margin-left:4em;
 }
+
+.the_number_of_characters_cut{
+	visibility: hidden;
+}
