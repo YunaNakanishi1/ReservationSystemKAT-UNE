@@ -65,13 +65,13 @@ public class DeleteResourceHandler implements Handler {
         		_log.error("validateError");
 	        	return ERROR_PAGE;
         	}
+
         } else {
         	//ログを残す
         	//authorityエラー
         	_log.error("authorityError");
         	return ERROR_PAGE;
         }
-
 	}
 }
 

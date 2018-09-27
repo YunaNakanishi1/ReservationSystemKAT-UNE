@@ -129,6 +129,7 @@ public class ResourceDao {
             stmt = _con.prepareStatement(sql);
             stmt.setString(1, resourceId);
             result = stmt.executeUpdate();
+
         } finally {
             // Statementのクローズ
             try {
