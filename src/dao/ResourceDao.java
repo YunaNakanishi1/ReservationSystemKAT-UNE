@@ -108,6 +108,12 @@ public class ResourceDao {
         return 0;
     }
 
+    /**
+     * 指定されたresourceIdのdeleteを1に書き換える
+     * @param resourceId 削除したいリソースID
+     * @return 削除結果（1だと成功）
+     * @throws SQLException
+     */
     public int delete(String resourceId) throws SQLException {
         int result = 0;
         DBHelper dbHelper = new DBHelper();
@@ -128,10 +134,10 @@ public class ResourceDao {
                 e1.printStackTrace();
                 _log.error("displayAll() Exception e1");
             }
-			}
+		}
 
             // ヘルパーに接続解除を依頼
-            dbHelper.closeDb();
+        dbHelper.closeDb();
         }
 
         return result;
