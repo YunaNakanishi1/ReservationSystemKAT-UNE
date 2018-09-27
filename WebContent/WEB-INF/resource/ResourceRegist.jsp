@@ -210,15 +210,10 @@ selected
 
 <tr>
 <td class="dialog"><b>詳細</b></td>
-<<<<<<< HEAD
+
 <td class="right2">
 <textarea class="scroll2" name="supplement">
-<c:if test="${hasResourceData && resource.supplement != null}">
-=======
-<td><div class="scroll2">
-<textarea name="supplement">
 <c:if test="${checkDisplay && resource.supplement != null}">
->>>>>>> branch 'develop' of https://github.com/YunaNakanishi1/ReservationSystemKAT-UNE.git
 <c:out value="${resource.supplement}" />
 </c:if>
 </textarea>
@@ -234,7 +229,7 @@ selected
 <td><input class="submit" class="dialog" type = "submit" value = "登録"></td>
 </form>
 <td>　</td>
-<td><form action = "${returnPage}" method = "post">
+<td><form action = "${returnPage}" method = "get">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resource.resourceId}"/>" >
 <input class="submit" type = "submit" value = "戻る"></form>
 </td>

@@ -68,15 +68,11 @@
 </tbody>
 </table>
 <br>
-<<<<<<< HEAD
 
 <c:if test="${authority == 0}">
 
 
 <table class="table3">
-=======
-<table class="table">
->>>>>>> branch 'develop' of https://github.com/YunaNakanishi1/ReservationSystemKAT-UNE.git
 <tr>
 <td><input class="submit" class="dialog" type = "submit" value = "変更"></td>
 <td>　</td>
@@ -86,8 +82,11 @@
 </td>
 </tr>
 </table>
+
+</c:if>
 <br>
-<a class="dialog" href = "xxx">一覧に戻る</a>
+
+<a class="dialog" href = "resourcelist" method="post">一覧に戻る</a>
 
 </div>
 
