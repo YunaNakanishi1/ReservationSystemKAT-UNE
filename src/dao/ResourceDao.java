@@ -108,6 +108,7 @@ public class ResourceDao {
         return 0;
     }
 
+
     /**
      * 指定されたresourceIdのdeleteを1に書き換える
      * @param resourceId 削除したいリソースID

@@ -66,7 +66,6 @@ public class DeleteResourceHandler implements Handler {
         		_log.error("validateError");
 	        	return ERROR_PAGE;
         	}
-
         } else {
         	//ログを残す
         	//authorityエラー
