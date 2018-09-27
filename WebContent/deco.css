@@ -11,15 +11,15 @@
 .body1{
 	font-family: Lato, "Noto Sans JP", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
 	height:100%;
-	min-height:100%;
-	min-height: 650px;
+	min-height:100vh;
 	background-size: cover;
 	/* 画像を常に天地左右の中央に配置 */
     background-position: center center;
     /* 画像をタイル状に繰り返し表示しない */
     background-repeat: no-repeat;
-	padding:0;
+	margin-bottom:-20px;
 	margin:0;
+	position:relative;
 	/*background-color:red; 便宜上追加中*/
 }
 .div{	/*ヘッダーの上に追加*/
@@ -35,8 +35,10 @@
 .contents1{		/*ログイン画面用*/
 	margin-left:1%;
 	margin-right:1%;
-	margin-top:10%;
+	margin-top:150px;
 	height:100%; /*これ100%から変更*/
+	min-width:400px;
+	min-height:150px;
 	position:relative;
 	bottom:0;
 	text-align:center;
@@ -55,20 +57,26 @@
 .error{
 	color:red;
 }
-.table{
+.table{	/*リソース詳細テーブル*/
 	right:0;
 	left:0;
 	margin:0 auto;
+	min-width:400px;
 }
-.table2{	/*リソース詳細テーブル*/
+.table2{	/*リソース入力テーブル*/
 	right:0;
 	left:0;
 	margin:0 auto;
 	/*background-color:red;*/
 	width:50%;
 	min-width:500px;
-
 }
+.table3{	/*ボタン覧に使用*/
+	right:0;
+	left:0;
+	margin:0 auto;
+}
+
 .dialog{
 	line-height:0.6;
 }
@@ -130,17 +138,19 @@
 }
 .one{
 	width:50%;
-	min-width:180px;
+	min-width:250px;
 
 }
-.scroll2{	/*リソース詳細の詳細ボックス*/
-	height: 8em;  /* 高さを制限(※) */
+.scroll2{	/*リソース詳細・入力の詳細ボックス*/
+	height: 6em;  /* 高さを制限(※) */
     overflow: scroll; /* スクロールバーを表示(※) */
     overflow-x: hidden;
-    text-align:left;
     white-space:pre-wrap;	/*連続で並ぶ半角スペースやtabは1つの空白文字にまとまるが、改行（enter）は反映される*/
     border: blue 1px dashed;  /* 枠線を追加 */
-    margin-left:4em;
+	width:240px;
+	min-width:100px;
+	text-align:left;
+	padding:0;
     /*background-color:green;*/	/*実験用*/
 }
 .scroll3{	/*リソース詳細のテーブル内、設備ボックスで使用*/
