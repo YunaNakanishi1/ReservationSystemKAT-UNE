@@ -74,7 +74,12 @@
 
 <table class="table3">
 <tr>
-<td><input class="submit" class="dialog" type = "submit" value = "変更"></td>
+<td>
+<form action="resourcechange" method="get">
+<input type="hidden" name="resourceId" value = "<c:out value = "${resource.resourceId}"/>" >
+<input class="submit" class="dialog" type = "submit" value = "変更">
+</form>
+</td>
 <td>　</td>
 <td><form action = "deleteresource" method = "post">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resource.resourceId}"/>" >

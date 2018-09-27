@@ -77,6 +77,7 @@ public class ShowResourceChangeHandler implements Handler{
 					Timestamp stopStartDate=resource.getUsageStopStartDate();
 					Timestamp stopEndDate=resource.getUsageStopEndDate();
 
+					if(stopStartDate!=null&&stopEndDate!=null){
 					SimpleDateFormat format = new SimpleDateFormat("yyyy/MM/dd");
 					request.setAttribute("stopStartDay", format.format(stopStartDate));
 					request.setAttribute("stopEndDay", format.format(stopEndDate));
@@ -91,6 +92,7 @@ public class ShowResourceChangeHandler implements Handler{
 
 					request.setAttribute("stopStartDate", resource.getUsageStopStartDate());
 					request.setAttribute("stopEndDate", resource.getUsageStopEndDate());
+					}
 
 					List<String> facility = resource.getFacility();
 					List<Boolean> selectedFacility = new ArrayList<Boolean>();
@@ -99,6 +101,7 @@ public class ShowResourceChangeHandler implements Handler{
 					}
 
 					request.setAttribute("selectedFacility", selectedFacility);
+					request.setAttribute("supplement", resource.getSupplement());
 
 					return RESOURCE_REGIST;
 				}catch(SQLException e){
