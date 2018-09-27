@@ -12,7 +12,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dto.User;
-import service.CheckAuthorityService;
 import service.LogInService;
 
 public class LogInHandler implements Handler {
@@ -55,40 +54,14 @@ public class LogInHandler implements Handler {
 
 				//ユーザ認証成功
 				if (resultUser != null) {
-					CheckAuthorityService checkAuthorityService =new CheckAuthorityService(userId);
-
-					//権限チェック
-					if(checkAuthorityService.validate()){
-						try {
-							checkAuthorityService.execute();
-							int authority = checkAuthorityService.getAuthority();
-							if(authority == 0 || authority == 1){
-
-								HttpSession session = request.getSession(true);
-								session.setAttribute("userId", resultUser.getUserId());
-								session.setAttribute("authority", resultUser.getAuthority());
-								session.setMaxInactiveInterval(SESSION_INTERVAL);
-								return RESERVE_LIST;
-
-							} else {
-								//権限が0,1以外の時
-								_log.error("authorityError");
-								return ERROR_PAGE;
-							}
-
-						} catch (SQLException e) {
-							_log.error("SQLException");
-							e.printStackTrace();
-							return ERROR_PAGE;
-						}
-					} else {
-						//権限validateエラー
-						_log.error("authorityValidate");
-						return ERROR_PAGE;
-					}
+					HttpSession session = request.getSession(true);
+					session.setAttribute("userId", resultUser.getUserId());
+					session.setAttribute("authority", resultUser.getAuthority());
+					session.setMaxInactiveInterval(SESSION_INTERVAL);
+					return RESERVE_LIST;
 
 				} else {
-					//ユーザ認証失敗
+					//ユーザ認証失敗(EM06)
 					String message = loginService.getValidationMessage();
 					request.setAttribute("Emessage", message);
 					return LOG_IN;

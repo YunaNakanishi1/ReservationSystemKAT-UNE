@@ -15,19 +15,28 @@ import org.apache.logging.log4j.Logger;
 import service.DeleteResourceService;
 
 public class DeleteResourceHandler implements Handler {
-	private static Logger _log = LogManager.getLogger(); //これはクラス図にはないんですが
+	private static Logger _log = LogManager.getLogger();
 
 	public String handleService(HttpServletRequest request) {
-		//セッションから権限を取得
-        int authority = 0; //0 権限あり 1 なし
 
       HttpSession httpSession = request.getSession(false);
       //セッションは存在する
+      int authority = (int) httpSession.getAttribute("authority");
+      String deleteId = request.getParameter("resourceId");
+
+      CommonValidator commonValidator = new CommonValidator();
+
+	  //resourceIdがあるかチェック
+	  if (commonValidator.notSetOn(deleteId)) {
+		  _log.error("noResourceId");
+          return ERROR_PAGE;
+      }
+
       authority = (int) httpSession.getAttribute("authority");
 
-        if (authority == 0) {
-        	String deleteId = request.getParameter("resourceId");
-        	DeleteResourceService deleteResourceService = new DeleteResourceService(deleteId);
+      //権限がある場合
+      if (authority == 0) {
+    	  DeleteResourceService deleteResourceService = new DeleteResourceService(deleteId);
 
         	if (deleteResourceService.validate()) {
         		try {
@@ -63,6 +72,5 @@ public class DeleteResourceHandler implements Handler {
         }
 
 	}
-
 }
 
