@@ -87,6 +87,10 @@ public class UserDao {
         // ヘルパーに接続を依頼
         _con = dbHelper.connectDb();
 
+        if(_con == null){//追記
+            _log.error("DataBaseAcessError");
+            throw new SQLException();
+        }
         PreparedStatement stmt = null;
         ResultSet rs = null;
 
@@ -110,6 +114,7 @@ public class UserDao {
                 // SQLException以外の例外が発生
                 e.printStackTrace();
                 // LOGへ記録
+                _log.error("displayAll() Exception on close");
             }
             // ResultSetのクローズ
             try {
@@ -118,6 +123,7 @@ public class UserDao {
                 // SQLException以外の例外が発生
                 e.printStackTrace();
                 // LOGへ記録
+                _log.error("displayAll() Exception on close");
             }
             dbHelper.closeDb();
         }
