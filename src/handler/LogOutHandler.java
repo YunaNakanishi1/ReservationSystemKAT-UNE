@@ -8,8 +8,8 @@ import javax.servlet.http.HttpSession;
 
 /**
  *
- * ログアウト処理を行うクラス.
- * @author p000527259
+ * ログアウト処理を行うハンドラ.
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
 public class LogOutHandler implements Handler {
