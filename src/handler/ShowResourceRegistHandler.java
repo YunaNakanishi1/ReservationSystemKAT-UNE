@@ -3,6 +3,7 @@ package handler;
 import static handler.ViewHolder.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -84,6 +85,12 @@ public class ShowResourceRegistHandler implements Handler {
 								return ERROR_PAGE;
 							}
 						}
+						List<Boolean> selectedFacility = new ArrayList<Boolean>();
+						for(String facilityElement:facilityList){
+							selectedFacility.add(facility.contains(facilityElement));
+						}
+
+						request.setAttribute("selectedFacility", selectedFacility);
 					}
 
 					// jspで表示する「戻る」ボタンのリンク先をリソース登録・リソース変更時で分ける処理
