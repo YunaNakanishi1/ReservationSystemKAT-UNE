@@ -9,8 +9,8 @@
 <title>リソース一覧</title>
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
-  <link rel="stylesheet" href="deco.css">
-  <link rel="stylesheet" href="header_footer.css">
+  <link rel="stylesheet" href="../deco.css">
+  <link rel="stylesheet" href="../header_footer.css">
   <!-- jQuery -->
   <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
   <!-- DataTables -->
