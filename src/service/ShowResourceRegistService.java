@@ -10,7 +10,7 @@ import dao.OfficeDao;
 /**
  * カテゴリ、事業所、リソース特性の一覧を取得する.
  *
- * @author KAT-UNE
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
 public class ShowResourceRegistService implements Service{

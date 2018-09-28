@@ -106,7 +106,7 @@ public class LogInServiceTest {
 
 	}
 
-	@Test
+	@Test(expected = SQLException.class)
 	public void test12() {
 		User user = new User("u0123456", "password", 0);
 		LogInService lis = new LogInService(user);

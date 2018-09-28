@@ -157,7 +157,7 @@ public class UserDaoTest {
 		}
 	}
 
-	//@Test
+	@Test(expected = SQLException.class)
 	public void test1_13() {
 		UserDao ud = new UserDao();
 		User user = new User("u0123456", "password", 0);

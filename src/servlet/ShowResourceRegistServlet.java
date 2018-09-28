@@ -15,6 +15,8 @@ import handler.ShowResourceRegistHandler;
 /**
  * リソース入力ページやエラーページに遷移する.
  *
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
  * Servlet implementation class ShowResourceRegistServlet
  */
 @WebServlet("/reservesystem/resourceregist")
