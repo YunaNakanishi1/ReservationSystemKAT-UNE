@@ -11,6 +11,7 @@ import dto.User;
 
 public class DataBaseFailTest {
 
+
 	//delete(String resourceId)データベース切断
 	@Test(expected = SQLException.class)
 	public void test2_5() {

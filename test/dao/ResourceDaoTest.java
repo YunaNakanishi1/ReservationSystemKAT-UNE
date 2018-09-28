@@ -8,7 +8,6 @@ import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 /**
-*
 * @author リコーITソリューションズ株式会社 team.KAT-UNE
 */
 public class ResourceDaoTest {
