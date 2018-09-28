@@ -1,7 +1,7 @@
 /* Copyright© Ricoh IT Solutions Co.,Ltd.
  * All Right Reserved.
  */
-package test;
+package service;
 
 import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
@@ -14,7 +14,6 @@ import java.util.List;
 import org.junit.Test;
 
 import dto.Resource;
-import service.ShowResourceListService;
 
 /**
   *
@@ -71,7 +70,7 @@ public class ShowResourceListServiceTest {
 		//resourceとtestLsitが一致するかのテスト
 		for(int i=0; i<resourceList.size(); i++){
 			//
-			
+
 			System.out.println(i);
 			assertThat(resourceList.get(i).getResourceId(),is(testList.get(i).getResourceId()));
 			assertThat(resourceList.get(i).getResourceName(),is(testList.get(i).getResourceName()));
