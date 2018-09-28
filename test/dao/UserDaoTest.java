@@ -11,10 +11,6 @@ import dto.User;
 
 public class UserDaoTest {
 
-	@Test
-	public void testGetUser() {
-		fail("まだ実装されていません");
-		UserDao ud = new UserDao(;)
 //	@Test
 	public void test1_1() {
 		UserDao ud = new UserDao();
