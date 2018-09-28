@@ -67,7 +67,7 @@ $(document).ready(function(){
 
 <h2>リソース一覧</h2>
 <p><font color = "blue">${Emessage}</font></p>
-<p><a href = "login" method="post">予約一覧に戻る</a></p>
+<p><a href = "reserveList" method="post">予約一覧に戻る</a></p>
 <form action = "resourceregist" method="get">
 <input type="hidden" name ="type" value="regist">
 <input class="submit" type = "submit" value = "リソース登録">
