@@ -10,6 +10,6 @@ public class ViewHolder {
     public static final String RESOURCE_REGIST  = "/WEB-INF/resource/ResourceRegist.jsp";
     public static final String ERROR_PAGE  = "error-role.jsp";
     public static final String RESOURCE_DETAILS_SERVLET  = "resourcedetails";
-    public static final String SHOW_RESOURCE_LIST_SERVLET = "resourcelist";
+    public static final String SHOW_RESOURCE_LIST_SERVLET = "reservesystem/resourcelist";
 
 }

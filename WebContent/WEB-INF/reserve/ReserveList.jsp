@@ -17,7 +17,7 @@
 
 <div class="contents">
 <h2>ダミーページ（予約一覧）</h2>
-<form action="resourcelist" method="get">
+<form action="reservesystem/resourcelist" method="get">
 <input type="submit" name="reserveList" value="リソース一覧">
 </form>
 </div>
