@@ -8,9 +8,14 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import service.CheckAuthorityService;
 
 public class SessionUpdateHandler implements Handler{
+
+    private static Logger _log = LogManager.getLogger();
 
 	@Override
 	public String handleService(HttpServletRequest request) {
@@ -32,14 +37,17 @@ public class SessionUpdateHandler implements Handler{
 						session.setAttribute("authority", authority);
 						return null;
 					}else{
+                        _log.error("authority is not 0 or 1");
 						return ERROR_PAGE;
 					}
 				}catch (SQLException e){
 					//ログを残す
+                    _log.error("SQLException");
 					return ERROR_PAGE;
 				}
 			}else{
 				//ログを残す
+                _log.error("validate Error");
 				return ERROR_PAGE;
 			}
 
