@@ -134,7 +134,6 @@ public class UserDao {
             }
             dbHelper.closeDb();
         }
-
         return authority;
 	}
 }
