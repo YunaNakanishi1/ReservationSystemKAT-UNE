@@ -206,10 +206,9 @@ public class ResourceDao {
 	}
 
 	/**
-	 * 指定されたresourceIdのdeleteを1に書き換える
+	 * 指定されたresourceIdのdeleteを1に書き換える.
 	 *
-	 * @param resourceId
-	 *            削除したいリソースID
+	 * @param resourceId 削除したいリソースID
 	 * @return 削除結果（1だと成功）
 	 * @throws SQLException
 	 */
