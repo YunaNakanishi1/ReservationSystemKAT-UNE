@@ -13,6 +13,8 @@ import handler.Handler;
 import handler.ShowResourceRegistHandler;
 
 /**
+ * リソース入力ページやエラーページに遷移する.
+ *
  * Servlet implementation class ShowResourceRegistServlet
  */
 @WebServlet("/resourceregist")
@@ -20,6 +22,8 @@ public class ShowResourceRegistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
+	 * リソース入力ページやエラーページに遷移する.
+	 *
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

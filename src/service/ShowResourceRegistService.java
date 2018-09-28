@@ -7,17 +7,33 @@ import dao.CategoryDao;
 import dao.FacilityDao;
 import dao.OfficeDao;
 
+/**
+ * カテゴリ、事業所、リソース特性の一覧を取得する.
+ *
+ * @author KAT-UNE
+ *
+ */
 public class ShowResourceRegistService implements Service{
 
 	private List<String> _categoryList;
 	private List<String> _officeList;
 	private List<String> _facilityList;
 
+	/**
+	 * 何もしない(trueを返す).
+	 *
+	 * @see service.Service#validate()
+	 */
 	@Override
 	public boolean validate() {
 		return true;
 	}
 
+	/**
+	 * カテゴリ、事業所、リソース特性の一覧を取得しフィールドにセットする
+	 *
+	 * @see service.Service#execute()
+	 */
 	@Override
 	public void execute() throws SQLException {
 		CategoryDao categoryDao=new CategoryDao();

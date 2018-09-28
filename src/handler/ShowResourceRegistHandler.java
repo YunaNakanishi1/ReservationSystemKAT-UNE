@@ -13,10 +13,22 @@ import org.apache.logging.log4j.Logger;
 
 import service.ShowResourceRegistService;
 
+/**
+ * 新規登録時、再表示のリソース入力画面に表示するカテゴリ、事業所、リソース特性情報のセット等を行う.
+ *
+ * @author KAT-UNE
+ *
+ */
 public class ShowResourceRegistHandler implements Handler {
 
 	private static Logger _log = LogManager.getLogger();
 
+	/**
+	 * カテゴリ、事業所、リソース特性の情報を取得し、リクエストにセットする.
+	 * 戻るボタンの行き先を設定する.
+	 *
+	 * @see handler.Handler#handleService(javax.servlet.http.HttpServletRequest)
+	 */
 	@Override
 	public String handleService(HttpServletRequest request) {
 
@@ -49,20 +61,23 @@ public class ShowResourceRegistHandler implements Handler {
 						String officeName = (String) request.getAttribute("officeName");
 						List<String> facility = (List<String>) request.getAttribute("facility");
 						CommonValidator commonValidator = new CommonValidator();
+						//カテゴリがあるかチェック
 						if (!commonValidator.notSetOn(category)) {
 							if (!categoryList.contains(category)) {
 								_log.error("category not found");
 								return ERROR_PAGE;
 							}
 						}
+						//事業所があるかチェック
 						if (!commonValidator.notSetOn(officeName)) {
 							if (!officeList.contains(officeName)) {
 								_log.error("officeName not found");
 								return ERROR_PAGE;
 							}
 						}
-						for (String fac : facility) {
-							if (!facilityList.contains(fac)) {
+						//特性があるかチェック
+						for (String facilityElement : facility) {
+							if (!facilityList.contains(facilityElement)) {
 								_log.error("facility not found");
 								return ERROR_PAGE;
 							}
