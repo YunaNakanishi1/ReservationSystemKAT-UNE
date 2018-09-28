@@ -14,10 +14,10 @@ import java.util.List;
 import org.junit.Test;
 
 /**
-* DataSet1(UT002)のデータ1を使用するテストをまとめています.
+*
 * @author リコーITソリューションズ株式会社 team.KAT-UNE
 */
-public class ResourceDaoTest {
+public class ResourceDaoTest_dataSet1_use {
 
 	/**
 	 * {@link dao.ResourceDao#displayAll()} のためのテスト・メソッド。
@@ -41,6 +41,67 @@ public class ResourceDaoTest {
 		assertThat(resourceList.get(0).getDeleted(),is(0));
 		assertThat(resourceList.get(0).getFacility(),nullValue());
 
+	}
+
+	@Test
+	public void testDisplayDetails() {
+		fail("まだ実装されていません");
+	}
+
+
+	//@Test
+	public void test2_1() {
+		ResourceDao rd = new ResourceDao();
+		try {
+			assertThat(rd.delete("r001"), is(1));
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+	}
+
+	//@Test
+	public void test2_2() {
+		ResourceDao rd = new ResourceDao();
+		try {
+			assertThat(rd.delete("u002"), is(0));
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+	}
+
+	//@Test
+	public void test2_3() {
+		ResourceDao rd = new ResourceDao();
+		try {
+			assertThat(rd.delete(null), is(0));
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+	}
+
+	//@Test
+	public void test2_4() {
+		ResourceDao rd = new ResourceDao();
+		try {
+			assertThat(rd.delete("A\'or\'A\'=\'A\'"), is(0));
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test2_5() {
+		ResourceDao rd = new ResourceDao();
+		try {
+			assertThat(rd.delete("u002"), is(0));
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 	}
 
 }
