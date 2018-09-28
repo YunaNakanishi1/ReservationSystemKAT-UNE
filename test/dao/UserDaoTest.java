@@ -157,7 +157,49 @@ public class UserDaoTest {
 		}
 	}
 
+	@Test
+	public void test2_1() {
+		UserDao ud = new UserDao();
+		try {
+			assertThat(ud.getAuthority("u0123456"), is(1));
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+	}
 
+	@Test
+	public void test2_2() {
+		UserDao ud = new UserDao();
+		try {
+			assertThat(ud.getAuthority(null), is(-1));
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test2_3() {
+		UserDao ud = new UserDao();
+		try {
+			assertThat(ud.getAuthority("nothing"), is(-1));
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+	}
+
+	@Test
+	public void test2_4() {
+		UserDao ud = new UserDao();
+		try {
+			assertThat(ud.getAuthority("A\'or\'A\'=\'A\'"), is(-1));
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+	}
 
 
 }
