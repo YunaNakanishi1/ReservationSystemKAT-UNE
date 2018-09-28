@@ -9,6 +9,7 @@ public class UserDaoTest {
 	@Test
 	public void testGetUser() {
 		fail("まだ実装されていません");
+		UserDao ud = new UserDao(;)
 	}
 
 	@Test
