@@ -39,3 +39,34 @@
 2018-09-28 13:54:43.660 | [main] | ERROR | dao.ResourceDao | DatabaseConnectError
 2018-09-28 13:54:43.676 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
 2018-09-28 13:54:43.676 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 16:59:34.846 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 16:59:44.868 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 16:59:44.872 | [main] | ERROR | dao.UserDao | DataBaseAcessError
+2018-09-28 16:59:54.889 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 16:59:54.890 | [main] | ERROR | dao.ResourceDao | DatabaseConnectError
+2018-09-28 17:03:51.371 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 17:03:51.371 | [main] | ERROR | dao.UserDao | DatabaseConnectError
+2018-09-28 17:04:01.388 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 17:04:01.390 | [main] | ERROR | dao.UserDao | DataBaseAcessError
+2018-09-28 17:04:11.403 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 17:04:11.404 | [main] | ERROR | dao.ResourceDao | DatabaseConnectError
+2018-09-28 17:08:24.828 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 17:08:24.828 | [main] | ERROR | dao.ResourceDao | DatabaseConnectError
+2018-09-28 17:08:34.849 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 17:08:34.849 | [main] | ERROR | dao.ResourceDao | DatabaseConnectError
+2018-09-28 17:08:44.865 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 17:08:44.865 | [main] | ERROR | dao.UserDao | DatabaseConnectError
+2018-09-28 17:08:54.880 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 17:08:54.880 | [main] | ERROR | dao.UserDao | DataBaseAcessError
+2018-09-28 17:09:04.887 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 17:09:04.887 | [main] | ERROR | dao.ResourceDao | DatabaseConnectError
+2018-09-28 17:10:51.044 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 17:10:51.044 | [main] | ERROR | dao.ResourceDao | DatabaseConnectError
+2018-09-28 17:11:01.070 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 17:11:01.072 | [main] | ERROR | dao.ResourceDao | DatabaseConnectError
+2018-09-28 17:11:11.089 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 17:11:11.089 | [main] | ERROR | dao.UserDao | DatabaseConnectError
+2018-09-28 17:11:21.094 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 17:11:21.095 | [main] | ERROR | dao.UserDao | DataBaseAcessError
+2018-09-28 17:11:31.101 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 17:11:31.103 | [main] | ERROR | dao.ResourceDao | DatabaseConnectError
