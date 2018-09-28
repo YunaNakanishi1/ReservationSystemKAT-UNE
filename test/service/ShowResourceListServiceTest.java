@@ -86,10 +86,11 @@ public class ShowResourceListServiceTest {
 
 
 	/**
+	 * ※データベースを止めた状態でやってみるとうまくいきます.
 	 * {@link service.ShowResourceListService#execute()} のためのテスト・メソッド。
 	 * @throws SQLException
 	 */
-	@Test(expected = SQLException.class)
+	@Test(expected =java.sql.SQLException.class)
 	public void test2() throws SQLException {
 		//fail("まだ実装されていません");
 		ShowResourceListService showResourceListservice = new ShowResourceListService();
