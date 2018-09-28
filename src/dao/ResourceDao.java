@@ -144,8 +144,65 @@ public class ResourceDao {
 		return result;
 	}
 
-	public int change(Resource resource) {
-		return 0;
+	public int change(Resource resource) throws SQLException{
+		int result = 0;
+		DBHelper dbHelper = new DBHelper();
+		_con = dbHelper.connectDb(); // データベースに接続
+		PreparedStatement stmt1 = null;
+		PreparedStatement stmt2 = null;
+		PreparedStatement stmt3 = null;
+
+		String sql1 = "UPDATE resources SET resource_name=?,category_id=(SELECT category_id FROM categories WHERE category_name=?),office_id=(SELECT office_id FROM offices WHERE office_name=?),capacity=?,supplement=?,usage_stop_start_date=?,usage_stop_end_date=? WHERE resource_id=? and deleted=0;";
+		String sql2 = "DELETE FROM resource_features WHERE resource_id=?;";
+		String sql3 = "INSERT INTO resource_features VALUES ((SELECT resource_characteristic_id FROM resource_characteristics WHERE resource_characteristic_name==?),?);";
+		try{
+			if(_con==null){
+				_log.error("DatabaseConnectError");
+				throw new SQLException();
+			}
+			_con.setAutoCommit(false);
+			stmt1=_con.prepareStatement(sql1);
+			stmt1.setString(8, resource.getResourceId());
+			stmt1.setString(1, resource.getResourceName());
+			stmt1.setString(2, resource.getCategory());
+			stmt1.setString(3, resource.getOfficeName());
+			stmt1.setInt(4,resource.getCapacity());
+			stmt1.setString(5, resource.getSupplement());
+			stmt1.setTimestamp(6, resource.getUsageStopStartDate());
+			stmt1.setTimestamp(7, resource.getUsageStopEndDate());
+			result=stmt1.executeUpdate();
+			stmt2=_con.prepareStatement(sql2);
+			stmt2.setString(1, resource.getResourceId());
+			stmt2.executeUpdate();
+			stmt3=_con.prepareStatement(sql3);
+			stmt3.setString(2, resource.getResourceId());
+			for(String facilityElement:resource.getFacility()){
+				stmt3.setString(1, facilityElement);
+				stmt3.executeUpdate();
+			}
+			_con.commit();
+		}finally{
+			try{
+				dbHelper.closeResource(stmt1);
+			}catch(Exception e){
+				e.printStackTrace();
+				_log.error("regist() Exception e");
+			}
+			try{
+				dbHelper.closeResource(stmt2);
+			}catch(Exception e){
+				e.printStackTrace();
+				_log.error("regist() Exception e");
+			}
+			try{
+				dbHelper.closeResource(stmt3);
+			}catch(Exception e){
+				e.printStackTrace();
+				_log.error("regist() Exception e");
+			}
+			dbHelper.closeDb();
+		}
+		return result;
 	}
 
 	/**
