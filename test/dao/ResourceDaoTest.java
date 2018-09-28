@@ -7,9 +7,6 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
-
-import org.junit.Test;
-
 /**
 *
 * @author リコーITソリューションズ株式会社 team.KAT-UNE
@@ -61,16 +58,5 @@ public class ResourceDaoTest {
 		}
 	}
 
-	@Test(expected = SQLException.class)
-	public void test2_5() {
-		ResourceDao rd = new ResourceDao();
-		try {
-			assertThat(rd.delete("u002"), is(0));
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-
-	}
 
 }

@@ -157,17 +157,6 @@ public class UserDaoTest {
 		}
 	}
 
-	@Test(expected = SQLException.class)
-	public void test1_13() {
-		UserDao ud = new UserDao();
-		User user = new User("u0123456", "password", 0);
-		try {
-			assertThat(ud.getUser(user), nullValue());
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-	}
 
 
 
