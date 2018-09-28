@@ -11,7 +11,6 @@
 <link rel="stylesheet" href="/ReservationSystemKAT-UNE/header_footer.css">
 </head>
 
-
 <body class="body1" background="/ReservationSystemKAT-UNE/kaigi.jpg">
 
 <div id="div">
