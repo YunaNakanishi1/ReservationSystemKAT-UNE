@@ -12,7 +12,7 @@
 </head>
 
 
-<body class="body1" background="/ReservationSystemKAT-UNE/css/kaigi.jpg">
+<body class="body1" background="/ReservationSystemKAT-UNE/kaigi.jpg">
 
 <div id="div">
 <header class="header"><p>会議室・備品予約システム</p>
