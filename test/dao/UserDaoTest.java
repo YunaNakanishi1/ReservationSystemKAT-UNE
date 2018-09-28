@@ -11,12 +11,10 @@ import dto.User;
 
 public class UserDaoTest {
 
-<<<<<<< HEAD
 	@Test
 	public void testGetUser() {
 		fail("まだ実装されていません");
 		UserDao ud = new UserDao(;)
-=======
 //	@Test
 	public void test1_1() {
 		UserDao ud = new UserDao();
@@ -149,7 +147,6 @@ public class UserDaoTest {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
->>>>>>> refs/remotes/origin/develop
 	}
 
 	@Test
@@ -175,5 +172,7 @@ public class UserDaoTest {
 			e.printStackTrace();
 		}
 	}
+
+
 
 }
