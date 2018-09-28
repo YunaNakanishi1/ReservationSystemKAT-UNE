@@ -17,7 +17,7 @@ import service.ShowResourceRegistService;
 /**
  * 新規登録時、再表示のリソース入力画面に表示するカテゴリ、事業所、リソース特性情報のセット等を行う.
  *
- * @author KAT-UNE
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
 public class ShowResourceRegistHandler implements Handler {

@@ -17,10 +17,22 @@ import org.apache.logging.log4j.Logger;
 import dto.Resource;
 import service.ShowResourceChangeService;
 
+/**
+ * リソース入力画面に表示するカテゴリ、事業所、リソース特性と元のリソース情報を求める.
+ *
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ */
 public class ShowResourceChangeHandler implements Handler{
 
 	private static Logger _log = LogManager.getLogger();
 
+	/**
+	 * リソース入力画面に表示するカテゴリ、事業所、リソース特性と元のリソース情報を求める.
+	 * 戻るボタンの行き先を設定する.
+	 *
+	 * @see handler.Handler#handleService(javax.servlet.http.HttpServletRequest)
+	 */
 	@Override
 	public String handleService(HttpServletRequest request) {
 
@@ -31,7 +43,8 @@ public class ShowResourceChangeHandler implements Handler{
 
 		if(authority==0){
 
-				request.setAttribute("hasResourceData", true);
+			//リソース情報があることを設定する
+			request.setAttribute("hasResourceData", true);
 
 			String type=request.getParameter("type");
 			request.setAttribute("type", type);
@@ -49,6 +62,7 @@ public class ShowResourceChangeHandler implements Handler{
 
 					Resource resource = showResourceChangeService.getResource();
 
+					//リソースが見つからなかったり、削除済みならエラー
 					if(resource==null){
 						_log.error("no Resource");
 						return ERROR_PAGE;
@@ -74,6 +88,7 @@ public class ShowResourceChangeHandler implements Handler{
 					request.setAttribute("officeName", resource.getOfficeName());
 
 
+					//日時の情報を日付、時間、分に分けてセットする
 					Timestamp stopStartDate=resource.getUsageStopStartDate();
 					Timestamp stopEndDate=resource.getUsageStopEndDate();
 
@@ -94,13 +109,14 @@ public class ShowResourceChangeHandler implements Handler{
 					request.setAttribute("stopEndDate", resource.getUsageStopEndDate());
 					}
 
+					//選択されているリソース特性の情報をセットする
 					List<String> facility = resource.getFacility();
 					List<Boolean> selectedFacility = new ArrayList<Boolean>();
 					for(String facilityElement:facilityList){
 						selectedFacility.add(facility.contains(facilityElement));
 					}
-
 					request.setAttribute("selectedFacility", selectedFacility);
+
 					request.setAttribute("supplement", resource.getSupplement());
 
 					return RESOURCE_REGIST;

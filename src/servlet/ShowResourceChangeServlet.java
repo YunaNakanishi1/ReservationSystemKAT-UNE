@@ -12,14 +12,17 @@ import javax.servlet.http.HttpServletResponse;
 import handler.Handler;
 import handler.ShowResourceChangeHandler;
 
-/**
+/**リソース入力ページやエラーページに移動する.
+ *
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
  * Servlet implementation class ShowResourceChangeServlet
  */
 @WebServlet("/reservesystem/resourcechange")
 public class ShowResourceChangeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
+	/**リソース入力ページやエラーページに移動する.
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

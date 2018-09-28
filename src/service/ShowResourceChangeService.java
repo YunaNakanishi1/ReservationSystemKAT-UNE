@@ -9,6 +9,11 @@ import dao.OfficeDao;
 import dao.ResourceDao;
 import dto.Resource;
 
+/**カテゴリ、事業所、リソース特性のリストと、リソース情報を獲得する.
+ *
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ */
 public class ShowResourceChangeService implements Service{
 
 	private String _resourceId;
@@ -26,6 +31,9 @@ public class ShowResourceChangeService implements Service{
 		return true;
 	}
 
+	/**カテゴリ、事業所、リソース特性のリストと、リソース情報を獲得し、フィールドにセットする.
+	 * @see service.Service#execute()
+	 */
 	@Override
 	public void execute() throws SQLException {
 		CategoryDao categoryDao=new CategoryDao();
