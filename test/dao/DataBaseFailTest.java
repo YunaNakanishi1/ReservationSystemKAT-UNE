@@ -50,4 +50,28 @@ public class DataBaseFailTest {
 		}
 	}
 
+	/**
+	 * DataSet1(UT002)のデータ2を使用するテスト
+	 * {@link dao.ResourceDao#displayAll()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test(expected = SQLException.class)
+	public void test1_3() throws SQLException {
+		//fail("まだ実装されていません");
+		dao.ResourceDao resourceDao = new dao.ResourceDao();
+		resourceDao.displayAll();
+	}
+
+	/**
+	 * DataSet1(UT002)のデータ2を使用するテスト
+	 * {@link dao.ResourceDao#displayAll()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test(expected = SQLException.class)
+	public void test3_4() throws SQLException {
+		//fail("まだ実装されていません");
+		dao.ResourceDao resourceDao = new dao.ResourceDao();
+		String argument = "0003";
+		resourceDao.displayDetails(argument);
+	}
 }

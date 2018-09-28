@@ -66,19 +66,6 @@ public class ResourceDaoTest {
 		}
 	}
 
-	@Test(expected = SQLException.class)
-	public void test2_5() {
-		ResourceDao rd = new ResourceDao();
-		try {
-			assertThat(rd.delete("u002"), is(0));
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-
-	}
-
-
 
 	/**
 	 * DataSet1(UT002)のデータ2を使用するテスト
@@ -128,16 +115,6 @@ public class ResourceDaoTest {
 			assertThat(resourceList.get(i).getUsageStopEndDate(),is(testList.get(i).getUsageStopEndDate()));
 		}
 	}
-
-
-
-
-
-
-
-
-
-
 
 
 	/**
