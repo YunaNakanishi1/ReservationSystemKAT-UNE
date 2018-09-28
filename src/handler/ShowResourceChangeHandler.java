@@ -96,8 +96,8 @@ public class ShowResourceChangeHandler implements Handler{
 
 					List<String> facility = resource.getFacility();
 					List<Boolean> selectedFacility = new ArrayList<Boolean>();
-					for(String fac:facilityList){
-						selectedFacility.add(facility.contains(fac));
+					for(String facilityElement:facilityList){
+						selectedFacility.add(facility.contains(facilityElement));
 					}
 
 					request.setAttribute("selectedFacility", selectedFacility);
