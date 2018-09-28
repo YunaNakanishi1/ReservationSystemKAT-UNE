@@ -129,4 +129,75 @@ public class ResourceDaoTest {
 		}
 	}
 
+
+
+
+
+
+
+
+
+
+
+
+	/**
+	 * DataSet1(UT002)のデータ2を使用するテスト
+	 * {@link dao.ResourceDao#displayAll()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test
+	public void test3_1() throws SQLException {
+		//fail("まだ実装されていません");
+		dao.ResourceDao resourceDao = new dao.ResourceDao();
+		String argument = "r003";
+		List<String> facility = new ArrayList<String>();
+		facility.add("ホワイトボード有");
+		facility.add("プロジェクター有");
+
+		Resource resource = resourceDao.displayDetails(argument);
+
+		assertThat(resource.getResourceId(),is("r003"));
+		assertThat(resource.getResourceName(),is("晴海414L"));
+		assertThat(resource.getCategory(),is("会議室"));
+		assertThat(resource.getOfficeName(),is("晴海"));
+		assertThat(resource.getCapacity(),is(24));
+		assertThat(resource.getSupplement(),is("新人教育のため占有"));
+		assertThat(resource.getUsageStopStartDate(),is(Timestamp.valueOf("2018-09-11 10:00:00")));
+		assertThat(resource.getUsageStopEndDate(),is(Timestamp.valueOf("2018-09-11 11:00:00")));
+		assertThat(resource.getDeleted(),is(0));
+		assertThat(resource.getFacility(),is(facility));
+
+	}
+
+	/**
+	 * DataSet1(UT002)のデータ2を使用するテスト
+	 * {@link dao.ResourceDao#displayAll()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test
+	public void test3_2() throws SQLException {
+		//fail("まだ実装されていません");
+		dao.ResourceDao resourceDao = new dao.ResourceDao();
+		String argument = "null";
+		Resource resource = resourceDao.displayDetails(argument);
+
+		assertThat(resource,nullValue());
+	}
+
+	/**
+	 * DataSet1(UT002)のデータ2を使用するテスト
+	 * {@link dao.ResourceDao#displayAll()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test
+	public void test3_3() throws SQLException {
+		//fail("まだ実装されていません");
+		dao.ResourceDao resourceDao = new dao.ResourceDao();
+		String argument = "0003";
+		Resource resource = resourceDao.displayDetails(argument);
+
+		assertThat(resource,nullValue());
+	}
+
 }
+
