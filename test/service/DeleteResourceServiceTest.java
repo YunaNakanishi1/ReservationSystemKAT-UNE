@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 
-import org.junit.Test;
-
 public class DeleteResourceServiceTest {
 
 	//@Test
@@ -49,16 +47,5 @@ public class DeleteResourceServiceTest {
 			e.printStackTrace();
 		}
 		assertThat(drs.getResult(), is(0));
-	}
-
-	@Test(expected = SQLException.class)
-	public void test5() {
-		DeleteResourceService drs = new DeleteResourceService("r006");
-		try {
-			drs.execute();
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
 	}
 }

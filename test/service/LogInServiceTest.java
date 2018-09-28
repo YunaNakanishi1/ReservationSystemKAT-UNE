@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 
 import java.sql.SQLException;
 
-import org.junit.Test;
-
 import dto.User;
 
 public class LogInServiceTest {
@@ -106,16 +104,4 @@ public class LogInServiceTest {
 
 	}
 
-	@Test(expected = SQLException.class)
-	public void test12() {
-		User user = new User("u0123456", "password", 0);
-		LogInService lis = new LogInService(user);
-		try {
-			lis.execute();
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
-
-	}
 }
