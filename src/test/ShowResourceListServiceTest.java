@@ -70,7 +70,9 @@ public class ShowResourceListServiceTest {
 
 		//resourceとtestLsitが一致するかのテスト
 		for(int i=0; i<resourceList.size(); i++){
-			//System.out.println(i);
+			//
+			
+			System.out.println(i);
 			assertThat(resourceList.get(i).getResourceId(),is(testList.get(i).getResourceId()));
 			assertThat(resourceList.get(i).getResourceName(),is(testList.get(i).getResourceName()));
 			assertThat(resourceList.get(i).getOfficeName(),is(testList.get(i).getOfficeName()));

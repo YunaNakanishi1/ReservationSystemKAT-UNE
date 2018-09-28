@@ -1,5 +1,7 @@
 package servlet;
 
+import static handler.ViewHolder.*;
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -9,33 +11,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import handler.Handler;
-import handler.ShowResourceRegistHandler;
-
 /**
- * リソース入力ページやエラーページに遷移する.
- *
- * Servlet implementation class ShowResourceRegistServlet
+ * Servlet implementation class ShowReservationListServlet
  */
-@WebServlet("/resourceregist")
-public class ShowResourceRegistServlet extends HttpServlet {
+@WebServlet("/reserveList")
+public class ShowReservationListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * リソース入力ページやエラーページに遷移する.
-	 *
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Handler showResourceRegistHandler = new ShowResourceRegistHandler();
-
-        //遷移先URL
-        String view = showResourceRegistHandler.handleService(request);
-
-        RequestDispatcher rd = request.getRequestDispatcher(view);
+        RequestDispatcher rd = request.getRequestDispatcher(RESERVE_LIST);
         rd.forward(request, response);
 	}
-
-
 
 }

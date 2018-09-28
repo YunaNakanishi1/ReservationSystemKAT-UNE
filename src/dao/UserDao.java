@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 import dto.User;
 
 /**
+ * usersテーブルを取り扱うクラス.
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 public class UserDao {
@@ -127,7 +128,6 @@ public class UserDao {
             }
             dbHelper.closeDb();
         }
-
         return authority;
 	}
 }
