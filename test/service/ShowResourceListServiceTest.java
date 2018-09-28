@@ -36,7 +36,7 @@ public class ShowResourceListServiceTest {
 	 * @throws SQLException
 	 */
 	@Test
-	public void testExecute() throws SQLException {
+	public void test1() throws SQLException {
 		//fail("まだ実装されていません");
 		ShowResourceListService showResourceListservice = new ShowResourceListService();
 		showResourceListservice.execute();
@@ -69,9 +69,7 @@ public class ShowResourceListServiceTest {
 
 		//resourceとtestLsitが一致するかのテスト
 		for(int i=0; i<resourceList.size(); i++){
-			//
-
-			System.out.println(i);
+			//System.out.println(i);
 			assertThat(resourceList.get(i).getResourceId(),is(testList.get(i).getResourceId()));
 			assertThat(resourceList.get(i).getResourceName(),is(testList.get(i).getResourceName()));
 			assertThat(resourceList.get(i).getOfficeName(),is(testList.get(i).getOfficeName()));
@@ -84,11 +82,18 @@ public class ShowResourceListServiceTest {
 			assertThat(resourceList.get(i).getUsageStopEndDate(),is(testList.get(i).getUsageStopEndDate()));
 
 		}
+	}
 
 
-
-
-
+	/**
+	 * {@link service.ShowResourceListService#execute()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test(expected = SQLException.class)
+	public void test2() throws SQLException {
+		//fail("まだ実装されていません");
+		ShowResourceListService showResourceListservice = new ShowResourceListService();
+		showResourceListservice.execute();
 	}
 
 
