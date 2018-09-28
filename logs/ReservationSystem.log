@@ -9,3 +9,5 @@
 2018-09-28 10:09:38.393 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
 2018-09-28 10:09:48.396 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
 2018-09-28 10:09:58.407 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 11:10:49.537 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-09-28 11:12:06.077 | [main] | ERROR | dao.DBHelper | connectDb() SQLException

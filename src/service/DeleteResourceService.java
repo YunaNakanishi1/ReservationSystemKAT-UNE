@@ -26,4 +26,9 @@ public class DeleteResourceService implements Service{
 	public int getResult(){
 		return _result;
 	}
+
+	//テスト用メソッド
+	public String getResourceId(){
+		return _resourceId;
+	}
 }
