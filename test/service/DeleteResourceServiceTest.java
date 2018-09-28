@@ -51,7 +51,7 @@ public class DeleteResourceServiceTest {
 		assertThat(drs.getResult(), is(0));
 	}
 
-	@Test
+	@Test(expected = SQLException.class)
 	public void test5() {
 		DeleteResourceService drs = new DeleteResourceService("r006");
 		try {
@@ -60,6 +60,5 @@ public class DeleteResourceServiceTest {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		assertThat(drs.getResult(), is(0));
 	}
 }
