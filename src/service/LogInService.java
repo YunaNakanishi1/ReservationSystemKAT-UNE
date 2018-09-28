@@ -76,4 +76,8 @@ public class LogInService implements Service {
 		return _validationMessage;
 	}
 
+	//テスト用メソッド
+	public User getInputUser() {
+		return _inputUser;
+	}
 }

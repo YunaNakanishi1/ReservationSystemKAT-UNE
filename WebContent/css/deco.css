@@ -1,0 +1,169 @@
+@CHARSET "UTF-8";
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700);
+@import url(http://fonts.googleapis.com/earlyaccess/notosansjp.css);
+
+.body {
+    font-family: Lato, "Noto Sans JP", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	min-height:100vh;
+	padding:0;
+}
+
+.body1{
+	font-family: Lato, "Noto Sans JP", "游ゴシック Medium", "游ゴシック体", "Yu Gothic Medium", YuGothic, "ヒラギノ角ゴ ProN", "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
+	height:100%;
+	min-height:100vh;
+	background-size: cover;
+	/* 画像を常に天地左右の中央に配置 */
+    background-position: center center;
+    /* 画像をタイル状に繰り返し表示しない */
+    background-repeat: no-repeat;
+	margin-bottom:-20px;
+	margin:0;
+	position:relative;
+	/*background-color:red; 便宜上追加中*/
+}
+.div{	/*ヘッダーの上に追加*/
+	min-width:500px;
+	width: 100%;
+	min-height: 100vh;
+	height: 100%;
+	bottom:0;
+	margin-bottom:-20px;
+	position:relative;
+}
+
+.contents1{		/*ログイン画面用*/
+	margin-left:1%;
+	margin-right:1%;
+	margin-top:150px;
+	height:100%; /*これ100%から変更*/
+	min-width:400px;
+	min-height:150px;
+	position:relative;
+	bottom:0;
+	text-align:center;
+	vertical-align:middle;
+	min-height:100%; /*これ追加*/
+}
+.contents{
+	margin-left:1%;
+	margin-right:1%;
+	padding-bottom: 20px;
+	height:100%;
+	position:relative;
+	bottom:0;
+	text-align:center;
+}
+.error{
+	color:red;
+}
+.table{	/*リソース詳細テーブル*/
+	right:0;
+	left:0;
+	margin:0 auto;
+	min-width:400px;
+}
+.table2{	/*リソース入力テーブル*/
+	right:0;
+	left:0;
+	margin:0 auto;
+	/*background-color:red;*/
+	width:50%;
+	min-width:500px;
+}
+.table3{	/*ボタン覧に使用*/
+	right:0;
+	left:0;
+	margin:0 auto;
+}
+
+.dialog{
+	line-height:0.6;
+}
+
+.submit{
+	background-color:white;
+	border-color:#FF8C00;
+}
+.red{
+	color:red;
+}
+.table td {
+  word-break : break-all;
+
+}
+
+.haikei{
+	background-color:white;
+	opacity:0.8;
+	width:30%;
+	min-width:400px;
+	min-height:150px;
+	right:0;
+	left:0;
+	margin:0 auto;
+	margin-top:30px;
+	padding-top:2px;
+	padding-bottom:10px;
+}
+.right{
+	text-align:left;
+
+}
+.right2{	/*リソース詳細のテーブル右側*/
+	padding-left:4em;
+	text-align:left;
+	/*background-color:red;*/	/*実験用*/
+}
+.right3{
+	padding-left:4em;
+	text-align:left;
+
+
+}
+.right4{
+	padding-left:4em;
+	text-align:left;
+	word-break : break-all;
+
+
+}
+.scroll{
+	height: 5.5em;  /* 高さを制限(※) */
+    overflow: scroll; /* スクロールバーを表示(※) */
+    overflow-x: hidden;
+    border: blue 1px dashed;  /* 枠線を追加 */
+
+    margin-left:4em;
+}
+.one{
+	width:50%;
+	min-width:250px;
+
+}
+.scroll2{	/*リソース詳細・入力の詳細ボックス*/
+	height: 6em;  /* 高さを制限(※) */
+    overflow: scroll; /* スクロールバーを表示(※) */
+    overflow-x: hidden;
+    white-space:pre-wrap;	/*連続で並ぶ半角スペースやtabは1つの空白文字にまとまるが、改行（enter）は反映される*/
+    border: blue 1px dashed;  /* 枠線を追加 */
+	width:240px;
+	min-width:100px;
+	text-align:left;
+	padding:0;
+    /*background-color:green;*/	/*実験用*/
+}
+.scroll3{	/*リソース詳細のテーブル内、設備ボックスで使用*/
+	height: 5em;  /* 高さを制限(※) */
+    overflow: scroll; /* スクロールバーを表示(※) */
+    overflow-x: hidden;
+    text-align:left;
+    border: blue 1px dashed;  /* 枠線を追加 */
+    width:auto;
+    min-width:100px;
+    margin-left:4em;
+}
+
+.the_number_of_characters_cut{
+	visibility: hidden;
+}

@@ -81,8 +81,13 @@ public class UserDao {
 		return returnUser;
 	}
 
+	/**
+	 * ユーザIDを指定してそのユーザのAuthorityを取得するメソッド
+	 * @param userId ユーザID
+	 * @return ユーザIDの権限(管理者：0、一般：1　ユーザIDがDBに登録されていない:-1)
+	 * @throws SQLException
+	 */
 	public int getAuthority(String userId) throws SQLException{
-		String sql = "SELECT authority FROM users WHERE user_id = ?";
 
 		DBHelper dbHelper = new DBHelper();
         // ヘルパーに接続を依頼
@@ -98,6 +103,7 @@ public class UserDao {
         int authority=-1;
 
         try{
+            String sql = "SELECT authority FROM users WHERE user_id = ?";
         	stmt = _con.prepareStatement(sql);
 
         	stmt.setString(1, userId);
@@ -128,7 +134,6 @@ public class UserDao {
             }
             dbHelper.closeDb();
         }
-
         return authority;
 	}
 }
