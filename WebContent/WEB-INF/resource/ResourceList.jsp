@@ -62,7 +62,9 @@ $(document).ready(function(){
 
 <div class="div">
 <header class="header"><p>会議室・備品予約システム</p>
+<form action="/ReservationSystemKAT-UNE/logout" method="get">
 <input class="logintop" type="submit" value="ログアウト">
+</form>
 </header>
 
 <div class="contents">

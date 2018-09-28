@@ -26,7 +26,7 @@ public class LogOutHandler implements Handler {
 			session.invalidate();
 		}
 
-		request.setAttribute("message", PM01);
+		request.setAttribute("Pmessage", PM01);
 
 		return LOG_IN;
 	}

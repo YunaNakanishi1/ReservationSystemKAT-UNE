@@ -22,6 +22,7 @@
 <div class="contents1">
 <div class="haikei">
 <p class="error"><c:out value ="${Emessage}"/></p>
+<p><font color = "blue">${Pmessage}</font></p>
 <form action="login" method="get">
 <table class="table">
 <tr><td>ID:</td><td><input type="text" name="userId" value = "<c:out value = "${requestScope.userId}"/>"></td></tr>
