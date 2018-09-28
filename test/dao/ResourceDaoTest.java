@@ -53,7 +53,7 @@ public class ResourceDaoTest {
 		}
 	}
 
-	@Test
+	@Test(expected = SQLException.class)
 	public void test2_5() {
 		ResourceDao rd = new ResourceDao();
 		try {
