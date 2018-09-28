@@ -14,7 +14,7 @@ import handler.ShowResourceDetailsHandler;
 /**
  * Servlet implementation class ShowResourceDetailsServlet
  */
-@WebServlet("/resourcedetails")
+@WebServlet("/reservesystem/resourcedetails")
 public class ShowResourceDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

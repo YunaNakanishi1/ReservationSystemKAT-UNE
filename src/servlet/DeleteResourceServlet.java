@@ -15,7 +15,7 @@ import handler.Handler;
 /**
  * Servlet implementation class DeleteResourceServlet
  */
-@WebServlet("/deleteresource")
+@WebServlet("/reservesystem/deleteresource")
 public class DeleteResourceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

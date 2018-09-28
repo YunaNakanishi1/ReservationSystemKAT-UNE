@@ -7,8 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>ログイン</title>
-<link rel="stylesheet" href="/ReservationSystemKAT-UNE/css/deco.css">
-<link rel="stylesheet" href="/ReservationSystemKAT-UNE/css/header_footer.css">
+<link rel="stylesheet" href="/ReservationSystemKAT-UNE/deco.css">
+<link rel="stylesheet" href="/ReservationSystemKAT-UNE/header_footer.css">
 </head>
 
 

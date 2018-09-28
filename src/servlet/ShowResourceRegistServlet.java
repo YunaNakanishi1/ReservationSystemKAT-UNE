@@ -17,7 +17,7 @@ import handler.ShowResourceRegistHandler;
  *
  * Servlet implementation class ShowResourceRegistServlet
  */
-@WebServlet("/resourceregist")
+@WebServlet("/reservesystem/resourceregist")
 public class ShowResourceRegistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
