@@ -11,8 +11,6 @@ import dto.User;
 
 public class UserDaoTest {
 
-//	@Test
-	public void test1_1() {	//完了！！
 	@Test
 	public void test1_1() throws SQLException {
 		UserDao ud = new UserDao();
