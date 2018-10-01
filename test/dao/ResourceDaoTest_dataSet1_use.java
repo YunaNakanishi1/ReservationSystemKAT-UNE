@@ -17,7 +17,7 @@ import org.junit.Test;
 * DataSet1(UT002)のデータ1を使用するテストをまとめています.
 * @author リコーITソリューションズ株式会社 team.KAT-UNE
 */
-public class ResourceDaoTest_dataSet1_use {
+public class ResourceDaoTest_dataSet1_use {	//完了！！
 
 	/**
 	 * {@link dao.ResourceDao#displayAll()} のためのテスト・メソッド。
