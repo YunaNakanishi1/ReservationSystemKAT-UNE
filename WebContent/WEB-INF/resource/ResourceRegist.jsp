@@ -27,7 +27,7 @@
 
 <table class="table2">
 <tbody>
-<form action="resourseregist" method="post">
+<form action="resourceregist" method="post">
 
 <tr>
 <td class="one" class="dialog"><b>リソース名</b></td>

@@ -36,15 +36,19 @@ public class ShowResourceChangeService implements Service{
 	 */
 	@Override
 	public void execute() throws SQLException {
+		//カテゴリのリストを取得
 		CategoryDao categoryDao=new CategoryDao();
 		_categoryList=categoryDao.category();
 
+		//事業所のリストを取得
 		OfficeDao officeDao=new OfficeDao();
 		_officeList=officeDao.officeName();
 
+		//特性のリストを取得
 		FacilityDao facilityDao = new FacilityDao();
 		_facilityList=facilityDao.facility();
 
+		//リソース情報を取得
 		ResourceDao resourceDao=new ResourceDao();
 		_resource = resourceDao.displayDetails(_resourceId);
 	}
