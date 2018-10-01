@@ -46,7 +46,8 @@ public class ShowResourceRegistHandler implements Handler {
 
 			Boolean hasResourceData = (Boolean) request.getAttribute("hasResourceData");
 			if (hasResourceData == null) {
-				request.setAttribute("hasResourceData", false);
+				hasResourceData=false;
+				request.setAttribute("hasResourceData", hasResourceData);
 			}
 
 			ShowResourceRegistService showResourceRegistService = new ShowResourceRegistService();
