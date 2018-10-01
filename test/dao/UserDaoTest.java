@@ -13,16 +13,14 @@ public class UserDaoTest {
 
 //	@Test
 	public void test1_1() {	//完了！！
+	@Test
+	public void test1_1() throws SQLException {
 		UserDao ud = new UserDao();
 		User user = new User("u0123456", "password", 0);
-		try {
 			assertThat(ud.getUser(user).getUserId(), is("u0123456"));
 			assertThat(ud.getUser(user).getPassword(), is("password"));
 			assertThat(ud.getUser(user).getAuthority(), is(1));
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+
 	}
 
 //	@Test
