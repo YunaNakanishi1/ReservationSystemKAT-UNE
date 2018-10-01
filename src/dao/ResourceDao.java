@@ -370,7 +370,39 @@ public class ResourceDao {
 		}
 	}
 
-	public String getMaxId() {
-		return null;
+	public List<String> getMaxId() throws SQLException{
+		DBHelper dbHelper = new DBHelper();
+		Statement stmt=null;
+		ResultSet rs=null;
+		String sql = "SELECT resource_id from resources;";
+		List<String> resourceIdList = new ArrayList<String>();
+		try{
+			_con = dbHelper.connectDb(); // データベースに接続
+
+			if (_con == null) {
+				_log.error("DatabaseConnectError");
+				throw new SQLException();
+			}
+			stmt=_con.createStatement();
+			rs=stmt.executeQuery(sql);
+			while(rs.next()){
+				resourceIdList.add(rs.getString(1));
+			}
+		}finally{
+			try{
+				dbHelper.closeResource(rs);
+			}catch(Exception e1){
+				e1.printStackTrace();
+				_log.error("getMaxId() Exception e1");
+			}
+			try{
+				dbHelper.closeResource(stmt);
+			}catch(Exception e2){
+				e2.printStackTrace();
+				_log.error("getMaxId() Exception e2");
+			}
+			dbHelper.closeDb();
+		}
+		return resourceIdList;
 	}
 }

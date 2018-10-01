@@ -13,11 +13,11 @@ public class ServiceValidator {
 	private static int MIN_CAPACITY=0;
 	private static int MAX_CAPACITY=999;
 	private static int MAX_SUPPLEMENT_LENGTH=500;
-	private String _validateMessage;
+	private String _validationMessage;
 
 
-	public String getValidateMessage() {
-		return _validateMessage;
+	public String getValidationMessage() {
+		return _validationMessage;
 	}
 
 
@@ -34,7 +34,7 @@ public class ServiceValidator {
 
 		//リソース名が30文字を越えていないかチェック
 		if(resourceName.length()>MAX_RESOURCE_NAME_LENGTH){
-			_validateMessage=EM28;
+			_validationMessage=EM28;
 			return false;
 
 		}
@@ -43,7 +43,7 @@ public class ServiceValidator {
 
 		//定員が負の数あるいは999を越えていないかチェック
 		if(capacity<MIN_CAPACITY||MAX_CAPACITY<capacity){
-			_validateMessage=EM32;
+			_validationMessage=EM32;
 			return false;
 
 		}
@@ -54,20 +54,20 @@ public class ServiceValidator {
 
 		//利用停止開始日時が記入されて、利用停止終了日時が記入されていない場合をはじく
 		if(stopStartDate!=null&&stopEndDate==null){
-			_validateMessage=EM34;
+			_validationMessage=EM34;
 			return false;
 		}
 
 		//利用停止終了日時が記入されて、利用停止開始日時が記入されていない場合、falseを返す
 		if(stopStartDate==null&&stopEndDate!=null){
-			_validateMessage=EM35;
+			_validationMessage=EM35;
 			return false;
 		}
 
 		//利用停止開始日時が利用停止終了日時より後の場合、falseを返す
 		if(stopStartDate!=null&&stopEndDate!=null){
 			if(stopStartDate.compareTo(stopEndDate)>0){
-				_validateMessage=EM36;
+				_validationMessage=EM36;
 				return false;
 			}
 		}
@@ -77,7 +77,7 @@ public class ServiceValidator {
 		//補足が500文字を超えている場合、falseを返す
 		if(supplement!=null){
 			if(supplement.length()>MAX_SUPPLEMENT_LENGTH){
-				_validateMessage=EM22;
+				_validationMessage=EM22;
 				return false;
 			}
 		}
