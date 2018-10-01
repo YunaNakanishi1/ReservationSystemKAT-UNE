@@ -12,7 +12,7 @@ import dto.User;
 public class UserDaoTest {
 
 //	@Test
-	public void test1_1() {
+	public void test1_1() {	//完了！！
 		UserDao ud = new UserDao();
 		User user = new User("u0123456", "password", 0);
 		try {

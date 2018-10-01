@@ -19,7 +19,7 @@ import dto.Resource;
   *
   * @author リコーITソリューションズ株式会社 team.KAT-UNE
   */
-public class ShowResourceListServiceTest {
+public class ShowResourceListServiceTest {	//完了！！
 
 	/**
 	 * {@link service.ShowResourceListService#validate()} のためのテスト・メソッド。
