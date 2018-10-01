@@ -32,9 +32,11 @@ public class SessionUpdateHandler implements Handler{
 
 					int authority = checkAuthorityService.getAuthority();
 
+					//System.out.println(authority);
+
 					if(authority==0||authority==1){
-						session.setAttribute("userId", userId);
-						session.setAttribute("authority", authority);
+						request.setAttribute("userId", userId);//session→requestに変更
+						request.setAttribute("authority", authority);//session→requestに変更
 						return null;
 					}else{
                         _log.error("authority is not 0 or 1");
@@ -53,7 +55,7 @@ public class SessionUpdateHandler implements Handler{
 
 
 		}else{
-			request.setAttribute("EMessage", EM39);
+			request.setAttribute("Emessage", EM39);
 			return LOG_IN;
 		}
 
