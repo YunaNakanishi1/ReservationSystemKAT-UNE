@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page session="false" %>
-
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta charset="UTF-8">
 <title>システムエラー</title>
 <link rel="stylesheet" href="deco.css">
 <link rel="stylesheet" href="header_footer.css">
@@ -14,7 +12,9 @@
 
 <div class="div">
 <header class="header"><p>会議室・備品予約システム</p>
+<form action="/ReservationSystemKAT-UNE/logout" method="get">
 <input class="logintop" type="submit" value="ログアウト">
+</form>
 </header>
 
 <div class="contents">

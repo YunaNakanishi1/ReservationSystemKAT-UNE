@@ -12,7 +12,10 @@ import dto.User;
 public class DataBaseFailTest {
 
 
-	//delete(String resourceId)データベース切断
+	/**
+	 * UserDao delete(String resourceId)データベース切断
+	 * @throws SQLException
+	 */
 	@Test(expected = SQLException.class)
 	public void deletetest2_5() throws SQLException  {
 		ResourceDao rd = new ResourceDao();
@@ -21,7 +24,10 @@ public class DataBaseFailTest {
 
 	}
 
-	//getUser(user)データベース切断
+	/**
+	 * UserDao getUser(user)データベース切断
+	 * @throws SQLException
+	 */
 	@Test(expected = SQLException.class)
 	public void getUsertest1_13() throws SQLException {
 		UserDao ud = new UserDao();
