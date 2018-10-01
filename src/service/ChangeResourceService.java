@@ -2,6 +2,7 @@ package service;
 
 import java.sql.SQLException;
 
+import dao.ResourceDao;
 import dto.Resource;
 
 public class ChangeResourceService implements Service{
@@ -28,7 +29,8 @@ public class ChangeResourceService implements Service{
 
 	@Override
 	public void execute() throws SQLException {
-		// TODO 自動生成されたメソッド・スタブ
+		ResourceDao resourceDao = new ResourceDao();
+		_result = resourceDao.change(_resource);
 
 	}
 
