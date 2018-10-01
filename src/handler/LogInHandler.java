@@ -21,7 +21,7 @@ import service.LogInService;
  */
 public class LogInHandler implements Handler {
 	private static Logger _log = LogManager.getLogger();
-	static final int SESSION_INTERVAL = 180;//1800
+	static final int SESSION_INTERVAL = 1800;
 
 	/**
 	 * userIdとpassword入力を受け取り、遷移先を返すメソッド.
