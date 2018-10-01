@@ -62,5 +62,34 @@ public class ShowResourceDetailsServiceTest {	//完了！！
 		assertThat(resource.getUsageStopEndDate(),is(use));
 	}
 
+	/**
+	 * {@link service.ShowResourceDetailsService#execute()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test
+	public void test2() throws SQLException {
+		//fail("まだ実装されていません");
+		ShowResourceDetailsService showResourceDetailsservice = new ShowResourceDetailsService("nothing");
+		showResourceDetailsservice.execute();
 
+		Resource resource = showResourceDetailsservice.getResult();
+
+		assertThat(resource,nullValue());
+	}
+
+
+	/**
+	 * {@link service.ShowResourceDetailsService#execute()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test
+	public void test3() throws SQLException {
+		//fail("まだ実装されていません");
+		ShowResourceDetailsService showResourceDetailsservice = new ShowResourceDetailsService(null);
+		showResourceDetailsservice.execute();
+
+		Resource resource = showResourceDetailsservice.getResult();
+
+		assertThat(resource,nullValue());
+	}
 }
