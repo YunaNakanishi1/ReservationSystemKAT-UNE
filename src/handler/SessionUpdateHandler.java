@@ -53,7 +53,7 @@ public class SessionUpdateHandler implements Handler{
 
 
 		}else{
-			request.setAttribute("EMessage", EM39);
+			request.setAttribute("Emessage", EM39);
 			return LOG_IN;
 		}
 
