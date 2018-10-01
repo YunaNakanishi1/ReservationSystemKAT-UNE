@@ -19,51 +19,35 @@ import dto.Resource;
 *
 * @author リコーITソリューションズ株式会社 team.KAT-UNE
 */
-public class ResourceDaoTest {
+public class ResourceDaoTest {	//完了！！
 
 
-	//@Test
-	public void test2_1() {
+	@Test
+	public void test2_1() throws SQLException {
 		ResourceDao rd = new ResourceDao();
-		try {
-			assertThat(rd.delete("r001"), is(1));
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+		assertThat(rd.delete("r001"), is(1));
+
 	}
 
-	//@Test
-	public void test2_2() {
+	@Test
+	public void test2_2() throws SQLException {
 		ResourceDao rd = new ResourceDao();
-		try {
-			assertThat(rd.delete("u002"), is(0));
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+		assertThat(rd.delete("u002"), is(0));
+
 	}
 
-	//@Test
-	public void test2_3() {
+	@Test
+	public void test2_3() throws SQLException {
 		ResourceDao rd = new ResourceDao();
-		try {
-			assertThat(rd.delete(null), is(0));
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+		assertThat(rd.delete(null), is(0));
+
 	}
 
-	//@Test
-	public void test2_4() {
+	@Test
+	public void test2_4() throws SQLException {
 		ResourceDao rd = new ResourceDao();
-		try {
-			assertThat(rd.delete("A\'or\'A\'=\'A\'"), is(0));
-		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
-			e.printStackTrace();
-		}
+		assertThat(rd.delete("A\'or\'A\'=\'A\'"), is(0));
+
 	}
 
 

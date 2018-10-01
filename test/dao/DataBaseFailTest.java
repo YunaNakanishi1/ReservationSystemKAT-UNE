@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import dto.User;
 
-public class DataBaseFailTest {
+public class DataBaseFailTest {	//完了！！
 
 
 	/**
