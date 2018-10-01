@@ -30,4 +30,18 @@ public class DataBaseFailTest {
 		LogInService lis = new LogInService(user);
 		lis.execute();
 	}
+
+
+	/**
+	 * ※データベースを止めた状態でやってみるとうまくいきます.
+	 * {@link service.ShowResourceListService#execute()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test(expected =java.sql.SQLException.class)
+	public void test2() throws SQLException {
+		//fail("まだ実装されていません");
+		ShowResourceListService showResourceListservice = new ShowResourceListService();
+		showResourceListservice.execute();
+	}
+
 }
