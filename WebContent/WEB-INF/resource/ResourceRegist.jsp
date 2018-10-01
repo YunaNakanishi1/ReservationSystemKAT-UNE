@@ -11,9 +11,26 @@
 <title>リソース入力</title>
 <link rel="stylesheet" href="/ReservationSystemKAT-UNE/deco.css">
 <link rel="stylesheet" href="/ReservationSystemKAT-UNE/header_footer.css">
+  <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+
 </head>
 <body class="body">
 <div class="div">
+<script>
+    $(function () {
+      $("#clear").click( function() {
+        //利用停止開始日時の入力欄をクリアする
+        $("#stopStartDay").val("");
+      });
+    });
+
+    $(function () {
+        $("#clear2").click( function() {
+          //利用停止終了日時の入力欄をクリアする
+          $("#stopEndDay").val("");
+        });
+      });
+</script>
 <header class="header"><p>会議室・備品予約システム</p>
 <form action="/ReservationSystemKAT-UNE/logout" method="get">
 <input class="logintop" type="submit" value="ログアウト">
@@ -98,11 +115,15 @@ checked
 <tr>
 <td class="dialog"><b>利用停止開始日時</b></td>
 <td class="right2">
-<input type="text" name="stopStartDay"
+<input type="text" id="stopStartDay" name="stopStartDay" placeholder="2018/01/01"
 <c:if test ="${hasResourceData && stopStartDay!= null}">
 value="${stopStartDay}"
 </c:if>
 >
+
+<a class="red" id="clear">
+×
+</a>
 </td>
 </tr>
 <tr>
@@ -157,13 +178,17 @@ selected
 <tr>
 <td class="dialog"><b>利用停止終了日時</b></td>
 <td class="right2">
-<input type="text" name="stopEndDay"
+<input type="text" id="stopEndDay" name="stopEndDay" placeholder="2018/01/01"
 <c:if test ="${hasResourceData && stopEndDay!= null}">
 value="${stopEndDay}"
 </c:if>
 >
+<a class="red" id="clear2">
+×
+</a>
 </td>
 </tr>
+
 <tr>
 <td></td>
 <td class="right2">
