@@ -28,7 +28,7 @@ public class ShowResourceDetailsServiceTest {	//完了！！
 	@Test
 	public void testValidate() {
 		//fail("まだ実装されていません");
-		ShowResourceDetailsService showResourceDetailsservice = new ShowResourceDetailsService("r003");
+		ShowResourceDetailsService showResourceDetailsservice = new ShowResourceDetailsService("r000000003");
 		assertEquals(true, showResourceDetailsservice.validate());
 	}
 
@@ -39,7 +39,7 @@ public class ShowResourceDetailsServiceTest {	//完了！！
 	@Test
 	public void test1() throws SQLException {
 		//fail("まだ実装されていません");
-		ShowResourceDetailsService showResourceDetailsservice = new ShowResourceDetailsService("r003");
+		ShowResourceDetailsService showResourceDetailsservice = new ShowResourceDetailsService("r000000003");
 		showResourceDetailsservice.execute();
 
 		Resource resource = showResourceDetailsservice.getResult();

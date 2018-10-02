@@ -25,7 +25,7 @@ public class ResourceDaoTest {	//完了！！
 	@Test
 	public void test2_1() throws SQLException {
 		ResourceDao rd = new ResourceDao();
-		assertThat(rd.delete("r001"), is(1));
+		assertThat(rd.delete("r000000001"), is(1));
 
 	}
 
@@ -117,7 +117,7 @@ public class ResourceDaoTest {	//完了！！
 
 		Resource resource = resourceDao.displayDetails(argument);
 
-		assertThat(resource.getResourceId(),is("r003"));
+		assertThat(resource.getResourceId(),is("r000000003"));
 		assertThat(resource.getResourceName(),is("晴海414L"));
 		assertThat(resource.getCategory(),is("会議室"));
 		assertThat(resource.getOfficeName(),is("晴海"));
