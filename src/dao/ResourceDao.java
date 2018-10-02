@@ -102,7 +102,7 @@ public class ResourceDao {
 		PreparedStatement stmt1 = null;
 		PreparedStatement stmt2 = null;
 		String sql1 = "INSERT INTO resources VALUES(?,?,(SELECT category_id FROM categories WHERE category_name=?),(SELECT office_id FROM offices WHERE office_name=?),?,?,?,?,0);";
-		String sql2 = "INSERT INTO resource_features VALUES ((SELECT resource_characteristic_id FROM resource_characteristics WHERE resource_characteristic_name==?),?);";
+		String sql2 = "INSERT INTO resource_features VALUES ((SELECT resource_characteristic_id FROM resource_characteristics WHERE resource_characteristic_name=?),?);";
 		try{
 			if(_con==null){
 				_log.error("DatabaseConnectError");
@@ -154,7 +154,7 @@ public class ResourceDao {
 
 		String sql1 = "UPDATE resources SET resource_name=?,category_id=(SELECT category_id FROM categories WHERE category_name=?),office_id=(SELECT office_id FROM offices WHERE office_name=?),capacity=?,supplement=?,usage_stop_start_date=?,usage_stop_end_date=? WHERE resource_id=? and deleted=0;";
 		String sql2 = "DELETE FROM resource_features WHERE resource_id=?;";
-		String sql3 = "INSERT INTO resource_features VALUES ((SELECT resource_characteristic_id FROM resource_characteristics WHERE resource_characteristic_name==?),?);";
+		String sql3 = "INSERT INTO resource_features VALUES ((SELECT resource_characteristic_id FROM resource_characteristics WHERE resource_characteristic_name=?),?);";
 		try{
 			if(_con==null){
 				_log.error("DatabaseConnectError");

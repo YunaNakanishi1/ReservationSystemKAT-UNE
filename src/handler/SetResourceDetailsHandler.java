@@ -88,7 +88,7 @@ public class SetResourceDetailsHandler implements Handler {
 		_request.setAttribute("stopStartMinute", stopStartMinute);
 		String stopEndDay = _request.getParameter("stopEndDay");
 		_request.setAttribute("stopEndDay", stopEndDay);
-		String stopEndHour = _request.getParameter("stopEndtHour");
+		String stopEndHour = _request.getParameter("stopEndHour");
 		_request.setAttribute("stopEndHour", stopEndHour);
 		String stopEndMinute = _request.getParameter("stopEndMinute");
 		_request.setAttribute("stopEndMinute", stopEndMinute);
@@ -96,7 +96,11 @@ public class SetResourceDetailsHandler implements Handler {
 		_request.setAttribute("supplement", supplement);
 
 		//リソース特性をリストとしてセット
-		List<String> facility = new ArrayList<String>(Arrays.asList(_request.getParameterValues("facility")));
+		List<String> facility = new ArrayList<String>();
+		String[] facilityArray=_request.getParameterValues("facility");
+		if(facilityArray!=null){
+		facility = new ArrayList<String>(Arrays.asList(facilityArray));
+		}
 		_request.setAttribute("facility", facility);
 
 		CommonValidator commonValidator = new CommonValidator();

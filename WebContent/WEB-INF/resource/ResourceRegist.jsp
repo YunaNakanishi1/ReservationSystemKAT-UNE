@@ -52,7 +52,7 @@
 <td class="right2">
 <input type="text" name="resourceName"
 <c:if test="${hasResourceData}">
- value=" <c:out value="${resourceName}" /> "
+ value="<c:out value="${resourceName}" />"
  </c:if>
  >
  </td>
@@ -78,7 +78,7 @@
 <td class="right2">
 <input type="text" name="capacity"
 <c:if test="${hasResourceData}">
- value=" <c:out value="${capacity}" /> "
+ value="<c:out value="${capacity}" />"
  </c:if>
  >
 </td>
@@ -88,7 +88,7 @@
 <td class="right2">
 <select name ="officeName">
 <c:forEach var="obj" items="${officeList}" varStatus="status">
-<option value="<${obj}"
+<option value="${obj}"
 <c:if test="${hasResourceData && obj==officeName}">
  selected
 </c:if>
@@ -117,7 +117,7 @@ checked
 <td class="right2">
 <input type="text" id="stopStartDay" name="stopStartDay" placeholder="2018/01/01"
 <c:if test ="${hasResourceData && stopStartDay!= null}">
-value="${stopStartDay}"
+value = "<c:out value="${stopStartDay}" />"
 </c:if>
 >
 
@@ -180,7 +180,7 @@ selected
 <td class="right2">
 <input type="text" id="stopEndDay" name="stopEndDay" placeholder="2018/01/01"
 <c:if test ="${hasResourceData && stopEndDay!= null}">
-value="${stopEndDay}"
+value="<c:out value="${stopEndDay}" />"
 </c:if>
 >
 <a class="red" id="clear2">
@@ -255,7 +255,12 @@ selected
 
 <table class="table3">
 <tr>
-<td><input class="submit" class="dialog" type = "submit" value = "登録"></td>
+<td>
+<input type="hidden" name = "type" value ="<c:out value="${type}"/>">
+<c:if test="${hasResourceData&&resourceId!=null }">
+<input type = "hidden" name="resourceId" value="<c:out value="${resourceId }" />">
+</c:if>
+<input class="submit" class="dialog" type = "submit" value = "登録"></td>
 </form>
 <td>　</td>
 <td><form action = "${returnPage}" method = "get">

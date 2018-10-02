@@ -63,11 +63,11 @@ public class CommonValidator {
     	SimpleDateFormat timestampFormat =new SimpleDateFormat("yyyy-MM-dd");
     	timestampFormat.setLenient(false);
     	try{
-    		_date=Timestamp.valueOf(timestampFormat.format(inputFormat.parse(date))+" "+hour+":"+minute);
+    		_date=Timestamp.valueOf(timestampFormat.format(inputFormat.parse(date))+" "+hour+":"+minute+":00");
     	}catch(ParseException e){
     		inputFormat = new SimpleDateFormat("MM/dd");
     		inputFormat.setLenient(false);
-    		timestampFormat =new SimpleDateFormat("MM-dd");
+    		timestampFormat =new SimpleDateFormat("-MM-dd");
     		timestampFormat.setLenient(false);
     		Calendar cal = Calendar.getInstance();
     		int year = cal.get(Calendar.YEAR);
