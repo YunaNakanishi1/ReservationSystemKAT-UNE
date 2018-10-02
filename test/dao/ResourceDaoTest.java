@@ -110,7 +110,7 @@ public class ResourceDaoTest {	//完了！！
 	public void test3_1() throws SQLException {
 		//fail("まだ実装されていません");
 		dao.ResourceDao resourceDao = new dao.ResourceDao();
-		String argument = "r003";
+		String argument = "r000000003";
 		List<String> facility = new ArrayList<String>();
 		facility.add("ホワイトボード有");
 		facility.add("プロジェクター有");
