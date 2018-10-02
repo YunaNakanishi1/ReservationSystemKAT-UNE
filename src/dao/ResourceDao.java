@@ -181,8 +181,8 @@ public class ResourceDao {
 					stmt3.setString(1, facilityElement);
 					stmt3.executeUpdate();
 				}
+				_con.commit();
 			}
-			_con.commit();
 
 		}finally{
 			try{
