@@ -52,7 +52,7 @@ public class DataBaseFailTest {
 	@Test(expected =java.sql.SQLException.class)
 	public void test4() throws SQLException {
 		//fail("まだ実装されていません");
-		ShowResourceDetailsService showResourceDetailsService = new ShowResourceDetailsService("r003");
+		ShowResourceDetailsService showResourceDetailsService = new ShowResourceDetailsService("r000000003");
 		showResourceDetailsService.execute();
 	}
 

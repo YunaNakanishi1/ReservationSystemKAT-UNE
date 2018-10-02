@@ -9,13 +9,13 @@ public class DeleteResourceServiceTest {
 
 	//@Test
 	public void test1() {
-		DeleteResourceService drs = new DeleteResourceService("r006");
-		assertThat(drs.getResourceId(), is("r006"));
+		DeleteResourceService drs = new DeleteResourceService("r000000006");
+		assertThat(drs.getResourceId(), is("r000000006"));
 	}
 
 	//@Test
 	public void test2() {
-		DeleteResourceService drs = new DeleteResourceService("r001");
+		DeleteResourceService drs = new DeleteResourceService("r000000001");
 		try {
 			drs.execute();
 		} catch (SQLException e) {

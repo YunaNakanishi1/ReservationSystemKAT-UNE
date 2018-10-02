@@ -63,7 +63,7 @@ public class DataBaseFailTest {	//完了！！
 	public void test3_4() throws SQLException {
 		//fail("まだ実装されていません");
 		dao.ResourceDao resourceDao = new dao.ResourceDao();
-		String argument = "0003";
+		String argument = "r000000003";
 		resourceDao.displayDetails(argument);
 	}
 }
