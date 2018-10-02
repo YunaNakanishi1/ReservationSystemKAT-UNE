@@ -373,12 +373,12 @@ public class ResourceDao {
 		}
 	}
 
-	public List<String> getMaxId() throws SQLException{
+	public String getMaxId() throws SQLException{
 		DBHelper dbHelper = new DBHelper();
 		Statement stmt=null;
 		ResultSet rs=null;
-		String sql = "SELECT resource_id from resources;";
-		List<String> resourceIdList = new ArrayList<String>();
+		String sql = "SELECT MAX(resource_id) from resources;";
+		String maxId = null;
 		try{
 			_con = dbHelper.connectDb(); // データベースに接続
 
@@ -388,8 +388,8 @@ public class ResourceDao {
 			}
 			stmt=_con.createStatement();
 			rs=stmt.executeQuery(sql);
-			while(rs.next()){
-				resourceIdList.add(rs.getString(1));
+			if(rs.next()){
+				maxId=rs.getString(1);
 			}
 		}finally{
 			try{
@@ -406,6 +406,6 @@ public class ResourceDao {
 			}
 			dbHelper.closeDb();
 		}
-		return resourceIdList;
+		return maxId;
 	}
 }

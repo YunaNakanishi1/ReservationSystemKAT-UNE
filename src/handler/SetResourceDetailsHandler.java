@@ -169,12 +169,16 @@ public class SetResourceDetailsHandler implements Handler {
 				//自動生成したIDを取得する
 				String resourceId = registResourceService.getResourceId();
 				//正しく1件登録できたか、IDが設定されているか調べる
-				if (result == 1 && resourceId != null) {
-					_request.setAttribute("resourceId", resourceId);
-					return RESOURCE_DETAILS_SERVLET;
-				} else {
+				if(resourceId==null){
+					_log.error("resourceId overflow");
+					return ERROR_PAGE;
+				}else if(result!=1){
 					_log.error("regist failed");
 					return ERROR_PAGE;
+				}else{
+					Resource resultResource=registResourceService.getResultResource();
+					_request.setAttribute("resource", resultResource);
+					return RESOURCE_DETAILS;
 				}
 			} catch (SQLException e) {
 				_log.error("SQLException");
@@ -203,7 +207,9 @@ public class SetResourceDetailsHandler implements Handler {
 				int result = changeResourceService.getResult();
 				//正しく1件登録できているか調べる
 				if (result == 1) {
-					return RESOURCE_DETAILS_SERVLET;
+					Resource resultResource=changeResourceService.getResultResource();
+					_request.setAttribute("resource", resultResource);
+					return RESOURCE_DETAILS;
 				} else {
 					_log.error("change failed");
 					return ERROR_PAGE;

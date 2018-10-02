@@ -1,8 +1,6 @@
 package service;
 
-import java.math.BigInteger;
 import java.sql.SQLException;
-import java.util.List;
 
 import dao.ResourceDao;
 import dto.Resource;
@@ -10,19 +8,20 @@ import dto.Resource;
 public class RegistResourceService implements Service {
 
 	private String _validationMessage;
-	private Resource _resource;
+	private Resource _inputResource;
 	private int _result;
 	private String _resourceId;
+	private Resource _resultResource;
 
 	public RegistResourceService(Resource resource) {
 		super();
-		_resource = resource;
+		_inputResource = resource;
 	}
 
 	@Override
 	public boolean validate() {
 		ServiceValidator serviceValidator = new ServiceValidator();
-		boolean validate = serviceValidator.setResourseDetailValidate(_resource);
+		boolean validate = serviceValidator.setResourseDetailValidate(_inputResource);
 		if (!validate) {
 			_validationMessage = serviceValidator.getValidationMessage();
 		}
@@ -33,47 +32,40 @@ public class RegistResourceService implements Service {
 	public void execute() throws SQLException {
 		// 全リソースIDを取得
 		ResourceDao resourceDao = new ResourceDao();
-		List<String> resourceIdList = resourceDao.getMaxId();
-		// 最大のIDを求めるための変数を用意
-		BigInteger maxIdInteger = new BigInteger("0");
-		// IDの数字部分の最大値を求める
-		for (String resourceId : resourceIdList) {
-			// 数字以外の部分を取り除く
-			String resourceIdNumber = resourceId.replaceAll("[^0-9]", "");
-			try {
-				// 数字部分を整数に直す
-				BigInteger resourceIdInteger = new BigInteger(resourceIdNumber);
-				// これまでの最大値より大きければ置き換える
-				if (maxIdInteger.compareTo(resourceIdInteger) < 0) {
-					maxIdInteger = resourceIdInteger;
-				}
-			} catch (NumberFormatException e) {
-				// 数字に直せないIDは無視
-			}
+		String maxId = resourceDao.getMaxId();
+
+		int maxIdInt=0;
+
+		if(maxId!=null){
+		String maxIdNumber = maxId.replace("r", "");
+		maxIdInt = Integer.parseInt(maxIdNumber);
 		}
-		// IDの数字の最大値に1足す
-		maxIdInteger = maxIdInteger.add(new BigInteger("1"));
-		// 文字列に直す
-		String MaxIdNumber = maxIdInteger.toString();
+		maxIdInt++;
+
+		String idNumber=Integer.toString(maxIdInt);
+
 		// 最大桁に対して桁数が残っているか調べる
-		int leftLength = 19 - MaxIdNumber.length();
-		if (leftLength <= 0) {
+		int remainingLength = 9 - idNumber.length();
+		if (remainingLength <= 0) {
 			_resourceId = null;
 			return;
 		}
 		// IDの補完する部分を求める
 		String formerOfResourceId = "";
-		for (int i = 0; i < leftLength; i++) {
+		for (int i = 0; i < remainingLength; i++) {
 			formerOfResourceId = "0" + formerOfResourceId;
 		}
 		formerOfResourceId = "r" + formerOfResourceId;
 		// 前半部分と数字部分を結合する
-		_resourceId = formerOfResourceId + MaxIdNumber;
+		_resourceId = formerOfResourceId + idNumber;
 
-		_resource = new Resource(_resourceId, _resource.getResourceName(), _resource.getOfficeName(),
-				_resource.getCategory(), _resource.getCapacity(), _resource.getSupplement(), 0, _resource.getFacility(),
-				_resource.getUsageStopStartDate(), _resource.getUsageStopEndDate());
-		_result=resourceDao.regist(_resource);
+		_inputResource = new Resource(_resourceId, _inputResource.getResourceName(), _inputResource.getOfficeName(),
+				_inputResource.getCategory(), _inputResource.getCapacity(), _inputResource.getSupplement(), 0, _inputResource.getFacility(),
+				_inputResource.getUsageStopStartDate(), _inputResource.getUsageStopEndDate());
+
+		_result=resourceDao.regist(_inputResource);
+
+		_resultResource=resourceDao.displayDetails(_resourceId);
 
 	}
 
@@ -88,5 +80,11 @@ public class RegistResourceService implements Service {
 	public String getResourceId() {
 		return _resourceId;
 	}
+
+	public Resource getResultResource() {
+		return _resultResource;
+	}
+
+
 
 }
