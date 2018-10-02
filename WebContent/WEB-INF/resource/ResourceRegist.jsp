@@ -40,6 +40,7 @@
 <div class="dialog">
 <h2>リソース入力</h2>
 <p><font color = "blue">${Pmessage}</font></p>
+<p><font color = "red">${Emessage}</font></p>
 </div>
 
 <table class="table2">

@@ -107,29 +107,29 @@ public class SetResourceDetailsHandler implements Handler {
 
 		//リソース名が入力されているか調べる
 		if (commonValidator.notSetOn(resourceName)) {
-			_request.setAttribute("EMessage", EM27);
+			_request.setAttribute("Emessage", EM27);
 			return false;
 		}
 		//カテゴリ情報があるか調べる
 		if (commonValidator.notSetOn(category)) {
-			_request.setAttribute("EMessage", EM37);
+			_request.setAttribute("Emessage", EM37);
 			return false;
 		}
 		//定員が入力されているか調べる
 		if (commonValidator.notSetOn(capacity)) {
-			_request.setAttribute("EMessage", EM30);
+			_request.setAttribute("Emessage", EM30);
 			return false;
 		}
 		//定員が数字になっているか調べる
 		if (commonValidator.notNumericOn(capacity)) {
-			_request.setAttribute("EMessage", EM31);
+			_request.setAttribute("Emessage", EM31);
 			return false;
 		}
 		//数字に変換した定員を取得する
 		int capacityNumber = commonValidator.getNumber();
 		//事業所情報があるか調べる
 		if (commonValidator.notSetOn(officeName)) {
-			_request.setAttribute("EMessage", EM33);
+			_request.setAttribute("Emessage", EM33);
 			return false;
 		}
 		//利用停止開始日時が設定されているか調べる
@@ -137,7 +137,7 @@ public class SetResourceDetailsHandler implements Handler {
 		if (!commonValidator.notSetOn(stopStartDay)) {
 			//日付のフォーマットが正しいか調べる
 			if (commonValidator.notDateOn(stopStartDay, stopStartHour, stopStartMinute)) {
-				_request.setAttribute("EMessage", EM38);
+				_request.setAttribute("Emessage", EM38);
 				return false;
 			}
 			stopStartDate = commonValidator.getDate();
@@ -147,7 +147,7 @@ public class SetResourceDetailsHandler implements Handler {
 		if (!commonValidator.notSetOn(stopEndDay)) {
 			//日付のフォーマットが正しいか調べる
 			if (commonValidator.notDateOn(stopEndDay, stopEndHour, stopEndMinute)) {
-				_request.setAttribute("EMessage", EM38);
+				_request.setAttribute("Emessage", EM38);
 				return false;
 			}
 			stopEndDate = commonValidator.getDate();
@@ -191,7 +191,7 @@ public class SetResourceDetailsHandler implements Handler {
 		} else {
 			//入力に不備があればリソース入力ページに戻す
 			String validationMessage = registResourceService.getValidationMessage();
-			_request.setAttribute("EMessage", validationMessage);
+			_request.setAttribute("Emessage", validationMessage);
 			return RESOURCE_REGIST_SERVLET;
 		}
 
@@ -225,7 +225,7 @@ public class SetResourceDetailsHandler implements Handler {
 		} else {
 			//入力に不備があればリソース入力ページに戻す
 			String validationMessage = changeResourceService.getValidationMessage();
-			_request.setAttribute("EMessage", validationMessage);
+			_request.setAttribute("Emessage", validationMessage);
 			return RESOURCE_REGIST_SERVLET;
 		}
 
