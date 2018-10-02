@@ -182,6 +182,7 @@ public class SetResourceDetailsHandler implements Handler {
 				}else{
 					Resource resultResource=registResourceService.getResultResource();
 					_request.setAttribute("resource", resultResource);
+					_request.setAttribute("Pmessage", PM06);
 					return RESOURCE_DETAILS;
 				}
 			} catch (SQLException e) {
@@ -213,6 +214,7 @@ public class SetResourceDetailsHandler implements Handler {
 				if (result == 1) {
 					Resource resultResource=changeResourceService.getResultResource();
 					_request.setAttribute("resource", resultResource);
+					_request.setAttribute("Pmessage", PM06);
 					return RESOURCE_DETAILS;
 				} else {
 					_log.error("change failed");
