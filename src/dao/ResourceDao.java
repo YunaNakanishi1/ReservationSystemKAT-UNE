@@ -171,16 +171,19 @@ public class ResourceDao {
 			stmt1.setTimestamp(6, resource.getUsageStopStartDate());
 			stmt1.setTimestamp(7, resource.getUsageStopEndDate());
 			result=stmt1.executeUpdate();
-			stmt2=_con.prepareStatement(sql2);
-			stmt2.setString(1, resource.getResourceId());
-			stmt2.executeUpdate();
-			stmt3=_con.prepareStatement(sql3);
-			stmt3.setString(2, resource.getResourceId());
-			for(String facilityElement:resource.getFacility()){
-				stmt3.setString(1, facilityElement);
-				stmt3.executeUpdate();
+			if (result == 1) {
+				stmt2=_con.prepareStatement(sql2);
+				stmt2.setString(1, resource.getResourceId());
+				stmt2.executeUpdate();
+				stmt3=_con.prepareStatement(sql3);
+				stmt3.setString(2, resource.getResourceId());
+				for(String facilityElement:resource.getFacility()){
+					stmt3.setString(1, facilityElement);
+					stmt3.executeUpdate();
+				}
 			}
 			_con.commit();
+
 		}finally{
 			try{
 				dbHelper.closeResource(stmt1);
