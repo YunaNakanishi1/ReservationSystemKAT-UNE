@@ -7,20 +7,21 @@ import dto.Resource;
 
 public class ChangeResourceService implements Service{
 	private String _validationMessage;
-	private Resource _resource;
+	private Resource _inputResource;
+	private Resource _resultResource;
 	private int _result;
 
 
 
 	public ChangeResourceService(Resource resource) {
 		super();
-		this._resource = resource;
+		_inputResource = resource;
 	}
 
 	@Override
 	public boolean validate() {
 		ServiceValidator serviceValidator = new ServiceValidator();
-		boolean validate = serviceValidator.setResourseDetailValidate(_resource);
+		boolean validate = serviceValidator.setResourseDetailValidate(_inputResource);
 		if(!validate){
 			_validationMessage=serviceValidator.getValidationMessage();
 		}
@@ -30,7 +31,8 @@ public class ChangeResourceService implements Service{
 	@Override
 	public void execute() throws SQLException {
 		ResourceDao resourceDao = new ResourceDao();
-		_result = resourceDao.change(_resource);
+		_result = resourceDao.change(_inputResource);
+		_resultResource=resourceDao.displayDetails(_inputResource.getResourceId());
 
 	}
 
@@ -41,6 +43,12 @@ public class ChangeResourceService implements Service{
 	public int getResult() {
 		return _result;
 	}
+
+	public Resource getResultResource() {
+		return _resultResource;
+	}
+
+
 
 
 

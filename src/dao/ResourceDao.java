@@ -102,7 +102,7 @@ public class ResourceDao {
 		PreparedStatement stmt1 = null;
 		PreparedStatement stmt2 = null;
 		String sql1 = "INSERT INTO resources VALUES(?,?,(SELECT category_id FROM categories WHERE category_name=?),(SELECT office_id FROM offices WHERE office_name=?),?,?,?,?,0);";
-		String sql2 = "INSERT INTO resource_features VALUES ((SELECT resource_characteristic_id FROM resource_characteristics WHERE resource_characteristic_name==?),?);";
+		String sql2 = "INSERT INTO resource_features VALUES ((SELECT resource_characteristic_id FROM resource_characteristics WHERE resource_characteristic_name=?),?);";
 		try{
 			if(_con==null){
 				_log.error("DatabaseConnectError");
@@ -154,7 +154,7 @@ public class ResourceDao {
 
 		String sql1 = "UPDATE resources SET resource_name=?,category_id=(SELECT category_id FROM categories WHERE category_name=?),office_id=(SELECT office_id FROM offices WHERE office_name=?),capacity=?,supplement=?,usage_stop_start_date=?,usage_stop_end_date=? WHERE resource_id=? and deleted=0;";
 		String sql2 = "DELETE FROM resource_features WHERE resource_id=?;";
-		String sql3 = "INSERT INTO resource_features VALUES ((SELECT resource_characteristic_id FROM resource_characteristics WHERE resource_characteristic_name==?),?);";
+		String sql3 = "INSERT INTO resource_features VALUES ((SELECT resource_characteristic_id FROM resource_characteristics WHERE resource_characteristic_name=?),?);";
 		try{
 			if(_con==null){
 				_log.error("DatabaseConnectError");
@@ -171,16 +171,19 @@ public class ResourceDao {
 			stmt1.setTimestamp(6, resource.getUsageStopStartDate());
 			stmt1.setTimestamp(7, resource.getUsageStopEndDate());
 			result=stmt1.executeUpdate();
-			stmt2=_con.prepareStatement(sql2);
-			stmt2.setString(1, resource.getResourceId());
-			stmt2.executeUpdate();
-			stmt3=_con.prepareStatement(sql3);
-			stmt3.setString(2, resource.getResourceId());
-			for(String facilityElement:resource.getFacility()){
-				stmt3.setString(1, facilityElement);
-				stmt3.executeUpdate();
+			if (result == 1) {
+				stmt2=_con.prepareStatement(sql2);
+				stmt2.setString(1, resource.getResourceId());
+				stmt2.executeUpdate();
+				stmt3=_con.prepareStatement(sql3);
+				stmt3.setString(2, resource.getResourceId());
+				for(String facilityElement:resource.getFacility()){
+					stmt3.setString(1, facilityElement);
+					stmt3.executeUpdate();
+				}
+				_con.commit();
 			}
-			_con.commit();
+
 		}finally{
 			try{
 				dbHelper.closeResource(stmt1);
@@ -370,12 +373,12 @@ public class ResourceDao {
 		}
 	}
 
-	public List<String> getMaxId() throws SQLException{
+	public String getMaxId() throws SQLException{
 		DBHelper dbHelper = new DBHelper();
 		Statement stmt=null;
 		ResultSet rs=null;
-		String sql = "SELECT resource_id from resources;";
-		List<String> resourceIdList = new ArrayList<String>();
+		String sql = "SELECT MAX(resource_id) from resources;";
+		String maxId = null;
 		try{
 			_con = dbHelper.connectDb(); // データベースに接続
 
@@ -385,8 +388,8 @@ public class ResourceDao {
 			}
 			stmt=_con.createStatement();
 			rs=stmt.executeQuery(sql);
-			while(rs.next()){
-				resourceIdList.add(rs.getString(1));
+			if(rs.next()){
+				maxId=rs.getString(1);
 			}
 		}finally{
 			try{
@@ -403,6 +406,6 @@ public class ResourceDao {
 			}
 			dbHelper.closeDb();
 		}
-		return resourceIdList;
+		return maxId;
 	}
 }
