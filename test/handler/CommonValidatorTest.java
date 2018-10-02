@@ -1,8 +1,9 @@
 /**
- * 
+ *
  */
 package handler;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
@@ -42,7 +43,9 @@ public class CommonValidatorTest {
 	 */
 	@Test
 	public void testNotDateOn() {
-		fail("まだ実装されていません");
+		//fail("まだ実装されていません");
+		CommonValidator cv = new CommonValidator();
+		assertThat(cv.notDateOn(null," 1", "1"),is(true));
 	}
 
 	/**
