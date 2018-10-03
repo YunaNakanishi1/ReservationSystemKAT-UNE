@@ -51,14 +51,17 @@ public class SetResourceDetailsHandler implements Handler {
 			// 表示する内容があることを示す
 			request.setAttribute("hasResourceData", true);
 
+			//入力の不備をチェック
 			// 新規登録処理と変更処理のどちらも同じバリデーションチェックを行う。
 			if (precheck()) {
 				// typeの値に応じて登録、変更を行う
+			    //遷移先の文字列は各々のメソッドから取得し返却する。
 				if ("regist".equals(_type)) {
 					return regist();
 				} else if("change".equals(_type)){
 					return change();
 				}else{
+				    //_typeに異常な値を検知
 					_log.error("wrong type");
 					return ERROR_PAGE;
 				}
