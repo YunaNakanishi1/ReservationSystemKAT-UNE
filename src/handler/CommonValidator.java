@@ -78,22 +78,36 @@ public class CommonValidator {
      * @return　渡されたデータが正しい場合、false 誤りがある場合、true
      */
     protected boolean notDateOn(String date ,String hour,String minute){
+    	//フォーマットパターン（yyyy/MM/dd）を設定する
     	SimpleDateFormat inputFormat =new SimpleDateFormat("yyyy/MM/dd");
+    	//入力された日付が正しいかどうかチェックする
     	inputFormat.setLenient(false);
+    	//フォーマットパターン（yyyy/MM/dd）を設定する
     	SimpleDateFormat timestampFormat =new SimpleDateFormat("yyyy-MM-dd");
+    	//入力された日付が正しいかどうかチェックする
     	timestampFormat.setLenient(false);
+
     	try{
+    	//【フォーマット通りに入力された場合（yyyy/MM/dd）】
+    	//入力された日付がフォーマット通り（yyyy/MM/dd）だった場合、フィールドにセットする
     		_date=Timestamp.valueOf(timestampFormat.format(inputFormat.parse(date))+" "+hour+":"+minute+":00");
+
     	}catch(ParseException e){
+    	//【年を省略して入力された場合（MM/dd）】
+    	//※年(yyyy)が入力されていない状態なので、現在時刻で補完する
     		inputFormat = new SimpleDateFormat("MM/dd");
     		inputFormat.setLenient(false);
+    	//後ほどyyyyを補完して文字列連結するために頭に「-」をつけたフォーマットにする
     		timestampFormat =new SimpleDateFormat("-MM-dd");
     		timestampFormat.setLenient(false);
+
+    	//現在年を取得しyearに代入
     		Calendar cal = Calendar.getInstance();
     		int year = cal.get(Calendar.YEAR);
     		try {
 				_date=Timestamp.valueOf(year + timestampFormat.format(inputFormat.parse(date))+" "+hour+":"+minute+":00");
 
+		//入力した日付が正しくない場合、trueを返却する
 			} catch (ParseException e1) {
 				return true;
 			}
