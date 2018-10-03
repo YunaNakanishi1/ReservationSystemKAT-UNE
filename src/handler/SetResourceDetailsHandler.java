@@ -5,6 +5,7 @@ import static handler.ViewHolder.*;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -181,6 +182,14 @@ public class SetResourceDetailsHandler implements Handler {
 					return ERROR_PAGE;
 				}else{
 					Resource resultResource=registResourceService.getResultResource();
+					if( (resultResource.getUsageStopStartDate() != null) && (resultResource.getUsageStopEndDate() != null) ){
+			            //利用停止期間をフォーマットに即して変換してセット
+			            String format = "yyyy/MM/dd　H時m分";
+			            String stopStartDate = new SimpleDateFormat(format).format(resultResource.getUsageStopStartDate());
+			            String stopEndDate = new SimpleDateFormat(format).format(resultResource.getUsageStopEndDate());
+			                _request.setAttribute("stopStartDate", stopStartDate);
+			                _request.setAttribute("stopEndDate", stopEndDate);
+			            }
 					_request.setAttribute("resource", resultResource);
 					_request.setAttribute("Pmessage", PM06);
 					return RESOURCE_DETAILS;
@@ -213,6 +222,14 @@ public class SetResourceDetailsHandler implements Handler {
 				//正しく1件登録できているか調べる
 				if (result == 1) {
 					Resource resultResource=changeResourceService.getResultResource();
+					if( (resultResource.getUsageStopStartDate() != null) && (resultResource.getUsageStopEndDate() != null) ){
+			            //利用停止期間をフォーマットに即して変換してセット
+			            String format = "yyyy/MM/dd　H時m分";
+			            String stopStartDate = new SimpleDateFormat(format).format(resultResource.getUsageStopStartDate());
+			            String stopEndDate = new SimpleDateFormat(format).format(resultResource.getUsageStopEndDate());
+			                _request.setAttribute("stopStartDate", stopStartDate);
+			                _request.setAttribute("stopEndDate", stopEndDate);
+			            }
 					_request.setAttribute("resource", resultResource);
 					_request.setAttribute("Pmessage", PM06);
 					return RESOURCE_DETAILS;
