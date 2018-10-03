@@ -80,6 +80,7 @@
 <td>
 <form action="resourcechange" method="get">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resource.resourceId}"/>" >
+<input type="hidden" name="type" value="change">
 <input class="submit" class="dialog" type = "submit" value = "変更">
 </form>
 </td>

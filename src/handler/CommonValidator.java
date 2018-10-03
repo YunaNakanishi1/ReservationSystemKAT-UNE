@@ -72,7 +72,7 @@ public class CommonValidator {
     		Calendar cal = Calendar.getInstance();
     		int year = cal.get(Calendar.YEAR);
     		try {
-				_date=Timestamp.valueOf(year + timestampFormat.format(inputFormat.parse(date))+" "+hour+":"+minute);
+				_date=Timestamp.valueOf(year + timestampFormat.format(inputFormat.parse(date))+" "+hour+":"+minute+":00");
 
 			} catch (ParseException e1) {
 				return true;
