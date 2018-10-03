@@ -56,8 +56,11 @@ public class SetResourceDetailsHandler implements Handler {
 				// typeの値に応じて登録、変更を行う
 				if ("regist".equals(_type)) {
 					return regist();
-				} else {
+				} else if("change".equals(_type)){
 					return change();
+				}else{
+					_log.error("wrong type");
+					return ERROR_PAGE;
 				}
 			} else {
 				// 入力に不備があればリソース入力ページに戻す

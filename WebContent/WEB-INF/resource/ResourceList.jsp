@@ -70,7 +70,7 @@ $(document).ready(function(){
 <div class="contents">
 
 <h2>リソース一覧</h2>
-<p><font color = "blue">${Emessage}</font></p>
+<p><font color = "blue">${Pmessage}</font></p>
 <p><a href = "reserveList" method="post">予約一覧に戻る</a></p>
 
 <c:if test="${authority == 0}">

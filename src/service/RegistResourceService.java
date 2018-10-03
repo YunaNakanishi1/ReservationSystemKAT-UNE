@@ -5,6 +5,10 @@ import java.sql.SQLException;
 import dao.ResourceDao;
 import dto.Resource;
 
+/**リソースの登録を行う
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ */
 public class RegistResourceService implements Service {
 
 	private String _validationMessage;
@@ -19,6 +23,9 @@ public class RegistResourceService implements Service {
 		_inputResource = resource;
 	}
 
+	/* 機能に依存するバリデーションチェックを行う.
+	 * @see service.Service#validate()
+	 */
 	@Override
 	public boolean validate() {
 		ServiceValidator serviceValidator = new ServiceValidator();
@@ -29,6 +36,9 @@ public class RegistResourceService implements Service {
 		return validate;
 	}
 
+	/* リソース情報を変更する.
+	 * @see service.Service#execute()
+	 */
 	@Override
 	public void execute() throws SQLException {
 		// 全リソースIDを取得

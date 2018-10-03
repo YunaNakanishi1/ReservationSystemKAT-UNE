@@ -80,6 +80,7 @@
 <td>
 <form action="resourcechange" method="get">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resource.resourceId}"/>" >
+<input type="hidden" name="type" value="change">
 <input class="submit" class="dialog" type = "submit" value = "変更">
 </form>
 </td>
@@ -94,7 +95,7 @@
 </c:if>
 <br>
 
-<a class="dialog" href = "resourcelist" method="post">一覧に戻る</a>
+<a class="dialog" href = "/ReservationSystemKAT-UNE/reservesystem/resourcelist" method="get">一覧に戻る</a>
 
 </div>
 

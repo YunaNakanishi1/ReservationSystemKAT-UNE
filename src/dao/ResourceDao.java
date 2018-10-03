@@ -136,6 +136,10 @@ public class ResourceDao {
 				stmt2.executeUpdate();
 			}
 			_con.commit();
+		}catch(SQLException e){
+			//ロールバックして例外を投げなおす
+			_con.rollback();
+			throw e;
 		}finally{
 			try{
 				dbHelper.closeResource(stmt1);
@@ -202,9 +206,16 @@ public class ResourceDao {
 					stmt3.executeUpdate();
 				}
 				_con.commit();
+			}else{
+				//変更件数が1でなければロールバック
+				_con.rollback();
 			}
-
-		}finally{
+		}catch(SQLException e){
+			//ロールバックして例外を投げなおす
+			_con.rollback();
+			throw e;
+		}
+		finally{
 			try{
 				dbHelper.closeResource(stmt1);
 			}catch(Exception e){
@@ -393,6 +404,10 @@ public class ResourceDao {
 		}
 	}
 
+	/**IDの最大値を返す
+	 * @return IDの最大値,リソースがなければnull
+	 * @throws SQLException 取得失敗
+	 */
 	public String getMaxId() throws SQLException{
 		DBHelper dbHelper = new DBHelper();
 		Statement stmt=null;

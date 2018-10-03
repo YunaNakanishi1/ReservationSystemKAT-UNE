@@ -21,7 +21,7 @@
 
 <div class="contents">
 <h2>ダミーページ（予約一覧）</h2>
-<form action="/ReservationSystemKAT-UNE/reservesystem/resourcelist" method="get">
+<form action="/ReservationSystemKAT-UNE/reservesystem/resourcelist" method="post">
 <input type="submit" name="reserveList" value="リソース一覧">
 </form>
 </div>
