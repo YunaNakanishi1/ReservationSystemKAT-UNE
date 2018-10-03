@@ -404,6 +404,10 @@ public class ResourceDao {
 		}
 	}
 
+	/**IDの最大値を返す
+	 * @return IDの最大値,リソースがなければnull
+	 * @throws SQLException 取得失敗
+	 */
 	public String getMaxId() throws SQLException{
 		DBHelper dbHelper = new DBHelper();
 		Statement stmt=null;

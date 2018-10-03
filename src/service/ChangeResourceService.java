@@ -5,6 +5,10 @@ import java.sql.SQLException;
 import dao.ResourceDao;
 import dto.Resource;
 
+/**リソースの変更を行う.
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ */
 public class ChangeResourceService implements Service{
 	private String _validationMessage;
 	private Resource _inputResource;
@@ -18,6 +22,9 @@ public class ChangeResourceService implements Service{
 		_inputResource = resource;
 	}
 
+	/* 機能に依存するバリデーションチェックを行う.
+	 * @see service.Service#validate()
+	 */
 	@Override
 	public boolean validate() {
 		ServiceValidator serviceValidator = new ServiceValidator();
@@ -28,6 +35,9 @@ public class ChangeResourceService implements Service{
 		return validate;
 	}
 
+	/* リソース情報を変更する.
+	 * @see service.Service#execute()
+	 */
 	@Override
 	public void execute() throws SQLException {
 		ResourceDao resourceDao = new ResourceDao();
