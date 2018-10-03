@@ -12,6 +12,7 @@ public class RegistResourceService implements Service {
 	private int _result;
 	private String _resourceId;
 	private Resource _resultResource;
+	private static final int NUMBER_LENGTH=9;
 
 	public RegistResourceService(Resource resource) {
 		super();
@@ -36,6 +37,8 @@ public class RegistResourceService implements Service {
 
 		int maxIdInt=0;
 
+		//idがnullではないとき
+		//rを取り除く、int型に変換する
 		if(maxId!=null){
 		String maxIdNumber = maxId.replace("r", "");
 		maxIdInt = Integer.parseInt(maxIdNumber);
@@ -45,7 +48,7 @@ public class RegistResourceService implements Service {
 		String idNumber=Integer.toString(maxIdInt);
 
 		// 最大桁に対して桁数が残っているか調べる
-		int remainingLength = 9 - idNumber.length();
+		int remainingLength = NUMBER_LENGTH - idNumber.length();
 		if (remainingLength <= 0) {
 			_resourceId = null;
 			return;

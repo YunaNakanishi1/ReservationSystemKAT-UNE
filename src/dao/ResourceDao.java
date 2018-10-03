@@ -95,6 +95,14 @@ public class ResourceDao {
 		return resourceList;
 	}
 
+
+	/**
+	 * リソース登録の処理を行う.
+	 *
+	 * @param resource 入力情報
+	 * @return　登録件数
+	 * @throws SQLException　登録の失敗
+	 */
 	public int regist(Resource resource) throws SQLException {
 		int result = 0;
 		DBHelper dbHelper = new DBHelper();
@@ -109,6 +117,7 @@ public class ResourceDao {
 				throw new SQLException();
 			}
 			_con.setAutoCommit(false);
+			//リソーステーブルへの登録
 			stmt1=_con.prepareStatement(sql1);
 			stmt1.setString(1, resource.getResourceId());
 			stmt1.setString(2, resource.getResourceName());
@@ -119,6 +128,7 @@ public class ResourceDao {
 			stmt1.setTimestamp(7, resource.getUsageStopStartDate());
 			stmt1.setTimestamp(8, resource.getUsageStopEndDate());
 			result=stmt1.executeUpdate();
+			//リソース特性対応テーブル（設備）への登録
 			stmt2=_con.prepareStatement(sql2);
 			stmt2.setString(2, resource.getResourceId());
 			for(String facilityElement:resource.getFacility()){
@@ -144,6 +154,11 @@ public class ResourceDao {
 		return result;
 	}
 
+	/**
+	 * @param resource 入力情報
+	 * @return 変更した件数
+	 * @throws SQLException 変更に失敗した場合
+	 */
 	public int change(Resource resource) throws SQLException{
 		int result = 0;
 		DBHelper dbHelper = new DBHelper();
@@ -161,6 +176,7 @@ public class ResourceDao {
 				throw new SQLException();
 			}
 			_con.setAutoCommit(false);
+			//リソーステーブルの変更
 			stmt1=_con.prepareStatement(sql1);
 			stmt1.setString(8, resource.getResourceId());
 			stmt1.setString(1, resource.getResourceName());
@@ -171,6 +187,10 @@ public class ResourceDao {
 			stmt1.setTimestamp(6, resource.getUsageStopStartDate());
 			stmt1.setTimestamp(7, resource.getUsageStopEndDate());
 			result=stmt1.executeUpdate();
+
+			//リソーステーブルの変更に成功した場合
+			//stmt2 リソース特性対応テーブルの削除を行う
+			//stmt3 リソース特性対応テーブルの登録を行う
 			if (result == 1) {
 				stmt2=_con.prepareStatement(sql2);
 				stmt2.setString(1, resource.getResourceId());
