@@ -95,7 +95,7 @@
 </c:if>
 <br>
 
-<a class="dialog" href = "resourcelist" method="post">一覧に戻る</a>
+<a class="dialog" href = "/ReservationSystemKAT-UNE/reservesystem/resourcelist" method="get">一覧に戻る</a>
 
 </div>
 
