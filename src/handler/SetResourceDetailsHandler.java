@@ -32,6 +32,11 @@ public class SetResourceDetailsHandler implements Handler {
 	private String _type;
 	private Logger _log = LogManager.getLogger();
 
+	/* (非 Javadoc)
+	 * @see handler.Handler#handleService(javax.servlet.http.HttpServletRequest)
+	 * _typeフィールドの内容に従って、新規登録処理と変更処理を分ける。
+	 *
+	 */
 	@Override
 	public String handleService(HttpServletRequest request) {
 		_request = request;
@@ -40,11 +45,13 @@ public class SetResourceDetailsHandler implements Handler {
 		HttpSession session = request.getSession(false);
 		int authority = (int) session.getAttribute("authority");
 
-		if (authority == 0) {
+
+		if (authority == 0) {//0:管理者 1:一般利用者
+
 			// 表示する内容があることを示す
 			request.setAttribute("hasResourceData", true);
 
-			// 機能に依存しないバリデーションチェック
+			// 新規登録処理と変更処理のどちらも同じバリデーションチェックを行う。
 			if (precheck()) {
 				// typeの値に応じて登録、変更を行う
 				if ("regist".equals(_type)) {
@@ -65,7 +72,13 @@ public class SetResourceDetailsHandler implements Handler {
 	}
 
 	/**
-	 * 入力内容の取得と機能に依存しないバリデーションチェック.
+	 * 入力画面再表示用に値をセットし、正しい形式で入力チェックを行い、_resourceフィールドにセットするメソッド.
+	 * 以下に処理の流れを示す。
+	 *
+	 * 1.入力画面で入力された内容を再表示するためにSetAttributeする。
+	 * 2.バリデーションチェック。チェックに引っかかる場合はfalseを返す
+	 * 3.バリデーションが通る場合、_resourceフィールドにインスタンスを生成
+	 * 4.trueを返す
 	 *
 	 * @return チェック結果
 	 */
