@@ -160,25 +160,5 @@ public class ResourceDaoTest {	//完了！！
 		assertThat(resource,nullValue());
 	}
 
-
-	@Test
-	public void test4_1() throws SQLException {
-		ResourceDao resourceDao = new ResourceDao();
-		List<String> list = new ArrayList<String>();
-		list.add("ホワイトボード有");
-		String spl = "";
-		Timestamp uss = null;
-		Timestamp use = null;
-		Timestamp uss2 =Timestamp.valueOf("2018-09-11 10:00:00");
-		Timestamp use2 =Timestamp.valueOf("2018-09-11 11:00:00");
-
-		//Resource resource = new Resource("r000000001", "晴海412S", "晴海", "会議室", 10, spl, 0, uss, use, list);
-		//Resource resource = resourceDao.displayDetails(argument);
-
-		//assertThat(resource,nullValue());
-	}
-
-
-
 }
 
