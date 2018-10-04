@@ -38,9 +38,10 @@ public class ShowResourceRegistHandler implements Handler {
 
 		int authority = (int) session.getAttribute("authority");
 
+		//リソース管理者
 		if (authority == 0) {
 
-			//登録か、変更かを取得
+			//登録か、変更かtypeを取得
 			String type = request.getParameter("type");
 			request.setAttribute("type", type);
 
@@ -107,6 +108,7 @@ public class ShowResourceRegistHandler implements Handler {
 					request.setAttribute("officeList", officeList);
 					request.setAttribute("facilityList", facilityList);
 					return RESOURCE_REGIST;
+
 				} catch (SQLException e) {
 					_log.error("SQLException");
 					return ERROR_PAGE;
