@@ -19,6 +19,7 @@ import org.apache.logging.log4j.Logger;
 import dto.Resource;
 
 /**
+ * resourcesテーブルを扱うdaoクラス.
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 public class ResourceDao {
@@ -27,10 +28,11 @@ public class ResourceDao {
 	Connection _con = null;
 
 	/**
-	 * リソース全件の一覧を表示するためのDaoメソッド.
+	 * リソース全件の一覧を表示するためのDaoメソッド
 	 *
-	 * @return resourceを返す
-	 */
+     * @return リソースのリスト(リソーステーブルが0件の場合、空のリストを返す）
+     * @throws SQLException データベースに接続できない場合、SQLの実行に失敗した場合
+     */
 	public List<Resource> displayAll() throws SQLException {
 		DBHelper dbHelper = new DBHelper();
 		Statement stmt = null;
@@ -98,6 +100,7 @@ public class ResourceDao {
 
 	/**
 	 * リソース登録の処理を行う.
+	 * 登録できれば１を返すが、失敗するとSQExceptionを発生する
 	 *
 	 * @param resource 入力情報
 	 * @return　登録件数
@@ -159,6 +162,8 @@ public class ResourceDao {
 	}
 
 	/**
+	 * リソースの変更処理を行う.
+     * 登録できれば１を返すが、失敗すると０を返す
 	 * @param resource 入力情報
 	 * @return 変更した件数
 	 * @throws SQLException 変更に失敗した場合
@@ -280,9 +285,10 @@ public class ResourceDao {
 
 	/**
 	 * リソース詳細を表示するために必要なDao.
+	 * リソーステーブルと引数のIDと一致するレコードを取得する
 	 *
-	 * @param resourceId
-	 * @return resourceをリターン
+	 * @param resourceId リソーステーブルのresource_id
+	 * @return リソーステーブルと引数が一致するレコードをResourceとしてリターン　
 	 * @throws SQLException
 	 */
 	public Resource displayDetails(String resourceId) throws SQLException {
@@ -404,7 +410,10 @@ public class ResourceDao {
 		}
 	}
 
-	/**IDの最大値を返す
+	/**
+	 * リソーステーブルの IDの最大値を返す
+	 *
+	 *
 	 * @return IDの最大値,リソースがなければnull
 	 * @throws SQLException 取得失敗
 	 */
