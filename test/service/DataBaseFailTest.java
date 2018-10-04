@@ -68,4 +68,17 @@ public class DataBaseFailTest {
 		checkAuthorityService.execute();
 	}
 
+	/**
+	 * ※データベースを止めた状態でやってみるとうまくいきます.
+	 * {@link service.ShowResourceChangeService#execute()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test(expected =java.sql.SQLException.class)
+	public void ShowResourceChangeServiceTest6() throws SQLException {
+		//fail("まだ実装されていません");
+		ShowResourceChangeService showResourceChangeService
+		= new ShowResourceChangeService("r000000003");
+		showResourceChangeService.execute();
+	}
+
 }
