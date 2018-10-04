@@ -4,9 +4,13 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
+import dto.Resource;
 import dto.User;
 
 public class DataBaseFailTest {	//完了！！
@@ -101,5 +105,19 @@ public class DataBaseFailTest {	//完了！！
 		//fail("まだ実装されていません");
 		OfficeDao od = new OfficeDao();
 		od.officeName();
+	}
+
+
+	@Test
+	public void ResourceDaoChangetest4_9() throws SQLException {
+		ResourceDao resourceDao = new ResourceDao();
+		List<String> list = new ArrayList<String>();
+		list.add("ホワイトボード有");
+		String spl = "";
+		Timestamp uss = null;
+		Timestamp use = null;
+		Resource resource = new Resource("r000000001", "晴海412S", "晴海", "会議室", 10, spl, 0, list, uss, use);
+		resourceDao.change(resource);
+
 	}
 }
