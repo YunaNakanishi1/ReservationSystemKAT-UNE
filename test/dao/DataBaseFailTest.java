@@ -66,4 +66,28 @@ public class DataBaseFailTest {	//完了！！
 		String argument = "r000000003";
 		resourceDao.displayDetails(argument);
 	}
+
+	@Test(expected = SQLException.class)
+	public void facilityDaoTest4() throws SQLException {
+		//fail("まだ実装されていません");
+		FacilityDao fd = new FacilityDao();
+		fd.facility();
+	}
+
+	@Test(expected = SQLException.class)
+	public void categoryDaoTest4() throws SQLException {
+		//fail("まだ実装されていません");
+		CategoryDao fd = new CategoryDao();
+		fd.category();
+	}
+
+	/**
+	 * @throws SQLException
+	 */
+	@Test(expected = SQLException.class)
+	public void officeDaoTest4() throws SQLException {
+		//fail("まだ実装されていません");
+		OfficeDao od = new OfficeDao();
+		od.officeName();
+	}
 }
