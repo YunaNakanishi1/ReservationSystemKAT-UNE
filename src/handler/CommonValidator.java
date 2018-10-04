@@ -1,5 +1,7 @@
-
-
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
+ */
 package handler;
 
 import java.sql.Timestamp;
@@ -8,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
- * @author リコーITソリューションズ株式会社 z00s600124
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  * リソースの入力項目に対して、正しい入力形式であるかをチェックするためのクラス.
  *
