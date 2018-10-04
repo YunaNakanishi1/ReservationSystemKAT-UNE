@@ -67,6 +67,11 @@ public class DataBaseFailTest {	//完了！！
 		resourceDao.displayDetails(argument);
 	}
 
+	/**
+	 * FacilityDaoのデータベース停止テスト
+	 * {@link dao.FacilityDao#facility()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
 	@Test(expected = SQLException.class)
 	public void facilityDaoTest4() throws SQLException {
 		//fail("まだ実装されていません");
@@ -74,6 +79,11 @@ public class DataBaseFailTest {	//完了！！
 		fd.facility();
 	}
 
+	/**
+	 * CategoryDaoのデータベース停止テスト
+	 * {@link dao.CategoryDao#category()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
 	@Test(expected = SQLException.class)
 	public void categoryDaoTest4() throws SQLException {
 		//fail("まだ実装されていません");
