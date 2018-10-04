@@ -1,3 +1,7 @@
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
+ */
 package handler;
 
 import static handler.MessageHolder.*;
@@ -193,11 +197,11 @@ public class SetResourceDetailsHandler implements Handler {
 	 * @return 遷移先のアドレス
 	 */
 	private String regist() {
-	    
+
 	    //try
 		RegistResourceService registResourceService = new RegistResourceService(_resource);
-		
-		
+
+
 		// バリデーションチェック
 		if (registResourceService.validate()) {
 			try {
