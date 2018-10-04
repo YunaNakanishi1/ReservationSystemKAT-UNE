@@ -15,28 +15,27 @@ import dto.Resource;
  */
 public class RegistResourceService implements Service {
 
-	private String _validationMessage;
-	//"ユーザIDは必須入力です"等、画面上に出すメッセージ
+	private String _validationMessage;//"ユーザIDは必須入力です"等、画面上に出すメッセージ
+	private Resource _inputResource; //ResourceのDTOを格納するフィールド
+	private String _resourceId; //リソースIDフィールド
+	private static final int NUMBER_LENGTH=9;//リソースIDは「r+9桁の数字」で構成
 
-	private Resource _inputResource;
-	/*SetResourceDetailsHandlerでRegistResourceServiceコンストラクタ呼び
-	 出し時にもらうResourceのDTOを格納*/
-
-	private int _result; //executeUpdate()の結果、返ってくる数値を格納
-	private String _resourceId; //リソースID
+	private int _result;
+	/*executeUpdate()の結果、返ってくる数値を格納するフィールド
+	  getメソッドで取得可能。Handler側で_resultが1でない時(アップデート失敗時）
+	  はエラーページ飛ばす仕様   */
 
 	private Resource _resultResource;
-	//resourceDaoのdisplayDetails(String)メソッド実行で返ってくるResourceのDTOを格納
-
-	private static final int NUMBER_LENGTH=9;
-	//リソースIDは「r+9桁の数字」で構成
+	//resourceDaoのdisplayDetails(String)メソッド実行で返ってくるResourceのDTOを格納するフィールド
 
 
 
+	//コンストラクタ
 	public RegistResourceService(Resource resource) {
 		super();
 		_inputResource = resource;
 	}
+
 
 
 
@@ -92,7 +91,11 @@ public class RegistResourceService implements Service {
 		   ⇒10桁以上の場合は_resourceIdにnullを格納しメソッドを強制終了。
 		   ※Handler側でリソースIDがnullの場合はエラーページに飛ばす仕様
 
-		4．9桁に満たない数字は0で埋める。
+		4． 4.1 何桁分0埋めするか
+			4.2 0埋め部分の作成
+			4.3「r」と0埋め部分を結合する
+
+		5. 新規最大登録リソースIDの完成
 		*/
 
 
@@ -104,49 +107,60 @@ public class RegistResourceService implements Service {
 
 
 		/* 2．【リソースIDが一件以上データベースに登録されていた(maxId!=null)場合】
-		   ⇒「r」を除いた数字部分のみを数値として、仮新規最大登録リソースIDとする */
+		   ⇒「r」を除いた数字部分のみに＋１した数値を、仮新規最大登録リソースIDとする   */
 		int maxIdInt=0; //仮新規最大登録リソースID
 		if(maxId!=null){
 			String maxIdNumber = maxId.replace("r", "");
 			maxIdInt = Integer.parseInt(maxIdNumber);
 		}
-		/*【リソースIDがデータベースに登録されていない(maxId=null)場合】
-		   ⇒1を仮新規最大登録リソースIDとする  */
-		maxIdInt++;
+		maxIdInt++; //【リソースIDがデータベースに登録されていない(maxId=null)場合】
+					// ⇒1を仮新規最大登録リソースIDとする
 
 
 
-		/*3．仮新規最大登録リソースIDが9桁以内で納まっていることを確認する
+		/* 3．仮新規最大登録リソースIDが9桁以内で納まっていることを確認する
 		  9桁より大きい場合は_resourceIdにnullを格納し、メソッドを強制終了。  */
 
 		//仮新規最大登録リソースIDの桁数を得るために文字列化
 		String idNumber=Integer.toString(maxIdInt);
 		if (NUMBER_LENGTH < idNumber.length()) {
-			_resourceId = null;
+			_resourceId = null; //※Handler側でリソースIDがnullの場合はエラーページに飛ばす仕様
 			return;
 		}
 
 
-		// 4．9桁に満たない数字は0で埋める。
-		// IDの補完する部分を求める
-		// 最大桁に対して桁数が残っているか調べる
+
+
+		/* 4．9桁に満たない数字は0で埋める。
+			4.1 何桁分0埋めするか(9桁 - 仮新規最大登録リソースIDの桁数)  */
 		int remainingLength = NUMBER_LENGTH - idNumber.length();
-		String formerOfResourceId = "";
+
+		 // 4.2 0埋め部分の作成
+		String formerOfResourceId = ""; // 「r」+ 0埋め部分。初期値は空とする
+		// 0をremainingLength回文字列連結することで0埋めを実現
 		for (int i = 0; i < remainingLength; i++) {
 			formerOfResourceId = "0" + formerOfResourceId;
 		}
-		formerOfResourceId = "r" + formerOfResourceId;
-		// 前半部分と数字部分を結合する
-		_resourceId = formerOfResourceId + idNumber;
 
+		 // 4.3「r」と0埋め部分を結合する
+		formerOfResourceId = "r" + formerOfResourceId;
+
+
+		// 5. 新規最大登録リソースIDの完成
+		_resourceId = formerOfResourceId + idNumber; //（「r」+ 0埋め部分）＋ 仮新規最大登録リソースID
+
+
+		/* 6. リソースのDTOを作成し、regist(Resource)メソッド・
+		displayDetails(Resource)メソッドに渡す  */
 		_inputResource = new Resource(_resourceId, _inputResource.getResourceName(), _inputResource.getOfficeName(),
 				_inputResource.getCategory(), _inputResource.getCapacity(), _inputResource.getSupplement(), 0, _inputResource.getFacility(),
 				_inputResource.getUsageStopStartDate(), _inputResource.getUsageStopEndDate());
 
-		_result=resourceDao.regist(_inputResource);
+		_result=resourceDao.regist(_inputResource); //リソース登録をする
 
+		/*リソース詳細に表示するためのリソースDTOを格納
+		  ※ 不慮の書き換えによるデータ変更に備えるため新しく作りなおす	*/
 		_resultResource=resourceDao.displayDetails(_resourceId);
-
 	}
 
 
