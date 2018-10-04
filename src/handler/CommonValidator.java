@@ -70,7 +70,7 @@ public class CommonValidator {
 
     /**
      * 引数のデータが正しい日付であるかを判断するメソッド.
-     * 正しい日付の場合、falseを返却し、_dateフィールドにセットする。
+     * 正しい日付の場合、falseを返却し、_dateフィールドにtimeStamp型でセットする.
      *
      * @param date ユーザから入力される年月日(例："2018/10/03"　"10/03")
      * @param hour ユーザからプルダウンによって選択された時間
@@ -78,37 +78,46 @@ public class CommonValidator {
      * @return　渡されたデータが正しい場合、false 誤りがある場合、true
      */
     protected boolean notDateOn(String date ,String hour,String minute){
-    	//フォーマットパターン（yyyy/MM/dd）を設定する
+    	/*【方針】
+    	 1．入力された日付が「yyyy/MM/dd」形式でチェックした場合に正しいかをチェック
+    	    正しい場合はtimestamp型に日付を変換する
+    	 2．1．の形式が当てはまらない場合、「MM/dd」形式であるならば正しいかをチェック
+    	    ※「MM/dd」形式では、入力された時の年を「yyyy」とする
+    	 */
+
+
+    	/* 「yyyy/MM/dd」形式で正しい日付か	*/
     	SimpleDateFormat inputFormat =new SimpleDateFormat("yyyy/MM/dd");
-    	//入力された日付が正しいかどうかチェックする
-    	inputFormat.setLenient(false);
-    	//フォーマットパターン（yyyy/MM/dd）を設定する
+    	inputFormat.setLenient(false);	//日時解析を厳密に行う
+
     	SimpleDateFormat timestampFormat =new SimpleDateFormat("yyyy-MM-dd");
-    	//入力された日付が正しいかどうかチェックする
-    	timestampFormat.setLenient(false);
+    	timestampFormat.setLenient(false);	//日時解析を厳密に行う
 
     	try{
-    	//【フォーマット通りに入力された場合（yyyy/MM/dd）】
-    	//入力された日付がフォーマット通り（yyyy/MM/dd）だった場合、フィールドにセットする
     		_date=Timestamp.valueOf(timestampFormat.format(inputFormat.parse(date))+" "+hour+":"+minute+":00");
 
-    	}catch(ParseException e){
-    	//【年を省略して入力された場合（MM/dd）】
-    	//※年(yyyy)が入力されていない状態なので、現在時刻で補完する
-    		inputFormat = new SimpleDateFormat("MM/dd");
-    		inputFormat.setLenient(false);
-    	//後ほどyyyyを補完して文字列連結するために頭に「-」をつけたフォーマットにする
-    		timestampFormat =new SimpleDateFormat("-MM-dd");
-    		timestampFormat.setLenient(false);
 
-    	//現在年を取得しyearに代入
+
+    	}catch(ParseException e){
+
+    	/* 「MM/dd」形式で正しい日付か	*/
+    		inputFormat = new SimpleDateFormat("MM/dd");
+    		inputFormat.setLenient(false);	//日時解析を厳密に行う
+
+    	//後ほどyyyyを補完して文字列連結するために頭に「-」をつけたフォーマットを用意
+    		timestampFormat =new SimpleDateFormat("-MM-dd");
+    		timestampFormat.setLenient(false);	//日時解析を厳密に行う
+
+
+
+    	//入力年を補完した状態の日付をフィールドに格納
     		Calendar cal = Calendar.getInstance();
     		int year = cal.get(Calendar.YEAR);
     		try {
 				_date=Timestamp.valueOf(year + timestampFormat.format(inputFormat.parse(date))+" "+hour+":"+minute+":00");
 
-		//入力した日付が正しくない場合、trueを返却する
-			} catch (ParseException e1) {
+
+			} catch (ParseException e1) {	//入力した日付が正しくない場合
 				return true;
 			}
     	}
