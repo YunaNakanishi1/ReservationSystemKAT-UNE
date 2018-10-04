@@ -160,5 +160,16 @@ public class ResourceDaoTest {	//完了！！
 		assertThat(resource,nullValue());
 	}
 
+
+	@Test
+	public void test4_1() throws SQLException {
+		ResourceDao resourceDao = new ResourceDao();
+		//Resource resource = resourceDao.displayDetails(argument);
+
+		//assertThat(resource,nullValue());
+	}
+
+
+
 }
 
