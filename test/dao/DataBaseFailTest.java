@@ -4,6 +4,8 @@ import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
@@ -65,5 +67,23 @@ public class DataBaseFailTest {	//完了！！
 		dao.ResourceDao resourceDao = new dao.ResourceDao();
 		String argument = "r000000003";
 		resourceDao.displayDetails(argument);
+	}
+
+	@Test(expected = SQLException.class)
+	public void test3_5() throws SQLException {
+		//fail("まだ実装されていません");
+		FacilityDao fd = new FacilityDao();
+		List<String> facilityList=new ArrayList<String>();
+		facilityList.add("ホワイトボード有");
+		assertThat(fd.facility().get(0),is(facilityList.get(0)));
+	}
+
+	@Test(expected = SQLException.class)
+	public void test3_6() throws SQLException {
+		//fail("まだ実装されていません");
+		CategoryDao fd = new CategoryDao();
+		List<String> categoryList=new ArrayList<String>();
+		categoryList.add("会議室");
+		assertThat(fd.category().get(0),is(categoryList.get(0)));
 	}
 }
