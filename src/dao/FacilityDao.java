@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
+ * resource_characteristicsテーブルを扱うdaoクラス.
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 public class FacilityDao {
@@ -22,6 +23,12 @@ public class FacilityDao {
 	private Connection _con=null;
 	private static Logger _log = LogManager.getLogger();
 
+	/**
+     * リソース特性を全件取得するメソッド.
+     *
+     * @return 文字列のリスト(リソース特性テーブルが0件の場合、空のリストを返す）
+     * @throws SQLException データベースに接続できない場合、SQLの実行に失敗した場合
+     */
 	public List<String> facility() throws SQLException {
 		List<String> facilityList=new ArrayList<String>();
 		DBHelper dbHelper =new DBHelper();
