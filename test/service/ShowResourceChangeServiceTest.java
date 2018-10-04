@@ -15,7 +15,7 @@ import org.junit.Test;
  *
  *@author リコーITソリューションズ株式会社 KAT-UNE
  */
-public class ShowResourceChangeServiceTest {
+public class ShowResourceChangeServiceTest {	//完了！
 
 	/**
 	 * {@link service.ShowResourceChangeService#validate()} のためのテスト・メソッド。
