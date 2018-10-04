@@ -45,9 +45,12 @@ public class ShowResourceRegistHandler implements Handler {
 			String type = request.getParameter("type");
 			request.setAttribute("type", type);
 
+			//再表示するデータがあるかチェック
+			//登録ボタン押下時には必ずnullで、falseをセット
+			//入力エラーがあった際は、再表示のためにSetRestrueDetailsHandlerでtrueがセットされている
 			Boolean hasResourceData = (Boolean) request.getAttribute("hasResourceData");
 			if (hasResourceData == null) {
-				hasResourceData=false;
+				hasResourceData = false;
 				request.setAttribute("hasResourceData", hasResourceData);
 			}
 
@@ -66,6 +69,7 @@ public class ShowResourceRegistHandler implements Handler {
 						String officeName = (String) request.getAttribute("officeName");
 						List<String> facility = (List<String>) request.getAttribute("facility");
 						CommonValidator commonValidator = new CommonValidator();
+
 						//カテゴリがあるかチェック
 						if (!commonValidator.notSetOn(category)) {
 							if (!categoryList.contains(category)) {
