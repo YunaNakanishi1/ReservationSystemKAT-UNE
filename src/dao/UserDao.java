@@ -24,6 +24,9 @@ public class UserDao {
 
 	/**
 	 * ユーザ認証を行うメソッド.
+	 * ユーザIDとパスワードを持つデータを引数で受け取り、一致したユーザがあればそのレコードを返却する
+	 * 一致しない場合や権限が異常値を持つ場合,nullを返す
+	 *
 	 * @param user 入力されたユーザ情報
 	 * @return returnUser 認証されたユーザ情報. 認証されなかった場合、権限が無い場合null
 	 * @throws SQLException
