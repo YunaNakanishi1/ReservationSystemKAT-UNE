@@ -1,5 +1,5 @@
 /*
- * Copyright© Ricoh IT Solutions Co.,Ltd.
+6 * Copyright© Ricoh IT Solutions Co.,Ltd.
  * All Rights Reserved.
  */
 package dao;
