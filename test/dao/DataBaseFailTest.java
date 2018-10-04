@@ -108,7 +108,7 @@ public class DataBaseFailTest {	//完了！！
 	}
 
 
-	@Test
+	@Test (expected = SQLException.class)
 	public void ResourceDaoChangetest4_9() throws SQLException {
 		ResourceDao resourceDao = new ResourceDao();
 		List<String> list = new ArrayList<String>();
@@ -119,5 +119,19 @@ public class DataBaseFailTest {	//完了！！
 		Resource resource = new Resource("r000000001", "晴海412S", "晴海", "会議室", 10, spl, 0, list, uss, use);
 		resourceDao.change(resource);
 
+	}
+
+
+	@Test (expected = SQLException.class)
+	public void ResourceDaoRegisttest5_5() throws SQLException {
+		ResourceDao resourceDao = new ResourceDao();
+		List<String> list = new ArrayList<String>();
+		list.add("ホワイトボード有");
+		list.add("プロジェクター有");
+		String spl = "";
+		Timestamp uss = null;
+		Timestamp use = null;
+		Resource resource = new Resource("r000000113", "新横浜16F会議室C ", "晴海", "会議室", 112, "A \' or \' A \' = \' A \'", 0, list, uss, use);
+		resourceDao.regist(resource);
 	}
 }
