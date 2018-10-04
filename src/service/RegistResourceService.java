@@ -74,34 +74,60 @@ public class RegistResourceService implements Service {
 		●リソース登録時には登録リソースにIDをシステム内で自動的に振り当てる。
 
 		≪リソース登録時内部処理≫
-		既リソースIDの数字部分の最大値に1を加えたものをリソースIDとして振り当てる
+		・既リソースIDの数字部分の最大値に1を加えたものをリソースIDとして振り当てる
 		⇒既登録リソースIDの最大値が「999999999」(9桁)の場合、新たに登録する
 		リソースIDは「最大値＋１」になるので、「10000000000」(10桁)になってしまう
+		・リソースID数字部分は9桁であるため、9桁に満たない数字は0で埋める。
+		⇒例：000000002
 
+		以上に注意して以下の処理を行う。
+		1．既リソースIDの最大値を取得
+
+		2．【リソースIDが一件以上データベースに登録されていた(maxId!=null)場合】
+		   ⇒「r」を除いた数字部分のみを数値として、仮新規最大登録リソースIDとする
+		   【リソースIDがデータベースに登録されていない(maxId=null)場合】
+		   ⇒1を仮新規最大登録リソースIDとする
+
+		3．仮新規最大登録リソースIDが9桁以内で納まっていることを確認する
+		   ⇒10桁以上の場合は_resourceIdにnullを格納しメソッドを強制終了。
+		   ※Handler側でリソースIDがnullの場合はエラーページに飛ばす仕様
+
+		4．9桁に満たない数字は0で埋める。
 		*/
 
 
-		// 全リソースIDを取得
+
+
+		// 1．既リソースIDの最大値を取得
 		ResourceDao resourceDao = new ResourceDao();
 		String maxId = resourceDao.getMaxId();
 
-		int maxIdInt=0;
 
-		//idがnullではないとき
-		//rを取り除く、int型に変換する
+		/* 2．【リソースIDが一件以上データベースに登録されていた(maxId!=null)場合】
+		   ⇒「r」を除いた数字部分のみを数値として、仮新規最大登録リソースIDとする */
+		int maxIdInt=0; //仮新規最大登録リソースID
 		if(maxId!=null){
 			String maxIdNumber = maxId.replace("r", "");
 			maxIdInt = Integer.parseInt(maxIdNumber);
 		}
+		/*【リソースIDがデータベースに登録されていない(maxId=null)場合】
+		   ⇒1を仮新規最大登録リソースIDとする  */
 		maxIdInt++;
 
+
+
+		/*3．仮新規最大登録リソースIDが9桁以内で納まっていることを確認する
+		  9桁より大きい場合は_resourceIdにnullを格納し、メソッドを強制終了。  */
+
+		//仮新規最大登録リソースIDの桁数を得るために文字列化
 		String idNumber=Integer.toString(maxIdInt);
-
-
 		if (NUMBER_LENGTH < idNumber.length()) {
 			_resourceId = null;
 			return;
 		}
+
+
+		// 4．9桁に満たない数字は0で埋める。
 		// IDの補完する部分を求める
 		// 最大桁に対して桁数が残っているか調べる
 		int remainingLength = NUMBER_LENGTH - idNumber.length();
