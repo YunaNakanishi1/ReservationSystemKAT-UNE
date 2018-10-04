@@ -1,3 +1,5 @@
+
+
 package service;
 
 import static handler.MessageHolder.*;
@@ -6,6 +8,12 @@ import java.sql.Timestamp;
 
 import dto.Resource;
 
+/**
+ * 入力画面で入力されたデータの妥当性をチェックするクラス.
+ *
+ * @author リコーITソリューションズ株式会社 z00s600124
+ *
+ */
 public class ServiceValidator {
 
 
@@ -23,8 +31,10 @@ public class ServiceValidator {
 
 	/**
 	 * 登録・変更時の機能に依存するValidateチェック
-	 * @param resource//ユーザーの入力したリソース情報
-	 * @return
+	 * チェックに引っかかった場合は_validationMessageフィールドにエラーメッセージをセットする.
+	 *
+	 * @param resource  ユーザーの入力したリソース情報
+	 * @return 引数に渡されたデータが全て正しいとき、trueを返す
 	 */
 	public boolean setResourseDetailValidate(Resource resource){
 
