@@ -21,7 +21,9 @@ import service.ChangeResourceService;
 import service.RegistResourceService;
 
 /**
- * リソースの登録、変更を行う.
+ * リソースの登録、変更処理を行うクラス.
+ * _typeフィールドの内容によってどちらの処理を行うかを決める.
+ *
  *
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
@@ -42,6 +44,7 @@ public class SetResourceDetailsHandler implements Handler {
 		_request = request;
 
 		// セッションから権限を取得
+		//管理者でないもののアクセスは許可しない
 		HttpSession session = request.getSession(false);
 		int authority = (int) session.getAttribute("authority");
 
@@ -184,6 +187,8 @@ public class SetResourceDetailsHandler implements Handler {
 
 	/**
 	 * リソースの登録を行う
+	 *リソースが正しく登録されればリソース詳細画面に遷移し、登録した内容が表示される.
+	 *入力に不備があれば、入力画面に戻す
 	 *
 	 * @return 遷移先のアドレス
 	 */
@@ -193,12 +198,13 @@ public class SetResourceDetailsHandler implements Handler {
 		// バリデーションチェック
 		if (registResourceService.validate()) {
 			try {
+			    //登録処理実行.登録できればresultに1が入り、登録できなければSQLExceptionを発生させる。
 				registResourceService.execute();
 				// 登録できた件数を取得する
 				int result = registResourceService.getResult();
 				// 自動生成したIDを取得する
 				String resourceId = registResourceService.getResourceId();
-				// 正しく1件登録できたか、IDが設定されているか調べる
+				// 正しく1件登録できたか、IDを取得できているか調べる
 				if (resourceId == null) {
 					_log.error("resourceId overflow");
 					return ERROR_PAGE;
@@ -206,6 +212,8 @@ public class SetResourceDetailsHandler implements Handler {
 					_log.error("regist failed");
 					return ERROR_PAGE;
 				} else {
+				    //リソース詳細画面を表示するための準備
+				    //必要なデータをセットする
 					Resource resultResource = registResourceService.getResultResource();
 					if ((resultResource.getUsageStopStartDate() != null)
 							&& (resultResource.getUsageStopEndDate() != null)) {
@@ -235,21 +243,27 @@ public class SetResourceDetailsHandler implements Handler {
 	}
 
 	/**
-	 * リソース情報を変更する
-	 *
-	 * @return 遷移先のアドレス
-	 */
+    /**
+     * リソースの変更を行う
+     *リソースが正しく登録されればリソース詳細画面に遷移し、登録した内容が表示される.
+     *入力に不備があれば、入力画面に戻す
+     *
+     * @return 遷移先のアドレス
+     */
 	private String change() {
 		ChangeResourceService changeResourceService = new ChangeResourceService(_resource);
 
 		// バリデーションチェック
 		if (changeResourceService.validate()) {
 			try {
+			    //update処理.登録できればresultに1が入り、できなければ0が入る.
 				changeResourceService.execute();
 				// 変更した件数を取得する
 				int result = changeResourceService.getResult();
 				// 正しく1件登録できているか調べる
 				if (result == 1) {
+				  //リソース詳細画面を表示するための準備
+                    //必要なデータをセットする
 					Resource resultResource = changeResourceService.getResultResource();
 					if ((resultResource.getUsageStopStartDate() != null)
 							&& (resultResource.getUsageStopEndDate() != null)) {
