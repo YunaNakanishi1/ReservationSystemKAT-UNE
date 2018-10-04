@@ -82,6 +82,8 @@ public class DataBaseFailTest {	//完了！！
 	}
 
 	/**
+	 * DataSet1(UT005)のデータ1を使用するテスト
+	 * {@link dao.OfficeDao#officeName()} のためのテスト・メソッド。
 	 * @throws SQLException
 	 */
 	@Test(expected = SQLException.class)
