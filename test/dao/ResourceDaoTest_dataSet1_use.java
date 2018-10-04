@@ -44,9 +44,16 @@ public class ResourceDaoTest_dataSet1_use {	//完了！！
 	}
 
 	@Test
-	public void testDisplayDetails() {
+	public void testDisplayDetails() throws SQLException {
 		//fail("まだ実装されていません");
+		ResourceDao rd = new ResourceDao();
+		List<String> list = new ArrayList<String>();
+		list.add("r000000001");
+
+		assertThat(rd.getMaxId(),is("r000000001"));
 	}
+
+
 
 
 
