@@ -1,64 +1,60 @@
-/**
- * 
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
  */
 package service;
 
+import static org.hamcrest.CoreMatchers.*;
 import static org.junit.Assert.*;
+
+import java.sql.SQLException;
 
 import org.junit.Test;
 
 /**
- * @author z00s600114
  *
+ *@author リコーITソリューションズ株式会社 KAT-UNE
  */
-public class ShowResourceChangeServiceTest {
+public class ShowResourceChangeServiceTest {	//完了！
 
 	/**
 	 * {@link service.ShowResourceChangeService#validate()} のためのテスト・メソッド。
 	 */
 	@Test
 	public void testValidate() {
-		fail("まだ実装されていません");
+		//fail("まだ実装されていません");
 	}
 
 	/**
 	 * {@link service.ShowResourceChangeService#execute()} のためのテスト・メソッド。
+	 * @throws SQLException
 	 */
 	@Test
-	public void testExecute() {
-		fail("まだ実装されていません");
+	public void test1() throws SQLException {
+		//fail("まだ実装されていません");
+		ShowResourceChangeService showResourceChangeService =
+				new ShowResourceChangeService("nothing");
+		showResourceChangeService.execute();
+		assertThat(showResourceChangeService.getResource(),nullValue());
+		assertThat(showResourceChangeService.getCategoryList().size(),is(0));
+		assertThat(showResourceChangeService.getOfficeList().size(),is(0));
+		assertThat(showResourceChangeService.getFacilityList().size(),is(0));
 	}
+
 
 	/**
-	 * {@link service.ShowResourceChangeService#getCategoryList()} のためのテスト・メソッド。
+	 * {@link service.ShowResourceChangeService#execute()} のためのテスト・メソッド。
+	 * @throws SQLException
 	 */
 	@Test
-	public void testGetCategoryList() {
-		fail("まだ実装されていません");
+	public void test2() throws SQLException {
+		//fail("まだ実装されていません");
+		ShowResourceChangeService showResourceChangeService =
+				new ShowResourceChangeService(null);
+		showResourceChangeService.execute();
+		assertThat(showResourceChangeService.getResource(),nullValue());
+		assertThat(showResourceChangeService.getCategoryList().size(),is(0));
+		assertThat(showResourceChangeService.getOfficeList().size(),is(0));
+		assertThat(showResourceChangeService.getFacilityList().size(),is(0));
 	}
-
-	/**
-	 * {@link service.ShowResourceChangeService#getOfficeList()} のためのテスト・メソッド。
-	 */
-	@Test
-	public void testGetOfficeList() {
-		fail("まだ実装されていません");
-	}
-
-	/**
-	 * {@link service.ShowResourceChangeService#getFacilityList()} のためのテスト・メソッド。
-	 */
-	@Test
-	public void testGetFacilityList() {
-		fail("まだ実装されていません");
-	}
-
-	/**
-	 * {@link service.ShowResourceChangeService#getResource()} のためのテスト・メソッド。
-	 */
-	@Test
-	public void testGetResource() {
-		fail("まだ実装されていません");
-	}
-
 }

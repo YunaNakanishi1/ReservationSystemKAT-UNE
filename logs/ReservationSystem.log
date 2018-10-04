@@ -211,3 +211,21 @@
 2018-10-04 15:44:46.188 | [main] | ERROR | dao.ResourceDao | DatabaseConnectError
 2018-10-04 15:44:47.202 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
 2018-10-04 15:44:47.203 | [main] | ERROR | dao.OfficeDao | DatabaseConnectError
+2018-10-04 17:09:26.873 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-10-04 17:09:26.876 | [main] | ERROR | dao.CategoryDao | DatabaseConnectError
+2018-10-04 17:09:27.898 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-10-04 17:09:27.899 | [main] | ERROR | dao.CategoryDao | DatabaseConnectError
+2018-10-04 17:09:28.905 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-10-04 17:09:28.906 | [main] | ERROR | dao.CategoryDao | DatabaseConnectError
+2018-10-04 17:09:33.547 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-10-04 17:09:33.549 | [main] | ERROR | dao.UserDao | DatabaseConnectError
+2018-10-04 17:09:34.569 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-10-04 17:09:34.570 | [main] | ERROR | dao.ResourceDao | DatabaseConnectError
+2018-10-04 17:09:35.582 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-10-04 17:09:35.582 | [main] | ERROR | dao.ResourceDao | DatabaseConnectError
+2018-10-04 17:09:36.593 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-10-04 17:09:36.594 | [main] | ERROR | dao.ResourceDao | DatabaseConnectError
+2018-10-04 17:09:37.602 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-10-04 17:09:37.602 | [main] | ERROR | dao.UserDao | DataBaseAcessError
+2018-10-04 17:09:38.611 | [main] | ERROR | dao.DBHelper | connectDb() SQLException
+2018-10-04 17:09:38.611 | [main] | ERROR | dao.CategoryDao | DatabaseConnectError

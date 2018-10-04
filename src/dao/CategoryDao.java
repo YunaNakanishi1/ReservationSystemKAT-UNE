@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 /**
+ * Categoriesテーブルを扱うdaoクラス.
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 public class CategoryDao {
@@ -23,6 +24,12 @@ public class CategoryDao {
 	private static Logger _log = LogManager.getLogger();
 
 
+	/**
+	 * カテゴリを全件取得するメソッド.
+	 *
+	 * @return 文字列のリスト(カテゴリテーブルが0件の場合、空のリストを返す）
+	 * @throws SQLException データベースに接続できない場合、SQLの実行に失敗した場合
+	 */
 	public List<String> category() throws SQLException {
 		List<String> categoryList=new ArrayList<String>();
 		DBHelper dbHelper =new DBHelper();
