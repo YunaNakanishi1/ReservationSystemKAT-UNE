@@ -134,4 +134,16 @@ public class DataBaseFailTest {	//完了！！
 		Resource resource = new Resource("r000000113", "新横浜16F会議室C ", "晴海", "会議室", 112, "A \' or \' A \' = \' A \'", 0, list, uss, use);
 		resourceDao.regist(resource);
 	}
+
+	/**
+	 * DataSet1(UT002)のデータ1を使用するテスト
+	 * {@link dao.ResourceDao#getMaxId()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test(expected = SQLException.class)
+	public void Test6_4() throws SQLException {
+		//fail("まだ実装されていません");
+		ResourceDao rd = new ResourceDao();
+		rd.getMaxId();
+	}
 }

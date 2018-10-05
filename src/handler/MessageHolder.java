@@ -1,5 +1,13 @@
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
+ */
 package handler;
 
+/**
+*
+*@author リコーITソリューションズ株式会社 KAT-UNE
+*/
 public class MessageHolder {
 	public static final String PM01 = "ログアウトしました";
 	public static final String PM06 = "リソースの登録が完了しました";
@@ -16,7 +24,7 @@ public class MessageHolder {
 	public static final String EM27 = "リソース名は必須入力です";
 	public static final String EM28 = "リソース名は30文字以内で入力してください";
 	public static final String EM30 = "定員は必須入力です";
-	public static final String EM31 = "定員は半角の定数で入力してください";
+	public static final String EM31 = "定員は半角の整数で入力してください";
 	public static final String EM32 = "定員は1～999または0で入力してください";
 	public static final String EM33 = "事業所は必須入力です";
 	public static final String EM34 = "利用停止開始日を入力している場合、 利用停止終了日を入力してください";

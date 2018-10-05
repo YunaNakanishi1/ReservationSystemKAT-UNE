@@ -1,3 +1,7 @@
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
+ */
 package service;
 
 import java.sql.SQLException;
@@ -6,6 +10,11 @@ import org.junit.Test;
 
 import dto.User;
 
+
+/**
+*
+*@author リコーITソリューションズ株式会社 KAT-UNE
+*/
 public class DataBaseFailTest {
 
 
@@ -79,6 +88,19 @@ public class DataBaseFailTest {
 		ShowResourceChangeService showResourceChangeService
 		= new ShowResourceChangeService("r000000003");
 		showResourceChangeService.execute();
+	}
+
+	/**
+	 *
+	 * {@link service.ShowResourceChangeService#execute()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test(expected =java.sql.SQLException.class)
+	public void ShowResourceRegistServiceTest3() throws SQLException {
+		//fail("まだ実装されていません");
+		ShowResourceRegistService showResourceRegistService
+		= new ShowResourceRegistService();
+		showResourceRegistService.execute();
 	}
 
 }

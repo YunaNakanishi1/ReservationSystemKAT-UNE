@@ -30,7 +30,7 @@ public class ResourceDaoTest_dataSet1_use {	//完了！！
 		List<dto.Resource> resourceList = new ArrayList<dto.Resource>();
 		resourceList = resourceDao.displayAll();
 
-		assertThat(resourceList.get(0).getResourceId(),is("r003"));
+		assertThat(resourceList.get(0).getResourceId(),is("r000000003"));
 		assertThat(resourceList.get(0).getResourceName(),is("晴海414L"));
 		assertThat(resourceList.get(0).getCategory(),is("会議室"));
 		assertThat(resourceList.get(0).getOfficeName(),is("晴海"));
@@ -44,18 +44,11 @@ public class ResourceDaoTest_dataSet1_use {	//完了！！
 	}
 
 	@Test
-	public void testDisplayDetails() throws SQLException {
+	public void test6_1() throws SQLException {
 		//fail("まだ実装されていません");
 		ResourceDao rd = new ResourceDao();
-		List<String> list = new ArrayList<String>();
-		list.add("r000000001");
 
-		assertThat(rd.getMaxId(),is("r000000001"));
+		assertThat(rd.getMaxId(),is("r000000003"));
 	}
-
-
-
-
-
 
 }
