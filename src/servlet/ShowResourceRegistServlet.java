@@ -21,7 +21,6 @@ import handler.ShowResourceRegistHandler;
  */
 @WebServlet("/reservesystem/resourceregist")
 public class ShowResourceRegistServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * リソース入力ページやエラーページに遷移する.
