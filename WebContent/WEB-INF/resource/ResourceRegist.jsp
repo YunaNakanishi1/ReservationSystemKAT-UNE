@@ -48,7 +48,7 @@
 <form action="setresource" method="post">
 
 <tr>
-<td class="one" class="dialog"><b>リソース名</b></td>
+<td class="one" class="dialog"><b>リソース名</b><a class="red">　※</a></td>
 
 <td class="right2">
 <input type="text" name="resourceName"
@@ -59,7 +59,7 @@
  </td>
 </tr>
 <tr>
-<td class="dialog"><b>カテゴリ</b></td>
+<td class="dialog"><b>カテゴリ</b><a class="red">　※</a></td>
 <td class="right2">
 <select name ="category">
 <c:forEach var="obj" items="${categoryList}" varStatus="status">
@@ -75,7 +75,7 @@
  </td>
 </tr>
 <tr>
-<td class="dialog"><b>定員</b></td>
+<td class="dialog"><b>定員</b><a class="red">　※</a></td>
 <td class="right2">
 <input type="text" name="capacity"
 <c:if test="${hasResourceData}">
@@ -85,7 +85,7 @@
 </td>
 </tr>
 <tr>
-<td class="dialog"><b>事業所</b></td>
+<td class="dialog"><b>事業所</b><a class="red">　※</a></td>
 <td class="right2">
 <select name ="officeName">
 <c:forEach var="obj" items="${officeList}" varStatus="status">
