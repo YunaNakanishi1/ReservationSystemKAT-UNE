@@ -81,10 +81,6 @@ public class CommonValidaterTest {
 
 	}
 
-	@Test
-	public void testGetNumber() {
-
-	}
 
 	@Test
 	public void testNotDateOn1() throws Exception, IllegalArgumentException, InvocationTargetException {
@@ -110,20 +106,10 @@ public class CommonValidaterTest {
 
 	}
 
+
+
 	@Test
 	public void testNotDateOn3() throws Exception, IllegalArgumentException, InvocationTargetException {
-		CommonValidator commonValidator=new CommonValidator();
-		java.lang.reflect.Method method =CommonValidator.class.getDeclaredMethod("notDateOn", String.class,String.class,String.class);
-
-		method.setAccessible(true);
-		boolean actual=(boolean)method.invoke(commonValidator,"2018/06/31","00","00");
-
-		assertThat(actual,is(true));
-
-	}
-
-	@Test
-	public void testNotDateOn4() throws Exception, IllegalArgumentException, InvocationTargetException {
 		CommonValidator commonValidator=new CommonValidator();
 		java.lang.reflect.Method method =CommonValidator.class.getDeclaredMethod("notDateOn", String.class,String.class,String.class);
 
@@ -135,7 +121,7 @@ public class CommonValidaterTest {
 	}
 
 	@Test
-	public void testNotDateOn5() throws Exception, IllegalArgumentException, InvocationTargetException {
+	public void testNotDateOn4() throws Exception, IllegalArgumentException, InvocationTargetException {
 		CommonValidator commonValidator=new CommonValidator();
 		java.lang.reflect.Method method =CommonValidator.class.getDeclaredMethod("notDateOn", String.class,String.class,String.class);
 
@@ -148,9 +134,5 @@ public class CommonValidaterTest {
 
 
 
-	@Test
-	public void testGetDate() {
-
-	}
 
 }
