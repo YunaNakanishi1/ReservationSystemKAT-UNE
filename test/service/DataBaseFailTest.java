@@ -5,9 +5,12 @@
 package service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 
+import dto.Resource;
 import dto.User;
 
 
@@ -102,5 +105,39 @@ public class DataBaseFailTest {
 		= new ShowResourceRegistService();
 		showResourceRegistService.execute();
 	}
+
+	/**
+	 *
+	 * {@link service.ShowResourceChangeService#execute()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test(expected =java.sql.SQLException.class)
+	public void RegistResouceServiceTest6() throws SQLException {
+		//fail("まだ実装されていません");
+		List<String> list=new ArrayList<String>();
+		Resource resource=new Resource(null,"晴海414L","晴海", "会議室",24,null,0,list,null,null);
+		RegistResourceService service = new RegistResourceService(resource);
+
+
+		 service.execute();
+	}
+
+	/**
+	 *
+	 * {@link service.ShowResourceChangeService#execute()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test(expected =java.sql.SQLException.class)
+	public void ChangeResouceServiceTest6() throws SQLException {
+		//fail("まだ実装されていません");
+		List<String> list=new ArrayList<String>();
+		Resource resource=new Resource(null,"晴海414L","晴海", "会議室",24,null,0,list,null,null);
+		ChangeResourceService service = new ChangeResourceService(resource);
+
+
+		 service.execute();
+	}
+
+
 
 }
