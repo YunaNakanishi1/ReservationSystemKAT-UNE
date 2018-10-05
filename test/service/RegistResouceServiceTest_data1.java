@@ -23,8 +23,19 @@ public class RegistResouceServiceTest_data1 {
 			service.execute();
 			assertThat(service.getResult(),is(1));
 			assertThat(service.getResourceId(),is("r000000001"));
-			Resource Resource=service.getResultResource().get(0)
-			assertThat(service.getResultResource().get(0),is("r000000001"));
+			Resource testResource=service.getResultResource();
+			assertThat(testResource.getResourceId(),is("r000000001"));
+			assertThat(testResource.getResourceName(),is("晴海414L"));
+			assertThat(testResource.getOfficeName(),is("晴海"));
+			assertThat(testResource.getCategory(),is("会議室"));
+			assertThat(testResource.getCapacity(),is(24));
+			assertThat(testResource.getSupplement(),nullValue());
+			assertThat(testResource.getFacility(),is(new ArrayList<String>()));
+			assertThat(testResource.getDeleted(),is(0));
+			assertThat(testResource.getUsageStopStartDate(),nullValue());
+			assertThat(testResource.getUsageStopEndDate(),nullValue());
+
+
 
 
 	}
