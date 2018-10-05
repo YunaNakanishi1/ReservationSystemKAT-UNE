@@ -35,7 +35,6 @@ $(document).ready(function(){
 </script>
 
 
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
     var $setElm = $('.the_number_of_characters_cut');
