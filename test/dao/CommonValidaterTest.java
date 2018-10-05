@@ -12,7 +12,7 @@ import handler.CommonValidator;
 public class CommonValidaterTest {
 
 	@Test
-	public void testNotSetOn1() throws Exception, IllegalArgumentException, InvocationTargetException {
+	public void testNotSetOn1_1() throws Exception, IllegalArgumentException, InvocationTargetException {
 		CommonValidator commonValidator=new CommonValidator();
 		java.lang.reflect.Method method =CommonValidator.class.getDeclaredMethod("notSetOn", String.class);
 
@@ -23,7 +23,7 @@ public class CommonValidaterTest {
 	}
 
 	@Test
-	public void testNotSetOn2() throws Exception, IllegalArgumentException, InvocationTargetException {
+	public void testNotSetOn1_2() throws Exception, IllegalArgumentException, InvocationTargetException {
 		CommonValidator commonValidator=new CommonValidator();
 		java.lang.reflect.Method method =CommonValidator.class.getDeclaredMethod("notSetOn", String.class);
 
@@ -34,7 +34,7 @@ public class CommonValidaterTest {
 	}
 
 	@Test
-	public void testNotSetOn3() throws Exception, IllegalArgumentException, InvocationTargetException {
+	public void testNotSetOn1_3() throws Exception, IllegalArgumentException, InvocationTargetException {
 		CommonValidator commonValidator=new CommonValidator();
 		java.lang.reflect.Method method =CommonValidator.class.getDeclaredMethod("notSetOn", String.class);
 
@@ -46,7 +46,7 @@ public class CommonValidaterTest {
 
 
 	@Test
-	public void testNotNumericOn1() throws Exception, IllegalArgumentException, InvocationTargetException  {
+	public void testNotNumericOn2_1() throws Exception, IllegalArgumentException, InvocationTargetException  {
 		CommonValidator commonValidator=new CommonValidator();
 		java.lang.reflect.Method method =CommonValidator.class.getDeclaredMethod("notNumericOn", String.class);
 
@@ -58,7 +58,7 @@ public class CommonValidaterTest {
 	}
 
 	@Test
-	public void testNotNumericOn2() throws Exception, IllegalArgumentException, InvocationTargetException  {
+	public void testNotNumericOn2_2() throws Exception, IllegalArgumentException, InvocationTargetException  {
 		CommonValidator commonValidator=new CommonValidator();
 		java.lang.reflect.Method method =CommonValidator.class.getDeclaredMethod("notNumericOn", String.class);
 
@@ -70,7 +70,7 @@ public class CommonValidaterTest {
 	}
 
 	@Test
-	public void testNotNumericOn3() throws Exception, IllegalArgumentException, InvocationTargetException  {
+	public void testNotNumericOn2_3() throws Exception, IllegalArgumentException, InvocationTargetException  {
 		CommonValidator commonValidator=new CommonValidator();
 		java.lang.reflect.Method method =CommonValidator.class.getDeclaredMethod("notNumericOn", String.class);
 
@@ -83,7 +83,7 @@ public class CommonValidaterTest {
 
 
 	@Test
-	public void testNotDateOn1() throws Exception, IllegalArgumentException, InvocationTargetException {
+	public void testNotDateOn3_1() throws Exception, IllegalArgumentException, InvocationTargetException {
 		CommonValidator commonValidator=new CommonValidator();
 		java.lang.reflect.Method method =CommonValidator.class.getDeclaredMethod("notDateOn", String.class,String.class,String.class);
 
@@ -95,7 +95,7 @@ public class CommonValidaterTest {
 	}
 
 	@Test
-	public void testNotDateOn2() throws Exception, IllegalArgumentException, InvocationTargetException {
+	public void testNotDateOn3_2() throws Exception, IllegalArgumentException, InvocationTargetException {
 		CommonValidator commonValidator=new CommonValidator();
 		java.lang.reflect.Method method =CommonValidator.class.getDeclaredMethod("notDateOn", String.class,String.class,String.class);
 
@@ -109,7 +109,7 @@ public class CommonValidaterTest {
 
 
 	@Test
-	public void testNotDateOn3() throws Exception, IllegalArgumentException, InvocationTargetException {
+	public void testNotDateOn3_4() throws Exception, IllegalArgumentException, InvocationTargetException {
 		CommonValidator commonValidator=new CommonValidator();
 		java.lang.reflect.Method method =CommonValidator.class.getDeclaredMethod("notDateOn", String.class,String.class,String.class);
 
@@ -121,7 +121,7 @@ public class CommonValidaterTest {
 	}
 
 	@Test
-	public void testNotDateOn4() throws Exception, IllegalArgumentException, InvocationTargetException {
+	public void testNotDateOn3_5() throws Exception, IllegalArgumentException, InvocationTargetException {
 		CommonValidator commonValidator=new CommonValidator();
 		java.lang.reflect.Method method =CommonValidator.class.getDeclaredMethod("notDateOn", String.class,String.class,String.class);
 

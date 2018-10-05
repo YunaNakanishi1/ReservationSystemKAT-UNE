@@ -22,7 +22,7 @@ public class OfficeDaoTest_dataSet2 {
 	 * {@link dao.OfficeDao#officeName()} のためのテスト・メソッド。
 	 */
 	@Test
-	public void testOfficeName() throws SQLException  {
+	public void test2() throws SQLException  {
 //		fail("まだ実装されていません");
 		OfficeDao od = new OfficeDao();
 		List<String> officeList = new ArrayList<String>();

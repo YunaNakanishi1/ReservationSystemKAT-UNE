@@ -23,7 +23,7 @@ public class FacilityDaoTest_dataSet1 {
 	 * @throws SQLException
 	 */
 	@Test
-	public void testFacility() throws SQLException {
+	public void test1() throws SQLException {
 		FacilityDao fd = new FacilityDao();
 		List<String> facilityList=new ArrayList<String>();
 		facilityList.add("ホワイトボード有");
