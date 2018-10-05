@@ -12,7 +12,7 @@ import org.junit.Test;
 public class FacilityDaoTest_dataSet2 {
 
 	@Test
-	public void testFacility() throws SQLException {
+	public void test2() throws SQLException {
 
 		FacilityDao fd = new FacilityDao();
 		List<String> facilityList=new ArrayList<String>();

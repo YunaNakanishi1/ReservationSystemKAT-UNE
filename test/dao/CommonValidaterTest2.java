@@ -13,7 +13,7 @@ public class CommonValidaterTest2 {
 
 
 	@Test
-	public void testNotDateOn1() throws Exception, IllegalArgumentException, InvocationTargetException {
+	public void testNotDateOn3_3_1() throws Exception, IllegalArgumentException, InvocationTargetException {
 		CommonValidator commonValidator=new CommonValidator();
 		java.lang.reflect.Method method =CommonValidator.class.getDeclaredMethod("notDateOn", String.class,String.class,String.class);
 
@@ -22,7 +22,7 @@ public class CommonValidaterTest2 {
 
 		assertThat(actual,is(false));
 	}
-	
-	
+
+
 
 }
