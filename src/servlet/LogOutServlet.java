@@ -17,7 +17,6 @@ import handler.LogOutHandler;
  */
 @WebServlet("/logout")
 public class LogOutServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
 
 	/**
 	 * セッションを破棄し、ログイン画面に飛ばす.
