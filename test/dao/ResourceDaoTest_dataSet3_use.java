@@ -32,4 +32,16 @@ public class ResourceDaoTest_dataSet3_use {	//完了！！
 		assertThat(resourceList.size(),is(0));
 
 	}
+
+	/**
+	 * {@link dao.ResourceDao#getMaxId()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test
+	public void test6_3() throws SQLException {
+		//fail("まだ実装されていません");
+		ResourceDao rd = new ResourceDao();
+
+		assertThat(rd.getMaxId(),is(nullValue()));
+	}
 }

@@ -91,6 +91,10 @@ public class ShowResourceRegistHandler implements Handler {
 								return ERROR_PAGE;
 							}
 						}
+
+						//リソース特性を選択しているチェックボックスにおいて、上から
+						//チェックがついている要素をtrue、ついていない要素をfalseというデータで
+						//リストを作成し、再表示用にセットする
 						List<Boolean> selectedFacility = new ArrayList<Boolean>();
 						for(String facilityElement:facilityList){
 							selectedFacility.add(facility.contains(facilityElement));
