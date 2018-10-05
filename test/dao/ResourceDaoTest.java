@@ -123,8 +123,8 @@ public class ResourceDaoTest {	//完了！！
 		assertThat(resource.getOfficeName(),is("晴海"));
 		assertThat(resource.getCapacity(),is(24));
 		assertThat(resource.getSupplement(),is("新人教育のため占有"));
-		assertThat(resource.getUsageStopStartDate(),is(Timestamp.valueOf("2018-09-11 10:00:00")));
-		assertThat(resource.getUsageStopEndDate(),is(Timestamp.valueOf("2018-09-11 11:00:00")));
+		assertThat(resource.getUsageStopStartDate(),is(Timestamp.valueOf("2018-11-09 10:00:00")));
+		assertThat(resource.getUsageStopEndDate(),is(Timestamp.valueOf("2018-11-09 11:00:00")));
 		assertThat(resource.getDeleted(),is(0));
 		assertThat(resource.getFacility(),is(facility));
 

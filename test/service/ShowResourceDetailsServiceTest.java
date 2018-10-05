@@ -46,11 +46,12 @@ public class ShowResourceDetailsServiceTest {	//完了！！
 
 		List<String> fac = new ArrayList<String>();
 		fac.add("ホワイトボード有");
+		fac.add("プロジェクター有");
 
-		Timestamp uss =Timestamp.valueOf("2018-09-11 10:00:00");
-		Timestamp use =Timestamp.valueOf("2018-09-11 11:00:00");
+		Timestamp uss =Timestamp.valueOf("2018-11-09 10:00:00");
+		Timestamp use =Timestamp.valueOf("2018-11-09 11:00:00");
 
-		assertThat(resource.getResourceId(),is("r003"));
+		assertThat(resource.getResourceId(),is("r000000003"));
 		assertThat(resource.getResourceName(),is("晴海414L"));
 		assertThat(resource.getOfficeName(),is("晴海"));
 		assertThat(resource.getCategory(),is("会議室"));
