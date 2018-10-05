@@ -134,7 +134,6 @@ public class DataBaseFailTest {
 		Resource resource=new Resource(null,"晴海414L","晴海", "会議室",24,null,0,list,null,null);
 		ChangeResourceService service = new ChangeResourceService(resource);
 
-
 		 service.execute();
 	}
 
