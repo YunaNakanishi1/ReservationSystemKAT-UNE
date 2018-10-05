@@ -81,4 +81,17 @@ public class DataBaseFailTest {
 		showResourceChangeService.execute();
 	}
 
+	/**
+	 *
+	 * {@link service.ShowResourceChangeService#execute()} のためのテスト・メソッド。
+	 * @throws SQLException
+	 */
+	@Test(expected =java.sql.SQLException.class)
+	public void ShowResourceRegistServiceTest6() throws SQLException {
+		//fail("まだ実装されていません");
+		ShowResourceRegistService showResourceRegistService
+		= new ShowResourceRegistService();
+		showResourceRegistService.execute();
+	}
+
 }
