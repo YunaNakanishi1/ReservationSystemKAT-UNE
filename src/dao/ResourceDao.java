@@ -330,7 +330,7 @@ public class ResourceDao {
 			}
 
 			final String sql = "select resource_name,office_name,"
-					+ "capacity,usage_stop_start_date,usage_stop_end_date,supplement,category_name,deteted "
+					+ "capacity,usage_stop_start_date,usage_stop_end_date,supplement,category_name,deleted "
 					+ "from resources,offices,categories "
 					+ "where offices.office_id = resources.office_id and categories.category_id=resources.category_id "
 					+ "and resource_id = ?;";
