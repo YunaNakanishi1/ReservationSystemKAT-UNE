@@ -1,3 +1,7 @@
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
+ */
 package service;
 
 import java.sql.SQLException;
@@ -6,6 +10,11 @@ import org.junit.Test;
 
 import dto.User;
 
+
+/**
+*
+*@author リコーITソリューションズ株式会社 KAT-UNE
+*/
 public class DataBaseFailTest {
 
 
