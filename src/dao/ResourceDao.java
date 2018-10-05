@@ -330,7 +330,7 @@ public class ResourceDao {
 			}
 
 			final String sql = "select resource_name,office_name,"
-					+ "capacity,usage_stop_start_date,usage_stop_end_date,supplement,category_name "
+					+ "capacity,usage_stop_start_date,usage_stop_end_date,supplement,category_name,deteted "
 					+ "from resources,offices,categories "
 					+ "where offices.office_id = resources.office_id and categories.category_id=resources.category_id "
 					+ "and resource_id = ?;";
@@ -344,6 +344,7 @@ public class ResourceDao {
 			String resourceName = "";
 			String officeName = "";
 			int capacity = 0;
+			int deleted = 0;//追加
 			String category = "";
 			String supplement = "";
 			Timestamp usageStopStartDate = null;
@@ -362,6 +363,8 @@ public class ResourceDao {
 				resourceName = rs.getString("resource_name");
 				officeName = rs.getString("office_name");
 				capacity = rs.getInt("capacity");
+                deleted = rs.getInt("deleted");//追記
+
 				supplement = rs.getString("supplement");
 				usageStopStartDate = rs.getTimestamp("usage_stop_start_date");
 				usageStopEndDate = rs.getTimestamp("usage_stop_end_date");
@@ -383,7 +386,7 @@ public class ResourceDao {
 					facilityList.add(facility);
 				}
 
-				resource = new Resource(resourceId, resourceName, officeName, category, capacity, supplement, 0,
+				resource = new Resource(resourceId, resourceName, officeName, category, capacity, supplement, deleted,
 						facilityList, usageStopStartDate, usageStopEndDate);
 			}
 
