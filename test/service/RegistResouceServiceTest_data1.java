@@ -34,10 +34,6 @@ public class RegistResouceServiceTest_data1 {
 			assertThat(testResource.getDeleted(),is(0));
 			assertThat(testResource.getUsageStopStartDate(),nullValue());
 			assertThat(testResource.getUsageStopEndDate(),nullValue());
-
-
-
-
 	}
 
 }
