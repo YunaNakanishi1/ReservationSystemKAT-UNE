@@ -55,7 +55,7 @@ public class SetResourceDetailsHandler implements Handler {
 
 		if (authority == 0) {//0:管理者 1:一般利用者
 
-			// 表示する内容があることを示す
+			// 入力に不備があった際、入力欄に再表示する内容があることを示す
 			request.setAttribute("hasResourceData", true);
 
 			//入力の不備をチェック
