@@ -87,7 +87,7 @@ public class DataBaseFailTest {
 	 * @throws SQLException
 	 */
 	@Test(expected =java.sql.SQLException.class)
-	public void ShowResourceRegistServiceTest6() throws SQLException {
+	public void ShowResourceRegistServiceTest3() throws SQLException {
 		//fail("まだ実装されていません");
 		ShowResourceRegistService showResourceRegistService
 		= new ShowResourceRegistService();
