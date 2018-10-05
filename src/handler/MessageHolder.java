@@ -1,5 +1,13 @@
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
+ */
 package handler;
 
+/**
+*
+*@author リコーITソリューションズ株式会社 KAT-UNE
+*/
 public class MessageHolder {
 	public static final String PM01 = "ログアウトしました";
 	public static final String PM06 = "リソースの登録が完了しました";
