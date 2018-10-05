@@ -114,11 +114,20 @@ public class ResourceDao {
 		PreparedStatement stmt2 = null;
 		String sql1 = "INSERT INTO resources VALUES(?,?,(SELECT category_id FROM categories WHERE category_name=?),(SELECT office_id FROM offices WHERE office_name=?),?,?,?,?,0);";
 		String sql2 = "INSERT INTO resource_features VALUES ((SELECT resource_characteristic_id FROM resource_characteristics WHERE resource_characteristic_name=?),?);";
+
+		//引数がnullの場合、SQLを実行できないので、変更した件数0を返す
+        if(resource == null){
+            _log.error("resource is null");
+            return 0;
+        }
+
+		//tryの中に記述されていたので、catch内の処理のロールバックでNullPointerExceptionが発生したため外に出した
+		if(_con==null){
+            _log.error("DatabaseConnectError");
+            throw new SQLException();
+        }
 		try{
-			if(_con==null){
-				_log.error("DatabaseConnectError");
-				throw new SQLException();
-			}
+
 			_con.setAutoCommit(false);
 			//リソーステーブルへの登録
 			stmt1=_con.prepareStatement(sql1);
@@ -179,11 +188,18 @@ public class ResourceDao {
 		String sql1 = "UPDATE resources SET resource_name=?,category_id=(SELECT category_id FROM categories WHERE category_name=?),office_id=(SELECT office_id FROM offices WHERE office_name=?),capacity=?,supplement=?,usage_stop_start_date=?,usage_stop_end_date=? WHERE resource_id=? and deleted=0;";
 		String sql2 = "DELETE FROM resource_features WHERE resource_id=?;";
 		String sql3 = "INSERT INTO resource_features VALUES ((SELECT resource_characteristic_id FROM resource_characteristics WHERE resource_characteristic_name=?),?);";
+		//引数がnullの場合、SQLを実行できないので、変更した件数0を返す
+		if(resource == null){
+            _log.error("resource is null");
+		    return 0;
+		}
+	      //tryの中に記述されていたので、catch内の処理のロールバックでNullPointerExceptionが発生したため外に出した
+		if(_con==null){
+            _log.error("DatabaseConnectError");
+            throw new SQLException();
+        }
 		try{
-			if(_con==null){
-				_log.error("DatabaseConnectError");
-				throw new SQLException();
-			}
+
 			_con.setAutoCommit(false);
 			//リソーステーブルの変更
 			stmt1=_con.prepareStatement(sql1);
@@ -314,7 +330,7 @@ public class ResourceDao {
 			}
 
 			final String sql = "select resource_name,office_name,"
-					+ "capacity,usage_stop_start_date,usage_stop_end_date,supplement,category_name "
+					+ "capacity,usage_stop_start_date,usage_stop_end_date,supplement,category_name,deleted "
 					+ "from resources,offices,categories "
 					+ "where offices.office_id = resources.office_id and categories.category_id=resources.category_id "
 					+ "and resource_id = ?;";
@@ -328,6 +344,7 @@ public class ResourceDao {
 			String resourceName = "";
 			String officeName = "";
 			int capacity = 0;
+			int deleted = 0;//追加
 			String category = "";
 			String supplement = "";
 			Timestamp usageStopStartDate = null;
@@ -346,6 +363,8 @@ public class ResourceDao {
 				resourceName = rs.getString("resource_name");
 				officeName = rs.getString("office_name");
 				capacity = rs.getInt("capacity");
+                deleted = rs.getInt("deleted");//追記
+
 				supplement = rs.getString("supplement");
 				usageStopStartDate = rs.getTimestamp("usage_stop_start_date");
 				usageStopEndDate = rs.getTimestamp("usage_stop_end_date");
@@ -367,7 +386,7 @@ public class ResourceDao {
 					facilityList.add(facility);
 				}
 
-				resource = new Resource(resourceId, resourceName, officeName, category, capacity, supplement, 0,
+				resource = new Resource(resourceId, resourceName, officeName, category, capacity, supplement, deleted,
 						facilityList, usageStopStartDate, usageStopEndDate);
 			}
 

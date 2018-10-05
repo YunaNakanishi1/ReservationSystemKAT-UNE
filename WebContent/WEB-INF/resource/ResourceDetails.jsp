@@ -73,6 +73,7 @@
 <br>
 
 <c:if test="${authority == 0}">
+<c:if test="${resource.deleted == 0}">
 
 
 <table class="table3">
@@ -91,7 +92,7 @@
 </td>
 </tr>
 </table>
-
+</c:if>
 </c:if>
 <br>
 

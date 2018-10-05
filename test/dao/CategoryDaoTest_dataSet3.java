@@ -12,7 +12,7 @@ import org.junit.Test;
 public class CategoryDaoTest_dataSet3 {
 
 	@Test
-	public void test() throws SQLException {
+	public void test3() throws SQLException {
 		CategoryDao fd = new CategoryDao();
 		List<String> categoryList=new ArrayList<String>();
 		categoryList=fd.category();
