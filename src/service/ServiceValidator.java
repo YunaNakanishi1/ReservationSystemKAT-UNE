@@ -1,5 +1,7 @@
-
-
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
+ */
 package service;
 
 import static handler.MessageHolder.*;
