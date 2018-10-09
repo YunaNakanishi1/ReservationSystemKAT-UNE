@@ -14,7 +14,7 @@
 <div class="div">
 <header class="header"><p>会議室・備品予約システム</p>
 <form action="/ReservationSystemKAT-UNE/logout" method="get">
-<c:if test="${userId != null}">
+<c:if test="${authority != null}">
 <input class="logintop" type="submit" value="ログアウト">
 </c:if>
 </form>
