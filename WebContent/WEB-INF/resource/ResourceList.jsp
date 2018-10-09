@@ -79,7 +79,6 @@ $(document).ready(function(){
 <input class="submit" type = "submit" value = "リソース登録">
 </form>
 </c:if>
-<br>
 <!-- リソースが0件の場合は以下を表示しない -->
 <c:if test="${resourceListSize != 0}">
 <table id="design-table" class="table table-striped table-bordered" style="width:90%">
