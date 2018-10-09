@@ -161,7 +161,7 @@ selected
 <select name = "stopStartMinute">
 <c:forEach begin="0" end="5" varStatus="status">
 <option value="<c:out value="${status.index}" />0"
-<c:if test="${hasResourceData && stopStartMinute == status.index+'0' }">
+<c:if test="${hasResourceData && stopStartMinute == (status.index*10) }">
 selected
 </c:if>
 >
@@ -224,7 +224,7 @@ selected
 <select name = "stopEndMinute">
 <c:forEach begin="0" end="5" varStatus="status">
 <option value="<c:out value="${status.index}" />0"
-<c:if test="${hasResourceData && stopEndMinute ==status.index +'0'}">
+<c:if test="${hasResourceData && stopEndMinute ==status.index *10}">
 selected
 </c:if>
 >
