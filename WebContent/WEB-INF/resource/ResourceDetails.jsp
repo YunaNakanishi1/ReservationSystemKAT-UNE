@@ -38,7 +38,12 @@
 </tr>
 <tr>
 <td class="dialog"><b>定員</b></td>
-<td class="right2"><c:out value="${resource.capacity}" /></td>
+<c:choose>
+	<c:when test="${resource.capacity!=0}">
+	<td class="right2"><c:out value="${resource.capacity}" /></td>
+	</c:when>
+	<c:otherwise><td class="right2">×</td></c:otherwise>
+</c:choose>
 </tr>
 <tr>
 <td class="dialog"><b>事業所</b></td>
