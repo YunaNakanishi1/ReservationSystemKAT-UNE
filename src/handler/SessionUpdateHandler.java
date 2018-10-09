@@ -19,10 +19,16 @@ public class SessionUpdateHandler implements Handler{
 
 	@Override
 	public String handleService(HttpServletRequest request) {
-		HttpSession session =request.getSession(false);
+		//旧
+		//HttpSession session =request.getSession(false);
+		HttpSession session =request.getSession(true);
 
-		if(session!=null){
+		//新
+		Object authorityCheck = session.getAttribute("authority");
+		//新
+		if(authorityCheck!=null){
 			String userId=(String)session.getAttribute("userId");
+
 
 			CheckAuthorityService checkAuthorityService =new CheckAuthorityService(userId);
 
@@ -32,11 +38,11 @@ public class SessionUpdateHandler implements Handler{
 
 					int authority = checkAuthorityService.getAuthority();
 
-					//System.out.println(authority);
+					System.out.println(authority);
 
 					if(authority==0||authority==1){
-						request.setAttribute("userId", userId);//session→requestに変更
-						request.setAttribute("authority", authority);//session→requestに変更
+						session.setAttribute("userId", userId);//sessionに変更
+						session.setAttribute("authority", authority);//sessionに変更
 						return null;
 					}else{
                         _log.error("authority is not 0 or 1");
