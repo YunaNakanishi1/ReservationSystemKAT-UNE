@@ -48,14 +48,21 @@ public class CommonValidator {
 	 * @return 半角整数値であればfalse、半角整数値でなければtrue
 	 */
 	protected boolean notNumericOn(String val) {
+		boolean notNumeric=false;
+		Pattern numericPattern;
+		numericPattern=Pattern.compile("^[0-9]+$");
+		Matcher m = numericPattern.matcher(val);
+		notNumeric = !m.find();
 
+		if(!notNumeric){
 		try {
 			_number = Integer.parseInt(val);
 		} catch (NumberFormatException e) {
 			return true;
 		}
+		}
 
-		return false;
+		return notNumeric;
 
 	}
 
