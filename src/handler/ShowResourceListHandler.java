@@ -77,6 +77,8 @@ public class ShowResourceListHandler implements Handler{
         List<String> statusList = new ArrayList<>();
         //現在時刻取得
         Date now = Calendar.getInstance().getTime();
+        System.out.println("now"+now);
+
 
         for (Resource resource : resourceList) {
 
@@ -86,7 +88,10 @@ public class ShowResourceListHandler implements Handler{
             else if(resource.getUsageStopStartDate() == null || resource.getUsageStopEndDate() == null){
                 statusList.add("利用可能");
             }
-            else if(resource.getUsageStopStartDate().after(now) && resource.getUsageStopEndDate().before(now)){
+            //beforeとafterのメソッドを逆にした
+            //旧
+            //else if(resource.getUsageStopStartDate().after(now) && resource.getUsageStopEndDate().before(now)){
+            else if(resource.getUsageStopStartDate().before(now) && resource.getUsageStopEndDate().after(now)){
                 statusList.add("利用停止");
             }else{
                 statusList.add("利用可能");
