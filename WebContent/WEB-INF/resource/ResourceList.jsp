@@ -70,6 +70,7 @@ $(document).ready(function(){
 
 <h2>リソース一覧</h2>
 <p><font color = "blue">${Pmessage}</font></p>
+<p><font color = "red">${Emessage}</font></p>
 <p><a href = "reserveList" method="post">予約一覧に戻る</a></p>
 
 <c:if test="${authority == 0}">
@@ -97,9 +98,14 @@ $(document).ready(function(){
 <c:forEach var="obj" items="${resourceList}" varStatus="status">
 <tr>
 <td><a href = "resourcedetails?resourceId=${obj.resourceId}"><c:out value="${obj.resourceName}" /></a></td>
-<td><c:out value="${obj.officeName}" /></td>
+<td><c:out value="${obj.officeName}事業所" /></td>
 <td><c:out value="${obj.category}" /></td>
-<td><c:out value="${obj.capacity}" /></td>
+<c:choose>
+	<c:when test="${obj.capacity!=0}">
+	<td><c:out value="${obj.capacity}名" /></td>
+	</c:when>
+	<c:otherwise><td>×</td></c:otherwise>
+</c:choose>
 <td  class="the_number_of_characters_cut"><c:out value="${obj.supplement}" /></td>
 <td><c:out value="${statusList[status.count-1]}" /></td>
 </tr>
