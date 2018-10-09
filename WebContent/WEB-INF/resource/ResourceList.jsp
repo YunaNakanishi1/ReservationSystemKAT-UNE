@@ -39,7 +39,7 @@ $(document).ready(function(){
 $(document).ready(function(){
     var $setElm = $('.the_number_of_characters_cut');
     var cutFigure = '30'; // カットする文字数
-    var afterTxt = '…'; // 文字カット後に表示するテキスト
+    var afterTxt = '・・'; // 文字カット後に表示するテキスト
 
     $setElm.each(function(){
         var textLength = $(this).text().length;
