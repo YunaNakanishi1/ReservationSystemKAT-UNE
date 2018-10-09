@@ -23,9 +23,9 @@ public class SessionUpdateHandler implements Handler{
 		//HttpSession session =request.getSession(false);
 		HttpSession session =request.getSession(true);
 
-
+		//新
 		Object authorityCheck = session.getAttribute("authority");
-
+		//新
 		if(authorityCheck!=null){
 			String userId=(String)session.getAttribute("userId");
 
