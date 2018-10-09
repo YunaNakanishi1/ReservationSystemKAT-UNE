@@ -100,7 +100,7 @@ public class ShowResourceChangeHandler implements Handler {
 						request.setAttribute("stopStartDay", format.format(stopStartDate));
 						request.setAttribute("stopEndDay", format.format(stopEndDate));
 
-						format = new SimpleDateFormat("hh");
+						format = new SimpleDateFormat("HH");
 						request.setAttribute("stopStartHour", format.format(stopStartDate));
 						request.setAttribute("stopEndHour", format.format(stopEndDate));
 
