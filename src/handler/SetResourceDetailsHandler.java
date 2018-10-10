@@ -225,7 +225,7 @@ public class SetResourceDetailsHandler implements Handler {
 					if ((resultResource.getUsageStopStartDate() != null)
 							&& (resultResource.getUsageStopEndDate() != null)) {
 						// 利用停止期間をフォーマットに即して変換してセット
-						String format = "yyyy/MM/dd　H時m分";
+						String format = "yyyy/MM/dd　HH:mm";
 						String stopStartDate = new SimpleDateFormat(format)
 								.format(resultResource.getUsageStopStartDate());
 						String stopEndDate = new SimpleDateFormat(format).format(resultResource.getUsageStopEndDate());
@@ -275,7 +275,7 @@ public class SetResourceDetailsHandler implements Handler {
 					if ((resultResource.getUsageStopStartDate() != null)
 							&& (resultResource.getUsageStopEndDate() != null)) {
 						// 利用停止期間をフォーマットに即して変換してセット
-						String format = "yyyy/MM/dd　H時m分";
+						String format = "yyyy/MM/dd　HH:mm";
 						String stopStartDate = new SimpleDateFormat(format)
 								.format(resultResource.getUsageStopStartDate());
 						String stopEndDate = new SimpleDateFormat(format).format(resultResource.getUsageStopEndDate());
