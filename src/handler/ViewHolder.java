@@ -1,5 +1,10 @@
 package handler;
 
+/**
+ * フォワード先をまとめたクラス.
+ * @author z00h230741
+ *
+ */
 public class ViewHolder {
 
 

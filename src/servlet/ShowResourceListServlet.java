@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import handler.ShowResourceListHandler;
 
 /**
- * Servlet implementation class ShowResourceListServlet
+ * リソース一覧画面に遷移するサーブレット.
+ *  @author リコーITソリューションズ株式会社 KAT-UNE
+ *
  */
 @WebServlet("/reservesystem/resourcelist")
 public class ShowResourceListServlet extends HttpServlet {

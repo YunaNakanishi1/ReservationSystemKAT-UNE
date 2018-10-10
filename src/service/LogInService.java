@@ -7,6 +7,12 @@ import java.sql.SQLException;
 import dao.UserDao;
 import dto.User;
 
+
+/**
+ * 入力されたユーザ情報の入力チェック、データベースのユーザテーブルで一致するユーザを得るサービス.
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ */
 public class LogInService implements Service {
 
 	private String _validationMessage;

@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ShowReservationListServlet
+ * 予約一覧に遷移するサーブレット.
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 @WebServlet("/reservesystem/reserveList")
 public class ShowReservationListServlet extends HttpServlet {
