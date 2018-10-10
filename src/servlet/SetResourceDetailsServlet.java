@@ -1,3 +1,7 @@
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
+ */
 package servlet;
 
 import java.io.IOException;
@@ -13,8 +17,9 @@ import handler.Handler;
 import handler.SetResourceDetailsHandler;
 
 /**
- * Servlet implementation class SetResourceDetailsServlet
- */
+* 登録ボタンが押された時にリソース詳細に飛ばすサーブレット.
+* @author リコーITソリューションズ株式会社 KAT-UNE
+*/
 @WebServlet("/reservesystem/setresource")
 public class SetResourceDetailsServlet extends HttpServlet {
 

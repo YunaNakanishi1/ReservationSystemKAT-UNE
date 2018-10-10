@@ -1,9 +1,20 @@
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
+ */
 package service;
 
 import java.sql.SQLException;
 
 import dao.ResourceDao;
 
+
+/**
+*
+* 権限削除処理を行うサービス.
+* @author リコーITソリューションズ株式会社 KAT-UNE
+*
+*/
 public class DeleteResourceService implements Service{
 
 	private String _resourceId;    //削除したいリソースId

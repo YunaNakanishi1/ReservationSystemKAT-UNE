@@ -1,9 +1,20 @@
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
+ */
 package service;
 
 import java.sql.SQLException;
 
 import dao.UserDao;
 
+
+/**
+*
+* 権限の取得を行うサービス.
+* @author リコーITソリューションズ株式会社 KAT-UNE
+*
+*/
 public class CheckAuthorityService implements Service{
 	private String _userId;
 	private int _authority;

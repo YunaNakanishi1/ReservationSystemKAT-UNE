@@ -1,3 +1,7 @@
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
+ */
 package handler;
 
 
@@ -14,6 +18,11 @@ import org.apache.logging.log4j.Logger;
 
 import service.DeleteResourceService;
 
+/**
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ * 削除ボタンが押された時の処理を行うためのクラス.
+ *
+ */
 public class DeleteResourceHandler implements Handler {
 	private static Logger _log = LogManager.getLogger();
 

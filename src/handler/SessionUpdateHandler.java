@@ -1,3 +1,7 @@
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
+ */
 package handler;
 
 import static handler.MessageHolder.*;
@@ -13,6 +17,13 @@ import org.apache.logging.log4j.Logger;
 
 import service.CheckAuthorityService;
 
+
+/**
+*
+* セッションの有無を調べるハンドラ.
+* @author リコーITソリューションズ株式会社 KAT-UNE
+*
+*/
 public class SessionUpdateHandler implements Handler{
 
     private static Logger _log = LogManager.getLogger();
