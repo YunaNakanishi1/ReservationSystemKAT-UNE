@@ -84,6 +84,12 @@
 </td>
 </tr>
 <tr>
+<td></td>
+<td class="right2">
+※定員がないものは0と入力
+</td>
+</tr>
+<tr>
 <td class="dialog"><b>事業所</b><a class="red">　※</a></td>
 <td class="right2">
 <select name ="officeName">
