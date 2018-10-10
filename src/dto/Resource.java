@@ -8,6 +8,8 @@ import java.sql.Timestamp;
 import java.util.List;
 
 /**
+ *
+ * データベースのリソース情報を格納するクラス.
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
