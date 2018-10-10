@@ -11,6 +11,8 @@ import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
 /**
+ * 文字のエンコード設定を行うクラス.
+ * 全てのサーブレットの前に適用される.
  * Servlet Filter implementation class EncodingFilter
  */
 @WebFilter("/*")
