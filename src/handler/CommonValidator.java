@@ -48,6 +48,9 @@ public class CommonValidator {
 	 * @return 半角整数値であればfalse、半角整数値でなければtrue
 	 */
 	protected boolean notNumericOn(String val) {
+	    if(val==null){
+	       return true;
+	    }
 		boolean notNumeric=false;
 		Pattern numericPattern;
 		numericPattern=Pattern.compile("^[0-9]+$");
