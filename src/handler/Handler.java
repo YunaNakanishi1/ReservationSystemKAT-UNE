@@ -2,6 +2,11 @@ package handler;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * mvcにおけるHandlerパッケージの抽象クラス.
+ * @author リコーITソリューションズ株式会社 z00s600124
+ *
+ */
 public interface Handler {
 
     /**

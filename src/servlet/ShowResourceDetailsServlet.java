@@ -14,6 +14,11 @@ import handler.ShowResourceDetailsHandler;
 /**
  * Servlet implementation class ShowResourceDetailsServlet
  */
+/**
+ * リソース一覧画面からリソース名を選択したときに呼ばれ、リソース詳細画面に遷移させるサーブレット.
+ * @author リコーITソリューションズ株式会社 z00s600124
+ *
+ */
 @WebServlet("/reservesystem/resourcedetails")
 public class ShowResourceDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

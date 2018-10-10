@@ -14,6 +14,12 @@ import org.apache.logging.log4j.Logger;
 
 import dto.Resource;
 import service.ShowResourceListService;
+/**
+ *
+ * リソース一覧画面の表示に関するhandlerクラス
+ * @author リコーITソリューションズ株式会社 z00s600124
+ *
+ */
 public class ShowResourceListHandler implements Handler{
 
     private static Logger _log = LogManager.getLogger();

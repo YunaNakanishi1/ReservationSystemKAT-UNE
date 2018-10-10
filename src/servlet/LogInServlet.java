@@ -15,6 +15,11 @@ import handler.LogInHandler;
 /**
  * Servlet implementation class LogInServlet
  */
+/**
+ * ログイン画面でログインボタンを押下された際に呼び出されるサーブレット.
+ * @author リコーITソリューションズ株式会社 z00s600124
+ *
+ */
 @WebServlet("/login")
 public class LogInServlet extends HttpServlet {
 
