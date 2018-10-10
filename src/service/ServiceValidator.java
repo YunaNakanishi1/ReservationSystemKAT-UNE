@@ -66,13 +66,13 @@ public class ServiceValidator {
 
         //利用停止開始日時が記入されて、利用停止終了日時が記入されていない場合をはじく
         if(stopStartDate!=null&&stopEndDate==null){
-            _validationMessage=EM34;
+            _validationMessage=EM35;
             return false;
         }
 
         //利用停止終了日時が記入されて、利用停止開始日時が記入されていない場合、falseを返す
         if(stopStartDate==null&&stopEndDate!=null){
-            _validationMessage=EM35;
+            _validationMessage=EM34;
             return false;
         }
 
