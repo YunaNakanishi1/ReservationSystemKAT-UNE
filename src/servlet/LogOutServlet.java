@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import handler.Handler;
 import handler.LogOutHandler;
 
+
 /**
- * Servlet implementation class LogOutServlet
+ * セッションを破棄し、ログイン画面に飛ばすサーブレット.
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
  */
 @WebServlet("/logout")
 public class LogOutServlet extends HttpServlet {

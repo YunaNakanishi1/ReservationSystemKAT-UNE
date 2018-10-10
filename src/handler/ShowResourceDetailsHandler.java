@@ -11,8 +11,15 @@ import org.apache.logging.log4j.Logger;
 import dto.Resource;
 import service.ShowResourceDetailsService;
 
+
+/**
+ *
+ * リソースの詳細表示のためのリソース情報をセットするクラス.
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ */
 public class ShowResourceDetailsHandler implements Handler{
-    private static Logger _log = LogManager.getLogger(); //これはクラス図にはないんですが
+    private static Logger _log = LogManager.getLogger();
 
     @Override
     public String handleService(HttpServletRequest request) {
