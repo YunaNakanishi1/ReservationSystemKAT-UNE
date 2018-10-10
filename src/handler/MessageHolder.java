@@ -18,7 +18,6 @@ public class MessageHolder {
 	public static final String EM04 = "パスワードは必須入力です。";
 	public static final String EM05 = "パスワードは半角英数字で入力してください。";
 	public static final String EM06 = "認証に失敗しました。";
-
 	public static final String EM08 = "検索結果は0件です。";
 	public static final String EM22 = "補足は500文字以内で入力してください。";
 	public static final String EM27 = "リソース名は必須入力です。";
