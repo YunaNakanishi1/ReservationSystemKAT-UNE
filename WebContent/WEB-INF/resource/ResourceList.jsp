@@ -109,7 +109,7 @@ $(document).ready(function(){
 							<tr>
 								<td><a href="resourcedetails?resourceId=${obj.resourceId}"><c:out
 											value="${obj.resourceName}" /></a></td>
-								<td><c:out value="${obj.officeName}事業所" /></td>
+								<td><c:out value="${obj.officeName}" /></td>
 								<td><c:out value="${obj.category}" /></td>
 								<c:choose>
 									<c:when test="${obj.capacity!=0}">
