@@ -17,6 +17,7 @@ import service.ShowResourceListService;
 public class ShowResourceListHandler implements Handler{
 
     private static Logger _log = LogManager.getLogger();
+    private static int SUPPLEMENT_MAX = 30;
 
     @Override
     public String handleService(HttpServletRequest request) {
@@ -69,6 +70,29 @@ public class ShowResourceListHandler implements Handler{
         //権限のあるユーザとないユーザの同時処理
         if(resourceList.size() == 0){
             request.setAttribute("Emessage", "検索結果は0件です。");
+        }
+
+        //補足が30文字を超えた場合、「・・」で省略を行う
+        for (int i=0; i<resourceList.size();i++) {
+            Resource resource = resourceList.get(i);
+            if(resource.getSupplement().length() > SUPPLEMENT_MAX){
+                //先頭の文字を取得して「・・」と連結
+                String shortSupplement = resource.getSupplement().substring(0, SUPPLEMENT_MAX)+"・・";
+
+                //新規にインスタンスを生成してリストと置き換え
+                resource = new Resource(resource.getResourceId(),
+                        resource.getResourceName(),
+                        resource.getOfficeName(),
+                        resource.getCategory(),
+                        resource.getCapacity(),
+                        shortSupplement,
+                        resource.getDeleted(),
+                        resource.getFacility(),
+                        resource.getUsageStopStartDate(),
+                        resource.getUsageStopEndDate());
+
+                resourceList.set(i, resource);
+            }
         }
         request.setAttribute("resourceList", resourceList);
         request.setAttribute("resourceListSize", resourceList.size());
