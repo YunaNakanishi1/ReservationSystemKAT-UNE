@@ -6,6 +6,12 @@ import java.util.List;
 import dao.ResourceDao;
 import dto.Resource;
 
+/**
+ * リソース一覧を表示する.
+ * displayAllの結果をHandlerに渡す.
+ * @author z00h230741
+ *
+ */
 public class ShowResourceListService implements Service{
 
     private List<Resource> _resourcelist;
