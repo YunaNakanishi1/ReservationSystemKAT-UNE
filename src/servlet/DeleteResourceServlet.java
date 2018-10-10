@@ -1,3 +1,7 @@
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
+ */
 package servlet;
 
 import java.io.IOException;
@@ -13,8 +17,9 @@ import handler.DeleteResourceHandler;
 import handler.Handler;
 
 /**
- * Servlet implementation class DeleteResourceServlet
- */
+* リソース詳細画面で削除ボタンが押された時にリソース一覧画面に飛ばすサーブレット.
+* @author リコーITソリューションズ株式会社 KAT-UNE
+*/
 @WebServlet("/reservesystem/deleteresource")
 public class DeleteResourceServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
