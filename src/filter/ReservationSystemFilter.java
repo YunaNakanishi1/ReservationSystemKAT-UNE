@@ -15,8 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import handler.Handler;
 import handler.SessionUpdateHandler;
 
+
 /**
- * Servlet Filter implementation class ReservationSystemFilter
+ *
+ * セッション情報の有無をチェックし、逐次セッションにuserIdとauthorityをセットし直すフィルター
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
  */
 @WebFilter("/reservesystem/*")
 public class ReservationSystemFilter implements Filter {
