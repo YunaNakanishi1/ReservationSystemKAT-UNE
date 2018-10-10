@@ -18,10 +18,6 @@ public class MessageHolder {
 	public static final String EM04 = "パスワードは必須入力です。";
 	public static final String EM05 = "パスワードは半角英数字で入力してください。";
 	public static final String EM06 = "認証に失敗しました。";
-<<<<<<< HEAD
-=======
-	public static final String EM07 = "データベースへの接続に失敗しました。";
->>>>>>> refs/remotes/origin/develop
 	public static final String EM08 = "検索結果は0件です。";
 	public static final String EM22 = "補足は500文字以内で入力してください。";
 	public static final String EM27 = "リソース名は必須入力です。";
@@ -30,13 +26,8 @@ public class MessageHolder {
 	public static final String EM31 = "定員は半角の整数で入力してください。";
 	public static final String EM32 = "定員は1～999または0で入力してください。";
 	public static final String EM33 = "事業所は必須入力です";
-<<<<<<< HEAD
 	public static final String EM34 = "利用停止終了日を入力している場合、 利用停止開始日を入力してください。";
 	public static final String EM35 = "利用停止開始日を入力している場合、 利用停止終了日を入力してください。";
-=======
-	public static final String EM34 = "利用停止開始日を入力している場合、 利用停止終了日を入力してください。";
-	public static final String EM35 = "利用停止終了日を入力している場合、 利用停止開始日を入力してください。";
->>>>>>> refs/remotes/origin/develop
 	public static final String EM36 = "利用停止終了日時は利用停止開始日時より後の日時を入力してください。";
 	public static final String EM37 = "カテゴリ名を選択してください";
 	public static final String EM38 = "日付が正しく入力されていません";
