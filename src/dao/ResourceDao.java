@@ -265,7 +265,7 @@ public class ResourceDao {
 	 *
 	 * @param resourceId 削除したいリソースID
 	 * @return 削除結果（1だと成功）
-	 * @throws SQLException
+	 * @throws SQLException 変更に失敗した場合
 	 */
 	public int delete(String resourceId) throws SQLException {
 		int result = 0;
