@@ -11,8 +11,8 @@
 	</page_setting>
 	<category_index>0</category_index>
 	<zoom>1.0</zoom>
-	<x>41</x>
-	<y>242</y>
+	<x>-4</x>
+	<y>521</y>
 	<default_color>
 		<r>128</r>
 		<g>128</g>
@@ -138,7 +138,7 @@
 			</connections>
 			<display>false</display>
 			<creation_date>2018-09-04 13:23:39</creation_date>
-			<updated_date>2018-10-15 13:37:50</updated_date>
+			<updated_date>2018-10-15 13:43:24</updated_date>
 			<model_property>
 				<name>プロジェクト名</name>
 				<value></value>
@@ -2310,7 +2310,7 @@
 			<width>279</width>
 				<font_name>游ゴシック</font_name>
 				<font_size>9</font_size>
-			<x>120</x>
+			<x>58</x>
 			<y>696</y>
 			<color>
 				<r>128</r>
@@ -2372,13 +2372,13 @@
 			<columns>
 				<normal_column>
 					<id>37</id>
-					<referenced_column>18</referenced_column>
-					<relation>7</relation>
+					<referenced_column>27</referenced_column>
+					<relation>6</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>varchar(n)</type>
+					<type>integer</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
@@ -2406,13 +2406,13 @@
 				</normal_column>
 				<normal_column>
 					<id>38</id>
-					<referenced_column>27</referenced_column>
-					<relation>6</relation>
+					<referenced_column>18</referenced_column>
+					<relation>7</relation>
 					<description></description>
 					<unique_key_name></unique_key_name>
 					<logical_name></logical_name>
 					<physical_name></physical_name>
-					<type>integer</type>
+					<type>varchar(n)</type>
 					<constraint></constraint>
 					<default_value></default_value>
 					<auto_increment>false</auto_increment>
