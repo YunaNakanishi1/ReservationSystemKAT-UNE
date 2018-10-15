@@ -1,5 +1,6 @@
 <html>
 <head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css" />
 	<link rel="stylesheet" href="Slider.css">
@@ -8,12 +9,23 @@
 	<script type="text/javascript" src="Slider.js">	</script>
 
 </head>
+    <body>
 
-<body>
-
-	<div class="box1">
-	<div id="slider-custom"></div>
-	</div>
-
-</body>
+    <div id="slider-area">
+        <div style="float:left;width:100px;margin-left:25px;">
+            <input type="text" id="slider-left-timelabel" class="timelabel" readonly="readonly" style="text-align: left;width:100%"/>
+        </div>
+        <div style="width:250px;float:left;text-align:center;">
+            <input type="text" id="slider-center-timelabel"  class="timelabel" readonly="readonly" style="text-align: center;width:100%"/>
+        </div>
+        <div style="float:right;width:100px;margin-right:25px;">
+            <input type="text" id="slider-right-timelabel"  class="timelabel" readonly="readonly" style="text-align: right;width:100%"/>
+        </div>
+        <br>
+        <div id="slider-box">
+        <div id="slider"></div>
+        </div>
+        <input type="text" id="slider-timelabel" class="timelabel" readonly="readonly" />
+    </div>
+    </body>
 </html>
