@@ -218,12 +218,12 @@ selected
 
 <td><form action = "${returnPage}" method = "get">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
-<input class="submit" type = "submit" value = "戻る"></form>
+<input class="submit dialog2" type = "submit" value = "戻る"></form>
 </td>
 <td>　</td>
 <td>
 <form action="setresource" method="post">
-<input class="submit" class="dialog" type = "submit" value = "検索"></td>
+<input class="submit dialog2" type = "submit" value = "検索"></td>
 </form>
 </tr>
 
