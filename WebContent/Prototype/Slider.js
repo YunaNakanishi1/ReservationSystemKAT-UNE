@@ -1,6 +1,6 @@
-var duration = 10;//1時間
-var start = 0;//午前６時
-var end = 24*60-10;//午前9時
+var duration = 1*60;//1時間
+var start = 6*60;//午前６時
+var end = 9*60;//午前9時
 var handleWidthMin = 15;//つまみの最小幅
 
 //スライダーを生成
@@ -9,7 +9,7 @@ $(function() {
                       value:0,
                       min: 0,
                       max: (end - start - duration),
-                      step: 10,
+                      step: 15,
                       slide: function( event, ui ) {
                       $( "#slider-timelabel" ).val( getSliderTimeStr( ui.value) );
                       }

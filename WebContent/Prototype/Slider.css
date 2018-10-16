@@ -5,23 +5,25 @@
 }
 /*スライダーの幅はこちらのwidthを変更すること。*/
 #slider-box{
-    width:400px;
+    width:470px;
      border:1px solid black;
      padding:2px 4px 2px 2px;
-     margin-left:auto;
+     margin-left:0px;
      margin-right:auto;
+     margin-top:6px;
+
 }
 
 #slider  {
     border:0px;
     width:400px;
-    height:50px;
+    height:30px;
 }
 
 
 #slider .ui-slider-handle {
     width:50px;
-    height:50px;
+    height:30px;
     margin-top:4px;
     margin-left:0px;
 }
