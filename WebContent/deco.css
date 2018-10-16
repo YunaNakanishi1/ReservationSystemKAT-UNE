@@ -128,6 +128,18 @@
 
 
 }
+
+.frame{
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    background: white;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.22);
+    width: 60%;
+    margin: 0 auto;
+    min-height:100%;
+}
+
+
 .scroll{
 	height: 5.5em;  /* 高さを制限(※) */
     overflow: scroll; /* スクロールバーを表示(※) */
