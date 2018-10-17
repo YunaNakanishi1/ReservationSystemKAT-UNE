@@ -53,11 +53,7 @@
 <tr>
 <td class="dialog"><b>利用人数</b></td>
 <td class="right2">
-<input type="text" name="capacity"
-<c:if test="${hasResourceData}">
- value="<c:out value="${capacity}" />"
- </c:if>
- >
+<input type="text" name="capacity">人以上
 </td>
 </tr>
 
