@@ -291,7 +291,7 @@ selected
 							<td>10:00～14:00</td>
 							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室4F"</a></td>
 							<td>20</td>
-							<td>晴海</td>
+							<td>新横浜</td>
 							<td>会議室</td>
 							<td>有</td>
 							</tr>
@@ -300,17 +300,17 @@ selected
 							<td>10:00～14:00</td>
 							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室4F"</a></td>
 							<td>20</td>
-							<td>晴海</td>
+							<td>新横浜</td>
 							<td>会議室</td>
 							<td>有</td>
 							</tr>
 							<tr>
 							<td><input type = "submit" value = "予約"></td>
 							<td>10:00～14:00</td>
-							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室4F"</a></td>
+							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室UCS"</a></td>
 							<td>20</td>
-							<td>晴海</td>
-							<td>会議室</td>
+							<td>新横浜</td>
+							<td>UCS</td>
 							<td>有</td>
 							</tr>
 
