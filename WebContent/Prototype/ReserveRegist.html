@@ -12,6 +12,7 @@
 
 	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="Slider.js">	</script>
+	<script type="text/javascript" src="UserSearch.js">	</script>
 
 </head>
 <body class="body">
@@ -74,31 +75,37 @@
 <tr>
 <td class="one" class="dialog"><b>会議名称</b></td>
 <td class="right2">
-<input type="text" name="meetingName"> (30文字以内)
+<input type="text" name="meetingName" placeholder="名称なし"> (30文字以内)
  </td>
 </tr>
 
 <tr>
 <td class="one" class="dialog"><b>利用人数</b></td>
 <td class="right2">
-<input type="text" name="usagePeople"> 名
+<input type="text" name="usagePeople" placeholder="半角数字のみ"> 名
  </td>
 </tr>
 
 <tr>
-<td class="one" class="dialog"><b>予約者</b><a class="red">　※</a></td>
+<td class="one" class="dialog"><b class="reserve_name">予約者</b><a class="red">　※</a></td>
 
 <td class="right2">
-理光 太郎 <input class="button" type = "submit" value = "変更">
+理光 太郎 <input class="button" type = "submit" onclick="addSearch('reserve_myself')" value = "変更">
  </td>
 </tr>
 
+<tr id="reserve_myself">
+</tr>
+
 <tr>
-<td class="one" class="dialog"><b>共同予約者</b></td>
+<td class="one" class="dialog"><b class="reserve_name">共同予約者</b></td>
 
 <td class="right2">
----- <input class="button" type = "submit" value = "変更">
+---- <input class="button" type = "submit" onclick="addSearch('reserve_pare')" value = "変更"> <input class="button" type = "submit" value = "クリア">
  </td>
+</tr>
+
+<tr id="reserve_pare">
 </tr>
 
 <tr>
@@ -126,12 +133,18 @@
 
 <table class="table3">
 <tr>
+
 <td>
-<input class="submit" class="dialog" type = "submit" value = "登録"></td>
-<td>　</td>
-<td><form action = "" method = "get">
-<input class="submit" type = "submit" value = "戻る"></form>
+<input class="submit" class="dialog" type = "submit" value = "登録">
 </td>
+<td>　</td>
+
+<td>
+<form action = "" method = "get">
+<input class="submit" type = "submit" value = "リソース選択画面へ">
+</form>
+</td>
+
 </tr>
 </table>
 <br>
