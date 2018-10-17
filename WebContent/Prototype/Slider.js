@@ -37,8 +37,20 @@ function setHandleLength(){
     if(handleWidth < handleWidthMin){
         handleWidth = handleWidthMin;
     }
-
-    $('#slider .ui-slider-handle').css('width',handleWidth+"px");//つまみの幅をセット
+    //window.getComputedStyle($('#slider .ui-slider-handle')[0], '::after').setProperty('padding-right',handleWidth+"px");
+   $('head').append('\
+		   <style>\
+		   #slider .ui-slider-handle::after {\
+		   content: "";\
+		   padding-right:'+handleWidth+'px;\
+		   padding-bottom: 7px;\
+		   border: 1px solid #d3d3d3;\
+		   background: #e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;\
+		   font-weight: normal;\
+		   color: #555;\
+		   }</style>\
+		   ');
+   // $('#slider .ui-slider-handle').attr('data-width',handleWidth+"px");//つまみの幅をセット
     $('#slider').css('width',sliderWidth-handleWidth+"px");//スライダーの幅をセット
 
 }
