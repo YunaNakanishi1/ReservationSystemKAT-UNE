@@ -203,8 +203,14 @@
     margin-left:4em;
 }
 
+/*予約者と共同予約者の幅を固定して、その右に表示される変更ボタンの位置を揃える*/
+.reserve_name{
+	display: inline-block;
+	width:100px;
+}
 
 .the_number_of_characters_cut{
 	/*visibility: hidden;*/
 	min-width:20%;
 }:/
+
