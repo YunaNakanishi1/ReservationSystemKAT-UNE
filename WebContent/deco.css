@@ -145,6 +145,7 @@
 }
 
 .frame{
+	min-width:500px;
     padding: 0.5em 1em;
     margin: 2em 0;
     background: white;
