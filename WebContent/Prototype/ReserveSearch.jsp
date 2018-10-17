@@ -57,21 +57,21 @@ $(document).ready(function(){
 <h2>リソース選択</h2>
 <div class = "frame">
 <p><font color = "red">メッセージ</font></p>
-<table class="table2">
+<table class="table4">
 <tbody>
 
 
 <tr>
-<td class="dialog"><b>利用日</b></td>
+<td class="dialog"><b>利用日</b><a class="red"> ※</a></td>
 <td class="right2">
-<input type="text" name="capacity">
+<input type="text" placeholder="2018/1/1（年は省略可）" name="usageDate">
 </td>
 </tr>
 
 <tr>
-<td class="dialog"><b>利用時間</b></td>
+<td class="dialog"><b>利用時間</b><a class="red"> ※</a></td>
 <td class="right2">
-<select name = "stopStartHour">
+<select name = "usageStartHour">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
@@ -92,20 +92,15 @@ selected
 </c:forEach>
 </select>
 ：
-<select name = "stopStartMinute">
-<c:forEach begin="0" end="5" varStatus="status">
-<option value="<c:out value="${status.index}" />0"
-<c:if test="${hasResourceData && stopStartMinute == (status.index*15) }">
-selected
-</c:if>
->
-<c:out value="${status.index}" />0
-</option>
-</c:forEach>
+<select name = "usageStartMinute">
+<option value="aaa">00</option>
+<option value="aaa">15</option>
+<option value="aaa">30</option>
+<option value="aaa">45</option>
 </select>
 
 ～
-<select name = "stopStartHour">
+<select name = "usageEndHour">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
@@ -126,20 +121,15 @@ selected
 </c:forEach>
 </select>
 ：
-<select name = "stopStartMinute">
-<c:forEach begin="0" end="5" varStatus="status">
-<option value="<c:out value="${status.index}" />0"
-<c:if test="${hasResourceData && stopStartMinute == (status.index*15) }">
-selected
-</c:if>
->
-<c:out value="${status.index}" />0
-</option>
-</c:forEach>
+<select name = "usageEndMinute">
+<option value="aaa">00</option>
+<option value="aaa">15</option>
+<option value="aaa">30</option>
+<option value="aaa">45</option>
 </select>
 
 の中で<br>
-<select name = "stopStartHour">
+<select name = "usageHour">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
@@ -160,16 +150,11 @@ selected
 </c:forEach>
 </select>
 時間
-<select name = "stopStartMinute">
-<c:forEach begin="0" end="5" varStatus="status">
-<option value="<c:out value="${status.index}" />0"
-<c:if test="${hasResourceData && stopStartMinute == (status.index*15) }">
-selected
-</c:if>
->
-<c:out value="${status.index}" />0
-</option>
-</c:forEach>
+<select name = "usageMinute">
+<option value="aaa">00</option>
+<option value="aaa">15</option>
+<option value="aaa">30</option>
+<option value="aaa">45</option>
 </select>
 分利用する
 </td>
@@ -179,18 +164,24 @@ selected
 <tr>
 <td class="dialog"><b>利用人数</b></td>
 <td class="right2">
-<input type="text" name="participants">
+<input type="text" name="participants">人以上
 </td>
 </tr>
 <tr>
-<td class="dialog"><b>事業所</b></td>
+<td class="dialog"><b>リソース名</b></td>
 <td class="right2">
-<select name ="category">
+<input type="text" name="resourceName">
+</td>
+</tr>
+<tr>
+<td class="dialog"><b>事業所／カテゴリ</b></td>
+<td class="right2">
+<select name ="office">
 <option value="aaa" selected>全て</option>
 <option value="aaa">晴海</option>
 <option value="aaa">新横浜</option>
-</select>　
-<b>カテゴリ</b>
+</select>
+／
 <select name ="category">
 <option value="aaa" selected>全て</option>
 <option value="aaa">会議室</option>
@@ -200,14 +191,13 @@ selected
 </tr>
 <tr>
 <td class="dialog"><b>リソース特性</b></td>
-<td><div class="scroll3">
+<td><div class="scroll4">
 <input type="checkbox" name = "facility" value = "ホワイトボード有" />ホワイトボード有<br>
 <input type="checkbox" name = "facility" value = "プロジェクター有" />プロジェクター有<br>
 <input type="checkbox" name = "facility" value = "外部スピーカー有" />外部スピーカー有<br>
 <input type="checkbox" name = "facility" value = "ホワイトボード有" />ホワイトボード有<br>
 <input type="checkbox" name = "facility" value = "プロジェクター有" />プロジェクター有<br>
 
-<c:out value="${obj}" />
 <br>
 </div></td>
 </tr>
@@ -218,12 +208,12 @@ selected
 
 <td><form action = "${returnPage}" method = "get">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
-<input class="submit" type = "submit" value = "戻る"></form>
+<input class="submit dialog2" type = "submit" value = "戻る"></form>
 </td>
 <td>　</td>
 <td>
 <form action="setresource" method="post">
-<input class="submit" class="dialog" type = "submit" value = "検索"></td>
+<input class="submit dialog2" type = "submit" value = "検索"></td>
 </form>
 </tr>
 
@@ -231,8 +221,9 @@ selected
 
 </div>
 <br><br>
+<p><font color = "red">メッセージ</font></p>
 <form action = "">
-<table id="design-table" class="table table-striped table-bordered" style="width: 90%">
+<table id="design-table" class="table table-striped table-bordered" style="width: 90%;">
 					<thead>
 						<tr>
 							<th></th>
