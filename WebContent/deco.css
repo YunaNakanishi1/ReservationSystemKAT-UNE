@@ -165,6 +165,25 @@
     min-height:100%;
 }
 
+.reframe {
+	display:inline-block;
+	min-width:500px;
+    padding: 0.5em 1em;
+    margin: 2em 0;
+    width: 60%;
+    margin: 0 auto;
+    min-height:100%;
+}
+
+.leftside {
+	display:inline-flex;
+	float:left;
+}
+
+.rightside {
+	display:inline-flex;
+	float:right;
+}
 
 .scroll{
 	height: 5.5em;  /* 高さを制限(※) */

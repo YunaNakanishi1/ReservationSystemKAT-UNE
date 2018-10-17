@@ -7,7 +7,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>リソース選択</title>
+<title>予約一覧</title>
 
 <link rel="stylesheet"
 	href="/ReservationSystemKAT-UNE/header_footer.css">
@@ -38,6 +38,9 @@ $(document).ready(function(){
 
 		});
 	  });
+
+
+
 
 </script>
 
@@ -73,17 +76,34 @@ function hyoji1()
 </header>
 <div class="contents">
 <div class="dialog">
-<h2>リソース選択</h2>
+<h2>予約一覧</h2>
+<div class = "reframe">
+<div class = "leftside">
+<form action="newReservation" method="get">
+<input class="submit dialog2" type="submit" value="新規予約">
+</form>
+　
+<form action="newReservation" method="get">
+<input class="submit dialog2" type="submit" value="今すぐ予約">
+</form>
+</div>
+<div class = "rightside">
+<form action="newReservation" method="get">
+<input class="submit dialog2" type="submit" value="リソース一覧">
+</form>
+</div>
+
+</div>
+<br>
 <div class = "frame">
 <p><font color = "red">メッセージ</font></p>
-<form action="setresource" method="post">
 
 <table class="table4">
 <tbody>
 <tr>
 <td class="dialog"><b>利用日</b><a class="red"> ※</a></td>
 <td class="right2">
-<input type="text" placeholder="2018/1/1（年は省略可）" name="usageDate"><font color = "red">×</font>
+<input type="text" placeholder="2018/1/1（年は省略可）" name="usageDate"><font color = "red">×</font> 以降30日間表示
 </td>
 </tr>
 
@@ -147,47 +167,19 @@ selected
 <option value="aaa">45</option>
 </select>
 
-の中で<br>
-<select name = "usageHour">
-<c:forEach begin="0" end="9"  varStatus="status">
-<option value= "0<c:out value="${status.index}"/>"
-<c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
-selected
-</c:if>
->
-0<c:out value="${status.index}"/>
-</option>
-</c:forEach>
-<c:forEach begin="10" end="23"  varStatus="status">
-<option value= "<c:out value="${status.index}"/>"
-<c:if test="${hasResourceData && stopStartHour == status.index }">
-selected
-</c:if>
->
-<c:out value="${status.index}"/>
-</option>
-</c:forEach>
-</select>
-時間
-<select name = "usageMinute">
-<option value="aaa">00</option>
-<option value="aaa">15</option>
-<option value="aaa">30</option>
-<option value="aaa">45</option>
-</select>
-分利用する
-</td>
-<td>
-</tr>
 <tr>
-<td class="dialog"><b>事業所／カテゴリ</b></td>
+<td class="dialog"><b>事業所</b></td>
 <td class="right2">
 <select name ="office">
 <option value="aaa" selected>全て</option>
 <option value="aaa">晴海</option>
 <option value="aaa">新横浜</option>
 </select>
-／
+</td>
+</tr>
+<tr>
+<td class="dialog"><b>カテゴリ</b></td>
+<td class="right2">
 <select name ="category">
 <option value="aaa" selected>全て</option>
 <option value="aaa">会議室</option>
@@ -195,54 +187,16 @@ selected
 </select>
  </td>
 </tr>
-</tbody>
 </table>
 
-<form>
-<input class="submit2 dialog2" type="button" value="もっと詳しく" onclick="hyoji1()">
-</form>
-
-<div id="disp" style="display:none;">
-<table class="table4">
-<tbody>
-<tr>
-<td class="dialog"><b>利用人数</b></td>
-<td class="right2">
-<input type="text" name="participants">人以上
-</td>
-</tr>
-<tr>
-<td class="dialog"><b>リソース名</b></td>
-<td class="right2">
-<input type="text" name="resourceName">
-</td>
-</tr>
-
-<tr>
-<td class="dialog"><b>リソース特性</b></td>
-<td><div class="scroll4">
-<input type="checkbox" name = "facility" value = "ホワイトボード有" />ホワイトボード有<br>
-<input type="checkbox" name = "facility" value = "プロジェクター有" />プロジェクター有<br>
-<input type="checkbox" name = "facility" value = "外部スピーカー有" />外部スピーカー有<br>
-<input type="checkbox" name = "facility" value = "ホワイトボード有" />ホワイトボード有<br>
-<input type="checkbox" name = "facility" value = "プロジェクター有" />プロジェクター有<br>
-
-<br>
-</div></td>
-</tr>
-</table>
-</div>
-<br>
+<input type="checkbox" name="example" value="ownReserve">自分の予約のみ表示　
+<input type="checkbox" name="example" value="pastReserve">過去の予約も表示
+<br><br>
 <table class="table3">
 <tr>
-
-<td><form action = "${returnPage}" method = "get">
-<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
-<input class="submit dialog2" type = "submit" value = "戻る"></form>
-</td>
-<td>　</td>
+<br>
 <td>
-
+<form action="setresource" method="post">
 <input class="submit dialog2" type = "submit" value = "検索"></td>
 </form>
 </tr>
@@ -250,67 +204,42 @@ selected
 </table>
 
 </div>
-
 <br><br>
 <p><font color = "red">メッセージ</font></p>
 <form action = "">
 <table id="design-table" class="table table-striped table-bordered" style="width: 90%;">
 					<thead>
 						<tr>
-							<th></th>
+							<th>利用日</th>
 							<th>利用時間</th>
-							<th>リソース名</th>
-							<th>定員</th>
+							<th>予約名称</th>
+							<th>リソース</th>
 							<th>事業所</th>
 							<th>カテゴリ</th>
-							<th>補足</th>
+							<th>予約者</th>
+							<th>削除</th>
 						</tr>
 					</thead>
 					<tbody>
 							<tr>
-							<td><input type = "submit" value = "予約"></td>
+							<td>2018/10/15（月）</td>
 							<td>13:00～18:00</td>
-							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"晴海412S"</a></td>
-							<td>5</td>
+							<td><a href="xxx">定例会</a></td>
+							<td>晴海412S</td>
 							<td>晴海</td>
 							<td>会議室</td>
-							<td>有</td>
+							<td>高原渉</td>
+							<td>未削除</td>
 							</tr>
 							<tr>
-							<td><input type = "submit" value = "予約"></td>
-							<td>12:00～14:00</td>
-							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"晴海4207"</a></td>
-							<td>25</td>
+							<td>2018/10/15（月）</td>
+							<td>16:00～18:00</td>
+							<td><a href="xxx">定例会</a></td>
+							<td>晴海41L</td>
 							<td>晴海</td>
 							<td>会議室</td>
-							<td>無</td>
-							</tr>
-							<tr>
-							<td><input type = "submit" value = "予約"></td>
-							<td>10:00～14:00</td>
-							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室4F"</a></td>
-							<td>20</td>
-							<td>新横浜</td>
-							<td>会議室</td>
-							<td>有</td>
-							</tr>
-							<tr>
-							<td><input type = "submit" value = "予約"></td>
-							<td>10:00～14:00</td>
-							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室4F"</a></td>
-							<td>20</td>
-							<td>新横浜</td>
-							<td>会議室</td>
-							<td>有</td>
-							</tr>
-							<tr>
-							<td><input type = "submit" value = "予約"></td>
-							<td>10:00～14:00</td>
-							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室UCS"</a></td>
-							<td>20</td>
-							<td>新横浜</td>
-							<td>UCS</td>
-							<td>有</td>
+							<td>理光太郎</td>
+							<td>未削除</td>
 							</tr>
 
 					</tbody>
