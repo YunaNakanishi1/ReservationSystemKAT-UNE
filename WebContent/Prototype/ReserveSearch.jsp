@@ -201,7 +201,7 @@ selected
 </table>
 
 <form>
-<input class="submit dialog2" type="button" value="詳細表示" onclick="hyoji1()">
+<input class="submit2 dialog2" type="button" value="詳細表示" onclick="hyoji1()">
 </form>
 
 <div id="disp" style="display:none;">
