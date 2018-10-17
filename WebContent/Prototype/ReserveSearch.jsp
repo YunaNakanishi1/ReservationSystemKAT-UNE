@@ -43,6 +43,28 @@ $(document).ready(function(){
 
 
 </script>
+
+
+<script>
+
+flag=false;
+function hyoji1()
+{
+  if (flag)
+  {
+    document.getElementById("disp").style.display="none";
+  }
+  else
+  {
+    document.getElementById("disp").style.display="block";
+  }
+  flag = !flag;
+}
+
+</script>
+
+
+
 </head>
 <body class="body">
 <div class="div">
@@ -57,10 +79,9 @@ $(document).ready(function(){
 <h2>リソース選択</h2>
 <div class = "frame">
 <p><font color = "red">メッセージ</font></p>
+
 <table class="table4">
 <tbody>
-
-
 <tr>
 <td class="dialog"><b>利用日</b><a class="red"> ※</a></td>
 <td class="right2">
@@ -160,19 +181,6 @@ selected
 </td>
 <td>
 </tr>
-
-<tr>
-<td class="dialog"><b>利用人数</b></td>
-<td class="right2">
-<input type="text" name="participants">人以上
-</td>
-</tr>
-<tr>
-<td class="dialog"><b>リソース名</b></td>
-<td class="right2">
-<input type="text" name="resourceName">
-</td>
-</tr>
 <tr>
 <td class="dialog"><b>事業所／カテゴリ</b></td>
 <td class="right2">
@@ -189,6 +197,29 @@ selected
 </select>
  </td>
 </tr>
+</tbody>
+</table>
+
+<form>
+<input class="submit2 dialog2" type="button" value="詳細表示" onclick="hyoji1()">
+</form>
+
+<div id="disp" style="display:none;">
+<table class="table4">
+<tbody>
+<tr>
+<td class="dialog"><b>利用人数</b></td>
+<td class="right2">
+<input type="text" name="participants">人以上
+</td>
+</tr>
+<tr>
+<td class="dialog"><b>リソース名</b></td>
+<td class="right2">
+<input type="text" name="resourceName">
+</td>
+</tr>
+
 <tr>
 <td class="dialog"><b>リソース特性</b></td>
 <td><div class="scroll4">
@@ -202,6 +233,7 @@ selected
 </div></td>
 </tr>
 </table>
+</div>
 <br>
 <table class="table3">
 <tr>
@@ -259,8 +291,26 @@ selected
 							<td>10:00～14:00</td>
 							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室4F"</a></td>
 							<td>20</td>
-							<td>晴海</td>
+							<td>新横浜</td>
 							<td>会議室</td>
+							<td>有</td>
+							</tr>
+							<tr>
+							<td><input type = "submit" value = "予約"></td>
+							<td>10:00～14:00</td>
+							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室4F"</a></td>
+							<td>20</td>
+							<td>新横浜</td>
+							<td>会議室</td>
+							<td>有</td>
+							</tr>
+							<tr>
+							<td><input type = "submit" value = "予約"></td>
+							<td>10:00～14:00</td>
+							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室UCS"</a></td>
+							<td>20</td>
+							<td>新横浜</td>
+							<td>UCS</td>
 							<td>有</td>
 							</tr>
 
