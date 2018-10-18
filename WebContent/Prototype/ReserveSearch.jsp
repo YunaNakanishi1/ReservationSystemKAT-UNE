@@ -95,8 +95,6 @@ function hyoji1()
 <td><b>　利用時間</b><a class="red"> ※</a></td>
 <td class="right2"><div class="dialog2">
 
-<td class="dialog"><b>利用時間</b><a class="red"> ※</a></td>
-<td class="right2">
 
 <select name = "usageStartHour">
 <c:forEach begin="0" end="9"  varStatus="status">
