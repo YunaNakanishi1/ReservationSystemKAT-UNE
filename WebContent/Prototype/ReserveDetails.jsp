@@ -60,7 +60,7 @@
 <td class="right2" class="dialog">社内会議</td>
 </tr>
 <tr>
-<td class="dialog"><b>詳細</b></td>
+<td class="dialog"><b>補足</b></td>
 <td class="right2"><div class="scroll2"></div></td>
 </tr>
 </tbody>

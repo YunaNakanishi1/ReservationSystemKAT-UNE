@@ -76,6 +76,7 @@ function hyoji1()
 
 <div class="contents">
 <div class="dialog">
+
 <h2>予約一覧</h2>
 <div class = "reframe">
 <div class = "leftside">
@@ -206,13 +207,20 @@ selected
 
 </table>
 
+
 </div>
+<br><br><br><br><br><br><br>
+
+<div class="silver">　</div>
 <br><br>
 <p><font color = "red">メッセージ</font></p>
+
+</div><!-- diallogとじ -->
+<br>
 <form action = "">
-<table id="design-table" class="table table-striped table-bordered" style="width: 90%;">
+<table id="design-table" class="table table-striped table-bordered" style="width: 90%;" >
 					<thead>
-						<tr>
+						<tr style="background-color: white;">
 							<th>利用日</th>
 							<th>利用時間</th>
 							<th>予約名称</th>
@@ -234,7 +242,7 @@ selected
 							<td>高原渉</td>
 							<td>未削除</td>
 							</tr>
-							<tr>
+							<tr style="background-color: white;">
 							<td>2018/10/15（月）</td>
 							<td>16:00～18:00</td>
 							<td><a href="xxx">定例会</a></td>
@@ -247,19 +255,17 @@ selected
 
 					</tbody>
 				</table>
-				</form>
-</div>
-
+</form>
+<br>
+<br>
 <br>
 
 
-<br>
-
 </div>
-
 
 <div class="footer1" class=><footer class="fotter2">copyright🄫KAT-UNE</footer></div>
-</div>
 
+
+</div>
 </body>
 </html>

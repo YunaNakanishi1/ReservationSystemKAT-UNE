@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -27,11 +26,11 @@
 <p><font color = "red">メッセージ</font></p>
 </div>
 
-<table class="table3">
+<table class="table2">
 <tbody>
 
 <tr>
-<td class="dialog"><b>事業所</b></td>
+<td class="one" class="dialog"><b>　　　　事業所</b></td>
 <td class="right2">
 <select name ="category">
 <option value="aaa" selected>全て</option>
@@ -41,7 +40,7 @@
  </td>
 </tr>
 <tr>
-<td class="dialog"><b>カテゴリ</b></td>
+<td class="dialog"><b>　　　　カテゴリ</b></td>
 <td class="right2">
 <select name ="category">
 <option value="aaa" selected>全て</option>
@@ -51,14 +50,14 @@
  </td>
 </tr>
 <tr>
-<td class="dialog"><b>利用人数</b></td>
+<td class="dialog"><b>　　　　利用人数</b></td>
 <td class="right2">
 <input type="text" name="capacity" placeholder="半角数字のみ">人以上
 </td>
 </tr>
 
 <tr>
-<td class="dialog"><b>利用時間</b></td>
+<td class="dialog"><b>　　　　利用時間</b></td>
 <td class="right2">
 <select name ="category">
 <c:forEach begin="10" end="23"  varStatus="status">
