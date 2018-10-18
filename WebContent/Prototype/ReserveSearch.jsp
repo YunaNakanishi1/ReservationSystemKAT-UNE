@@ -208,7 +208,7 @@ selected
 <tr>
 <td class="dialog"><b>利用人数</b></td>
 <td class="right2">
-<input type="text" name="participants">人以上
+<input type="text" name="participants" placeholder="半角数字のみ">人以上
 </td>
 </tr>
 <tr>

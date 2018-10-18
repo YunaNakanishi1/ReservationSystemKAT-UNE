@@ -53,7 +53,7 @@
 <tr>
 <td class="dialog"><b>利用人数</b></td>
 <td class="right2">
-<input type="text" name="capacity">人以上
+<input type="text" name="capacity" placeholder="半角数字のみ">人以上
 </td>
 </tr>
 
