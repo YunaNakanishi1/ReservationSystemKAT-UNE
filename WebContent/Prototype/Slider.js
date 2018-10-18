@@ -44,8 +44,10 @@ function setHandleLength(){
 		   content: "";\
 		   padding-right:'+handleWidth+'px;\
 		   padding-bottom: 7px;\
-		   border: 1px solid #d3d3d3;\
-		   background: #e6e6e6 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;\
+		   border: 2px solid #4169E1;\
+		   border-right: 4px solid #4169E1;\
+		   border-bottom: 3px solid #4169E1;\
+		   background: #4169E1 url(images/ui-bg_glass_75_e6e6e6_1x400.png) 50% 50% repeat-x;\
 		   font-weight: normal;\
 		   color: #555;\
 		   }</style>\

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -74,6 +73,7 @@ function hyoji1()
 <input class="logintop" type="submit" value="ログアウト">
 </form>
 </header>
+
 <div class="contents">
 <div class="dialog">
 <h2>予約一覧</h2>
@@ -101,14 +101,16 @@ function hyoji1()
 <table class="table4">
 <tbody>
 <tr>
-<td class="dialog"><b>利用日</b><a class="red"> ※</a></td>
+<td class="one" class="dialog"><b>　利用日</b><a class="red"> ※</a></td>
 <td class="right2">
+<div class="dialog2">
 <input type="text" placeholder="2018/1/1（年は省略可）" name="usageDate"><font color = "red">×</font> 以降30日間表示
+</div>
 </td>
 </tr>
 
 <tr>
-<td class="dialog"><b>利用時間</b><a class="red"> ※</a></td>
+<td class="dialog"><b>　利用時間</b><a class="red"> ※</a></td>
 <td class="right2">
 <select name = "usageStartHour">
 <c:forEach begin="0" end="9"  varStatus="status">
