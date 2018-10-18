@@ -270,10 +270,72 @@
 	min-width:20%;
 }
 
-.btn-inner {
-	margin: 0;
-	padding: 0;
-	color: #555;
-	background-color:white;
-	font-size: 16px;
+.btn {
+	 position: relative;
+ 	 padding-top:2px;
+ 	 padding-bottom:2px;
+ 	 padding-left:10px;
+ 	 padding-right:10px;
+ 	 margin-top:2px;
+ 	 border: 2px solid #333;
+ 	 color: #fff;
+ 	 background-color:#333;
+ 	 border-radius: 10px 3px;
+ 	 font-weight:normal;
+}
+.btn:hover {
+    color: #333;
+    background-color:white;
+   	font-weight:900;
+   	border:2px solid #FF1A6F;
+   	letter-spacing: 3px;
+}
+
+.button {	/*変更・クリアボタン*/
+  background-color:#333;
+  opacity:0.8;
+  border: 2px solid #fff;
+  color: #fff;
+  padding-top:2px;
+  padding-bottom:2px;
+  padding-left:10px;
+  padding-right:10px;
+}
+.button:hover {
+  opacity:1;
+  background-color:white;
+  color:#191970;
+  font-weight:bold;
+  border:solid;
+  letter-spacing: 1px;
+}
+
+
+
+.nuime{ /*予約ボタン*/
+	display: block;
+    position: relative;
+    text-decoration: none;
+    height:30px;
+    width: 50px;
+    left:0;
+    right:0;
+    margin:0 auto;
+    text-align: center;
+    color: #fff;
+    background: #2F4F4F;
+    border: dashed 1px rgba(255, 255, 255, 255);
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px #2F4F4F;
+    -webkit-transition: 0.3s;
+    -moz-transition: 0.3s;
+    -o-transition: 0.3s;
+    -ms-transition: 0.3s;
+    transition: 0.3s;
+    opacity: 0.8;
+}
+.nuime:hover{
+  opacity: 1;
+  color: #fff;
+  border: solid 1px #2F4F4F;
 }

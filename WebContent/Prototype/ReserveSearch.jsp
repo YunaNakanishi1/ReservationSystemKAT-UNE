@@ -264,7 +264,7 @@ selected
 
 </div>
 
-<br><br>
+<br><br><br><br><br><br>
 <p><font color = "red">メッセージ</font></p>
 <form action = "">
 <table id="design-table" class="table table-striped table-bordered" style="width: 90%;">
@@ -281,7 +281,7 @@ selected
 					</thead>
 					<tbody>
 							<tr>
-							<td><input type = "submit" value = "予約"></td>
+							<td><input class="nuime" type = "submit" value = "予約"></td>
 							<td>13:00～18:00</td>
 							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"晴海412S"</a></td>
 							<td>5</td>
@@ -290,7 +290,7 @@ selected
 							<td>有</td>
 							</tr>
 							<tr>
-							<td><input type = "submit" value = "予約"></td>
+							<td><input class="nuime" type = "submit" value = "予約"></td>
 							<td>12:00～14:00</td>
 							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"晴海4207"</a></td>
 							<td>25</td>
@@ -299,7 +299,7 @@ selected
 							<td>無</td>
 							</tr>
 							<tr>
-							<td><input type = "submit" value = "予約"></td>
+							<td><input class="nuime"  = "submit" value = "予約"></td>
 							<td>10:00～14:00</td>
 							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室4F"</a></td>
 							<td>20</td>
@@ -308,7 +308,7 @@ selected
 							<td>有</td>
 							</tr>
 							<tr>
-							<td><input type = "submit" value = "予約"></td>
+							<td><input class="nuime" type = "submit" value = "予約"></td>
 							<td>10:00～14:00</td>
 							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室4F"</a></td>
 							<td>20</td>
@@ -317,7 +317,7 @@ selected
 							<td>有</td>
 							</tr>
 							<tr>
-							<td><input type = "submit" value = "予約"></td>
+							<td><input class="nuime" type = "submit" value = "予約"></td>
 							<td>10:00～14:00</td>
 							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室UCS"</a></td>
 							<td>20</td>
