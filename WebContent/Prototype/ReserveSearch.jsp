@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -71,25 +70,30 @@ function hyoji1()
 <input class="logintop" type="submit" value="ログアウト">
 </form>
 </header>
+
+
 <div class="contents">
 <div class="dialog">
 <h2>リソース選択</h2>
+
+
 <div class = "frame">
 <p><font color = "red">メッセージ</font></p>
 <form action="setresource" method="post">
 
+
 <table class="table4">
 <tbody>
 <tr>
-<td class="dialog"><b>利用日</b><a class="red"> ※</a></td>
+<td class="one" class="dialog" ><b>　利用日</b><a class="red"> ※</a></td>
 <td class="right2">
 <input type="text" placeholder="2018/1/1（年は省略可）" name="usageDate"><font color = "red">×</font>
 </td>
 </tr>
 
 <tr>
-<td class="dialog"><b>利用時間</b><a class="red"> ※</a></td>
-<td class="right2">
+<td><b>　利用時間</b><a class="red"> ※</a></td>
+<td class="right2"><div class="dialog2">
 <select name = "usageStartHour">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
@@ -175,7 +179,8 @@ selected
 <option value="aaa">30</option>
 <option value="aaa">45</option>
 </select>
-分利用する
+分　利用する
+</div>
 </td>
 <td>
 </tr>
@@ -198,17 +203,20 @@ selected
 </tbody>
 </table>
 
+<br>
 <form>
-<input class="submit2 dialog2" type="button" value="もっと詳しく" onclick="hyoji1()">
+<input class="more-details" class="dialog2" type="button" value="もっと詳しく" onclick="hyoji1()">
 </form>
 
 <div id="disp" style="display:none;">
 <table class="table4">
 <tbody>
 <tr>
-<td class="dialog"><b>利用人数</b></td>
+<td class="one" class="dialog"><b>利用人数</b></td>
 <td class="right2">
+<div class="dialog2">
 <input type="text" name="participants">人以上
+</div>
 </td>
 </tr>
 <tr>
@@ -239,12 +247,15 @@ selected
 <td><form action = "${returnPage}" method = "get">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit dialog2" type = "submit" value = "戻る"></form>
+
 </td>
 <td>　</td>
-<td>
 
-<input class="submit dialog2" type = "submit" value = "検索"></td>
+<td>
+<form action = "${searchPage}" method = "post">
+<input class="submit dialog2" type = "submit" value = "検索">
 </form>
+</td>
 </tr>
 
 </table>
