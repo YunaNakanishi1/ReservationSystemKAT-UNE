@@ -192,7 +192,8 @@ selected
 </table>
 
 <input type="checkbox" name="example" value="ownReserve">自分の予約のみ表示　
-<input type="checkbox" name="example" value="pastReserve">過去の予約も表示
+<input type="checkbox" name="example" value="pastReserve">過去の予約も表示　
+<input type="checkbox" name="example" value="pastReserve">削除済み予約を表示　
 <br><br>
 <table class="table3">
 <tr>
