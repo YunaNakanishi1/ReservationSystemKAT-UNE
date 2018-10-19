@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<title>利用停止該当予約確認</title>
+<link rel="stylesheet" href="/ReservationSystemKAT-UNE/deco.css">
+<link rel="stylesheet" href="/ReservationSystemKAT-UNE/header_footer.css">
+</head>
+<body class="body">
+
+<div class="div">
+<header class="header"><p>会議室・備品予約システム</p>
+<input class="logintop" type="submit" value="ログアウト">
+</header>
+
+<div class="contents">
+<h2>利用停止該当予約確認</h2>
+<div class="dialog">
+<p>利用停止期間を適用しようとしているリソースは既に予約されています</p>
+<p>リソースの利用停止期間を適用すると以下の予約は強制的に削除されます。</p>
+<p><font color="red">この操作は取り消せません。</font></p>
+<br>
+<p><font color="red">メッセージ</font></p>
+<p>【リソースを使用している予約】</p>
+<div class="scroll3" style="width:800px;height:200px;margin:0 auto;">
+<p>yyyy/MM/dd hh:mm ～ hh:mm 予約者:〇〇 〇〇(△△@…,03_****_****)</p>
+<p>yyyy/MM/dd hh:mm ～ hh:mm 予約者:□□ □□(〇〇@…,03_****_****)</p>
+</div>
+</div>
+<form>
+<input type="checkbox" name = "facility" value = "check" />確認しました
+<br>
+<br>
+<input class="submit" type="submit" value="削除する">　　　
+<input class="submit" type="submit" value="戻る">
+</form>
+</div>
+<br>
+<br>
+<br>
+<div class="footer1" class=><footer class="fotter2">copyright🄫KAT-UNE</footer></div>
+</div>
+</body>
+</html>
