@@ -53,6 +53,7 @@
 	position:relative;
 	bottom:0;
 	text-align:center;
+
 }
 .error{
 	color:red;
@@ -270,7 +271,7 @@
 	min-width:20%;
 }
 
-.btn {
+.btn { /*時間ボタン*/
 	 position: relative;
  	 padding-top:2px;
  	 padding-bottom:2px;
@@ -282,13 +283,11 @@
  	 background-color:#333;
  	 border-radius: 10px 3px;
  	 font-weight:normal;
+ 	 box-shadow: 2px 2px 4px #008080;
 }
 .btn:hover {
-    color: #333;
-    background-color:white;
    	font-weight:900;
-   	border:2px solid #FF1A6F;
-   	letter-spacing: 3px;
+   	box-shadow: 0 0;
 }
 
 .button {	/*変更・クリアボタン*/
@@ -339,3 +338,15 @@
   color: #fff;
   border: solid 1px #2F4F4F;
 }
+
+
+.silver{
+	background-color:#C0C0C0;
+	width:100%;
+	height:5px;
+	margin-left:0;
+	padding-left:0;
+	padding-bottom:0;
+}
+
+
