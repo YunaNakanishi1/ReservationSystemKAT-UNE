@@ -59,25 +59,41 @@
 <tr>
 <td class="dialog"><b>　　　　利用時間</b></td>
 <td class="right2">
+06:00 ～
 <select name ="category">
-<c:forEach begin="10" end="23"  varStatus="status">
-<option value= "<c:out value="${status.index}"/>"
-<c:if test="${hasResourceData && stopStartHour == status.index }">
-selected
-</c:if>
->
-<c:out value="${status.index}"/>
-</option>
-</c:forEach>
+<option value="aaa">00</option>
+<option value="aaa">01</option>
+<option value="aaa">02</option>
+<option value="aaa">03</option>
+<option value="aaa">04</option>
+<option value="aaa">05</option>
+<option value="aaa">06</option>
+<option value="aaa">07</option>
+<option value="aaa">08</option>
+<option value="aaa">09</option>
+<option value="aaa">10</option>
+<option value="aaa">11</option>
+<option value="aaa">12</option>
+<option value="aaa">13</option>
+<option value="aaa">14</option>
+<option value="aaa">15</option>
+<option value="aaa">16</option>
+<option value="aaa">17</option>
+<option value="aaa">18</option>
+<option value="aaa">19</option>
+<option value="aaa">20</option>
+<option value="aaa">21</option>
+<option value="aaa">22</option>
+<option value="aaa">23</option>
+
 </select>
-時間
+:
 <select name ="category">
 <option value="aaa">00</option>
 <option value="aaa">15</option>
 <option value="aaa">30</option>
 <option value="aaa">45</option>
 </select>
-分利用する
 </td>
 </tr>
 
