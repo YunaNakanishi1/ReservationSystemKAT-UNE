@@ -10,9 +10,10 @@
 <link rel="stylesheet" href="/ReservationSystemKAT-UNE/deco.css">
 <link rel="stylesheet" href="/ReservationSystemKAT-UNE/header_footer.css">
   <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+	<script type="text/javascript" src="pulldownControll.js">	</script>
 
 </head>
-<body class="body">
+<body class="body" onload="initChange();">
 <div class="div">
 
 <header class="header"><p>会議室・備品予約システム</p>
@@ -50,8 +51,10 @@
  </td>
 </tr>
 <tr>
-<td class="dialog"><b>　　　　利用人数</b></td>
+<td class="dialog"><b>　　　　定員</b></td>
 <td class="right2">
+(※定員がないものは0と入力)<br>
+
 <input type="text" name="capacity" placeholder="半角数字のみ">人以上
 </td>
 </tr>
@@ -60,35 +63,29 @@
 <td class="dialog"><b>　　　　利用時間</b></td>
 <td class="right2">
 06:00 ～
-<select name ="category">
-<option value="aaa">00</option>
-<option value="aaa">01</option>
-<option value="aaa">02</option>
-<option value="aaa">03</option>
-<option value="aaa">04</option>
-<option value="aaa">05</option>
-<option value="aaa">06</option>
-<option value="aaa">07</option>
-<option value="aaa">08</option>
-<option value="aaa">09</option>
-<option value="aaa">10</option>
-<option value="aaa">11</option>
-<option value="aaa">12</option>
-<option value="aaa">13</option>
-<option value="aaa">14</option>
-<option value="aaa">15</option>
-<option value="aaa">16</option>
-<option value="aaa">17</option>
-<option value="aaa">18</option>
-<option value="aaa">19</option>
-<option value="aaa">20</option>
-<option value="aaa">21</option>
-<option value="aaa">22</option>
-<option value="aaa">23</option>
-
+<select name = "QuickStartHour" id = "QuickStartHour" onchange="hourChange('QuickStartHour','QuickStartMinute')">
+<c:forEach begin="0" end="9"  varStatus="status">
+<option value= "0<c:out value="${status.index}"/>"
+<c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
+selected
+</c:if>
+>
+0<c:out value="${status.index}"/>
+</option>
+</c:forEach>
+<c:forEach begin="10" end="24"  varStatus="status">
+<option value= "<c:out value="${status.index}"/>"
+<c:if test="${hasResourceData && stopStartHour == status.index }">
+selected
+</c:if>
+>
+<c:out value="${status.index}"/>
+</option>
+</c:forEach>
 </select>
+
 :
-<select name ="category">
+<select name = "QuickStartMinute" id="QuickStartMinute"">
 <option value="aaa">00</option>
 <option value="aaa">15</option>
 <option value="aaa">30</option>
