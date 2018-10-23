@@ -62,17 +62,28 @@ function hyoji1()
 
 </script>
 
+	<script type="text/javascript" src="pulldownControll.js">	</script>
 
 
 </head>
-<body class="body">
+<body class="body"  onload="initChange();">
 <div class="div">
 
 <header class="header"><p>会議室・備品予約システム</p>
+
 <form action="/ReservationSystemKAT-UNE/logout" method="get">
 <input class="logintop" type="submit" value="ログアウト">
 </form>
 </header>
+
+<!-- javascript警告ラベル始まり -->
+<div id="JavascriptLabelBox">
+<div id = "JavascriptErrorLabel">
+Javascriptを有効にしてください
+</div>
+</div>
+<script type="text/javascript" src="JavascriptErrorLabel.js">	</script>
+<!-- javascript警告ラベル終わり -->
 
 <div class="contents">
 <div class="dialog">
@@ -113,7 +124,7 @@ function hyoji1()
 <tr>
 <td class="dialog"><b>　利用時間</b><a class="red"> ※</a></td>
 <td class="right2">
-<select name = "usageStartHour">
+<select name = "usageStartHour" id = "usageStartHour"  onchange="hourChange('usageStartHour','usageStartMinute')">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
@@ -123,7 +134,7 @@ selected
 0<c:out value="${status.index}"/>
 </option>
 </c:forEach>
-<c:forEach begin="10" end="23"  varStatus="status">
+<c:forEach begin="10" end="24"  varStatus="status">
 <option value= "<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == status.index }">
 selected
@@ -134,7 +145,7 @@ selected
 </c:forEach>
 </select>
 ：
-<select name = "usageStartMinute">
+<select name = "usageStartMinute" id = "usageStartMinute">
 <option value="aaa">00</option>
 <option value="aaa">15</option>
 <option value="aaa">30</option>
@@ -142,7 +153,7 @@ selected
 </select>
 
 ～
-<select name = "usageEndHour">
+<select name = "usageEndHour" id = "usageEndHour"  onchange="hourChange('usageEndHour','usageEndMinute')">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
@@ -152,7 +163,7 @@ selected
 0<c:out value="${status.index}"/>
 </option>
 </c:forEach>
-<c:forEach begin="10" end="23"  varStatus="status">
+<c:forEach begin="10" end="24"  varStatus="status">
 <option value= "<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == status.index }">
 selected
@@ -163,7 +174,7 @@ selected
 </c:forEach>
 </select>
 ：
-<select name = "usageEndMinute">
+<select name = "usageEndMinute" id = "usageEndMinute">
 <option value="aaa">00</option>
 <option value="aaa">15</option>
 <option value="aaa">30</option>
