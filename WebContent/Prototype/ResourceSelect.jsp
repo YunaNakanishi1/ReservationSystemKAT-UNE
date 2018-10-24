@@ -34,8 +34,9 @@ $(document).ready(function(){
 	    "bSort": false,
 	    "bInfo": true,
 	    "bAutoWidth": true,
-
 		});
+
+	  hyoji1();
 	  });
 
 </script>
@@ -43,7 +44,7 @@ $(document).ready(function(){
 
 <script>
 
-flag=false;
+flag=true;
 function hyoji1()
 {
   if (flag)
@@ -60,9 +61,11 @@ function hyoji1()
 </script>
 
 
+	<script type="text/javascript" src="pulldownControll.js">	</script>
 
 </head>
-<body class="body">
+
+<body class="body" onload="initChange();">
 <div class="div">
 
 <header class="header"><p>会議室・備品予約システム</p>
@@ -70,6 +73,16 @@ function hyoji1()
 <input class="logintop" type="submit" value="ログアウト">
 </form>
 </header>
+
+
+<!-- javascript警告ラベル始まり -->
+<div id="JavascriptLabelBox">
+<div id = "JavascriptErrorLabel">
+Javascriptを有効にしてください
+</div>
+</div>
+<script type="text/javascript" src="JavascriptErrorLabel.js">	</script>
+<!-- javascript警告ラベル終わり -->
 
 
 <div class="contents">
@@ -95,8 +108,7 @@ function hyoji1()
 <td><b>　利用時間</b><a class="red"> ※</a></td>
 <td class="right2"><div class="dialog2">
 
-
-<select name = "usageStartHour">
+<select name = "usageStartHour" id = "usageStartHour" onchange="hourChange('usageStartHour','usageStartMinute')">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
@@ -106,7 +118,7 @@ selected
 0<c:out value="${status.index}"/>
 </option>
 </c:forEach>
-<c:forEach begin="10" end="23"  varStatus="status">
+<c:forEach begin="10" end="24"  varStatus="status">
 <option value= "<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == status.index }">
 selected
@@ -116,8 +128,9 @@ selected
 </option>
 </c:forEach>
 </select>
+
 ：
-<select name = "usageStartMinute">
+<select name = "usageStartMinute" id="usageStartMinute">
 <option value="aaa">00</option>
 <option value="aaa">15</option>
 <option value="aaa">30</option>
@@ -125,7 +138,7 @@ selected
 </select>
 
 ～
-<select name = "usageEndHour">
+<select name = "usageEndHour" id="usageEndHour" onchange="hourChange('usageEndHour','usageEndMinute');">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
@@ -135,7 +148,7 @@ selected
 0<c:out value="${status.index}"/>
 </option>
 </c:forEach>
-<c:forEach begin="10" end="23"  varStatus="status">
+<c:forEach begin="10" end="24"  varStatus="status">
 <option value= "<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == status.index }">
 selected
@@ -146,7 +159,7 @@ selected
 </c:forEach>
 </select>
 ：
-<select name = "usageEndMinute">
+<select name = "usageEndMinute" id="usageEndMinute">
 <option value="aaa">00</option>
 <option value="aaa">15</option>
 <option value="aaa">30</option>
@@ -154,7 +167,7 @@ selected
 </select>
 
 の中で<br>
-<select name = "usageHour">
+<select name = "usageHour"  id = "usageHour" onchange="hourChange('usageHour','usageMinute')">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
@@ -164,7 +177,7 @@ selected
 0<c:out value="${status.index}"/>
 </option>
 </c:forEach>
-<c:forEach begin="10" end="23"  varStatus="status">
+<c:forEach begin="10" end="24"  varStatus="status">
 <option value= "<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == status.index }">
 selected
@@ -175,7 +188,7 @@ selected
 </c:forEach>
 </select>
 時間
-<select name = "usageMinute">
+<select name = "usageMinute" id="usageMinute">
 <option value="aaa">00</option>
 <option value="aaa">15</option>
 <option value="aaa">30</option>
@@ -210,12 +223,14 @@ selected
 <input class="more-details" class="dialog2" type="button" value="もっと詳しく" onclick="hyoji1()">
 </form>
 
-<div id="disp" style="display:none;">
+<div id="disp" style="display:block;">
 <table class="table4">
 <tbody>
 <tr>
-<td class="one" class="dialog"><b>利用人数</b></td>
+<td class="one" class="dialog"><b>定員</b></td>
 <td class="right2">
+(※定員がないものは0人で登録されています)<br><br>
+
 <div class="dialog2">
 <input type="text" name="participants">人以上
 </div>
@@ -283,7 +298,7 @@ selected
 							<tr>
 							<td><input class="nuime" type = "submit" value = "予約"></td>
 							<td>13:00～18:00</td>
-							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"晴海412S"</a></td>
+							<td><a href="resourcedetails?resourceId=${obj.resourceId}">晴海412S</a></td>
 							<td>5</td>
 							<td>晴海</td>
 							<td>会議室</td>
@@ -292,38 +307,11 @@ selected
 							<tr>
 							<td><input class="nuime" type = "submit" value = "予約"></td>
 							<td>12:00～14:00</td>
-							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"晴海4207"</a></td>
+							<td><a href="resourcedetails?resourceId=${obj.resourceId}">晴海4207</a></td>
 							<td>25</td>
 							<td>晴海</td>
 							<td>会議室</td>
 							<td>無</td>
-							</tr>
-							<tr>
-							<td><input class="nuime"  = "submit" value = "予約"></td>
-							<td>10:00～14:00</td>
-							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室4F"</a></td>
-							<td>20</td>
-							<td>新横浜</td>
-							<td>会議室</td>
-							<td>有</td>
-							</tr>
-							<tr>
-							<td><input class="nuime" type = "submit" value = "予約"></td>
-							<td>10:00～14:00</td>
-							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室4F"</a></td>
-							<td>20</td>
-							<td>新横浜</td>
-							<td>会議室</td>
-							<td>有</td>
-							</tr>
-							<tr>
-							<td><input class="nuime" type = "submit" value = "予約"></td>
-							<td>10:00～14:00</td>
-							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"新横浜会議室UCS"</a></td>
-							<td>20</td>
-							<td>新横浜</td>
-							<td>UCS</td>
-							<td>有</td>
 							</tr>
 
 					</tbody>

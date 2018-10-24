@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>ログイン</title>
+<title>予約登録</title>
 <link rel="stylesheet" href="/ReservationSystemKAT-UNE/deco.css">
 <link rel="stylesheet" href="/ReservationSystemKAT-UNE/header_footer.css">
 
@@ -16,35 +16,42 @@
 
 </head>
 <body class="body">
+<div class="div">
 
 <header class="header"><p>会議室・備品予約システム</p>
 <form action="/ReservationSystemKAT-UNE/logout" method="get">
 <input class="logintop" type="submit" value="ログアウト">
 </form>
 </header>
+
+<!-- javascript警告ラベル始まり -->
+<div id="JavascriptLabelBox">
+<div id = "JavascriptErrorLabel">
+Javascriptを有効にしてください
+</div>
+</div>
+<script type="text/javascript" src="JavascriptErrorLabel.js">	</script>
+<!-- javascript警告ラベル終わり -->
+
 <div class="contents">
-<h2>予約変更</h2>
+<h2>予約登録</h2>
 <p><font color = "red">メッセージ</font></p>
 
-<table class="table2">
+<table class="table5">
 <tbody>
 
 <tr>
-<td class="one" class="dialog"><b>リソース名</b></td>
-<td class="right2">
-	晴海412S
- </td>
+<td class="one" class="dialog"><b>　　　　　　リソース名</b></td>
+<td class="right2"><a href="..." >晴海412S</a></td>
 </tr>
 
 <tr>
-<td class="one" class="dialog"><b>利用日</b></td>
-<td class="right2">
-	2018年5月9日
- </td>
+<td class="dialog"><b>　　　　　　利用日</b></td>
+<td class="right2">2018年5月9日</td>
 </tr>
 
 <tr>
-<td class="one" class="dialog"><b>利用時間<b><a class="red">　※</a></b></td>
+<td class="dialog"><b>　　　　　　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
 <div id="slider-area">
         <div style="float:left;width:100px;margin-left:0px;">
@@ -61,34 +68,35 @@
         <div id="slider"></div>
         </div>
         <div style="float:left;width:100px;margin-left:0px;">
-			<input class="button" type = "submit" value = "-15分">
+        <input class="btn" type = "submit" value = "-15分">
 		</div>
+
         <div style="width:270px;float:left;text-align:center;">
         <input type="text" id="slider-timelabel" class="timelabel" readonly="readonly" />
         </div>
         <div style="float:right;width:100px;margin-right:25px;">
-			<input class="button" type = "submit" value = "+15分">
+			<input class="btn" type = "submit" value = "+15分">
         </div>
-    </div>
-   </div>
+</div>
+
 </td>
 </tr>
 <tr>
-<td class="one" class="dialog"><b>会議名称</b></td>
+<td class="dialog"><b>　　　　　　予約名称</b></td>
 <td class="right2">
 <input type="text" name="meetingName" placeholder="名称なし"> (30文字以内)
  </td>
 </tr>
 
 <tr>
-<td class="one" class="dialog"><b>利用人数</b></td>
+<td class="dialog"><b>　　　　　　利用人数</b></td>
 <td class="right2">
 <input type="text" name="usagePeople" placeholder="半角数字のみ"> 名
  </td>
 </tr>
 
 <tr>
-<td class="one" class="dialog"><b>予約者</b><a class="red">　※</a></td>
+<td class="dialog"><b>　　　　　　予約者</b></td>
 
 <td class="right2">
 <span class="reserve_name">理光 太郎</span>
@@ -99,7 +107,7 @@
 </tr>
 
 <tr>
-<td class="one" class="dialog"><b>共同予約者</b></td>
+<td class="dialog"><b>　　　　　　共同予約者</b></td>
 
 <td class="right2">
 <span class="reserve_name">----</span> <input class="button" type = "submit" onclick="addSearch('reserve_pare')" value = "変更"> <input class="button" type = "submit" value = "クリア">
@@ -110,7 +118,7 @@
 </tr>
 
 <tr>
-<td class="one" class="dialog"><b>参加者種別</b></td>
+<td class="dialog"><b>　　　　　　参加者種別</b></td>
 
 <td class="right2">
 <select name ="sankasyasyubetu">
@@ -123,7 +131,7 @@
 </tr>
 
 <tr>
-<td class="dialog"><b>詳細</b></td>
+<td class="dialog"><b>　　　　　　補足</b></td>
 
 <td class="right2">
 <textarea class="scroll2" name="supplement"></textarea>125/500
@@ -133,18 +141,31 @@
 </tbody>
 </table>
 
-
+<br>
 <table class="table3">
 <tr>
 
 <td>
-<input class="submit" class="dialog" type = "submit" value = "変更">
+<input class="submit" class="dialog" type = "submit" value = "登録">
 </td>
+<td>　</td>
+
+<td>
+<form action = "" method = "get">
+<input class="submit" type = "submit" value = "リソース選択画面へ">
+</form>
+</td>
+
 </tr>
 </table>
 <br>
-   <div class="footer1" class=><footer class="fotter2">copyright🄫KAT-UNE</footer></div>
-   </div>
+<a href="..">予約一覧へ</a>
+<br>
+<br>
+<br>
+</div>
+<div class="footer1" class=><footer class="fotter2">copyright🄫KAT-UNE</footer></div>
+</div>
 
     </body>
 </html>
