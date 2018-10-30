@@ -91,7 +91,7 @@ Javascriptを有効にしてください
 
 
 <div class = "frame">
-<p><font color = "red">メッセージ</font></p>
+<p><font color = "red"><!--メッセージ --></font></p>
 <form action="setresource" method="post">
 
 
@@ -280,8 +280,9 @@ selected
 </div>
 
 <br><br><br><br><br><br>
-<p><font color = "red">メッセージ</font></p>
+<p><font color = "red"><!-- メッセージ --></font></p>
 <form action = "">
+<!--
 <table id="design-table" class="table table-striped table-bordered" style="width: 90%;">
 					<thead>
 						<tr>
@@ -316,6 +317,7 @@ selected
 
 					</tbody>
 				</table>
+				-->
 				</form>
 </div>
 
