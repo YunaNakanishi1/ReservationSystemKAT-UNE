@@ -91,7 +91,7 @@ Javascriptを有効にしてください
 
 
 <div class = "frame">
-<p><font color = "red"><!--メッセージ --></font></p>
+<p><font color = "red">利用終了時刻は現在時刻より後の時間を入力してください。<!--メッセージ --></font></p>
 <form action="setresource" method="post">
 
 
