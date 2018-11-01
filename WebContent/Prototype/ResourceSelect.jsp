@@ -91,7 +91,7 @@ Javascriptを有効にしてください
 
 
 <div class = "frame">
-<p><font color = "red">利用終了時刻は現在時刻より後の時間を入力してください。<!--メッセージ --></font></p>
+<p><font color = "red"><!--メッセージ --></font></p>
 <form action="setresource" method="post">
 
 
@@ -280,7 +280,7 @@ selected
 </div>
 
 <br><br><br><br><br><br>
-<p><font color = "red"><!-- メッセージ --></font></p>
+<p><font color = "red">検索結果は0件です。<!-- メッセージ --></font></p>
 <form action = "">
 <!--
 <table id="design-table" class="table table-striped table-bordered" style="width: 90%;">
@@ -298,14 +298,14 @@ selected
 					<tbody>
 							<tr>
 							<td><input class="nuime" type = "submit" value = "予約"></td>
-							<td>13:00～18:00</td>
+							<td>12:00～14:00</td>
 							<td><a href="resourcedetails?resourceId=${obj.resourceId}">晴海412S</a></td>
 							<td>5</td>
 							<td>晴海</td>
 							<td>会議室</td>
-							<td>有</td>
+							<td>無</td>
 							</tr>
-							<tr>
+						 	<tr>
 							<td><input class="nuime" type = "submit" value = "予約"></td>
 							<td>12:00～14:00</td>
 							<td><a href="resourcedetails?resourceId=${obj.resourceId}">晴海4207</a></td>
@@ -317,7 +317,7 @@ selected
 
 					</tbody>
 				</table>
-				-->
+ -->
 				</form>
 </div>
 
