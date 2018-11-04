@@ -63,4 +63,9 @@
 }
 
 
-
+#JavascriptErrorLabel {
+    text-align: center;
+    color: red;
+    font-size: 20px;
+    height: 20px;
+}

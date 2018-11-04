@@ -24,11 +24,19 @@
 </form>
 </header>
 
+<!-- javascript警告ラベル始まり -->
+<div id="JavascriptLabelBox">
+<div id = "JavascriptErrorLabel">
+Javascriptを有効にしてください
+</div>
+</div>
+<script type="text/javascript" src="JavascriptErrorLabel.js">	</script>
+<!-- javascript警告ラベル終わり -->
+
 <div class="contents">
 <h2>予約登録</h2>
-<!--
-<p><font color = "red">エラーメッセージ</font></p>
-  -->
+<p><font color = "red"><!-- メッセージ --></font></p>
+
 <table class="table5">
 <tbody>
 
@@ -39,7 +47,7 @@
 
 <tr>
 <td class="dialog"><b>　　　　　　利用日</b></td>
-<td class="right2">2020年1月1日</td>
+<td class="right2">2020年1月11日</td>
 </tr>
 
 <tr>
@@ -88,10 +96,10 @@
 </tr>
 
 <tr>
-<td class="dialog"><b>　　　　　　予約者</b><a class="red">※</a></td>
+<td class="dialog"><b>　　　　　　予約者</b></td>
 
 <td class="right2">
-<span class="reserve_name">理光 太郎</span>
+<span class="reserve_name">理工太郎</span>
  </td>
 </tr>
 
@@ -102,7 +110,7 @@
 <td class="dialog"><b>　　　　　　共同予約者</b></td>
 
 <td class="right2">
-<span class="reserve_name">----</span> <input class="button" type = "submit" onclick="addSearch('reserve_pare')" value = "変更"> <input class="button" type = "submit" value = "クリア">
+<span class="reserve_name">理工五郎</span> <input class="button" type = "submit" onclick="addSearch('reserve_pare')" value = "変更"> <input class="button" type = "submit" value = "クリア">
  </td>
 </tr>
 
@@ -152,6 +160,8 @@
 </table>
 <br>
 <a href="..">予約一覧へ</a>
+<br>
+<br>
 <br>
 </div>
 <div class="footer1" class=><footer class="fotter2">copyright🄫KAT-UNE</footer></div>

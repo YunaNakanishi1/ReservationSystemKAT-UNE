@@ -23,24 +23,32 @@
 <input class="logintop" type="submit" value="ログアウト">
 </form>
 </header>
-<div class="contents">
-<h2>予約変更</h2>
-<p><font color = "red">メッセージ</font></p>
+<!-- javascript警告ラベル始まり -->
+<div id="JavascriptLabelBox">
+<div id = "JavascriptErrorLabel">
+Javascriptを有効にしてください。
+</div>
+</div>
+<script type="text/javascript" src="JavascriptErrorLabel.js">	</script>
+<!-- javascript警告ラベル終わり -->
 
+<div class="contents">
+<h2><!-- 予約変更 --></h2>
+<p><font color = "red">Javascriptを有効にしてください。<!-- メッセージ --></p></font>
 <table class="table5">
 <tbody>
 
 <tr>
 <td class="one" class="dialog"><b>　　　　　　リソース名</b></td>
 <td class="right2">
-	<a href="...">晴海412S</a>
+	<a href="...">晴海414L</a>
  </td>
 </tr>
 
 <tr>
 <td class="dialog"><b>　　　　　　利用日</b></td>
 <td class="right2">
-	2018年5月9日
+	2020年1月1日
  </td>
 </tr>
 
@@ -89,10 +97,10 @@
 </tr>
 
 <tr>
-<td 　　　　　　class="dialog"><b>　　　　　　予約者</b><a class="red">※</a></td>
+<td 　　　　　　class="dialog"><b>　　　　　　予約者</b></td>
 
 <td class="right2">
-<span class="reserve_name">理光 太郎</span>
+<span class="reserve_name">理光四郎</span>
  </td>
 </tr>
 
@@ -103,7 +111,7 @@
 <td class="dialog"><b>　　　　　　共同予約者</b></td>
 
 <td class="right2">
-<span class="reserve_name">----</span>
+<span class="reserve_name">理光五郎</span>
 <input class="button" type = "submit" onclick="addSearch('reserve_pare')" value = "変更">
 <input class="button" type = "submit" value = "クリア">
  </td>
@@ -129,7 +137,7 @@
 <td class="dialog"><b>　　　　　　補足</b></td>
 
 <td class="right2">
-<textarea class="scroll2" name="supplement"></textarea>125/500
+<textarea class="scroll2" name="supplement"></textarea>0/500
 </td>
 </tr>
 

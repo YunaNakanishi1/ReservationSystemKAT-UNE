@@ -244,7 +244,7 @@ selected
 
 
 <tr>
-<td class="dialog"><b>詳細</b></td>
+<td class="dialog"><b>補足</b></td>
 
 <td class="right2">
 <textarea class="scroll2" name="supplement"><c:if test="${hasResourceData && supplement != null}"><c:out value="${supplement}" /></c:if></textarea>
