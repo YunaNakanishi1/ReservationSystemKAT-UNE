@@ -97,8 +97,9 @@ function hyoji1()
 </div>
 <br>
 <div class = "frame">
-<p><font color = "red">メッセージ</font></p>
-
+<!--
+<p><font color = "red">利用日が正しく入力されていません。（例：2018/10/18）</font></p>
+ -->
 <table class="table4">
 <tbody>
 <tr>
@@ -123,7 +124,7 @@ selected
 0<c:out value="${status.index}"/>
 </option>
 </c:forEach>
-<c:forEach begin="10" end="23"  varStatus="status">
+<c:forEach begin="10" end="24"  varStatus="status">
 <option value= "<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == status.index }">
 selected
@@ -152,7 +153,7 @@ selected
 0<c:out value="${status.index}"/>
 </option>
 </c:forEach>
-<c:forEach begin="10" end="23"  varStatus="status">
+<c:forEach begin="10" end="24"  varStatus="status">
 <option value= "<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == status.index }">
 selected
@@ -213,11 +214,13 @@ selected
 
 <div class="silver">　</div>
 <br><br>
-<p><font color = "red">メッセージ</font></p>
+
+<p><font color = "red">検索結果は0件です</font></p>
 
 </div><!-- diallogとじ -->
 <br>
 <form action = "">
+<!--
 <table id="design-table" class="table table-striped table-bordered" style="width: 90%;" >
 					<thead>
 						<tr style="background-color: white;">
@@ -233,28 +236,89 @@ selected
 					</thead>
 					<tbody>
 							<tr>
-							<td>2018/10/15（月）</td>
-							<td>13:00～18:00</td>
-							<td><a href="xxx">定例会</a></td>
-							<td>晴海412S</td>
+							<td>2020/12/25</td>
+							<td>13:00～14:00</td>
+							<td><a href="xxx">UCS</a></td>
+							<td>UCS001</td>
 							<td>晴海</td>
-							<td>会議室</td>
-							<td>高原渉</td>
+							<td>UCS</td>
+							<td>理工五郎</td>
 							<td>未削除</td>
 							</tr>
 							<tr style="background-color: white;">
-							<td>2018/10/15（月）</td>
-							<td>16:00～18:00</td>
-							<td><a href="xxx">定例会</a></td>
-							<td>晴海41L</td>
+							<td>2020/12/25</td>
+							<td>18:00～19:00</td>
+							<td><a href="xxx">時間ではじく</a></td>
+							<td>晴海412S</td>
 							<td>晴海</td>
 							<td>会議室</td>
-							<td>理光太郎</td>
+							<td>理工五郎</td>
+							<td>未削除</td>
+							</tr>
+							<tr>
+							<td>2020/12/26</td>
+							<td>15:00～18:00</td>
+							<td><a href="xxx">新横浜</a></td>
+							<td>新横浜412S</td>
+							<td>新横浜</td>
+							<td>会議室</td>
+							<td>理工五郎</td>
+							<td>未削除</td>
+							</tr>
+							<tr style="background-color: white;">
+							<td>2020/12/28</td>
+							<td>9:00～10:00</td>
+							<td><a href="xxx">あいうえおあいうえおあいうえおあいうえおあいうえおあいうえお</a></td>
+							<td>晴海412S</td>
+							<td>晴海</td>
+							<td>会議室</td>
+							<td>理工五郎</td>
+							<td>未削除</td>
+							</tr>
+							<tr>
+							<td>2020/12/28</td>
+							<td>10:00～11:00</td>
+							<td><a href="xxx">あ</a></td>
+							<td>晴海415M</td>
+							<td>晴海</td>
+							<td>会議室</td>
+							<td>理工五郎</td>
+							<td>未削除</td>
+							</tr>
+							<tr style="background-color: white;">
+							<td>2020/12/31</td>
+							<td>15:00～17:00</td>
+							<td><a href="xxx">五郎なし</a></td>
+							<td>晴海412S</td>
+							<td>晴海</td>
+							<td>会議室</td>
+							<td>理工三郎</td>
+							<td>未削除</td>
+							</tr>
+							<tr>
+							<td>2020/1/22</td>
+							<td>15:00～17:00</td>
+							<td><a href="xxx">共同予約者五郎</a></td>
+							<td>晴海412S</td>
+							<td>晴海</td>
+							<td>会議室</td>
+							<td>理工三郎</td>
+							<td>未削除</td>
+							</tr>
+							<tr style="background-color: white;">
+							<td>2020/1/23</td>
+							<td>15:00～17:00</td>
+							<td><a href="xxx">30日目（晴海会議室）</a></td>
+							<td>晴海412S</td>
+							<td>晴海</td>
+							<td>会議室</td>
+							<td>理工五郎</td>
 							<td>未削除</td>
 							</tr>
 
 					</tbody>
 				</table>
+				 -->
 </form>
 <br>
 <br>

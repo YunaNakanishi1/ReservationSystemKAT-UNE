@@ -78,7 +78,9 @@ function hyoji1()
 
 
 <div class = "frame">
-<p><font color = "red">メッセージ</font></p>
+
+<p><font color = "red">利用終了時刻は利用開始時刻より後の時刻を入力してください。</font></p>
+
 <form action="setresource" method="post">
 
 
@@ -265,8 +267,11 @@ selected
 </div>
 
 <br><br><br><br><br><br>
-<p><font color = "red">メッセージ</font></p>
+
+<p><font color = "red"></font></p>
+
 <form action = "">
+<!--
 <table id="design-table" class="table table-striped table-bordered" style="width: 90%;">
 					<thead>
 						<tr>
@@ -282,13 +287,14 @@ selected
 					<tbody>
 							<tr>
 							<td><input class="nuime" type = "submit" value = "予約"></td>
-							<td>13:00～18:00</td>
-							<td><a href="resourcedetails?resourceId=${obj.resourceId}">"晴海412S"</a></td>
+							<td>13:00～15:00</td>
+							<td><a href="resourcedetails?resourceId=${obj.resourceId}">晴海412S</a></td>
 							<td>5</td>
 							<td>晴海</td>
 							<td>会議室</td>
-							<td>有</td>
+							<td>無</td>
 							</tr>
+
 							<tr>
 							<td><input class="nuime" type = "submit" value = "予約"></td>
 							<td>12:00～14:00</td>
@@ -325,7 +331,7 @@ selected
 							<td>UCS</td>
 							<td>有</td>
 							</tr>
-
+-->
 					</tbody>
 				</table>
 				</form>

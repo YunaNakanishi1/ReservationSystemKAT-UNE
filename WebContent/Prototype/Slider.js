@@ -1,6 +1,6 @@
-var duration = 1*60;//1時間
-var start = 6*60;//午前６時
-var end = 9*60;//午前9時
+var duration = 2*60;//1時間
+var start = 13*60;//午前６時
+var end = 18*60;//午前9時
 var handleWidthMin = 15;//つまみの最小幅
 
 //スライダーを生成
