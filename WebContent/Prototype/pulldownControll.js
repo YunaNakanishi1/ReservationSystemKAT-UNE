@@ -19,7 +19,6 @@ function hourChange(hourId,miniteId){
 	var hourVal = parseInt(document.getElementById(hourId).options[ hour_selectid].value);
 
 
-	alert
 	if(hourVal == 24){
 		document.getElementById(miniteId).innerHTML = "<option value='0'>00</option>";
 	}
