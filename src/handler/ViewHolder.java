@@ -20,9 +20,7 @@ public class ViewHolder {
     public static final String SHOW_FIRST_RESERVATION_LIST_SERVLET="showfirstreservationlist";
     public static final String SEARCH_RESERVATION_LIST_SERVLET="searchReservationList";
     public static final String SHOW_QUICK_RESERVATION_SERVLET = "showquickreservation";
-<<<<<<< HEAD
     public static final String SHOW_RESOURCE_SELECT_SERVLET="showreserveregist";
-=======
     public static final String QUIICK_RESERVATION = "/WEB-INF/reserve/QuickReservation.jsp";
->>>>>>> refs/remotes/origin/develop
+
 }
