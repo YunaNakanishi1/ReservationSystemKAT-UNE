@@ -261,7 +261,7 @@ selected
 <table class="table3">
 <tr>
 
-<td><form action = "${returnPage}" method = "get">
+<td><form action = "${returnPageForResourceSelect}" method = "get">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit dialog2" type = "submit" value = "戻る"></form>
 
