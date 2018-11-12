@@ -20,8 +20,8 @@ public class ShowQuickReservationHandler implements Handler {
 		HttpSession session =request.getSession(true);
 		HandlerHelper handlerHelper = new HandlerHelper();
 
-		String categoryId = (String)session.getAttribute("categoryListForResourceSelect");
-		String officeId = (String)session.getAttribute("officeListForResourceSelect");
+		String categoryId = (String)session.getAttribute("categoryIdForResourceSelect");
+		String officeId = (String)session.getAttribute("officeIdForResourceSelect");
 
 		boolean hasOfficeAndCategory = handlerHelper.getOfficeAndCategory(categoryId, officeId);
 		if (hasOfficeAndCategory) {
