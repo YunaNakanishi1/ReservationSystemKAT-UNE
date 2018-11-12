@@ -12,6 +12,13 @@ import dto.OfficeDto;
 import dto.TimeDto;
 import exception.MyException;
 
+/**
+ *
+ * サーブレット番号：24
+ * 今すぐ予約画面を表示するための情報をセット.
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ */
 public class ShowQuickReservationHandler implements Handler {
 
 	@Override
@@ -19,8 +26,8 @@ public class ShowQuickReservationHandler implements Handler {
 		HttpSession session =request.getSession(true);
 		HandlerHelper handlerHelper = new HandlerHelper();
 
-		String categoryId = (String)session.getAttribute("categoryListForResourceSelect");
-		String officeId = (String)session.getAttribute("officeListForResourceSelect");
+		String categoryId = (String)session.getAttribute("categoryIdForResourceSelect");
+		String officeId = (String)session.getAttribute("officeIdForResourceSelect");
 
 		boolean hasOfficeAndCategory = handlerHelper.getOfficeAndCategory(categoryId, officeId);
 		if (hasOfficeAndCategory) {

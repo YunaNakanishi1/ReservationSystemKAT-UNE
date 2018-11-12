@@ -95,7 +95,7 @@ Javascriptを有効にしてください
 <input class="submit dialog2" type="submit" value="新規予約">
 </form>
 　
-<form action="newReservation" method="get">
+<form action="/ReservationSystemKAT-UNE/reservesystem/pushQuickReservationButton" method="post">
 <input class="submit dialog2" type="submit" value="今すぐ予約">
 </form>
 </div>
@@ -108,16 +108,21 @@ Javascriptを有効にしてください
 </div>
 <br>
 <div class = "frame">
-<!--
-<p><font color = "red">利用日が正しく入力されていません。（例：2018/10/18）</font></p>
- -->
+<c:if test="${messageForReservationListUpper !=null }">
+<p><font color = "red"><c:out value="${messageForReservationListUpper }"/></font></p>
+</c:if>
 <table class="table4">
 <tbody>
 <tr>
 <td class="one" class="dialog"><b>　利用日</b><a class="red"> ※</a></td>
 <td class="right2">
 <div class="dialog2">
-<input type="text" placeholder="2018/1/1（年は省略可）" name="usageDate"><font color = "red">×</font> 以降30日間表示
+<input type="text" placeholder="2018/1/1（年は省略可）"  name="usageDate"
+<c:if test="${usageDateForReservationList!=null }">
+value="<c:out value="${usageDateForReservationList }"/>"
+</c:if>
+
+><font color = "red">×</font> 以降30日間表示
 </div>
 </td>
 </tr>
@@ -128,7 +133,7 @@ Javascriptを有効にしてください
 <select name = "usageStartHour" id = "usageStartHour"  onchange="hourChange('usageStartHour','usageStartMinute')">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
-<c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
+<c:if test="${status.index == usageStartTimeForReservationList.hour }">
 selected
 </c:if>
 >
@@ -137,7 +142,7 @@ selected
 </c:forEach>
 <c:forEach begin="10" end="24"  varStatus="status">
 <option value= "<c:out value="${status.index}"/>"
-<c:if test="${hasResourceData && stopStartHour == status.index }">
+<c:if test="${status.index == usageStartTimeForReservationList.hour }">
 selected
 </c:if>
 >
@@ -147,17 +152,24 @@ selected
 </select>
 ：
 <select name = "usageStartMinute" id = "usageStartMinute">
-<option value="aaa">00</option>
-<option value="aaa">15</option>
-<option value="aaa">30</option>
-<option value="aaa">45</option>
+
+<option value="00"
+>00</option>
+<c:forEach begin="1" end="3" varStatus="status">
+<option value="<c:out value="${status.index * 15 }"/>"
+<c:if test="${status.index * 15 == usageStartTimeForReservationList.minutes }">
+selected
+</c:if>
+><c:out value="${status.index * 15 }"/>
+</option>
+</c:forEach>
 </select>
 
 ～
 <select name = "usageEndHour" id = "usageEndHour"  onchange="hourChange('usageEndHour','usageEndMinute')">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
-<c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
+<c:if test="${status.index == usageEndTimeForReservationList.hour }">
 selected
 </c:if>
 >
@@ -166,7 +178,7 @@ selected
 </c:forEach>
 <c:forEach begin="10" end="24"  varStatus="status">
 <option value= "<c:out value="${status.index}"/>"
-<c:if test="${hasResourceData && stopStartHour == status.index }">
+<c:if test="${status.index == usageEndTimeForReservationList.hour }">
 selected
 </c:if>
 >
@@ -176,19 +188,32 @@ selected
 </select>
 ：
 <select name = "usageEndMinute" id = "usageEndMinute">
-<option value="aaa">00</option>
-<option value="aaa">15</option>
-<option value="aaa">30</option>
-<option value="aaa">45</option>
+
+<option value="00"
+>00</option>
+<c:forEach begin="1" end="3" varStatus="status">
+<option value="<c:out value="${status.index * 15 }"/>"
+<c:if test="${status.index * 15 == usageEndTimeForReservationList.minutes }">
+selected
+</c:if>
+><c:out value="${status.index * 15 }"/>
+</option>
+</c:forEach>
 </select>
 
 <tr>
 <td class="dialog"><b>事業所</b></td>
 <td class="right2">
-<select name ="office">
-<option value="aaa" selected>全て</option>
-<option value="aaa">晴海</option>
-<option value="aaa">新横浜</option>
+<select name ="officeId">
+<option >全て</option>
+<c:forEach var="obj" items="${officeListForReservationList}" varStatus="status">
+<option value="<c:out value ="${obj.officeId}"/>"
+<c:if test="${obj.officeId == officeIdForReservationList }">
+selected
+</c:if>
+><c:out value="${obj.officeName }"/>
+</option>
+</c:forEach>
 </select>
 </td>
 </tr>
@@ -197,16 +222,34 @@ selected
 <td class="right2">
 <select name ="category">
 <option value="aaa" selected>全て</option>
-<option value="aaa">会議室</option>
-<option value="aaa">UCS</option>
+<c:forEach var="obj" items="${categoryListForReservationList}" varStatus="status">
+<option value="<c:out value ="${obj.categoryId}"/>"
+<c:if test="${obj.cateogryId == categoryIdForReservationList }">
+selected
+</c:if>
+><c:out value="${obj.categoryName }"/>
+</option>
+</c:forEach>
 </select>
  </td>
 </tr>
 </table>
 
-<input type="checkbox" name="example" value="ownReserve">自分の予約のみ表示　
-<input type="checkbox" name="example" value="pastReserve">過去の予約も表示　
-<input type="checkbox" name="example" value="pastReserve">削除済み予約を表示　
+<input type="checkbox" name="displayOnlyMyReservation" value="displayOnlyMyReservation"
+<c:if test="${displayOnlyMyReservation }">
+checked
+</c:if>
+>自分の予約のみ表示　
+<input type="checkbox" name="displayPastReservation" value="displayPastReservation"
+<c:if test="${displayPastReservation }">
+checked
+</c:if>
+>過去の予約も表示　
+<input type="checkbox" name="displayDeletedReservation" value="displayDeletedReservation"
+<c:if test="${displayDeletedReservation }">
+checked
+</c:if>
+>削除済み予約を表示　
 <br><br>
 <table class="table3">
 <tr>

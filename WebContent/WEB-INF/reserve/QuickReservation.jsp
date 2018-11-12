@@ -46,20 +46,42 @@
 				<tbody>
 
 					<tr>
+					<!-- nullの時全てってやつ -->
 						<td class="one" class="dialog"><b>　　　事業所</b></td>
-						<td class="right2"><select name="category">
-								<option value="aaa" selected>全て</option>
-								<option value="aaa">晴海</option>
-								<option value="aaa">新横浜</option>
-						</select></td>
+						<td class="right2">
+						<select name ="officeName">
+							<option value="全て"
+								<c:if test="${obj==null}">
+								 selected
+								</c:if>>全て
+							</option>
+
+							<c:forEach var="obj" items="${officeListForResourceSelect}" varStatus="status">
+							<option value="${obj}"
+							<c:if test="${obj==officeIdForResourceSelect}">
+							 selected
+							</c:if>>
+							<c:out value="${obj}"/></option>
+							</c:forEach>
+						</select>
+					</td>
 					</tr>
 					<tr>
 						<td class="dialog"><b>　　　カテゴリ</b></td>
-						<td class="right2"><select name="category">
-								<option value="aaa" selected>全て</option>
-								<option value="aaa">会議室</option>
-								<option value="aaa">UCS</option>
-								<option value="aaa">応接室</option>
+						<td class="right2"><select name ="officeName">
+							<option value="全て"
+								<c:if test="${obj==null}">
+								 selected
+								</c:if>>全て
+							</option>
+
+							<c:forEach var="obj" items="${categoryListForResourceSelect}" varStatus="status">
+							<option value="${obj}"
+							<c:if test="${obj==categoryIdForResourceSelect}">
+							 selected
+							</c:if>>
+							<c:out value="${obj}"/></option>
+							</c:forEach>
 						</select></td>
 					</tr>
 					<tr>
@@ -72,7 +94,7 @@
 					<tr>
 						<td class="dialog"><b>　　　利用時間</b></td>
 						<td class="right2">
-						<c:out value = "${usageStartTimeForResourceSelect.getHour}"/>:<c:out value = "${usageStartTimeForResourceSelect.getMinutes}"/>
+						<c:out value = "${usageStartTimeForResourceSelect.hour}"/>:<c:out value = "${usageStartTimeForResourceSelect.minutes}"/>
 						 ～
 						<!--  09:45 ～-->
 
@@ -93,7 +115,7 @@ selected
 
 								<c:forEach begin="10" end="24" varStatus="status">
 									<option value="<c:out value="${status.index}"/>"
-										<c:if test="${usageEndHourForResourceSelect == status.index }">
+										<c:if test="${usageEndTimeForResourceSelect.hour == status.index }">
 selected
 </c:if><c:if test = "${status.index==10 }">selected</c:if>>
 
@@ -103,14 +125,14 @@ selected
 						</select> :
 
 						<select name="usageEndMinutesForResourceSelect" id="QuickStartMinute">
-								<option value="0"<c:if test="${usageEndMinutesForResourceSelect == 0}">selected
+								<option value="0"<c:if test="${usageEndTimeForResourceSelect.minutes == 0}">selected
 </c:if>>00</option>
-								<option value="15"<c:if test="${usageEndMinutesForResourceSelect == 15}">selected
-</c:if>>00</option>
-								<option value="30"<c:if test="${usageEndMinutesForResourceSelect == 30}">selected
-</c:if>>00</option>
-								<option value="45"<c:if test="${usageEndMinutesForResourceSelect == 45}">selected
-</c:if>>00</option>
+								<option value="15"<c:if test="${usageEndTimeForResourceSelect.minutes == 15}">selected
+</c:if>>15</option>
+								<option value="30"<c:if test="${usageEndTimeForResourceSelect.minutes == 30}">selected
+</c:if>>30</option>
+								<option value="45"<c:if test="${usageEndTimeForResourceSelect.minutes == 45}">selected
+</c:if>>45</option>
 						</select>
 
 						</td>
