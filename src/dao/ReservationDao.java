@@ -5,9 +5,9 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -42,10 +42,26 @@ public class ReservationDao {
 			throw new SQLException();	//エラー処理はハンドラーに任せる
 		}
 
-		Statement stmt = null;
+		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
-		
-		String sql="";
+
+		String sql="select * from reservations where reserve_id = ?";
+
+		preparedStatement = _con.prepareStatement(sql);
+		preparedStatement.setInt(1,reserveId);
+
+
+//		private int _reservationId;				ok
+//		private Resource _resource;				リソースDTO
+//		private String _usageDate;				利用日
+//		private TimeDto _usageStartTime;		利用開始時間
+//		private TimeDto _usageEndTime;			利用終了時間
+//		private String _reservationName;		ok
+//		private User _reservedPerson;			予約者DTO
+//		private User _coReservedPerson;			共同予約者DTO
+//		private int _numberOfParticipants;		ok 利用人数
+//		private AttendanceTypeDto _AttendanceTypeDto;	参加者種別DTO
+//		private String _supplement;				ok 補足
 
 		return null;
 
