@@ -2,10 +2,10 @@ package handler;
 
 import static handler.ViewHolder.*;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 import dto.CategoryDto;
 import dto.OfficeDto;
