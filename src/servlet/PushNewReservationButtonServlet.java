@@ -15,7 +15,7 @@ import handler.PushNewReservationButtonHandler;
  * サーブレット番号：7
  * Servlet implementation class PushQuickReservationButtonServlet
  */
-@WebServlet("/PushQuickReservationButtonServlet")
+@WebServlet("/PushNewReservationButtonServlet")
 public class PushNewReservationButtonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

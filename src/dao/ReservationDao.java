@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -27,7 +28,7 @@ public class ReservationDao {
 
 
 	/**
-	  * 引数でもらった予約IDから
+	  * 引数でもらった予約IDからReservationDtoを作成しリターンする.
 	  * @param reserveId 予約ID
 	  * @return
 	  * @throws SQLException
@@ -45,10 +46,39 @@ public class ReservationDao {
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
 
-		String sql="select * from reservations where reserve_id = ?";
+		//実行するSQL文
+		String selectReservationsSql ="select * from reservations where reserve_id = ?";
 
-		preparedStatement = _con.prepareStatement(sql);
+		preparedStatement = _con.prepareStatement(selectReservationsSql);
 		preparedStatement.setInt(1,reserveId);
+		rs = preparedStatement.executeQuery();	//実行
+
+
+
+		//reservationsテーブルのカラムをセットするために用意
+		String resourceId;	//リソースID
+		Timestamp usageStartDate; //利用開始日時
+		Timestamp usageEndDate; //利用終了日時
+		String reservationName;	//予約名称
+		String reservedPersonId; //予約者ID
+		String coReservedPersonId;//共同予約者ID
+		int numberOfParticipants;	//利用人数
+		int attendanceTypeId;	//参加者種別ID
+		Timestamp reserveSupplement; //補足
+
+
+		while (rs.next()) {
+			resourceId = rs.getString("resource_id");	//リソースID
+			usageStartDate = rs.getTimestamp("usage_start_date"); //利用開始日時
+			usageEndDate = rs.getTimestamp("usage_end_date"); //利用終了日時
+			reservationName = rs.getString("reservation_name");	//予約名称
+			reservedPersonId = rs.getString("reserved_person_id"); //予約者ID
+			coReservedPersonId = rs.getString("co_reserved_person_id");//共同予約者ID
+			numberOfParticipants = rs.getInt("number_of_participants");	//利用人数
+			attendanceTypeId = rs.getInt("attendance_type_id");	//参加者種別ID
+			reserveSupplement = rs.getTimestamp("reserve_supplement"); //補足
+		}
+
 
 
 //		private int _reservationId;				ok
@@ -62,6 +92,11 @@ public class ReservationDao {
 //		private int _numberOfParticipants;		ok 利用人数
 //		private AttendanceTypeDto _AttendanceTypeDto;	参加者種別DTO
 //		private String _supplement;				ok 補足
+
+		ReservationDto reservationDto = new ReservationDto(reserveId, _resource,
+				_usageDate, _usageStartTime, _usageEndTime, _reservationName,
+				_reservedPerson, _coReservedPerson, _numberOfParticipants,
+				_AttendanceTypeDto, supplement);
 
 		return null;
 

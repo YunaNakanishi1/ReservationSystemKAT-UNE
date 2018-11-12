@@ -126,6 +126,7 @@ public class HandlerHelper {
 
 		TimeDto usageStartTimeForResourceSelect = new TimeDto(hour, usageStartMinutes);
 		return usageStartTimeForResourceSelect;
+
 	}
 
 	private List<OfficeDto> _officeList;

@@ -15,6 +15,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dto.TimeDto;
+import exception.MyException;
 
 /**
  * servlet番号：9
@@ -47,33 +48,12 @@ public class PushQuickReservationButtonHandler implements Handler {
 		session.setAttribute("usageDateForReservationList", usageDateForReservationList);
 
 		HandlerHelper handlerHelper = new HandlerHelper();
-		TimeDto usageStartTimeForResourceSelect = handlerHelper.getUsageStartTime();
-//
-//		Date currentTime = new Date();
-//		TimeDto currentTimeDto = null;
-//		try {
-//			currentTimeDto = new TimeDto(currentTime);
-//		} catch(MyException e) {
-//			return ERROR_PAGE;
-//		}
-//
-//		int hour = currentTimeDto.getHour();
-//		int minutes = currentTimeDto.getMinutes();
-//
-//		//利用開始時間の設定
-//		int usageStartMinutes = 0;
-//		if (0 <= minutes && minutes < 15) {
-//			usageStartMinutes = 0;
-//		} else if (15 <= minutes && minutes < 30) {
-//			usageStartMinutes = 15;
-//		} else if (30 <= minutes && minutes < 45) {
-//			usageStartMinutes = 30;
-//		} else if (45 <= minutes && minutes < 60) {
-//			usageStartMinutes = 45;
-//		}
-//
-//		TimeDto usageStartTimeForResourceSelect = new TimeDto(hour, usageStartMinutes);
-
+		TimeDto usageStartTimeForResourceSelect = null;
+		try {
+			usageStartTimeForResourceSelect = handlerHelper.getUsageStartTime();
+		} catch (MyException e) {
+			return ERROR_PAGE;
+		}
 
 		session.setAttribute("usageStartTimeForResourceSelect", usageStartTimeForResourceSelect);
 		int hour = usageStartTimeForResourceSelect.getHour();
