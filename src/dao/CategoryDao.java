@@ -79,6 +79,10 @@ public class CategoryDao {
 		return categoryList;
 	}
 
+	/**
+	 * @return 全カテゴリDTOのリスト(ID順)
+	 * @throws SQLException データベースエラー
+	 */
 	public List<CategoryDto> queryAll() throws SQLException{
 		List<CategoryDto> categoryList = new ArrayList<CategoryDto>();
 		DBHelper dbHelper =new DBHelper();

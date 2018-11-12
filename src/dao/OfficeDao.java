@@ -75,6 +75,10 @@ public class OfficeDao {
 		return  officeList;
 	}
 
+	/**
+	 * @return 全事業所のDTOのリスト（ID順）
+	 * @throws SQLException データベースエラー
+	 */
 	public List<OfficeDto> queryAll() throws SQLException{
 		List<OfficeDto> officeList = new ArrayList<OfficeDto>();
 		DBHelper dbHelper =new DBHelper();
