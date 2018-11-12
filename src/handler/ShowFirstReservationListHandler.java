@@ -12,6 +12,12 @@ import javax.servlet.http.HttpSession;
 import dto.ReservationDto;
 import dto.TimeDto;
 
+/**
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ * 予約検索の初期値をセットする
+ *
+ */
 public class ShowFirstReservationListHandler implements Handler{
 
 	@Override
