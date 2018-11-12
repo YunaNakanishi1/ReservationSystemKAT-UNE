@@ -18,5 +18,5 @@ public class ViewHolder {
     public static final String SHOW_RESOURCE_LIST_SERVLET = "resourcelist";
     public static final String RESOURCE_REGIST_SERVLET="resourceregist";
     public static final String SHOW_FIRST_RESERVATION_LIST_SERVLET="showfirstreservationlist";
-
+    public static final String SHOW_QUICK_RESERVATION_SERVLET = "showquickreservation";
 }
