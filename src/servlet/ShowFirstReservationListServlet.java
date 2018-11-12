@@ -15,6 +15,12 @@ import handler.ShowFirstReservationListHandler;
 /**
  * Servlet implementation class ShowFirstReservationListServlet
  */
+/**
+ * 予約一覧を最初に表示するときに呼び出される.
+ *
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ */
 @WebServlet("/showfirstreservationlist")
 public class ShowFirstReservationListServlet extends HttpServlet {
 

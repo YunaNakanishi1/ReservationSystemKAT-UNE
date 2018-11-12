@@ -1,5 +1,11 @@
 package dto;
 
+/**
+ * 参加者種別情報を格納するDTO.
+ *
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ */
 public class AttendanceTypeDto {
 	private String _attendanceTypeId;
 	private String _attendanceTypeName;

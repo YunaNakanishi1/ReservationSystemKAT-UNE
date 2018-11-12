@@ -15,14 +15,21 @@ import dto.TimeDto;
 /**
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
- * 予約検索の初期値をセットする
+ * 予約検索の初期値をセットする.
  *
  */
 public class ShowFirstReservationListHandler implements Handler{
 
+	/**
+	 * @see handler.Handler#handleService(javax.servlet.http.HttpServletRequest)
+	 *
+	 * 予約検索の初期値をセットする.
+	 */
 	@Override
 	public String handleService(HttpServletRequest request) {
 		HttpSession session =request.getSession(true);
+
+		HandlerHelper.initializeAttributeForReservationRegist(session);
 
 		String usageDateForReservationList = new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance());
 
