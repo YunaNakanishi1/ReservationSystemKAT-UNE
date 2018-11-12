@@ -40,7 +40,13 @@ public class ShowReservationDetailsHandler implements Handler{
 		if(getReservationFromIdService.validate()){
 
 			try {
+				//予約IDをもとにreservationDtoを作成＆フィールドにセットする
 				getReservationFromIdService.execute();
+
+				//reservationDto（フィールド）を取得しセッションに保存
+				session.setAttribute("reservationDTOForReservationDetails",
+						getReservationFromIdService.getReservation());
+
 
 			} catch (SQLException e) {
 				e.printStackTrace();
