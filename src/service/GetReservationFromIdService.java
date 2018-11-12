@@ -6,6 +6,7 @@ package service;
 
 import java.sql.SQLException;
 
+import dao.ReservationDao;
 import dto.ReservationDto;
 
 /**
