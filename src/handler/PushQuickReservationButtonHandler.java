@@ -39,7 +39,6 @@ public class PushQuickReservationButtonHandler implements Handler {
 	public String handleService(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 	      //セッションは存在する
-		  // テストのコメント
 		HandlerHelper.initializeAttributeForReservationRegist(session);
 
 		//当日の日付取得, セット

@@ -27,6 +27,7 @@ public class PushNewReservationButtonHandler implements Handler {
 	@Override
 	public String handleService(HttpServletRequest request) {
 		 //セッションは存在する
+		 //コメントプッシュ
 		HttpSession session = request.getSession(true);
 
 		//HandlerHelperのinitializeAttributeForReservationRegist()メソッドを呼び出す
