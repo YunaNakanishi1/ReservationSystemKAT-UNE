@@ -7,7 +7,6 @@ import static handler.ViewHolder.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,7 +15,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dto.TimeDto;
-import exception.MyException;
 
 /**
  * servlet番号：9
@@ -48,31 +46,38 @@ public class PushQuickReservationButtonHandler implements Handler {
 		String usageDateForReservationList = usageDate.format(formatter);
 		session.setAttribute("usageDateForReservationList", usageDateForReservationList);
 
-		Date currentTime = new Date();
-		TimeDto currentTimeDto = null;
-		try {
-			currentTimeDto = new TimeDto(currentTime);
-		} catch(MyException e) {
-			return ERROR_PAGE;
-		}
+		HandlerHelper handlerHelper = new HandlerHelper();
+		TimeDto usageStartTimeForResourceSelect = handlerHelper.getUsageStartTime();
+//
+//		Date currentTime = new Date();
+//		TimeDto currentTimeDto = null;
+//		try {
+//			currentTimeDto = new TimeDto(currentTime);
+//		} catch(MyException e) {
+//			return ERROR_PAGE;
+//		}
+//
+//		int hour = currentTimeDto.getHour();
+//		int minutes = currentTimeDto.getMinutes();
+//
+//		//利用開始時間の設定
+//		int usageStartMinutes = 0;
+//		if (0 <= minutes && minutes < 15) {
+//			usageStartMinutes = 0;
+//		} else if (15 <= minutes && minutes < 30) {
+//			usageStartMinutes = 15;
+//		} else if (30 <= minutes && minutes < 45) {
+//			usageStartMinutes = 30;
+//		} else if (45 <= minutes && minutes < 60) {
+//			usageStartMinutes = 45;
+//		}
+//
+//		TimeDto usageStartTimeForResourceSelect = new TimeDto(hour, usageStartMinutes);
 
-		int hour = currentTimeDto.getHour();
-		int minutes = currentTimeDto.getMinutes();
 
-		//利用開始時間の設定
-		int usageStartMinutes = 0;
-		if (0 <= minutes && minutes < 15) {
-			usageStartMinutes = 0;
-		} else if (15 <= minutes && minutes < 30) {
-			usageStartMinutes = 15;
-		} else if (30 <= minutes && minutes < 45) {
-			usageStartMinutes = 30;
-		} else if (45 <= minutes && minutes < 60) {
-			usageStartMinutes = 45;
-		}
-
-		TimeDto usageStartTimeForResourceSelect = new TimeDto(hour, usageStartMinutes);
 		session.setAttribute("usageStartTimeForResourceSelect", usageStartTimeForResourceSelect);
+		int hour = usageStartTimeForResourceSelect.getHour();
+		int usageStartMinutes = usageStartTimeForResourceSelect.getMinutes();
 
 		//利用終了時間の設定
 		int usageEndHour = 0;

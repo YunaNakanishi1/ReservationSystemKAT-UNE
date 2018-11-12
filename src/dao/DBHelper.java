@@ -18,7 +18,8 @@ public class DBHelper {
 
     private static Logger _log = LogManager.getLogger();
     private Connection _con = null;
-    private final String _url = "jdbc:postgresql://localhost/katune";
+    private final String _url = "jdbc:postgresql://localhost:5432/katune";
+    		//+ "10.63.150.169:5432/katune";
     private final String _user = "katune";
     private final String _password = "k@TnuE";
 
