@@ -30,6 +30,8 @@ public class SearchReservationListService implements Service{
 		super();
 		if(_userId==null||_usageStartTime==null||_usageEndTime==null){
 			throw new MyException();
+		}else if(_usageStartTime.getTimeMinutesValue()>_usageEndTime.getTimeMinutesValue()){
+			throw new MyException();
 		}
 
 		this._officeId = _officeId;
@@ -45,14 +47,11 @@ public class SearchReservationListService implements Service{
 
 	@Override
 	public boolean validate() {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return true;
 	}
 
 	@Override
 	public void execute() throws SQLException {
-		// TODO 自動生成されたメソッド・スタブ
-
 	}
 
 	public List<ReservationDto> getReservationList() {
