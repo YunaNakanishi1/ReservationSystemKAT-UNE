@@ -59,6 +59,7 @@
 								<option value="aaa" selected>全て</option>
 								<option value="aaa">会議室</option>
 								<option value="aaa">UCS</option>
+								<option value="aaa">応接室</option>
 						</select></td>
 					</tr>
 					<tr>
@@ -78,23 +79,24 @@
 										<c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
 selected
 </c:if>>
-										0
-										<c:out value="${status.index}" />
+
+										0<c:out value="${status.index}" />
 									</option>
 								</c:forEach>
 								<c:forEach begin="10" end="24" varStatus="status">
 									<option value="<c:out value="${status.index}"/>"
 										<c:if test="${hasResourceData && stopStartHour == status.index }">
 selected
-</c:if>>
+</c:if><c:if test = "${status.index==10 }">selected</c:if>>
+
 										<c:out value="${status.index}" />
 									</option>
 								</c:forEach>
 						</select> : <select name="QuickStartMinute" id="QuickStartMinute"">
 								<option value="aaa">00</option>
-								<!-- <option value="aaa">15</option>
+								<option value="aaa" selected>15</option>
 								<option value="aaa">30</option>
-								<option value="aaa">45</option> -->
+								<option value="aaa">45</option>
 						</select>
 						</td>
 					</tr>
