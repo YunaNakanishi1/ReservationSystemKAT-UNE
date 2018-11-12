@@ -18,7 +18,9 @@ import org.apache.logging.log4j.Logger;
 import dto.TimeDto;
 
 /**
- * @author p000527259
+ * servlet番号：9
+ * 今すぐ予約画面の開始時刻、終了時刻を設定するメソッド
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
 public class PushQuickReservationButtonHandler implements Handler {
@@ -37,8 +39,7 @@ public class PushQuickReservationButtonHandler implements Handler {
 	public String handleService(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 	      //セッションは存在する
-		//HandleHelper.initializeAttributeForReservationRegist(session);
-		//実装未だ
+		HandlerHelper.initializeAttributeForReservationRegist(session);
 
 		//当日の日付取得, セット
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -84,6 +85,7 @@ public class PushQuickReservationButtonHandler implements Handler {
 			usageEndHour = hour + ONE_HOUR;
 		}
 
+		//24時を超えた場合24時00分にセット
 		if (usageEndHour > 24) {
 			usageEndMinutes = ZERO;
 			usageEndHour = TWENTY_FOUR;
