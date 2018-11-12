@@ -57,6 +57,7 @@ public class PushQuickReservationButtonHandler implements Handler {
 		int hour = currentTimeDto.getHour();
 		int minutes = currentTimeDto.getMinutes();
 
+		//利用開始時間の設定
 		int usageStartMinutes = 0;
 		if (0 <= minutes && minutes < 15) {
 			usageStartMinutes = 0;
@@ -69,9 +70,32 @@ public class PushQuickReservationButtonHandler implements Handler {
 		}
 
 		TimeDto usageStartTimeForResourceSelect = new TimeDto(hour, usageStartMinutes);
+		session.setAttribute("usageStartTimeForResourceSelect", usageStartTimeForResourceSelect);
 
+		//利用終了時間の設定
+		int usageEndHour = 0;
+		int usageEndMinutes = 0;
 
-		return null;
+		if (usageStartMinutes == 0 || usageStartMinutes == 15) {
+			usageEndMinutes = usageStartMinutes + THIRTY_MINUTES;
+			usageEndHour = hour;
+		} else {
+			usageEndMinutes = usageStartMinutes + THIRTY_MINUTES - SIXTY_MINUTES;
+			usageEndHour = hour + ONE_HOUR;
+		}
+
+		if (usageEndHour > 24) {
+			usageEndMinutes = ZERO;
+			usageEndHour = TWENTY_FOUR;
+		}
+
+		TimeDto usageEndTimeForResourceSelect = new TimeDto(usageEndHour, usageEndMinutes);
+		session.setAttribute("usageEndTimeForResourceSelect", usageEndTimeForResourceSelect);
+
+		//戻るボタンの行き先
+		session.setAttribute("returnPageForResourceSelect", SHOW_FIRST_RESERVATION_LIST_SERVLET);
+
+		return  SHOW_QUICK_RESERVATION_SERVLET;
 	}
 
 }
