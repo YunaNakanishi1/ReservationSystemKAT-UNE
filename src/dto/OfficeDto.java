@@ -13,10 +13,10 @@ public class OfficeDto {
 		this._officeId = _officeId;
 		this._officeName = _officeName;
 	}
-	public String get_officeId() {
+	public String getOfficeId() {
 		return _officeId;
 	}
-	public String get_officeName() {
+	public String getOfficeName() {
 		return _officeName;
 	}
 

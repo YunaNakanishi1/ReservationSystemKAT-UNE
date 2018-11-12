@@ -9,7 +9,7 @@ import dto.CategoryDto;
 import dto.OfficeDto;
 
 /**
- * 事業所とカテゴリの一覧を取得する.
+ * 事業所とカテゴリの一覧を取得する. 1
  *
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
@@ -17,7 +17,6 @@ import dto.OfficeDto;
 public class GetOfficeAndCategoryService implements Service {
 	private List<OfficeDto> _officeList;
 	private List<CategoryDto> _categoryList;
-
 
 	@Override
 	public boolean validate() {
@@ -27,12 +26,10 @@ public class GetOfficeAndCategoryService implements Service {
 	@Override
 	public void execute() throws SQLException {
 		OfficeDao officeDao = new OfficeDao();
-		_officeList=officeDao.queryAll();
+		_officeList = officeDao.queryAll();
 
 		CategoryDao categoryDao = new CategoryDao();
 		_categoryList = categoryDao.queryAll();
-
-
 
 	}
 
@@ -43,7 +40,5 @@ public class GetOfficeAndCategoryService implements Service {
 	public List<CategoryDto> getCategoryList() {
 		return _categoryList;
 	}
-
-
 
 }
