@@ -161,7 +161,59 @@ public class CommonValidator {
 		return notDate;
 
 	}
+	   /**
+     * notLenientDateOnがfalseを返すとき、yyyy/mm/ddとして日付データがセットされる
+     */
+    private String _dateStr;
+	/**
+     * 引数のデータが正しい日付であるかを判断するメソッド.
+     * 正しい日付の場合、falseを返却し、_dateフィールドにtimeStamp型でセットする.
+     *
+     * @param date ユーザから入力される年月日(例："2018/10/03"　"10/03")
+     * @return 渡されたデータが正しい場合、false 誤りがある場合、true
+     */
+    protected boolean notLenientDateOn(String dateStr){
+        boolean notDate = false;
+        Pattern datePattern;
 
+        //フォーマット確認「yyyy/M/d」か？
+        datePattern = Pattern.compile("^[0-9]{4}/[0-9]{2}/[0-9]{2}$");
+        Matcher m = datePattern.matcher(dateStr);
+        notDate = !m.find();
+
+        /* 「yyyy/M/d」形式でない */
+        if(notDate){
+            /*「M/d形式か？」*/
+            datePattern = Pattern.compile("^[0-9]{2}/[0-9]{2}$");
+            m = datePattern.matcher(dateStr);
+            notDate = !m.find();
+            if(!notDate){
+                /*「M/d」形式であるのでyyyyを付け加える*/
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                dateStr = year + "/" + dateStr;
+            }else{
+                //yyyy/M/dでもM/dでもないので間違い
+                return true;
+            }
+        }
+
+        /* 「yyyy/MM/dd」形式で厳密に正しい日付か    */
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy/M/d");
+        inputFormat.setLenient(false); // 日時解析を厳密に行う
+        try{
+            inputFormat.parse(dateStr);
+            _dateStr = dateStr;
+            return true;
+
+        }catch (ParseException e) {
+            return true;
+        }
+    }
+
+    protected String getDateStr() {
+        return _dateStr;
+    }
 	protected Timestamp getDate() {
 		return _date;
 	}

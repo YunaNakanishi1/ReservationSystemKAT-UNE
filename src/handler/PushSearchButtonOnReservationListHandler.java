@@ -33,7 +33,7 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
         int endHour;
         int endMinutes;
         
-
+        //変換処理
         try{
             startHour = Integer.parseInt(startHourStr);
             startMinutes = Integer.parseInt(startMinutesStr);
@@ -43,6 +43,8 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
             _log.error("NumberFormatException");
             return ERROR_PAGE;
         }
+        
+        
         return null;
     }
 
