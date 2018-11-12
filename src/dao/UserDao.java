@@ -32,7 +32,7 @@ public class UserDao {
 	 * @throws SQLException
 	 */
 	public User getUser(User user) throws SQLException {
-		String sql = "SELECT user_id, password, authority FROM users WHERE (user_id = ?) AND (password = ?) AND ((authority = 1) OR (authority = 0))";
+		String sql = "SELECT user_id, password, authority,family_name,first_name FROM users WHERE (user_id = ?) AND (password = ?) AND ((authority = 1) OR (authority = 0))";
 		User returnUser = null;
 		if (user == null) {
 			return null;
@@ -60,7 +60,7 @@ public class UserDao {
 
             //認証出来た場合, authority含むユーザ情報作成
             if (rs.next()) {
-            	returnUser = new User(rs.getString(1), rs.getString(2), rs.getInt(3));
+            	returnUser = new User(rs.getString(1), rs.getString(2), rs.getInt(3),rs.getString(4),rs.getString(5),null,null);
             }
 
         } finally {
