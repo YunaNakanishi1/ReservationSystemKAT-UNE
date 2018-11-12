@@ -46,6 +46,7 @@ public class PushQuickReservationButtonHandler implements Handler {
 
 		Date currentTime = new Date();
 		TimeDto now = new TimeDto(currentTime);
+
 		return null;
 	}
 
