@@ -22,4 +22,5 @@ public class ViewHolder {
     public static final String SHOW_QUICK_RESERVATION_SERVLET = "showquickreservation";
     public static final String SHOW_RESOURCE_SELECT_SERVLET="showreserveregist";
     public static final String QUIICK_RESERVATION = "/WEB-INF/reserve/QuickReservation.jsp";
+
 }
