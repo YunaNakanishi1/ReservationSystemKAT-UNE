@@ -12,6 +12,13 @@ import dto.OfficeDto;
 import dto.TimeDto;
 import exception.MyException;
 
+/**
+ *
+ * サーブレット番号：24
+ * 今すぐ予約画面を表示するための情報をセット.
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ */
 public class ShowQuickReservationHandler implements Handler {
 
 	@Override

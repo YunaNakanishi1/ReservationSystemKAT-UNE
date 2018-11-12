@@ -13,7 +13,10 @@ import handler.Handler;
 import handler.ShowQuickReservationHandler;
 
 /**
- * Servlet implementation class ShowQuickReservationServlet
+ * サーブレット番号：24
+ * 今すぐ予約画面を表示するためのサーブレット.
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
  */
 @WebServlet("/showquickreservation")
 public class ShowQuickReservationServlet extends HttpServlet {

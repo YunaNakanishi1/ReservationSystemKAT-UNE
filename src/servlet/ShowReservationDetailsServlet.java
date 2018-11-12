@@ -19,7 +19,7 @@ import handler.ShowReservationDetailsHandler;
  * 予約名称リンクからのフォワード先を決める(26).
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
-@WebServlet("/showreservationdetailsservlet")
+@WebServlet("/showReservationDetails")
 public class ShowReservationDetailsServlet extends HttpServlet {
 
 
