@@ -6,6 +6,8 @@ package handler;
 
 import static handler.ViewHolder.*;
 
+import java.sql.SQLException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,17 +31,27 @@ public class ShowReservationDetailsHandler implements Handler{
 		//servletでセッションは作られているのでfalseでよい
 		HttpSession session = request.getSession(false);
 
-		String reserveId = (String) session.getAttribute("reserveId");
-		String userId = (String) session.getAttribute("userId");
+		int reserveId = (int) session.getAttribute("reserveId");
 
-		CommonValidator commonValidator = new CommonValidator();
 
-		if(commonValidator.notSetOn(userId)){	//userIdがない場合
+		GetReservationFromIdService getReservationFromIdService
+		= new GetReservationFromIdService(reserveId);
+
+		if(getReservationFromIdService.validate()){
+
+			try {
+				getReservationFromIdService.execute();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				_log.error("SQLException");
+				return ERROR_PAGE;
+			}
+
+		}else{
+			_log.error("validateError");
 			return ERROR_PAGE;
 		}
 
-		GetReservationFromIdService getReservationFromIdService
-		= new GetReservationFromIdService();
 
 		return null;
 	}
