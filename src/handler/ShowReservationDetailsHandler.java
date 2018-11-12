@@ -41,6 +41,7 @@ public class ShowReservationDetailsHandler implements Handler{
 
 			try {
 				getReservationFromIdService.execute();
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 				_log.error("SQLException");
