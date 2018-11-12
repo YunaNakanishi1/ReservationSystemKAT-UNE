@@ -12,7 +12,6 @@ import dto.OfficeDto;
 import dto.TimeDto;
 import exception.MyException;
 
-
 public class ShowQuickReservationHandler implements Handler {
 
 	@Override
