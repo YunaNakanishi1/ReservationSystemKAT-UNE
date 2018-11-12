@@ -9,6 +9,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dto.TimeDto;
+import exception.MyException;
+import service.CheckSearchReservationListService;
 
 public class PushSearchButtonOnReservationListHandler implements Handler{
     private static Logger _log = LogManager.getLogger();
@@ -63,9 +65,10 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
         CommonValidator cValidator = new CommonValidator();
         boolean notCorrectDate = cValidator.notLenientDateOn(dateStr);
         if(notCorrectDate){
+            //バリデーションNG時の処理
             boolean setComplete = setCategoryAndOffice(request, categoryIdStr, officeIdStr);
             if(setComplete){
-                session.setAttribute("messageForReservationListUpper", "MessageHolder.EM42");
+                session.setAttribute("messageForReservationListUpper", MessageHolder.EM42);
                 return RESERVE_LIST;
             }
             else{
@@ -73,12 +76,48 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
                 return ERROR_PAGE;
             }
         }
-        
-        
-        return null;
+        CheckSearchReservationListService cService;
+        try{
+            cService = new CheckSearchReservationListService(startTime, endTime);
+        }catch (MyException e) {
+            _log.error("ConstructorError");
+            return ERROR_PAGE;
+        }
+
+        if(cService.validate() == false){
+            //バリデーションNG時の処理
+            boolean setComplete = setCategoryAndOffice(request, categoryIdStr, officeIdStr);
+            if(setComplete){
+                session.setAttribute("messageForReservationListUpper", MessageHolder.EM42);
+                return RESERVE_LIST;
+            }
+            else{
+                _log.error("NumberFormatException");
+                return ERROR_PAGE;
+            }
+        }
+
+
+
+        return SEARCH_RESERVATION_LIST_SERVLET;
     }
+    /**
+     * プルダウン表示用にカテゴリと事業所の一覧を取得する
+     * @param request
+     * @param categoryId
+     * @param officeId
+     * @return
+     */
     private boolean setCategoryAndOffice(HttpServletRequest request,String categoryId,String officeId){
-        //後で定義
-        return false;
+        HandlerHelper helper = new HandlerHelper();
+        boolean completed = helper.getOfficeAndCategory(officeId, categoryId);
+
+        if(completed){
+            request.setAttribute("categoryListForReservationList", helper.getCategoryList());
+            request.setAttribute("officeListForReservationList", helper.getOfficeList());
+            return true;
+        }else{
+            return false;
+        }
     }
 }
