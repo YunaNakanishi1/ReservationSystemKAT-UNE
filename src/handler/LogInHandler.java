@@ -54,7 +54,7 @@ public class LogInHandler implements Handler {
         }
 
 		//入力されたユーザ情報
-		User user = new User(userId, password, 0);
+		User user = new User(userId, password, 0,null,null,null,null);
 		LogInService loginService = new LogInService(user);
 
 
@@ -67,10 +67,12 @@ public class LogInHandler implements Handler {
 				//ユーザ認証成功
 				if (resultUser != null) {
 					HttpSession session = request.getSession(true);
-					session.setAttribute("userId", resultUser.getUserId());
-					session.setAttribute("authority", resultUser.getAuthority());
+					session.setAttribute("userIdOfLoggedIn", resultUser.getUserId());
+					session.setAttribute("authorityOfLoggedIn", resultUser.getAuthority());
+					session.setAttribute("familyNameOfLoggedIn", resultUser.getFamilyName());
+					session.setAttribute("lastNameOfLoggedIn", resultUser.getFirstName());
 					session.setMaxInactiveInterval(SESSION_INTERVAL);
-					return RESERVE_LIST;
+					return SHOW_FIRST_RESERVATION_LIST_SERVLET;
 
 				} else {
 					//ユーザ認証失敗(EM06)

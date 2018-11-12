@@ -38,7 +38,7 @@
 			<div class="dialog">
 				<h2>今すぐ予約</h2>
 				<p>
-					<font color="red">メッセージ</font>
+					<font color="red"><!--メッセージ  --></font>
 				</p>
 			</div>
 
@@ -46,7 +46,7 @@
 				<tbody>
 
 					<tr>
-						<td class="one" class="dialog"><b> 事業所</b></td>
+						<td class="one" class="dialog"><b>　　　事業所</b></td>
 						<td class="right2"><select name="category">
 								<option value="aaa" selected>全て</option>
 								<option value="aaa">晴海</option>
@@ -54,23 +54,24 @@
 						</select></td>
 					</tr>
 					<tr>
-						<td class="dialog"><b> カテゴリ</b></td>
+						<td class="dialog"><b>　　　カテゴリ</b></td>
 						<td class="right2"><select name="category">
 								<option value="aaa" selected>全て</option>
 								<option value="aaa">会議室</option>
 								<option value="aaa">UCS</option>
+								<option value="aaa">応接室</option>
 						</select></td>
 					</tr>
 					<tr>
-						<td class="dialog"><b> 定員</b></td>
+						<td class="dialog"><b>　　　定員</b></td>
 						<td class="right2">(※定員がないものは0人で登録されています)<br> <input
 							type="text" name="capacity" placeholder="半角数字のみ">人以上
 						</td>
 					</tr>
 
 					<tr>
-						<td class="dialog"><b> 利用時間</b></td>
-						<td class="right2">06:00 ～ <select name="QuickStartHour"
+						<td class="dialog"><b>　　　利用時間</b></td>
+						<td class="right2">09:45 ～ <select name="QuickStartHour"
 							id="QuickStartHour"
 							onchange="hourChange('QuickStartHour','QuickStartMinute')">
 								<c:forEach begin="0" end="9" varStatus="status">
@@ -78,21 +79,22 @@
 										<c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
 selected
 </c:if>>
-										0
-										<c:out value="${status.index}" />
+
+										0<c:out value="${status.index}" />
 									</option>
 								</c:forEach>
 								<c:forEach begin="10" end="24" varStatus="status">
 									<option value="<c:out value="${status.index}"/>"
 										<c:if test="${hasResourceData && stopStartHour == status.index }">
 selected
-</c:if>>
+</c:if><c:if test = "${status.index==10 }">selected</c:if>>
+
 										<c:out value="${status.index}" />
 									</option>
 								</c:forEach>
 						</select> : <select name="QuickStartMinute" id="QuickStartMinute"">
 								<option value="aaa">00</option>
-								<option value="aaa">15</option>
+								<option value="aaa" selected>15</option>
 								<option value="aaa">30</option>
 								<option value="aaa">45</option>
 						</select>
