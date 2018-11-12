@@ -16,7 +16,7 @@ import handler.PushQuickReservationButtonHandler;
  * サーブレット番号：9
  * 今すぐ予約画面を表示するためのサーブレット
  */
-@WebServlet("/pushQuickReservationButton")
+@WebServlet("/reservesystem/pushQuickReservationButton")
 public class PushQuickReservationButtonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
