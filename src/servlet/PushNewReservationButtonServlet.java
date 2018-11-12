@@ -12,14 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import handler.Handler;
 import handler.PushNewReservationButtonHandler;
 
-
-import handler.PushNewReservationButtonHandler;
-
 /**
  * サーブレット番号：7
  * Servlet implementation class PushQuickReservationButtonServlet
  */
-@WebServlet("/reservesystem/pushnewreservationbuttonservlet")
+@WebServlet("/reservesystem/pushNewReservationButton")
 public class PushNewReservationButtonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

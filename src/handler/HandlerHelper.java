@@ -15,7 +15,7 @@ import dto.TimeDto;
 import exception.MyException;
 import service.ContainSelectedCategoryService;
 import service.ContainSelectedOfficeService;
-import service.GetOfficeAndCategoryService;
+import service.GetOfficeAndCategoryListService;
 
 public class HandlerHelper {
 
@@ -140,7 +140,7 @@ public class HandlerHelper {
 	 * @return 正常に処理が終了すればtrue
 	 */
 	public boolean getOfficeAndCategory(String officeId, String categoryId) {
-		GetOfficeAndCategoryService getOfficeAndCategoryService = new GetOfficeAndCategoryService();
+		GetOfficeAndCategoryListService getOfficeAndCategoryService = new GetOfficeAndCategoryListService();
 		if (getOfficeAndCategoryService.validate()) {
 			try {
 				getOfficeAndCategoryService.execute();

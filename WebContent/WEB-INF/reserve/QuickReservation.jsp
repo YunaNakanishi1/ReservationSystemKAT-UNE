@@ -38,7 +38,7 @@
 			<div class="dialog">
 				<h2>今すぐ予約</h2>
 				<p>
-					<font color="red"><c:out value = "${messageForQuickReservation}"/></font>
+					<font color="red"><!--メッセージ  --></font>
 				</p>
 			</div>
 
@@ -46,58 +46,95 @@
 				<tbody>
 
 					<tr>
+					<!-- nullの時全てってやつ -->
 						<td class="one" class="dialog"><b>　　　事業所</b></td>
-						<td class="right2"><select name="category">
-								<option value="aaa" selected>全て</option>
-								<option value="aaa">晴海</option>
-								<option value="aaa">新横浜</option>
-						</select></td>
+						<td class="right2">
+						<select name ="officeName">
+							<option value="全て"
+								<c:if test="${obj==null}">
+								 selected
+								</c:if>>全て
+							</option>
+
+							<c:forEach var="obj" items="${officeListForResourceSelect}" varStatus="status">
+							<option value="${obj}"
+							<c:if test="${obj==officeIdForResourceSelect}">
+							 selected
+							</c:if>>
+							<c:out value="${obj}"/></option>
+							</c:forEach>
+						</select>
+					</td>
 					</tr>
 					<tr>
 						<td class="dialog"><b>　　　カテゴリ</b></td>
-						<td class="right2"><select name="category">
-								<option value="aaa" selected>全て</option>
-								<option value="aaa">会議室</option>
-								<option value="aaa">UCS</option>
-								<option value="aaa">応接室</option>
+						<td class="right2"><select name ="officeName">
+							<option value="全て"
+								<c:if test="${obj==null}">
+								 selected
+								</c:if>>全て
+							</option>
+
+							<c:forEach var="obj" items="${categoryListForResourceSelect}" varStatus="status">
+							<option value="${obj}"
+							<c:if test="${obj==categoryIdForResourceSelect}">
+							 selected
+							</c:if>>
+							<c:out value="${obj}"/></option>
+							</c:forEach>
 						</select></td>
 					</tr>
 					<tr>
 						<td class="dialog"><b>　　　定員</b></td>
 						<td class="right2">(※定員がないものは0人で登録されています)<br> <input
-							type="text" name="capacityForResourceSelect" placeholder="半角数字のみ">人以上
+							type="text" name="capacity" placeholder="半角数字のみ">人以上
 						</td>
 					</tr>
 
 					<tr>
 						<td class="dialog"><b>　　　利用時間</b></td>
-						<td class="right2">09:45 ～ <select name="QuickStartHour"
-							id="QuickStartHour"
-							onchange="hourChange('QuickStartHour','QuickStartMinute')">
+						<td class="right2">
+						<c:out value = "${usageStartTimeForResourceSelect.hour}"/>:<c:out value = "${usageStartTimeForResourceSelect.minutes}"/>
+						 ～
+						<!--  09:45 ～-->
+
+
+						<select name="usageEndHourForResourceSelect"
+							id="usageEndHourForResourceSelect"
+							onchange="hourChange('usageEndHourForResourceSelect','QuickStartMinute')">
+
 								<c:forEach begin="0" end="9" varStatus="status">
 									<option value="0<c:out value="${status.index}"/>"
-										<c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
+										<c:if test="${usageEndHourForResourceSelect == 0 + status.index }">
 selected
 </c:if>>
 
 										0<c:out value="${status.index}" />
 									</option>
 								</c:forEach>
+
 								<c:forEach begin="10" end="24" varStatus="status">
 									<option value="<c:out value="${status.index}"/>"
-										<c:if test="${hasResourceData && stopStartHour == status.index }">
+										<c:if test="${usageEndTimeForResourceSelect.hour == status.index }">
 selected
 </c:if><c:if test = "${status.index==10 }">selected</c:if>>
 
 										<c:out value="${status.index}" />
 									</option>
 								</c:forEach>
-						</select> : <select name="QuickStartMinute" id="QuickStartMinute"">
-								<option value="aaa">00</option>
-								<option value="aaa" selected>15</option>
-								<option value="aaa">30</option>
-								<option value="aaa">45</option>
+						</select> :
+
+						<select name="usageEndMinutesForResourceSelect" id="QuickStartMinute">
+								<option value="0"<c:if test="${usageEndTimeForResourceSelect.minutes == 0}">selected
+</c:if>>00</option>
+								<option value="15"<c:if test="${usageEndTimeForResourceSelect.minutes == 15}">selected
+</c:if>>15</option>
+								<option value="30"<c:if test="${usageEndTimeForResourceSelect.minutes == 30}">selected
+</c:if>>30</option>
+								<option value="45"<c:if test="${usageEndTimeForResourceSelect.minutes == 45}">selected
+</c:if>>45</option>
 						</select>
+
 						</td>
 					</tr>
 
@@ -115,10 +152,8 @@ selected
 					</td>
 					</form>
 					<td></td>
-					<td><form action="${returnPage}" method="get">
-							<input type="hidden" name="resourceId"
-								value="<c:out value = "${resourceId}"/>"> <input
-								class="submit" type="submit" value="戻る">
+					<td><form action="/ReservationSystemKAT-UNE/reservesystem/showfirstreservationlist" method="get">
+							<input class="submit" type="submit" value="戻る">
 						</form></td>
 				</tr>
 			</table>
@@ -134,3 +169,4 @@ selected
 
 </body>
 </html>
+

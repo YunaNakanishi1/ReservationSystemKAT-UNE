@@ -95,7 +95,7 @@ Javascriptを有効にしてください
 <input class="submit dialog2" type="submit" value="新規予約">
 </form>
 　
-<form action="newReservation" method="get">
+<form action="/ReservationSystemKAT-UNE/reservesystem/pushQuickReservationButton" method="post">
 <input class="submit dialog2" type="submit" value="今すぐ予約">
 </form>
 </div>
