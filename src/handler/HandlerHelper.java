@@ -9,7 +9,7 @@ public class HandlerHelper {
 	 * @param session
 	 * @author リコーITソリューションズ株式会社 KAT-UNE
 	 */
-	public void initializeAttributeForReservationRegist(HttpSession session){
+	public static void initializeAttributeForReservationRegist(HttpSession session){
 		session.setAttribute("usageStartTimeForReservationChange", null);
 		session.setAttribute("usageEndTimeForReservationChange", null);
 		session.setAttribute("reservationNameForReservationChange",null );
