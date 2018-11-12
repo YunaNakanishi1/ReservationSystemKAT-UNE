@@ -14,7 +14,7 @@ import dto.OfficeDto;
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
-public class GetOfficeAndCategoryService implements Service {
+public class GetOfficeAndCategoryListService implements Service {
 	private List<OfficeDto> _officeList;
 	private List<CategoryDto> _categoryList;
 
