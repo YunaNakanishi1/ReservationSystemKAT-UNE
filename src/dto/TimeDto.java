@@ -19,6 +19,9 @@ public class TimeDto {
 	}
 
 	public TimeDto(Date date) {
+		if (date == null) {
+			//MyExceptionを発生させる
+		}
 		String strHour = new SimpleDateFormat("h").format(date);
 		this._hour = Integer.parseInt(strHour);
 		String strMinutes = new SimpleDateFormat("m").format(date);
