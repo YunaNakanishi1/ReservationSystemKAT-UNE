@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -74,14 +73,16 @@ public class ReservationDao {
 
 
 		//resourcesテーブルのカラムをセットするために用意
-		String _resourceName;	//リソース名
-		String _officeName;	//オフィス名
-		String _category;	//カテゴリ
-		int _capacity;	//定員
-		String _supplement;	//補足
-		List<String> _facility;	//設備
-		Timestamp _usageStopStartDate;	//利用停止開始日時
-		Timestamp _usageStopEndDate;	//利用停止終了日時
+		String resourceName;	//リソース名
+		String officeName;	//オフィス名
+		String category;	//カテゴリ
+		int capacity;	//定員
+		String supplement; //補足
+		Timestamp usageStopStartDate;	//利用停止開始日時
+		Timestamp usageStopEndDate;	//利用停止終了日時
+
+		//attendance_typesテーブルのカラムをセットするために用意
+		String attendance_type; //参加者種別
 
 
 		while (rs.next()) {
@@ -95,6 +96,16 @@ public class ReservationDao {
 			attendanceTypeId = rs.getInt("attendance_type_id");
 			reserveSupplement = rs.getTimestamp("reserve_supplement");
 			deleted = rs.getInt("deleted");
+
+			resourceName = rs.getString("resourceName");
+			officeName = rs.getString("officeName");
+			category = rs.getString("category");
+			capacity = rs.getInt("capacity");
+			supplement = rs.getString("supplement");
+			usageStopStartDate = rs.getTimestamp("usageStopStartDate");
+			usageStopEndDate = rs.getTimestamp("usageStopEndDate");
+
+			attendance_type = rs.getString("resource_id");
 		}
 
 
