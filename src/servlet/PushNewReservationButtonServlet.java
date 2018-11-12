@@ -13,6 +13,8 @@ import handler.Handler;
 import handler.PushNewReservationButtonHandler;
 
 
+import handler.PushNewReservationButtonHandler;
+
 /**
  * サーブレット番号：7
  * Servlet implementation class PushQuickReservationButtonServlet

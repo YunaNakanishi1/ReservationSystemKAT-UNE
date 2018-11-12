@@ -32,12 +32,15 @@ public class GetReservationFromIdService implements Service{
 	@Override
 	public void execute() throws SQLException {
 		ReservationDao reservationDao = new ReservationDao();
-		reservationDao.queryById(_reserveId);
+		_reservation = reservationDao.queryById(_reserveId);
 
 	}
 
+	/**
+	 * @return フィールド
+	 */
 	public ReservationDto getReservation(){
-		return null;
+		return _reservation;
 	}
 
 }

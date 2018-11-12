@@ -18,9 +18,13 @@ public class ReservationDto {
 	private int _numberOfParticipants;
 	private AttendanceTypeDto _AttendanceTypeDto;
 	private String _supplement;
-	public ReservationDto(int _reservationId, Resource _resource, String _usageDate, TimeDto _usageStartTime,
-			TimeDto _usageEndTime, String _reservationName, User _reservedPerson, User _coReservedPerson,
-			int _numberOfParticipants, AttendanceTypeDto _AttendanceTypeDto, String supplement) {
+	private int _deleted;
+
+
+	public ReservationDto(int _reservationId, Resource _resource, String _usageDate,
+			TimeDto _usageStartTime,TimeDto _usageEndTime, String _reservationName,
+			User _reservedPerson, User _coReservedPerson,int _numberOfParticipants,
+			AttendanceTypeDto _AttendanceTypeDto, String supplement, int deleted) {
 		super();
 		this._reservationId = _reservationId;
 		this._resource = _resource;
@@ -33,7 +37,11 @@ public class ReservationDto {
 		this._numberOfParticipants = _numberOfParticipants;
 		this._AttendanceTypeDto = _AttendanceTypeDto;
 		this._supplement = supplement;
+		this._deleted = deleted;
 	}
+
+
+
 	public int getReservationId() {
 		return _reservationId;
 	}
@@ -68,6 +76,9 @@ public class ReservationDto {
 		return _supplement;
 	}
 
+	public int getDeleted() {
+		return _deleted;
+	}
 
 
 }
