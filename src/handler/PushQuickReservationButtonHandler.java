@@ -16,6 +16,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dto.TimeDto;
+import exception.MyException;
 
 /**
  * servlet番号：9
