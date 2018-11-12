@@ -15,19 +15,19 @@ import dto.TimeDto;
 /**
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
- * 予約検索の初期値をセットする.
+ *         予約検索の初期値をセットする.
  *
  */
-public class ShowFirstReservationListHandler implements Handler{
+public class ShowFirstReservationListHandler implements Handler {
 
 	/**
 	 * @see handler.Handler#handleService(javax.servlet.http.HttpServletRequest)
 	 *
-	 * 予約検索の初期値をセットする.
+	 *      予約検索の初期値をセットする.
 	 */
 	@Override
 	public String handleService(HttpServletRequest request) {
-		HttpSession session =request.getSession(true);
+		HttpSession session = request.getSession(true);
 
 		HandlerHelper.initializeAttributeForReservationRegist(session);
 
@@ -36,7 +36,7 @@ public class ShowFirstReservationListHandler implements Handler{
 		session.setAttribute("reservationListForReservationList", new ArrayList<ReservationDto>());
 		session.setAttribute("usageDateForReservationList", usageDateForReservationList);
 		session.setAttribute("usageStartHourForReservationList", new TimeDto(0, 0));
-		session.setAttribute("usageEndHourForReservationList", new TimeDto(24,0));
+		session.setAttribute("usageEndHourForReservationList", new TimeDto(24, 0));
 		session.setAttribute("displayOnlyMyReservation", true);
 		return SEARCH_RESERVATION_LIST_SERVLET;
 	}

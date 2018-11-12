@@ -16,7 +16,7 @@ import handler.ShowFirstReservationListHandler;
  * Servlet implementation class ShowFirstReservationListServlet
  */
 /**
- * 予約一覧を最初に表示するときに呼び出される.
+ * 予約一覧を最初に表示するときに呼び出される. 18
  *
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
