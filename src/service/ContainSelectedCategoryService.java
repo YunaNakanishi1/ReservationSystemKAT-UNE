@@ -7,7 +7,7 @@ import dto.CategoryDto;
 import exception.MyException;
 
 /**
- * 引数のカテゴリIDが含まれているかを調べる. 17
+ * カテゴリIDがリストに含まれているかを調べる. 17
  *
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
