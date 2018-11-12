@@ -41,7 +41,7 @@ Javascriptを有効にしてください
 <div class="contents">
  <div class="dialog">
  <h2>予約詳細</h2>
- <p><font color = "blue">予約を削除しました<!-- メッセージ --></font></p>
+ <p><font color = "blue">予約が完了しました。<!-- 予約を削除しました メッセージ --></font></p>
  </div>
 
 
@@ -52,23 +52,24 @@ Javascriptを有効にしてください
  <tbody>
  <tr>
  <td class="dialog"><b>リソース</b></td>
- <td class="right2"><a href = "xxx">晴海414L</a></td>
+ <td class="right2"><a href = "xxx">晴海412S</a></td>
  </tr>
  <tr>
  <td class="one" class="dialog"><b>利用日</b></td>
- <td class="right2">2020年1月3日</td>
+ <td class="right2">2020年1月1日</td>
  </tr>
  <tr>
  <td class="dialog"><b>利用時間</b></td>
- <td class="right2">13 : 00 ～ 18 : 00</td>
+ <td class="right2">12 : 00 ～ 14 : 00</td>
  </tr>
  <tr>
  <td class="dialog"><b>予約名称</b></td>
- <td class="right2">打ち合せ四郎3</td>
+ <td class="right2">&lt;script&gt;alert("A");&lt;/script&gt;
+ </td>
  </tr>
  <tr>
  <td class="dialog"><b>利用人数</b></td>
- <td class="right2">100</td>
+ <td class="right2">1</td>
  </tr>
  <tr>
  <td><b>予約者</b></td>
@@ -76,15 +77,15 @@ Javascriptを有効にしてください
  </tr>
  <tr>
  <td><b>共同予約者</b></td>
- <td class="right2" class="dialog">理工五郎</td>
+ <td class="right2" class="dialog">----</td>
  </tr>
  <tr>
  <td><b>参加者種別</b></td>
- <td class="right2" class="dialog">RG外会議</td>
+ <td class="right2" class="dialog">なし</td>
  </tr>
  <tr>
  <td class="dialog"><b>詳細</b></td>
- <td class="right2"><div class="scroll2"></div></td>
+ <td class="right2"><div class="scroll2">&lt;script&gt;alert("B");&lt;/script&gt;</div></td>
  </tr>
  </tbody>
  </table>
