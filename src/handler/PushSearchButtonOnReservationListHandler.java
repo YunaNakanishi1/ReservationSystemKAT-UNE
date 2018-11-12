@@ -8,6 +8,8 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dto.TimeDto;
+
 public class PushSearchButtonOnReservationListHandler implements Handler{
     private static Logger _log = LogManager.getLogger();
 
@@ -22,7 +24,7 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
         String endHourStr = request.getParameter("endHour");
         String endMinutesStr = request.getParameter("endMinutes");
         String officeIdStr = request.getParameter("officeId");
-        String categoryId = request.getParameter("categoryId");
+        String categoryIdStr = request.getParameter("categoryId");
         String displayOnlyMyReservationStr = request.getParameter("displayOnlyMyReservation");
         String displayPastReservationStr = request.getParameter("displayPastReservation");
         String displayDeletedReservationStr = request.getParameter("displayDeletedReservation");
@@ -44,8 +46,39 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
             return ERROR_PAGE;
         }
 
+        TimeDto startTime = new TimeDto(startHour, startMinutes);
+        TimeDto endTime = new TimeDto(endHour, endMinutes);
 
+        //再表示用にセッションにセット
+        session.setAttribute("IDcategoryIdForReservationList", categoryIdStr);
+        session.setAttribute("IDofficeIdForReservationList", officeIdStr);
+        session.setAttribute("usageDateForReservationList", dateStr);
+        session.setAttribute("usageStartHourForReservationList", startTime);
+        session.setAttribute("usageEndHourForResourceSelect", endTime);
+        session.setAttribute("displayOnlyMyReservation", displayOnlyMyReservationStr);
+        session.setAttribute("displayPastReservation", displayPastReservationStr);
+        session.setAttribute("displayDeletedReservation", displayDeletedReservationStr);
+
+        //入力された日付が正しいか
+        CommonValidator cValidator = new CommonValidator();
+        boolean notCorrectDate = cValidator.notLenientDateOn(dateStr);
+        if(notCorrectDate){
+            boolean setComplete = setCategoryAndOffice(request, categoryIdStr, officeIdStr);
+            if(setComplete){
+                session.setAttribute("messageForReservationListUpper", "MessageHolder.EM42");
+                return RESERVE_LIST;
+            }
+            else{
+                _log.error("NumberFormatException");
+                return ERROR_PAGE;
+            }
+        }
+        
+        
         return null;
     }
-
+    private boolean setCategoryAndOffice(HttpServletRequest request,String categoryId,String officeId){
+        //後で定義
+        return false;
+    }
 }
