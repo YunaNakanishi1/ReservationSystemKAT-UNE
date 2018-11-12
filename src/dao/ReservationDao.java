@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -47,7 +48,11 @@ public class ReservationDao {
 		ResultSet rs = null;
 
 		//実行するSQL文
-		String selectReservationsSql ="select * from reservations where reserve_id = ?";
+		String selectReservationsSql
+		="select * from reservations, resources,attendance_types "
+	   + "where resources.resource_id = reservations.resource_id "
+	   + "and attendance_types.attendance_type_id = reservations.attendance_type_id"
+	   + "and reserve_id = ?;";
 
 		preparedStatement = _con.prepareStatement(selectReservationsSql);
 		preparedStatement.setInt(1,reserveId);
@@ -65,18 +70,31 @@ public class ReservationDao {
 		int numberOfParticipants;	//利用人数
 		int attendanceTypeId;	//参加者種別ID
 		Timestamp reserveSupplement; //補足
+		int deleted; //削除済み
+
+
+		//resourcesテーブルのカラムをセットするために用意
+		String _resourceName;	//リソース名
+		String _officeName;	//オフィス名
+		String _category;	//カテゴリ
+		int _capacity;	//定員
+		String _supplement;	//補足
+		List<String> _facility;	//設備
+		Timestamp _usageStopStartDate;	//利用停止開始日時
+		Timestamp _usageStopEndDate;	//利用停止終了日時
 
 
 		while (rs.next()) {
-			resourceId = rs.getString("resource_id");	//リソースID
-			usageStartDate = rs.getTimestamp("usage_start_date"); //利用開始日時
-			usageEndDate = rs.getTimestamp("usage_end_date"); //利用終了日時
-			reservationName = rs.getString("reservation_name");	//予約名称
-			reservedPersonId = rs.getString("reserved_person_id"); //予約者ID
-			coReservedPersonId = rs.getString("co_reserved_person_id");//共同予約者ID
-			numberOfParticipants = rs.getInt("number_of_participants");	//利用人数
-			attendanceTypeId = rs.getInt("attendance_type_id");	//参加者種別ID
-			reserveSupplement = rs.getTimestamp("reserve_supplement"); //補足
+			resourceId = rs.getString("resource_id");
+			usageStartDate = rs.getTimestamp("usage_start_date");
+			usageEndDate = rs.getTimestamp("usage_end_date");
+			reservationName = rs.getString("reservation_name");
+			reservedPersonId = rs.getString("reserved_person_id");
+			coReservedPersonId = rs.getString("co_reserved_person_id");
+			numberOfParticipants = rs.getInt("number_of_participants");
+			attendanceTypeId = rs.getInt("attendance_type_id");
+			reserveSupplement = rs.getTimestamp("reserve_supplement");
+			deleted = rs.getInt("deleted");
 		}
 
 

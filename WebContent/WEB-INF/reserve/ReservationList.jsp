@@ -269,12 +269,16 @@ checked
 <div class="silver">　</div>
 <br><br>
 
-<p><font color = "red">検索結果は0件です</font></p>
+<p><font color = "red">
+<c:if test="${messageForReservationListLower != null }">
+<c:out value="${messageForReservationListLower }"/>
+</c:if>
+</font></p>
 
 </div><!-- diallogとじ -->
 <br>
 <form action = "">
-<!--
+
 <table id="design-table" class="table table-striped table-bordered" style="width: 90%;" >
 					<thead>
 						<tr style="background-color: white;">
@@ -289,6 +293,15 @@ checked
 						</tr>
 					</thead>
 					<tbody>
+					<c:forEach var="obj" items="${reservationListForReservationList }" varStatus="status">
+					<tr>
+					<td><c:out value="${obj.usageDate }"/></td>
+					<td><c:out value="${obj.usageStartTime }"/>～<c:out value="${obj.usageEndTime }"/></td>
+					<td><a href=""><a><c:out value="${obj.reservationName }"/></a></td>
+
+
+					</c:forEach>
+
 							<tr>
 							<td>2020/12/25</td>
 							<td>13:00～14:00</td>
@@ -372,7 +385,7 @@ checked
 
 					</tbody>
 				</table>
-				 -->
+
 </form>
 <br>
 <br>
