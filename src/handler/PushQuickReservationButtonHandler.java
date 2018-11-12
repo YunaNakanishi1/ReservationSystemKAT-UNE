@@ -3,6 +3,8 @@
  */
 package handler;
 
+import static handler.ViewHolder.*;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -45,8 +47,15 @@ public class PushQuickReservationButtonHandler implements Handler {
 		session.setAttribute("usageDateForReservationList", usageDateForReservationList);
 
 		Date currentTime = new Date();
-		TimeDto now = new TimeDto(currentTime);
+		TimeDto currentTimeDto = null;
+		try {
+			currentTimeDto = new TimeDto(currentTime);
+		} catch(MyException e) {
+			return ERROR_PAGE;
+		}
 
+		int hour = currentTimeDto.getHour();
+		int minutes = currentTimeDto.getMinutes();
 		return null;
 	}
 

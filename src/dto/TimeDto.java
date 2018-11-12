@@ -54,4 +54,14 @@ public class TimeDto {
 			//MyException発生
 		}
 	}
+
+
+	public int getHour() {
+		return _hour;
+	}
+
+	public int getMinutes() {
+		return _minutes;
+	}
+
 }
