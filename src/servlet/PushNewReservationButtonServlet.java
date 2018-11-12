@@ -9,11 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import handler.Handler;
+import handler.PushNewReservationButtonHandler;
+
+
 /**
  * サーブレット番号：7
  * Servlet implementation class PushQuickReservationButtonServlet
  */
-@WebServlet("/PushNewReservationButtonServlet")
+@WebServlet("/reservesystem/pushnewreservationbuttonservlet")
 public class PushNewReservationButtonServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -21,7 +25,7 @@ public class PushNewReservationButtonServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 PushNewReservationHandler pushNewReservationHandler = new PushNewReservationHandler();
+		 Handler pushNewReservationHandler = new PushNewReservationButtonHandler();
 	        String view = pushNewReservationHandler.handleService(request);
 
 		 RequestDispatcher rd = request.getRequestDispatcher(view);
