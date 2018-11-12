@@ -56,6 +56,21 @@ public class PushQuickReservationButtonHandler implements Handler {
 
 		int hour = currentTimeDto.getHour();
 		int minutes = currentTimeDto.getMinutes();
+
+		int usageStartMinutes = 0;
+		if (0 <= minutes && minutes < 15) {
+			usageStartMinutes = 0;
+		} else if (15 <= minutes && minutes < 30) {
+			usageStartMinutes = 15;
+		} else if (30 <= minutes && minutes < 45) {
+			usageStartMinutes = 30;
+		} else if (45 <= minutes && minutes < 60) {
+			usageStartMinutes = 45;
+		}
+
+		TimeDto usageStartTimeForResourceSelect = new TimeDto(hour, usageStartMinutes);
+
+
 		return null;
 	}
 
