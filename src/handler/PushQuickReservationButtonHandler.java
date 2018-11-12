@@ -3,6 +3,8 @@
  */
 package handler;
 
+import static handler.ViewHolder.*;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -16,7 +18,9 @@ import org.apache.logging.log4j.Logger;
 import dto.TimeDto;
 
 /**
- * @author p000527259
+ * servlet番号：9
+ * 今すぐ予約画面の開始時刻、終了時刻を設定するメソッド
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
 public class PushQuickReservationButtonHandler implements Handler {
@@ -35,8 +39,7 @@ public class PushQuickReservationButtonHandler implements Handler {
 	public String handleService(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 	      //セッションは存在する
-		//HandleHelper.initializeAttributeForReservationRegist(session);
-		//実装未だ
+		HandlerHelper.initializeAttributeForReservationRegist(session);
 
 		//当日の日付取得, セット
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -45,9 +48,56 @@ public class PushQuickReservationButtonHandler implements Handler {
 		session.setAttribute("usageDateForReservationList", usageDateForReservationList);
 
 		Date currentTime = new Date();
-		TimeDto now = new TimeDto(currentTime);
+		TimeDto currentTimeDto = null;
+		try {
+			currentTimeDto = new TimeDto(currentTime);
+		} catch(MyException e) {
+			return ERROR_PAGE;
+		}
 
-		return null;
+		int hour = currentTimeDto.getHour();
+		int minutes = currentTimeDto.getMinutes();
+
+		//利用開始時間の設定
+		int usageStartMinutes = 0;
+		if (0 <= minutes && minutes < 15) {
+			usageStartMinutes = 0;
+		} else if (15 <= minutes && minutes < 30) {
+			usageStartMinutes = 15;
+		} else if (30 <= minutes && minutes < 45) {
+			usageStartMinutes = 30;
+		} else if (45 <= minutes && minutes < 60) {
+			usageStartMinutes = 45;
+		}
+
+		TimeDto usageStartTimeForResourceSelect = new TimeDto(hour, usageStartMinutes);
+		session.setAttribute("usageStartTimeForResourceSelect", usageStartTimeForResourceSelect);
+
+		//利用終了時間の設定
+		int usageEndHour = 0;
+		int usageEndMinutes = 0;
+
+		if (usageStartMinutes == 0 || usageStartMinutes == 15) {
+			usageEndMinutes = usageStartMinutes + THIRTY_MINUTES;
+			usageEndHour = hour;
+		} else {
+			usageEndMinutes = usageStartMinutes + THIRTY_MINUTES - SIXTY_MINUTES;
+			usageEndHour = hour + ONE_HOUR;
+		}
+
+		//24時を超えた場合24時00分にセット
+		if (usageEndHour > 24) {
+			usageEndMinutes = ZERO;
+			usageEndHour = TWENTY_FOUR;
+		}
+
+		TimeDto usageEndTimeForResourceSelect = new TimeDto(usageEndHour, usageEndMinutes);
+		session.setAttribute("usageEndTimeForResourceSelect", usageEndTimeForResourceSelect);
+
+		//戻るボタンの行き先
+		session.setAttribute("returnPageForResourceSelect", SHOW_FIRST_RESERVATION_LIST_SERVLET);
+
+		return  SHOW_QUICK_RESERVATION_SERVLET;
 	}
 
 }
