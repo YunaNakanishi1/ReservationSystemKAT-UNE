@@ -3,7 +3,17 @@
  */
 package handler;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import dto.TimeDto;
 
 /**
  * @author p000527259
@@ -15,6 +25,7 @@ public class PushQuickReservationButtonHandler implements Handler {
 	private static int ONE_HOUR = 1;
 	private static int ZERO = 0;
 	private static int TWENTY_FOUR = 24;
+	private Logger _log = LogManager.getLogger();
 
 
 	/* (非 Javadoc)
@@ -22,7 +33,19 @@ public class PushQuickReservationButtonHandler implements Handler {
 	 */
 	@Override
 	public String handleService(HttpServletRequest request) {
-		// TODO 自動生成されたメソッド・スタブ
+		HttpSession session = request.getSession(false);
+	      //セッションは存在する
+		//HandleHelper.initializeAttributeForReservationRegist(session);
+		//実装未だ
+
+		//当日の日付取得, セット
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+		LocalDateTime usageDate = LocalDateTime.now();
+		String usageDateForReservationList = usageDate.format(formatter);
+		session.setAttribute("usageDateForReservationList", usageDateForReservationList);
+
+		Date currentTime = new Date();
+		TimeDto now = new TimeDto(currentTime);
 		return null;
 	}
 
