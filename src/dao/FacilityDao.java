@@ -14,6 +14,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dto.FacilityDto;
+
 /**
  * resource_characteristicsテーブルを扱うdaoクラス.
  * @author リコーITソリューションズ株式会社 KAT-UNE
@@ -73,4 +75,48 @@ public class FacilityDao {
 
 		return facilityList;
 	}
-}
+
+	public List<FacilityDto> queryAll() throws SQLException {
+		List<FacilityDto> facilityList = new ArrayList<FacilityDto>();
+		DBHelper dbHelper=new DBHelper();
+		_con=dbHelper.connectDb();
+
+		if (_con == null) {
+			_log.error("DatabaseConnectError");
+			throw new SQLException();
+		}
+		Statement stmt=null;
+		ResultSet rs=null;
+
+		try{
+			String sql="select _facilityId,_facilityName from resource_characteristics order by _facilityId";
+
+
+			stmt=_con.createStatement();
+			rs=stmt.executeQuery(sql);
+
+			while(rs.next()){
+				 facilityList.add(new FacilityDto(rs.getString(1), rs.getString(2)));
+			}
+		}finally{
+			try{
+				dbHelper.closeResource(stmt);
+
+			}catch(Exception e1){
+				e1.printStackTrace();
+				 _log.error("FacilityName() Exception e1");
+			}
+
+			try {
+				dbHelper.closeResource(rs);
+			} catch (Exception e2) {
+				e2.printStackTrace();
+				_log.error("FacilityName() Exception e2");
+			}
+			 dbHelper.closeDb();
+		}
+
+		return  facilityList;
+		}
+	}
+
