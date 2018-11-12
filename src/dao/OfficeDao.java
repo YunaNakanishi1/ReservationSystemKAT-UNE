@@ -14,6 +14,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dto.OfficeDto;
+
 /**
  * officesテーブルを扱うdaoクラス.
  * @author リコーITソリューションズ株式会社 KAT-UNE
@@ -69,6 +71,53 @@ public class OfficeDao {
 			}
 
 
+
+		return  officeList;
+	}
+
+	/**
+	 * @return 全事業所のDTOのリスト（ID順）
+	 * @throws SQLException データベースエラー
+	 */
+	public List<OfficeDto> queryAll() throws SQLException{
+		List<OfficeDto> officeList = new ArrayList<OfficeDto>();
+		DBHelper dbHelper =new DBHelper();
+		_con=dbHelper.connectDb();
+
+		String sql="select office_id, office_name from offices order by  office_id";
+
+		Statement stmt=null;
+		ResultSet rs=null;
+
+
+			try{
+				if (_con == null) {
+					_log.error("DatabaseConnectError");
+					throw new SQLException();
+				}
+				stmt=_con.createStatement();
+				rs=stmt.executeQuery(sql);
+
+				while(rs.next()){
+					 officeList.add(new OfficeDto(rs.getString(1), rs.getString(2)));
+				}
+			}finally{
+				try{
+					dbHelper.closeResource(stmt);
+
+				}catch(Exception e1){
+					e1.printStackTrace();
+					 _log.error("officeName() Exception e1");
+				}
+
+				try {
+					dbHelper.closeResource(rs);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+					_log.error("officeName() Exception e2");
+				}
+				 dbHelper.closeDb();
+			}
 
 		return  officeList;
 	}

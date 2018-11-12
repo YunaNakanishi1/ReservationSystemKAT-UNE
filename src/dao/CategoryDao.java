@@ -14,6 +14,8 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dto.CategoryDto;
+
 /**
  * Categoriesテーブルを扱うdaoクラス.
  * @author リコーITソリューションズ株式会社 KAT-UNE
@@ -75,5 +77,52 @@ public class CategoryDao {
 
 
 		return categoryList;
+	}
+
+	/**
+	 * @return 全カテゴリDTOのリスト(ID順)
+	 * @throws SQLException データベースエラー
+	 */
+	public List<CategoryDto> queryAll() throws SQLException{
+		List<CategoryDto> categoryList = new ArrayList<CategoryDto>();
+		DBHelper dbHelper =new DBHelper();
+		_con=dbHelper.connectDb();
+
+		String sql="select category_id, category_name from categories order by  category_id";
+
+		Statement stmt=null;
+		ResultSet rs=null;
+
+
+			try{
+				if (_con == null) {
+					_log.error("DatabaseConnectError");
+					throw new SQLException();
+				}
+				stmt=_con.createStatement();
+				rs=stmt.executeQuery(sql);
+
+				while(rs.next()){
+					 categoryList.add(new CategoryDto(rs.getString(1), rs.getString(2)));
+				}
+			}finally{
+				try{
+					dbHelper.closeResource(stmt);
+
+				}catch(Exception e1){
+					e1.printStackTrace();
+					 _log.error("categoryName() Exception e1");
+				}
+
+				try {
+					dbHelper.closeResource(rs);
+				} catch (Exception e2) {
+					e2.printStackTrace();
+					_log.error("categoryName() Exception e2");
+				}
+				 dbHelper.closeDb();
+			}
+
+		return  categoryList;
 	}
 }

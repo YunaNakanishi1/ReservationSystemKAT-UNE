@@ -17,7 +17,7 @@ public class ReservationDto {
 	private User _coReservedPerson;
 	private int _numberOfParticipants;
 	private AttendanceTypeDto _AttendanceTypeDto;
-	private String supplement;
+	private String _supplement;
 	public ReservationDto(int _reservationId, Resource _resource, String _usageDate, TimeDto _usageStartTime,
 			TimeDto _usageEndTime, String _reservationName, User _reservedPerson, User _coReservedPerson,
 			int _numberOfParticipants, AttendanceTypeDto _AttendanceTypeDto, String supplement) {
@@ -32,40 +32,40 @@ public class ReservationDto {
 		this._coReservedPerson = _coReservedPerson;
 		this._numberOfParticipants = _numberOfParticipants;
 		this._AttendanceTypeDto = _AttendanceTypeDto;
-		this.supplement = supplement;
+		this._supplement = supplement;
 	}
-	public int get_reservationId() {
+	public int getReservationId() {
 		return _reservationId;
 	}
-	public Resource get_resource() {
+	public Resource getResource() {
 		return _resource;
 	}
-	public String get_usageDate() {
+	public String getUsageDate() {
 		return _usageDate;
 	}
-	public TimeDto get_usageStartTime() {
+	public TimeDto getUsageStartTime() {
 		return _usageStartTime;
 	}
-	public TimeDto get_usageEndTime() {
+	public TimeDto getUsageEndTime() {
 		return _usageEndTime;
 	}
-	public String get_reservationName() {
+	public String getReservationName() {
 		return _reservationName;
 	}
-	public User get_reservedPerson() {
+	public User getReservedPerson() {
 		return _reservedPerson;
 	}
-	public User get_coReservedPerson() {
+	public User getCoReservedPerson() {
 		return _coReservedPerson;
 	}
-	public int get_numberOfParticipants() {
+	public int getNumberOfParticipants() {
 		return _numberOfParticipants;
 	}
-	public AttendanceTypeDto get_AttendanceTypeDto() {
+	public AttendanceTypeDto getAttendanceTypeDto() {
 		return _AttendanceTypeDto;
 	}
 	public String getSupplement() {
-		return supplement;
+		return _supplement;
 	}
 
 
