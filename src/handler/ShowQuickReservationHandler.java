@@ -39,6 +39,7 @@ public class ShowQuickReservationHandler implements Handler {
 		} catch (MyException e) {
 			return ERROR_PAGE;
 		}
+
 		session.setAttribute("usageStartTimeForResourceSelect", usageStartTimeForResourceSelect);
 
 		return QUIICK_RESERVATION;
