@@ -15,7 +15,8 @@ public class TimeDto {
 	private int _minutes;
 
 	public TimeDto(int hour, int minutes) {
-
+		this._hour = hour;
+		this._minutes = minutes;
 	}
 
 	/**
@@ -54,4 +55,14 @@ public class TimeDto {
 			//MyException発生
 		}
 	}
+
+
+	public int getHour() {
+		return _hour;
+	}
+
+	public int getMinutes() {
+		return _minutes;
+	}
+
 }
