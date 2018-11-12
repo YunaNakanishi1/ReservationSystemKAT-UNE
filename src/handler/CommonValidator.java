@@ -204,7 +204,7 @@ public class CommonValidator {
         try{
             inputFormat.parse(dateStr);
             _dateStr = dateStr;
-            return true;
+            return false;
 
         }catch (ParseException e) {
             return true;
