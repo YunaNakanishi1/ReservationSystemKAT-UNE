@@ -1,5 +1,11 @@
 package dto;
 
+/**
+ * 予約情報を格納するDTO.
+ *
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ */
 public class ReservationDto {
 	private int _reservationId;
 	private Resource _resource;
