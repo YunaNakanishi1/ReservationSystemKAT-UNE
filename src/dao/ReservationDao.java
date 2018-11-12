@@ -5,7 +5,9 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,11 +23,11 @@ public class ReservationDao {
 	private Connection _con = null;
 	private static Logger _log = LogManager.getLogger();
 
-	
-	
-	
+
+
+
 	/**
-	  * 
+	  * 引数でもらった予約IDから
 	  * @param reserveId 予約ID
 	  * @return
 	  * @throws SQLException
@@ -39,6 +41,11 @@ public class ReservationDao {
 			_log.error("DatabaseConnectError");
 			throw new SQLException();	//エラー処理はハンドラーに任せる
 		}
+
+		Statement stmt = null;
+		ResultSet rs = null;
+		
+		String sql="";
 
 		return null;
 
