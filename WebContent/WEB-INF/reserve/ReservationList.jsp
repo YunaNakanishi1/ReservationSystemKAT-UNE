@@ -297,7 +297,13 @@ checked
 					<tr>
 					<td><c:out value="${obj.usageDate }"/></td>
 					<td><c:out value="${obj.usageStartTime }"/>～<c:out value="${obj.usageEndTime }"/></td>
-					<td><a href=""><a><c:out value="${obj.reservationName }"/></a></td>
+					<td><a href="showReservationDetails?reservationId=${obj.reservationId }"><c:out value="${obj.reservationName }"/></a></td>
+					<td><c:out value="${obj.resource.resourceName }"/></td>
+					<td><c:out value="${obj.resource.officeName }"/></td>
+					<td><c:out value="${obj.resource.category }"/></td>
+					<td><c:out value="${obj.reservedPerson.userId }"/></td>
+
+
 
 
 					</c:forEach>
