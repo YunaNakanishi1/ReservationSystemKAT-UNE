@@ -78,6 +78,7 @@ public class SearchReservationListHandler implements Handler {
 				}
 
 			_session.setAttribute("reservationListForReservationList", reservationList);
+			_session.setAttribute("reservationListSizeForReservationList", reservationList.size());
 			}
 
 		} catch (MyException e) {
