@@ -15,7 +15,7 @@ import handler.ShowResourceSelectHandler;
 /**
  * Servlet implementation class ShowResourceSelectServlet
  */
-@WebServlet("/reservesystem/ShowResourceSelect")
+@WebServlet("/reservesystem/showResourceSelect")
 public class ShowResourceSelectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
