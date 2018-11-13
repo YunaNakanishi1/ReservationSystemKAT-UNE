@@ -18,7 +18,7 @@ import handler.ShowQuickReservationHandler;
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
-@WebServlet("/showquickreservation")
+@WebServlet("/reservesystem/showquickreservation")
 public class ShowQuickReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -34,5 +34,12 @@ public class ShowQuickReservationServlet extends HttpServlet {
         RequestDispatcher rd = request.getRequestDispatcher(view);
         rd.forward(request, response);
 	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		doGet(request,response);
+
+	}
+
+
 
 }

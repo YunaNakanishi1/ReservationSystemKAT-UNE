@@ -138,14 +138,17 @@ selected
 
 ：
 <select name = "startMinutes" id="usageStartMinute">
-<option value="0"<c:if test="${usageStartTimeForResourceSelect.minutes == 0}">selected
-</c:if>>00</option>
-<option value="15"<c:if test="${usageStartTimeForResourceSelect.minutes == 15}">selected
-</c:if>>15</option>
-<option value="30"<c:if test="${usageStartTimeForResourceSelect.minutes == 30}">selected
-</c:if>>30</option>
-<option value="45"<c:if test="${usageStartTimeForResourceSelect.minutes == 45}">selected
-</c:if>>45</option>
+<option value="00"
+		>00</option>
+		<c:forEach begin="1" end="3" varStatus="status">
+		<option value="<c:out value="${status.index * 15 }"/>"
+		<c:if test="${status.index * 15 == usageStartTimeForResourceSelect.minutes }">
+		selected
+		</c:if>
+		><c:out value="${status.index * 15 }"/>
+		</option>
+		</c:forEach>
+
 </select>
 
 ～
@@ -171,14 +174,16 @@ selected
 </select>
 ：
 <select name = "endMinutes" id="usageEndMinute">
-<option value="0"<c:if test="${usageEndTimeForResourceSelect.minutes == 0}">selected
-</c:if>>00</option>
-<option value="15"<c:if test="${usageEndTimeForResourceSelect.minutes == 15}">selected
-</c:if>>15</option>
-<option value="30"<c:if test="${usageEndTimeForResourceSelect.minutes == 30}">selected
-</c:if>>30</option>
-<option value="45"<c:if test="${usageEndTimeForResourceSelect.minutes == 45}">selected
-</c:if>>45</option>
+<option value="00"
+		>00</option>
+		<c:forEach begin="1" end="3" varStatus="status">
+		<option value="<c:out value="${status.index * 15 }"/>"
+		<c:if test="${status.index * 15 == usageEndTimeForResourceSelect.minutes }">
+		selected
+		</c:if>
+		><c:out value="${status.index * 15 }"/>
+		</option>
+		</c:forEach>
 </select>
 
 の中で<br>
@@ -204,14 +209,16 @@ selected
 </select>
 時間
 <select name = "actualUseTimeMinutes" id="usageMinute">
-<option value="0"<c:if test="${usageTimeForReservationSelect.minutes == 0}">selected
-</c:if>>00</option>
-<option value="15"<c:if test="${usageTimeForReservationSelect.minutes == 15}">selected
-</c:if>>15</option>
-<option value="30"<c:if test="${usageTimeForReservationSelect.minutes == 30}">selected
-</c:if>>30</option>
-<option value="45"<c:if test="${usageTimeForReservationSelect.minutes == 45}">selected
-</c:if>>45</option>
+<option value="00"
+		>00</option>
+		<c:forEach begin="1" end="3" varStatus="status">
+		<option value="<c:out value="${status.index * 15 }"/>"
+		<c:if test="${status.index * 15 == usageTimeForReservationSelect.minutes }">
+		selected
+		</c:if>
+		><c:out value="${status.index * 15 }"/>
+		</option>
+		</c:forEach>
 </select>
 分　利用する
 </div>
@@ -391,7 +398,6 @@ checked
 </div>
 
 <br>
-
 
 <br>
 
