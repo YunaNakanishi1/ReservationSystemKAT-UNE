@@ -23,7 +23,9 @@ import service.GetResourceCharacteristicListService;
 
 
 /**
- * @author z00h230741
+ * サーブレット番号：36
+ * リソース選択画面を表示するための情報をセット.
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
 public class ShowResourceSelectHandler implements Handler{
@@ -32,10 +34,9 @@ public class ShowResourceSelectHandler implements Handler{
 	@Override
 	public String handleService(HttpServletRequest request){
 		HttpSession session =request.getSession(true);
-		HandlerHelper handlerHelper = new HandlerHelper();
 
-		String categoryId = (String)session.getAttribute("categoryIdForResourceSelect");
-		String officeId = (String)session.getAttribute("officeIdForResourceSelect");
+		String categoryListForResourceSelect = (String)session.getAttribute("ForResourceSelect");
+		String officeListForResourceSelect = (String)session.getAttribute("officeListForResourceSelectForResourceSelect");
 		List<String> facilityIdListForResourceSelect = (List<String>)session.getAttribute("facilityIdListForResourceSelect");
 
 		//事務所・カテゴリ一覧取得
@@ -84,37 +85,36 @@ public class ShowResourceSelectHandler implements Handler{
 		}
 
 		//カテゴリ選択チェック取得
-		ContainSelectedCategoryService containSelectedCategoryService = new ContainSelectedCategoryService(categoryList,categoryId);
+		ContainSelectedCategoryService containSelectedCategoryService = new ContainSelectedCategoryService(categoryList,categoryListForResourceSelect);
 		//boolean型の変数を用意
 		boolean selectedCategory;
 		if(containSelectedCategoryService.validate()){
-			try{
+
 				containSelectedCategoryService.execute();
 				selectedCategory=containSelectedCategoryService.getResult();
 
-			}catch(SQLException e){
-					  _log.error("SQLException");
+			if(selectedCategory==false){
+				_log.error("Noselected");
 				return ERROR_PAGE;
 			}
-
 		}else{
-				_log.error("validateError");
+			_log.error("validateError");
 			return ERROR_PAGE;
 		}
 
 		//事業所選択チェック取得
-		ContainSelectedOfficeService containSelectedOfficeService = new ContainSelectedOfficeService(officeList,officeId);
+		ContainSelectedOfficeService containSelectedOfficeService = new ContainSelectedOfficeService(officeList,officeListForResourceSelect);
 		//boolean型の変数を用意
 		boolean selectedOffice;
 			if(containSelectedOfficeService.validate()){
-				try{
-					containSelectedOfficeService.execute();
-					selectedOffice=containSelectedOfficeService.getResult();
+				containSelectedOfficeService.execute();
+				selectedOffice=containSelectedOfficeService.getResult();
 
-				}catch(SQLException e){
-					_log.error("SQLException");
+				if(selectedOffice==false){
+					_log.error("Noselected");
 					return ERROR_PAGE;
 				}
+
 
 			}else{
 				_log.error("validateError");
@@ -124,21 +124,29 @@ public class ShowResourceSelectHandler implements Handler{
 		//事業所選択チェック取得
 		ContainSelectedResourceCharacteristicService containSelectedResourceCharacteristicService = new ContainSelectedResourceCharacteristicService(facilityIdListForResourceSelect,facilityList);
 		//boolean型の変数を用意
+
 			boolean selectedResourceCharacteristic;
 				if(containSelectedResourceCharacteristicService.validate()){
-					try{
+
 						containSelectedResourceCharacteristicService.execute();
 						selectedResourceCharacteristic=containSelectedResourceCharacteristicService.getResult();
 
-					}catch(SQLException e){
-						_log.error("SQLException");
-						return ERROR_PAGE;
-					}
+						if(selectedResourceCharacteristic==false){
+							_log.error("Noselected");
+							return ERROR_PAGE;
+						}
 
 				}else{
 					_log.error("validateError");
 					return ERROR_PAGE;
 				}
+
+		//requestに各値をセット
+				request.setAttribute("categoryListForResourceSelect",categoryList);
+				request.setAttribute("officeListForResourceSelect",officeList);
+				request.setAttribute("facilityListForResourceSelect", facilityList);
+
+				return RESOURCE_SELECT;
 
 		}
 
