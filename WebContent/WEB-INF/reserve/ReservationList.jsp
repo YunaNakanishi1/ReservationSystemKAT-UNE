@@ -277,7 +277,7 @@ checked
 </div><!-- diallogとじ -->
 <br>
 <form action = "">
-<c:if test="${reservationListForReservationListsize!=0 }">
+<c:if test="${reservationListSizeForReservationList!=0 }">
 <table id="design-table" class="table table-striped table-bordered" style="width: 90%;" >
 					<thead>
 						<tr style="background-color: white;">

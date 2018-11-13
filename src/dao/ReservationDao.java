@@ -317,7 +317,7 @@ public class ReservationDao {
 				TimeDto resultUsageStartTime=new TimeDto(rs.getTimestamp("starttime"));
 				TimeDto resultUsageEndTime=new TimeDto(rs.getTimestamp("endtime"));
 
-				ReservationDto reservation = new ReservationDto(rs.getInt("reserveid"), resource, resultUsageDate, resultUsageStartTime, resultUsageEndTime, rs.getString("reservename"), user, null, 0, null, null, rs.getInt("deleted"));
+				ReservationDto reservation = new ReservationDto(rs.getInt("reserveid"), resource, resultUsageDate, resultUsageStartTime, resultUsageEndTime, rs.getString("reservename"), user, null, 0, null, null, rs.getInt("reservedeleted"));
 				reservationList.add(reservation);
 			}
 
