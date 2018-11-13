@@ -137,8 +137,28 @@ public class ReservationDao {
 
 
 
-	public List<ReservationDto> queryByInput(Timestamp currenTime,String usageDate,TimeDto usageStartTime,TimeDto usagEndTime,String officeId,String categoryId,String userId,boolean onlyMyReservation,boolean pastReservation,boolean deletedReservation){
+	public List<ReservationDto> queryByInput(Timestamp currenTime,String usageDate,TimeDto usageStartTime,TimeDto usagEndTime,String officeId,String categoryId,String userId,boolean onlyMyReservation,boolean pastReservation,boolean deletedReservation)throws SQLException{
 		List<ReservationDto> reservationList=new ArrayList<ReservationDto>();
+
+		DBHelper dbHelper = new DBHelper();
+		_con = dbHelper.connectDb(); //dbに接続
+
+		if (_con == null) {
+			_log.error("DatabaseConnectError");
+			throw new SQLException();	//エラー処理はハンドラーに任せる
+		}
+
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		StringBuilder sqlBuilder=new StringBuilder();
+
+		try{
+			sqlBuilder.append("WITH PARAMS AS ( SELECT ? AS p1_current_time,? AS p2_usage_date,? AS p3 _");
+
+
+		}finally{
+
+		}
 
 		return reservationList;
 	}
