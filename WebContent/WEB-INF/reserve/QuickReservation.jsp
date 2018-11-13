@@ -57,11 +57,11 @@
 							</option>
 
 							<c:forEach var="obj" items="${officeListForResourceSelect}" varStatus="status">
-							<option value="${obj}"
-							<c:if test="${obj==officeIdForResourceSelect}">
+							<option value="${obj.officeId}"
+							<c:if test="${obj.officeId==officeIdForResourceSelect}">
 							 selected
 							</c:if>>
-							<c:out value="${obj}"/></option>
+							<c:out value="${obj.officeName}"/></option>
 							</c:forEach>
 						</select>
 					</td>
@@ -76,11 +76,11 @@
 							</option>
 
 							<c:forEach var="obj" items="${categoryListForResourceSelect}" varStatus="status">
-							<option value="${obj}"
-							<c:if test="${obj==categoryIdForResourceSelect}">
+							<option value="${obj.categoryId}"
+							<c:if test="${obj.categoryId==categoryIdForResourceSelect}">
 							 selected
 							</c:if>>
-							<c:out value="${obj}"/></option>
+							<c:out value="${obj.categoryName}"/></option>
 							</c:forEach>
 						</select></td>
 					</tr>
@@ -98,10 +98,12 @@
 						 ～
 						<!--  09:45 ～-->
 
-
+						<select name = "usageEndHour" id = "usageEndHour"  onchange="hourChange('usageEndHour','usageEndMinute')">
+						<!--
 						<select name="usageEndHourForResourceSelect"
 							id="usageEndHourForResourceSelect"
 							onchange="hourChange('usageEndHourForResourceSelect','QuickStartMinute')">
+							 -->
 
 								<c:forEach begin="0" end="9" varStatus="status">
 									<option value="0<c:out value="${status.index}"/>"
@@ -124,15 +126,21 @@ selected
 								</c:forEach>
 						</select> :
 
-						<select name="usageEndMinutesForResourceSelect" id="QuickStartMinute">
-								<option value="0"<c:if test="${usageEndTimeForResourceSelect.minutes == 0}">selected
-</c:if>>00</option>
-								<option value="15"<c:if test="${usageEndTimeForResourceSelect.minutes == 15}">selected
-</c:if>>15</option>
-								<option value="30"<c:if test="${usageEndTimeForResourceSelect.minutes == 30}">selected
-</c:if>>30</option>
-								<option value="45"<c:if test="${usageEndTimeForResourceSelect.minutes == 45}">selected
-</c:if>>45</option>
+	<select name = "usageEndMinute" id = "usageEndMinute"  onchange="hourChange('usageEndHour','usageEndMinute')">
+						<!-- <select name="usageEndMinutesForResourceSelect" id="QuickEndMinute"> -->
+
+				<option value="00"
+				>00</option>
+				<c:forEach begin="1" end="3" varStatus="status">
+				<option value="<c:out value="${status.index * 15 }"/>"
+				<c:if test="${status.index * 15 == usageEndTimeForResourceSelect.minutes }">
+				selected
+				</c:if>
+				><c:out value="${status.index * 15 }"/>
+				</option>
+				</c:forEach>
+
+
 						</select>
 
 						</td>
@@ -147,7 +155,7 @@ selected
 			<table class="table3">
 				<tr>
 					<td>
-					<form action="/ReservationSystemKAT-UNE/reservesystem/pushSearchButtonOnReservationList" method="post">
+					<form action="/ReservationSystemKAT-UNE/reservesystem/pushSearchButtonOnQuickReservation" method="post">
 							<input class="submit" class="dialog" type="submit" value="検索">
 					</form>
 					</td>

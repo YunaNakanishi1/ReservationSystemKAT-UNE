@@ -226,7 +226,7 @@ selected
 <option value="aaa" selected>全て</option>
 <c:forEach var="obj" items="${categoryListForReservationList}" varStatus="status">
 <option value="<c:out value ="${obj.categoryId}"/>"
-<c:if test="${obj.categoryId == categoryIdForReservationList }">
+<c:if test="${obj.cateogryId == categoryIdForReservationList }">
 selected
 </c:if>
 ><c:out value="${obj.categoryName }"/>
