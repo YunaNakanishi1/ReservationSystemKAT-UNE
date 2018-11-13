@@ -41,7 +41,7 @@ Javascriptを有効にしてください
 
  <!-- メッセージを表示 -->
  <p><font color = "blue">${messageForReservationRegist}
-  ${messageForDeleteomCpleted} ${messageForReservationChange} </font></p>
+  ${messageForDeleteCompleted} ${messageForReservationChange} </font></p>
  </div>
 
 <table class="table2">
