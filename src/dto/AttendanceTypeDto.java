@@ -7,14 +7,14 @@ package dto;
  *
  */
 public class AttendanceTypeDto {
-	private String _attendanceTypeId;
+	private int _attendanceTypeId;
 	private String _attendanceTypeName;
-	public AttendanceTypeDto(String attendanceTypeId, String attendanceTypeName) {
+	public AttendanceTypeDto(int attendanceTypeId, String attendanceTypeName) {
 		super();
 		this._attendanceTypeId = attendanceTypeId;
 		this._attendanceTypeName = attendanceTypeName;
 	}
-	public String getAttendanceTypeId() {
+	public int getAttendanceTypeId() {
 		return _attendanceTypeId;
 	}
 	public String getAttendanceTypeName() {

@@ -38,6 +38,8 @@ public class ShowFirstReservationListHandler implements Handler {
 		session.setAttribute("usageStartHourForReservationList", new TimeDto(0, 0));
 		session.setAttribute("usageEndHourForReservationList", new TimeDto(24, 0));
 		session.setAttribute("displayOnlyMyReservation", true);
+		session.setAttribute("displayPastReservation", false);
+		session.setAttribute("displayDeletedReservation", false);
 		return SEARCH_RESERVATION_LIST_SERVLET;
 	}
 

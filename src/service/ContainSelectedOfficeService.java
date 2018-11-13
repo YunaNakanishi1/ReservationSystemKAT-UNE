@@ -1,6 +1,5 @@
 package service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import dto.OfficeDto;
@@ -33,7 +32,7 @@ public class ContainSelectedOfficeService implements Service {
 	}
 
 	@Override
-	public void execute() throws SQLException {
+	public void execute(){
 		if (_officeId == null) {
 			_result = true;
 		} else {
