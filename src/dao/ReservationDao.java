@@ -9,18 +9,16 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dto.ReservationDto;
 import dto.Resource;
+import dto.TimeDto;
 
 /**
   * (6 8 10 11 12 13 17 18).
@@ -79,7 +77,7 @@ public class ReservationDao {
 			int numberOfParticipants;	//利用人数
 			int attendanceTypeId;	//参加者種別ID
 			Timestamp reserveSupplement; //補足
-			int deleted; //削除済み
+			int reservationDeleted; //削除済み
 
 
 			//resourcesテーブルのカラムをセットするために用意
@@ -138,38 +136,35 @@ public class ReservationDao {
 				facility.add(rsForFacility.getString("resource_characteristic_name"));
 			}
 
+
+
 			//ResourceDtoを作成
 			Resource resource = new Resource(resourceId, resourceName, officeName, category,
 				capacity, supplement, deleted, facility, usageStopStartDate,usageStopEndDate);
 
-			
-			//「利用日」「利用開始時間」「利用終了時間」を作る
-			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy年M月d");
 
-//			/* 「yyyy/MM/dd」形式で正しい日付か	*/
-//			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy/MM/dd");
-//			inputFormat.setLenient(false); // 日時解析を厳密に行う
-//
-//			SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd");
-//			timestampFormat.setLenient(false); // 日時解析を厳密に行う
-//
-//			datePattern = Pattern.compile("^[0-9]{4}/[0-9]{2}/[0-9]{2}$");
-//			Matcher m = datePattern.matcher(date);
-//			notDate = !m.find();
-//
-//			/* 「yyyy/MM/dd」形式で正しい日付か */
-//			if (!notDate) {
-//
-//				try {
-//					_date = Timestamp
-//							.valueOf(timestampFormat.format(inputFormat.parse(date)) + " " + hour + ":" + minute + ":00");
-//					notDate = false;
-//				} catch (ParseException e) {
-//					notDate = true;
-//				}
-//			}
+			//「利用日」を作る
+			SimpleDateFormat usageDateFormat = new SimpleDateFormat("yyyy年M月d日");
+			String usageDate = usageDateFormat.format(usageStartDate);
+
+			//「利用開始時間」「利用終了時間」のDTOを作る
+			TimeDto usageStartTime = new TimeDto(usageStartDate);
+			TimeDto usageEndTime = new TimeDto(usageEndDate);
+
+
+			//「予約者」「共同予約者」のUserDtoを作る
 			
 			
+//			private String _userId;
+//			private String _password;
+//			private int _authority;
+//			private String _familyName;
+//			private String _firstName;
+//			private String _phoneNumber;
+//			private String _mailAddress;
+//			
+//			user_id  | password | family_name | first_name | authority |     tel      |       mail_address
+
 		//		private int _reservationId;				ok
 		//		private Resource _resource;				リソースDTO
 		//		private String _usageDate;				利用日
@@ -183,9 +178,9 @@ public class ReservationDao {
 		//		private String _supplement;				ok 補足
 
 			ReservationDto reservationDto = new ReservationDto(reserveId, resource,
-					usageDate, _usageStartTime, _usageEndTime, _reservationName,
-					_reservedPerson, _coReservedPerson, _numberOfParticipants,
-					_AttendanceTypeDto, supplement);
+					usageDate, usageStartTime, usageEndTime, reservationName,
+					reservedPerson, coReservedPerson, numberOfParticipants,
+					AttendanceTypeDto, supplement);
 
 		}finally{
 			try {
