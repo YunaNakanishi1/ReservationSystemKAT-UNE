@@ -3,6 +3,7 @@ package service;
 import java.sql.SQLException;
 
 import dto.TimeDto;
+import exception.MyException;
 
 /**
  *
@@ -37,7 +38,7 @@ public class CheckResourceSelectInputService implements Service {
 	}
 
 	@Override
-	public boolean validate() {
+	public boolean validate() throws MyException {
 		ServiceValidator serviceValidator = new ServiceValidator();
 		boolean serviceValidate =  serviceValidator.checkQuickReservationValidate(_date, _usageStartTime, _usageEndTime, _usageTime, _capacity, _resourceName);
 		return serviceValidate;
