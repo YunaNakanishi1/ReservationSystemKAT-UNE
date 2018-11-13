@@ -62,7 +62,7 @@ function hyoji1()
 
 </script>
 
-	<script type="text/javascript" src="pulldownControll.js">	</script>
+	<script type="text/javascript" src="script/pulldownControll.js">	</script>
 
 
 </head>
@@ -82,7 +82,7 @@ function hyoji1()
 Javascriptを有効にしてください
 </div>
 </div>
-<script type="text/javascript" src="JavascriptErrorLabel.js">	</script>
+<script type="text/javascript" src="script/JavascriptErrorLabel.js">	</script>
 <!-- javascript警告ラベル終わり -->
 
 <div class="contents">
@@ -114,7 +114,7 @@ Javascriptを有効にしてください
 </c:if>
 <table class="table4">
 <tbody>
-<form action="pushSearchButtonOnReservationList" method="post">
+<form action="reservesystem/pushSearchButtonOnReservationList" method="post">
 <tr>
 <td class="one" class="dialog"><b>　利用日</b><a class="red"> ※</a></td>
 <td class="right2">
