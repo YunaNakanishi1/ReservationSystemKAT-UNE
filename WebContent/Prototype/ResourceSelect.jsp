@@ -91,7 +91,7 @@ Javascriptを有効にしてください
 
 
 <div class = "frame">
-<p><font color = "red"><!--メッセージ --></font></p>
+<p><font color="red"><c:out value = "${messageForResourceSelectUpper}"/></font></p>
 <form action="setresource" method="post">
 
 
@@ -100,7 +100,7 @@ Javascriptを有効にしてください
 <tr>
 <td class="one" class="dialog" ><b>　利用日</b><a class="red"> ※</a></td>
 <td class="right2">
-<input type="text" placeholder="2018/1/1（年は省略可）" name="usageDate"><font color = "red">×</font>
+<input type="text" placeholder="2018/1/1（年は省略可）" name="date"><font color = "red">×</font>
 </td>
 </tr>
 
@@ -108,7 +108,7 @@ Javascriptを有効にしてください
 <td><b>　利用時間</b><a class="red"> ※</a></td>
 <td class="right2"><div class="dialog2">
 
-<select name = "usageStartHour" id = "usageStartHour" onchange="hourChange('usageStartHour','usageStartMinute')">
+<select name = "startHour" id = "usageStartHour" onchange="hourChange('usageStartHour','usageStartMinute')">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
@@ -130,7 +130,7 @@ selected
 </select>
 
 ：
-<select name = "usageStartMinute" id="usageStartMinute">
+<select name = "startMinutes" id="usageStartMinute">
 <option value="aaa">00</option>
 <option value="aaa">15</option>
 <option value="aaa">30</option>
@@ -138,7 +138,7 @@ selected
 </select>
 
 ～
-<select name = "usageEndHour" id="usageEndHour" onchange="hourChange('usageEndHour','usageEndMinute');">
+<select name = "endHour" id="usageEndHour" onchange="hourChange('usageEndHour','usageEndMinute');">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
@@ -159,7 +159,7 @@ selected
 </c:forEach>
 </select>
 ：
-<select name = "usageEndMinute" id="usageEndMinute">
+<select name = "endMinutes" id="usageEndMinute">
 <option value="aaa">00</option>
 <option value="aaa">15</option>
 <option value="aaa">30</option>
@@ -167,7 +167,7 @@ selected
 </select>
 
 の中で<br>
-<select name = "usageHour"  id = "usageHour" onchange="hourChange('usageHour','usageMinute')">
+<select name = "actualUseTimeHour"  id = "usageHour" onchange="hourChange('usageHour','usageMinute')">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
 <c:if test="${hasResourceData && stopStartHour == 0 + status.index }">
@@ -188,7 +188,7 @@ selected
 </c:forEach>
 </select>
 時間
-<select name = "usageMinute" id="usageMinute">
+<select name = "actualUseTimeMinutes" id="usageMinute">
 <option value="aaa">00</option>
 <option value="aaa">15</option>
 <option value="aaa">30</option>
@@ -232,7 +232,7 @@ selected
 (※定員がないものは0人で登録されています)<br><br>
 
 <div class="dialog2">
-<input type="text" name="participants">人以上
+<input type="text" name="capacity">人以上
 </div>
 </td>
 </tr>
@@ -246,11 +246,23 @@ selected
 <tr>
 <td class="dialog"><b>リソース特性</b></td>
 <td><div class="scroll4">
-<input type="checkbox" name = "facility" value = "ホワイトボード有" />ホワイトボード有<br>
-<input type="checkbox" name = "facility" value = "プロジェクター有" />プロジェクター有<br>
-<input type="checkbox" name = "facility" value = "外部スピーカー有" />外部スピーカー有<br>
-<input type="checkbox" name = "facility" value = "ホワイトボード有" />ホワイトボード有<br>
-<input type="checkbox" name = "facility" value = "プロジェクター有" />プロジェクター有<br>
+<c:forEach var="obj" items="${facilityList}" varStatus="status">
+<input type="checkbox" name = "resourceCharacteristics" value = <c:out value="${obj}" />
+<c:if test ="${obj==facilityIdListForResourceSelect[status.index]}">
+checked
+</c:if>
+>
+<c:out value="${obj}" />
+<br>
+</c:forEach>
+
+<!--
+<input type="checkbox" name = "resourceCharacteristics" value = "ホワイトボード有" />ホワイトボード有<br>
+<input type="checkbox" name = "resourceCharacteristics" value = "プロジェクター有" />プロジェクター有<br>
+<input type="checkbox" name = "resourceCharacteristics" value = "外部スピーカー有" />外部スピーカー有<br>
+<input type="checkbox" name = "resourceCharacteristics" value = "ホワイトボード有" />ホワイトボード有<br>
+<input type="checkbox" name = "resourceCharacteristics" value = "プロジェクター有" />プロジェクター有<br>
+-->
 
 <br>
 </div></td>
@@ -280,9 +292,9 @@ selected
 </div>
 
 <br><br><br><br><br><br>
-<p><font color = "red">検索結果は0件です。<!-- メッセージ --></font></p>
+<p><font color = "red"><c:out value = "${messageForResourceSelectLower}"/></font></p>
 <form action = "">
-<!--
+
 <table id="design-table" class="table table-striped table-bordered" style="width: 90%;">
 					<thead>
 						<tr>
@@ -317,7 +329,7 @@ selected
 
 					</tbody>
 				</table>
- -->
+
 				</form>
 </div>
 

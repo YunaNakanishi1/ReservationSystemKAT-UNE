@@ -52,6 +52,7 @@ public class PushQuickReservationButtonHandler implements Handler {
 		try {
 			usageStartTimeForResourceSelect = handlerHelper.getUsageStartTime();
 		} catch (MyException e) {
+			_log.error("format error");
 			return ERROR_PAGE;
 		}
 
