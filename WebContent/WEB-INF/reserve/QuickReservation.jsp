@@ -49,7 +49,7 @@
 					<!-- nullの時全てってやつ -->
 						<td class="one" class="dialog"><b>　　　事業所</b></td>
 						<td class="right2">
-						<select name ="officeName">
+						<select name ="office">
 							<option value="全て"
 								<c:if test="${obj==null}">
 								 selected
@@ -68,7 +68,7 @@
 					</tr>
 					<tr>
 						<td class="dialog"><b>　　　カテゴリ</b></td>
-						<td class="right2"><select name ="officeName">
+						<td class="right2"><select name ="category">
 							<option value="全て"
 								<c:if test="${obj==null}">
 								 selected
