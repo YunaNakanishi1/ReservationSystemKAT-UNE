@@ -9,9 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -203,4 +206,29 @@ public class ReservationDao {
 
 	}
 
+	public List<ReservationDto> queryByInput(Timestamp currenTime,String usageDate,TimeDto usageStartTime,TimeDto usagEndTime,String officeId,String categoryId,String userId,boolean onlyMyReservation,boolean pastReservation,boolean deletedReservation)throws SQLException{
+		List<ReservationDto> reservationList=new ArrayList<ReservationDto>();
+
+		DBHelper dbHelper = new DBHelper();
+		_con = dbHelper.connectDb(); //dbに接続
+
+		if (_con == null) {
+			_log.error("DatabaseConnectError");
+			throw new SQLException();	//エラー処理はハンドラーに任せる
+		}
+
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		StringBuilder sqlBuilder=new StringBuilder();
+
+		try{
+			sqlBuilder.append("WITH PARAMS AS ( SELECT ? AS p1_current_time,? AS p2_usage_date,? AS p3 _");
+
+
+		}finally{
+
+		}
+
+		return reservationList;
+	}
 }

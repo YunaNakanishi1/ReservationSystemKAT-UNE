@@ -76,6 +76,7 @@ public class FacilityDao {
 		return facilityList;
 	}
 
+
 	/**
 	 * リソース特性を全件取得するメソッド
 	 * @return FacilityDtoのリスト(リソース特性テーブルが0件の場合、空のリストを返す）
