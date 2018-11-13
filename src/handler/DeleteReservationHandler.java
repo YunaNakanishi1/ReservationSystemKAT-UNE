@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import dto.ReservationDto;
 import dto.User;
+import service.DeleteReservationService;
 import service.GetReservationFromIdService;
 
 /**
@@ -100,7 +101,6 @@ public class DeleteReservationHandler implements Handler{
 			 _log.error("reservedPersonIsNull");
 			 return ERROR_PAGE;
 		}
-
 
 
 
