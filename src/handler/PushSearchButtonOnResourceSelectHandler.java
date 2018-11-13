@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import dto.TimeDto;
+import exception.MyException;
+import service.CheckResourceSelectInputService;
 
 /**
  *
@@ -77,7 +79,34 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         	return SHOW_RESOURCE_SELECT_SERVLET;
         }
 
-		return null;
+        //日付の入力チェック
+        if(validator.notLenientDateOn(dateStr)) {
+        	session.setAttribute("messageForResourceSelectUpper", EM42);
+        	return SHOW_RESOURCE_SELECT_SERVLET;
+        } else {
+        	dateStr = validator.getDateStr();
+        }
+
+        //入力バリデーションチェック
+        CheckResourceSelectInputService checkResourceSelectInputService = new CheckResourceSelectInputService(dateStr, usageStartTimeForResourceSelect, usageEndTimeForResourceSelect, usageTimeForResourceSelect, capacityStr, resourceNameStr);
+        try {
+        	if(checkResourceSelectInputService.validate()) {
+        		return SHOW_RESOURCE_SELECT_SERVLET;
+        	}
+        } catch (MyException e) {
+        	return ERROR_PAGE;
+        }
+
+        int startTime = usageStartTimeForResourceSelect.getTimeMinutesValue();
+        int endTime = usageEndTimeForResourceSelect.getTimeMinutesValue();
+        int actualUseTime = usageTimeForResourceSelect.getTimeMinutesValue();
+        if ((endTime - startTime) < actualUseTime) {
+        	session.setAttribute("resultMessageForReservationListUpper",PM10);
+        	TimeDto updateUsageTime = new TimeDto(endTime - startTime);
+        	session.setAttribute("usageTimeForReservationSelect", updateUsageTime);
+        }
+
+		return SEARCH_RESOURCE_LIST_SERVLET;
 	}
 
 }
