@@ -19,17 +19,19 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
     public String handleService(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
 
+        CommonValidator commonValidator = new CommonValidator();
+
         //入力項目の取得
-        String dateStr = request.getParameter("date");
-        String startHourStr = request.getParameter("startHour");
-        String startMinutesStr = request.getParameter("startMinutes");
-        String endHourStr = request.getParameter("endHour");
-        String endMinutesStr = request.getParameter("endMinutes");
+        String dateStr = request.getParameter("usageDate");
+        String startHourStr = request.getParameter("usageStartHour");
+        String startMinutesStr = request.getParameter("usageStartMinutes");
+        String endHourStr = request.getParameter("usageEndHour");
+        String endMinutesStr = request.getParameter("usageEndMinutes");
         String officeIdStr = request.getParameter("officeId");
         String categoryIdStr = request.getParameter("categoryId");
-        String displayOnlyMyReservationStr = request.getParameter("displayOnlyMyReservation");
-        String displayPastReservationStr = request.getParameter("displayPastReservation");
-        String displayDeletedReservationStr = request.getParameter("displayDeletedReservation");
+        boolean displayOnlyMyReservationStr =  !commonValidator.notSetOn(request.getParameter("displayOnlyMyReservation"));
+        boolean displayPastReservationStr = !commonValidator.notSetOn(request.getParameter("displayPastReservation"));
+        boolean displayDeletedReservationStr = !commonValidator.notSetOn(request.getParameter("displayDeletedReservation"));
 
         //TimeDto生成のための変数
         int startHour;
