@@ -88,17 +88,16 @@ public class ShowResourceSelectHandler implements Handler{
 		//boolean型の変数を用意
 		boolean selectedCategory;
 		if(containSelectedCategoryService.validate()){
-			try{
+
 				containSelectedCategoryService.execute();
 				selectedCategory=containSelectedCategoryService.getResult();
 
-			}catch(SQLException e){
-					  _log.error("SQLException");
+			if(selectedCategory==false){
+				_log.error("Noselected");
 				return ERROR_PAGE;
 			}
-
 		}else{
-				_log.error("validateError");
+			_log.error("validateError");
 			return ERROR_PAGE;
 		}
 
@@ -107,14 +106,14 @@ public class ShowResourceSelectHandler implements Handler{
 		//boolean型の変数を用意
 		boolean selectedOffice;
 			if(containSelectedOfficeService.validate()){
-				try{
-					containSelectedOfficeService.execute();
-					selectedOffice=containSelectedOfficeService.getResult();
+				containSelectedOfficeService.execute();
+				selectedOffice=containSelectedOfficeService.getResult();
 
-				}catch(SQLException e){
-					_log.error("SQLException");
+				if(selectedOffice==false){
+					_log.error("Noselected");
 					return ERROR_PAGE;
 				}
+
 
 			}else{
 				_log.error("validateError");
@@ -124,21 +123,25 @@ public class ShowResourceSelectHandler implements Handler{
 		//事業所選択チェック取得
 		ContainSelectedResourceCharacteristicService containSelectedResourceCharacteristicService = new ContainSelectedResourceCharacteristicService(facilityIdListForResourceSelect,facilityList);
 		//boolean型の変数を用意
+
 			boolean selectedResourceCharacteristic;
 				if(containSelectedResourceCharacteristicService.validate()){
-					try{
+
 						containSelectedResourceCharacteristicService.execute();
 						selectedResourceCharacteristic=containSelectedResourceCharacteristicService.getResult();
 
-					}catch(SQLException e){
-						_log.error("SQLException");
-						return ERROR_PAGE;
-					}
+						if(selectedResourceCharacteristic==false){
+							_log.error("Noselected");
+							return ERROR_PAGE;
+						}
 
 				}else{
 					_log.error("validateError");
 					return ERROR_PAGE;
 				}
+
+		//sessionに各値をセット
+
 
 		}
 
