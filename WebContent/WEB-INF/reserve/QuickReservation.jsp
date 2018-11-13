@@ -147,10 +147,10 @@ selected
 			<table class="table3">
 				<tr>
 					<td>
-						<form action="setresource" method="post">
+					<form action="/ReservationSystemKAT-UNE/reservesystem/pushSearchButtonOnReservationList" method="post">
 							<input class="submit" class="dialog" type="submit" value="検索">
-					</td>
 					</form>
+					</td>
 					<td></td>
 					<td><form action="/ReservationSystemKAT-UNE/reservesystem/showfirstreservationlist" method="get">
 							<input class="submit" type="submit" value="戻る">
