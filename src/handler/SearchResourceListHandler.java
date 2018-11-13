@@ -1,6 +1,7 @@
 package handler;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,8 +12,10 @@ import org.apache.logging.log4j.Logger;
 
 import dto.AvailableDto;
 import dto.Resource;
+import dto.TimeDto;
 import exception.MyException;
 import service.GetResourceListOnSearchService;
+import service.MakeAvailableListService;
 
 public class SearchResourceListHandler implements Handler {
 
@@ -70,6 +73,7 @@ public class SearchResourceListHandler implements Handler {
         List<Resource> resources;
 
         try {
+            //サービスに値を渡して検索処理
             GetResourceListOnSearchService service = new GetResourceListOnSearchService(resourceName, capacity, categoryId, officeId, facilittyIdList);
             if(service.validate()){
                 service.execute();
@@ -87,6 +91,35 @@ public class SearchResourceListHandler implements Handler {
         return resources;
     }
     private List<AvailableDto> getAvailableList(List<Resource> resourceList){
-        return null;
+        TimeDto startTime = (TimeDto) _session.getAttribute("usageStartTimeForResourceSelect");
+        TimeDto endTime = (TimeDto) _session.getAttribute("usageEndTimeForResourceSelect");
+        TimeDto usageTime = (TimeDto) _session.getAttribute("usageTimeForReservationSelect");
+        String usageDate = (String) _session.getAttribute("usageDateForReservationRegist");
+
+        //返す結果の初期化
+        List<AvailableDto> availableList = new ArrayList<>();
+        try{
+            MakeAvailableListService mService = new MakeAvailableListService(resourceList, startTime, endTime, usageTime, usageDate);
+
+            if(mService.validate()){
+                mService.execute();
+                availableList = mService.getAvailableList();
+
+                if(availableList == null){
+                    _log.error("availableList is Null");
+                    throw new MyException();
+                }
+
+            }else{
+                _log.error("ValidateError");
+                throw new MyException();
+            }
+        }
+        catch (MyException | SQLException e) {
+            _log.error("AvailableError");
+            throw new MyException();
+        }
+
+        return availableList;
     }
 }
