@@ -9,11 +9,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dto.ReservationDto;
+import dto.TimeDto;
 
 /**
   * (6 8 10 11 12 13 17 18).
@@ -131,4 +134,12 @@ public class ReservationDao {
 
 	}
 
+
+
+
+	public List<ReservationDto> queryByInput(Timestamp currenTime,String usageDate,TimeDto usageStartTime,TimeDto usagEndTime,String officeId,String categoryId,String userId,boolean onlyMyReservation,boolean pastReservation,boolean deletedReservation){
+		List<ReservationDto> reservationList=new ArrayList<ReservationDto>();
+
+		return reservationList;
+	}
 }
