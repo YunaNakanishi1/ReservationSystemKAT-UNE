@@ -471,4 +471,8 @@ public class ResourceDao {
 		}
 		return maxId;
 	}
+	public List<Resource> queryByInput(int capacity,String resourceName, String categoryId, String officeId,  List<String> facilityIdList){
+	    return null;
+	}
 }
+
