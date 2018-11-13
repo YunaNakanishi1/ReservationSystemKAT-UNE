@@ -68,7 +68,7 @@ public class HandlerHelper {
 		session.setAttribute("usageEndHourForResourceSelect", null);
 		session.setAttribute("displayOnlyMyReservation", null);
 		session.setAttribute("displayPastReservation", null);
-		session.setAttribute("displayDeletedReservatioj", null);
+		session.setAttribute("displayDeletedReservation", null);
 		session.setAttribute("usageStartHourForReservationRegist", null);
 		session.setAttribute("usageEndHourForReservationRegist", null);
 		session.setAttribute("reservableListForResourceSelect", null);
@@ -170,9 +170,6 @@ public class HandlerHelper {
 		} catch (MyException e) {
 			_log.error("categoryListIsNull");
 			return false;
-		} catch (SQLException e) {
-			_log.error("SQLException");
-			return false;
 		}
 
 		try {
@@ -189,9 +186,6 @@ public class HandlerHelper {
 			}
 		} catch (MyException e) {
 			_log.error("officeListIsNull");
-			return false;
-		} catch (SQLException e) {
-			_log.error("SQLException");
 			return false;
 		}
 
