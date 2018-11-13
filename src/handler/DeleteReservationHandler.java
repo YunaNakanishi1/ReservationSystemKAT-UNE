@@ -1,5 +1,6 @@
 package handler;
 
+import static handler.MessageHolder.*;
 import static handler.ViewHolder.*;
 
 import java.sql.SQLException;
@@ -7,13 +8,13 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dto.ReservationDto;
+import dto.User;
+import service.DeleteReservationService;
 import service.GetReservationFromIdService;
-
 
 /**
  * サーブレット番号：2
@@ -62,10 +63,44 @@ public class DeleteReservationHandler implements Handler{
 			 return ERROR_PAGE;
 		}
 
-		User user = reservationDto.getReservedPerson();
-		User coUser = reservationDto.getCoReservedPerson();
+		User reservedPerson =reservationDto.getReservedPerson();
+		User coReservedPerson =reservationDto.getCoReservedPerson();
 
+		if(reservedPerson!=null){
+			String reservedPersonId = reservedPerson.getUserId();
+			String coReservedPersonId = coReservedPerson.getUserId();
 
+			if(userIdOfLoggedIn.equals(reservedPersonId)||userIdOfLoggedIn.equals(coReservedPersonId)){
+				DeleteReservationService deleteReservationService=new DeleteReservationService(reservationIdForReservationDetails);
+				if(deleteReservationService.validate()){
+					try{
+						deleteReservationService.execute();
+						int result =deleteReservationService.getResult();
+							if(result==1){
+								request.setAttribute("messageForDeleteCompleted", PM05);
+								return SHOW_RESERVATION_DETAILS_SERVLET;
+							}else{
+								_log.error("deleteError");
+								 return ERROR_PAGE;
+							}
+					}catch(SQLException e){
+						_log.error("SQLException");
+						 return ERROR_PAGE;
+					}
+
+				}else{
+					_log.error("ValidateError");
+					 return ERROR_PAGE;
+				}
+
+			}else{
+				_log.error("NoreservedPersonorcoReservedPerson");
+				 return ERROR_PAGE;
+			}
+		}else{
+			 _log.error("reservedPersonIsNull");
+			 return ERROR_PAGE;
+		}
 
 
 

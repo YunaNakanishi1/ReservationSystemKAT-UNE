@@ -62,7 +62,7 @@ function hyoji1()
 
 </script>
 
-	<script type="text/javascript" src="pulldownControll.js">	</script>
+	<script type="text/javascript" src="script/pulldownControll.js">	</script>
 
 
 </head>
@@ -82,7 +82,7 @@ function hyoji1()
 Javascriptを有効にしてください
 </div>
 </div>
-<script type="text/javascript" src="JavascriptErrorLabel.js">	</script>
+<script type="text/javascript" src="script/JavascriptErrorLabel.js">	</script>
 <!-- javascript警告ラベル終わり -->
 
 <div class="contents">
@@ -114,7 +114,7 @@ Javascriptを有効にしてください
 </c:if>
 <table class="table4">
 <tbody>
-<form action="pushSearchButtonOnReservationList" method="post">
+<form action="reservesystem/pushSearchButtonOnReservationList" method="post">
 <tr>
 <td class="one" class="dialog"><b>　利用日</b><a class="red"> ※</a></td>
 <td class="right2">
@@ -277,7 +277,7 @@ checked
 </div><!-- diallogとじ -->
 <br>
 <form action = "">
-
+<c:if test="${reservationListSizeForReservationList!=0 }">
 <table id="design-table" class="table table-striped table-bordered" style="width: 90%;" >
 					<thead>
 						<tr style="background-color: white;">
@@ -296,7 +296,7 @@ checked
 					<tr>
 					<td><c:out value="${obj.usageDate }"/></td>
 					<td><c:out value="${obj.usageStartTime }"/>～<c:out value="${obj.usageEndTime }"/></td>
-					<td><a href="showReservationDetails?reservationId=${obj.reservationId }"><c:out value="${obj.reservationName }"/></a></td>
+					<td><a href="reservesystem/showReservationDetails?reservedId=${obj.reservationId }"><c:out value="${obj.reservationName }"/></a></td>
 					<td><c:out value="${obj.resource.resourceName }"/></td>
 					<td><c:out value="${obj.resource.officeName }"/></td>
 					<td><c:out value="${obj.resource.category }"/></td>
@@ -306,7 +306,7 @@ checked
 					</c:forEach>
 					</tbody>
 				</table>
-
+</c:if>
 </form>
 <br>
 <br>

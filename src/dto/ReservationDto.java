@@ -16,7 +16,7 @@ public class ReservationDto {
 	private User _reservedPerson;
 	private User _coReservedPerson;
 	private int _numberOfParticipants;
-	private AttendanceTypeDto _AttendanceTypeDto;
+	private AttendanceTypeDto _attendanceTypeDto;
 	private String _supplement;
 	private int _deleted;
 
@@ -24,7 +24,7 @@ public class ReservationDto {
 	public ReservationDto(int reservationId, Resource resource, String usageDate,
 			TimeDto usageStartTime,TimeDto usageEndTime, String reservationName,
 			User reservedPerson, User coReservedPerson,int numberOfParticipants,
-			AttendanceTypeDto AttendanceTypeDto, String supplement, int deleted) {
+			AttendanceTypeDto attendanceTypeDto, String supplement, int deleted) {
 		super();
 		this._reservationId = reservationId;
 		this._resource = resource;
@@ -35,7 +35,7 @@ public class ReservationDto {
 		this._reservedPerson = reservedPerson;
 		this._coReservedPerson = coReservedPerson;
 		this._numberOfParticipants = numberOfParticipants;
-		this._AttendanceTypeDto = AttendanceTypeDto;
+		this._attendanceTypeDto = attendanceTypeDto;
 		this._supplement = supplement;
 		this._deleted = deleted;
 	}
@@ -70,7 +70,7 @@ public class ReservationDto {
 		return _numberOfParticipants;
 	}
 	public AttendanceTypeDto getAttendanceTypeDto() {
-		return _AttendanceTypeDto;
+		return _attendanceTypeDto;
 	}
 	public String getSupplement() {
 		return _supplement;

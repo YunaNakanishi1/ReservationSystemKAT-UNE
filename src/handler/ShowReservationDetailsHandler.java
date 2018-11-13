@@ -33,10 +33,11 @@ public class ShowReservationDetailsHandler implements Handler{
 
 		HttpSession session = request.getSession(false);
 
-		int reserveId = (int) session.getAttribute("reserveId");
-		String currentUserId = (String) session.getAttribute("userId");
+		int reserveId = (int) session.getAttribute("reservedId");
+		String currentUserId = (String) session.getAttribute("userIdOfLoggedIn");
 
 		if(currentUserId == null){
+			_log.error("currentUserId is null");
 			return ERROR_PAGE;
 		}
 
