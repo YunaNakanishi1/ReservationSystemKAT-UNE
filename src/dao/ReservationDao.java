@@ -20,6 +20,7 @@ import org.apache.logging.log4j.Logger;
 import dto.ReservationDto;
 import dto.Resource;
 import dto.TimeDto;
+import dto.User;
 
 /**
   * (6 8 10 11 12 13 17 18).
@@ -206,7 +207,7 @@ public class ReservationDao {
 
 	}
 
-	public List<ReservationDto> queryByInput(String usageDate,TimeDto usageStartTime,TimeDto usagEndTime,String officeId,String categoryId,String userId,boolean onlyMyReservation,boolean pastReservation,boolean deletedReservation)throws SQLException{
+	public List<ReservationDto> queryByInput(String usageDate,TimeDto usageStartTime,TimeDto usageEndTime,String officeId,String categoryId,String userId,boolean onlyMyReservation,boolean pastReservation,boolean deletedReservation)throws SQLException{
 		List<ReservationDto> reservationList=new ArrayList<ReservationDto>();
 
 		DBHelper dbHelper = new DBHelper();
@@ -223,7 +224,7 @@ public class ReservationDao {
 
 		try{
 			sqlBuilder.append("WITH params AS ( SELECT ? AS p1_usage_date,? AS p2_after_30_date,? AS p3_usage_start_minute_value,? AS p4_usage_end_minute_value ,? AS p5_office_id ? AS p6_category_id,? AS p7_user_id");
-			sqlBuilder.append("SELECT reserve_id,reservations.resource_id,resource_name,office_name,category_name,usage_start_time,usage_end_time,reservation_name,reservations.user_id, user_name,deleted");
+			sqlBuilder.append("SELECT reserve_id reserveid,reservations.resource_id resourceid,resource_name resourcename,office_name officename,category_name categoryname,usage_start_time starttime,usage_end_time endtime,reservation_name reservename,reservations.user_id userid, family_name familyname,first_name firstname,deleted deleted");
 			sqlBuilder.append("FROM reservations,users,resources,categories,offices,params");
 			sqlBuilder.append("WHERE reservations.resource_id=resources.resource_id AND resources.officeId=offices.officeId AND resources.category_id=categories_category_id AND reserved_person_id=user_id");
 
@@ -234,12 +235,75 @@ public class ReservationDao {
 				usageDateTimestamp=new TimeDto(0).getTimeStamp(usageDate);
 				Calendar calendar=Calendar.getInstance();
 				calendar.setTime(usageDateTimestamp);
-				calendar.add(Calendar.DATE, 30);
+				calendar.add(Calendar.DATE, TERM_FOR_RESERVATION_SEARCH);
 				after30Timestamp=new Timestamp(calendar.getTime().getTime());
+			}
+
+			sqlBuilder.append("AND EXTRACT(hour FROM usage_start_time)*60+EXTRACT(minute usage_start_time)>p3_usage_start_minute_value AND EXTRACT(hour FROM usage_end_time)*60+EXTRACT(minute usage_end_time)<p4_usage_end_minute_value");
+
+			if(officeId!=null){
+				sqlBuilder.append("AND resources.officeId=p5_office_id ");
+			}
+
+			if(categoryId!=null){
+				sqlBuilder.append("AND resources.categoryId=p6_category_id");
+			}
+
+			if(onlyMyReservation){
+				sqlBuilder.append("AND (reserved_person_id=p7_user_id OR co_reserved_person_id=p7_user_id)");
+			}
+
+			if(!pastReservation){
+				sqlBuilder.append("AND usage_end_time>current_timestamp");
+			}
+
+			if(deletedReservation){
+				sqlBuilder.append("AND (deleted = 0 OR (reserved_person_id=p7_user_id OR co_reserved_person_id=p7_user_id))");
+			}else{
+				sqlBuilder.append("AND deleted = 0");
+			}
+
+			sqlBuilder.append("ORDER BY usage_start_time , resources.office_id,resources.category_id,reservations.resource_id,reserve_id");
+
+			preparedStatement=_con.prepareStatement(sqlBuilder.toString());
+
+			preparedStatement.setTimestamp(1, usageDateTimestamp);
+			preparedStatement.setTimestamp(2, after30Timestamp);
+			preparedStatement.setInt(3, usageStartTime.getTimeMinutesValue());
+			preparedStatement.setInt(4, usageEndTime.getTimeMinutesValue());
+			preparedStatement.setString(5, officeId);
+			preparedStatement.setString(6, categoryId);
+			preparedStatement.setString(7, userId);
+
+			rs=preparedStatement.executeQuery();
+
+			while(rs.next()){
+				Resource resource = new Resource(rs.getString("resourceid"), rs.getString("resourcename"), rs.getString("officename"), rs.getString("categoryname"), 0, null, 0, null, null, null);
+				User user=new User(rs.getString("userid"), null, 0, rs.getString("familyname"), rs.getString("firstname"), null, null);
+				String resultUsageDate=new SimpleDateFormat("yyyy/MM/dd").format(rs.getTimestamp("starttime"));
+				TimeDto resultUsageStartTime=new TimeDto(rs.getTimestamp("starttime"));
+				TimeDto resultUsageEndTime=new TimeDto(rs.getTimestamp("endtime"));
+
+				ReservationDto reservation = new ReservationDto(rs.getInt("reserveid"), resource, resultUsageDate, resultUsageStartTime, resultUsageEndTime, rs.getString("reservename"), user, null, 0, null, null, rs.getInt("deleted"));
+				reservationList.add(reservation);
 			}
 
 
 		}finally{
+			try {
+				dbHelper.closeResource(rs);
+			} catch (Exception e) {
+				e.printStackTrace();
+				_log.error("Exception");
+			}
+
+			try {
+				dbHelper.closeResource(preparedStatement);
+			} catch (Exception e) {
+				e.printStackTrace();
+				_log.error("Exception");
+			}
+			dbHelper.closeDb();
 
 		}
 
