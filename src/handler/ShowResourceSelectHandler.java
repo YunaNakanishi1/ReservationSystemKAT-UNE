@@ -17,6 +17,7 @@ import dto.FacilityDto;
 import dto.OfficeDto;
 import service.ContainSelectedCategoryService;
 import service.ContainSelectedOfficeService;
+import service.ContainSelectedResourceCharacteristicService;
 import service.GetOfficeAndCategoryListService;
 import service.GetResourceCharacteristicListService;
 
@@ -121,13 +122,13 @@ public class ShowResourceSelectHandler implements Handler{
 			}
 
 		//事業所選択チェック取得
-		ContainSelectedCharacteristicService containSelectedCharacteristicService = new ContainSelectedCharacteristicService(facilityList,officeId);
+		ContainSelectedResourceCharacteristicService containSelectedResourceCharacteristicService = new ContainSelectedResourceCharacteristicService(facilityIdListForResourceSelect,facilityList);
 		//boolean型の変数を用意
-			boolean selectedOffice;
-				if(containSelectedOfficeService.validate()){
+			boolean selectedResourceCharacteristic;
+				if(containSelectedResourceCharacteristicService.validate()){
 					try{
-						containSelectedOfficeService.execute();
-						selectedOffice=containSelectedOfficeService.getResult();
+						containSelectedResourceCharacteristicService.execute();
+						selectedResourceCharacteristic=containSelectedResourceCharacteristicService.getResult();
 
 					}catch(SQLException e){
 						_log.error("SQLException");
