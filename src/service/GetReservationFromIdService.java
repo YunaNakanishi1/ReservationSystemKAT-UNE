@@ -33,7 +33,6 @@ public class GetReservationFromIdService implements Service{
 	public void execute() throws SQLException {
 		ReservationDao reservationDao = new ReservationDao();
 		_reservation = reservationDao.queryById(_reserveId);
-
 	}
 
 	/**

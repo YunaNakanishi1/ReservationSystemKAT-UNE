@@ -3,6 +3,7 @@ package service;
 import java.sql.SQLException;
 import java.util.List;
 
+import dao.ReservationDao;
 import dto.ReservationDto;
 import dto.TimeDto;
 import exception.MyException;
@@ -52,6 +53,8 @@ public class SearchReservationListService implements Service{
 
 	@Override
 	public void execute() throws SQLException {
+		ReservationDao reservationDao = new ReservationDao();
+		_reservationList=reservationDao.queryByInput(_usageDate, _usageStartTime, _usageEndTime, _officeId, _categoryId, _userId, _onlyMyReservation, _pastReservation, _deletedReservation);
 	}
 
 	public List<ReservationDto> getReservationList() {

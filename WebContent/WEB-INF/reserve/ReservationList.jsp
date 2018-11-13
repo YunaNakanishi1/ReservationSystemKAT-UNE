@@ -299,7 +299,7 @@ checked
 					<td><c:out value="${obj.resource.resourceName }"/></td>
 					<td><c:out value="${obj.resource.officeName }"/></td>
 					<td><c:out value="${obj.resource.category }"/></td>
-					<td><c:out value="${obj.reservedPerson.userId }"/></td>
+					<td><c:out value="${obj.reservedPerson.familyName }"/><c:out value="${obj.reservedPerson.firstName }"/></td>
 					<td><c:out value="${obj.deleted }"/></td>
 					</tr>
 					</c:forEach>

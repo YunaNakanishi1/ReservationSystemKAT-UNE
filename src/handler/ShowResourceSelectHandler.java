@@ -35,16 +35,19 @@ public class ShowResourceSelectHandler implements Handler{
 	public String handleService(HttpServletRequest request){
 		HttpSession session =request.getSession(true);
 
-		String categoryListForResourceSelect = (String)session.getAttribute("ForResourceSelect");
-		String officeListForResourceSelect = (String)session.getAttribute("officeListForResourceSelectForResourceSelect");
+		//セッションから予約一覧画面で選択されたカテゴリID、事務所ID、設備IDを取得する
+		//設備は複数選択可なのでList<String>型
+		String categoryIdForResourceSelect = (String)session.getAttribute("ForResourceSelect");
+		String officeIdForResourceSelect = (String)session.getAttribute("officeListForResourceSelectForResourceSelect");
 		List<String> facilityIdListForResourceSelect = (List<String>)session.getAttribute("facilityIdListForResourceSelect");
 
-		//事務所・カテゴリ一覧取得
+		
 		GetOfficeAndCategoryListService getOfficeAndCategoryListService = new GetOfficeAndCategoryListService();
 		//空のリストを用意
 		List<CategoryDto> categoryList=new ArrayList<CategoryDto>();
 		List<OfficeDto> officeList=new ArrayList<OfficeDto>();
 
+		//事務所・カテゴリ一覧取得する
 		if(getOfficeAndCategoryListService.validate()){
 			try{
 				getOfficeAndCategoryListService.execute();
@@ -62,12 +65,12 @@ public class ShowResourceSelectHandler implements Handler{
 			return ERROR_PAGE;
 		}
 
-		//リソース特性一覧取得
+		
 		GetResourceCharacteristicListService getResourceCharacteristicListService = new GetResourceCharacteristicListService();
 		//空のリストを取得
 		List<FacilityDto> facilityList=new ArrayList<FacilityDto>();
 
-
+		//リソース特性一覧取得
 		if(getResourceCharacteristicListService.validate()){
 			try{
 				getResourceCharacteristicListService.execute();
@@ -84,10 +87,14 @@ public class ShowResourceSelectHandler implements Handler{
 			return ERROR_PAGE;
 		}
 
-		//カテゴリ選択チェック取得
-		ContainSelectedCategoryService containSelectedCategoryService = new ContainSelectedCategoryService(categoryList,categoryListForResourceSelect);
+		
+		ContainSelectedCategoryService containSelectedCategoryService = new ContainSelectedCategoryService(categoryList,categoryIdForResourceSelect);
 		//boolean型の変数を用意
 		boolean selectedCategory;
+		
+		
+		//選択したカテゴリがデータベースから削除されてないか確認する
+		
 		if(containSelectedCategoryService.validate()){
 
 				containSelectedCategoryService.execute();
@@ -102,8 +109,8 @@ public class ShowResourceSelectHandler implements Handler{
 			return ERROR_PAGE;
 		}
 
-		//事業所選択チェック取得
-		ContainSelectedOfficeService containSelectedOfficeService = new ContainSelectedOfficeService(officeList,officeListForResourceSelect);
+		//選択した事業所がデータベースから削除されてないか確認する
+		ContainSelectedOfficeService containSelectedOfficeService = new ContainSelectedOfficeService(officeList,officeIdForResourceSelect);
 		//boolean型の変数を用意
 		boolean selectedOffice;
 			if(containSelectedOfficeService.validate()){
@@ -121,20 +128,20 @@ public class ShowResourceSelectHandler implements Handler{
 				return ERROR_PAGE;
 			}
 
-		//事業所選択チェック取得
+		//選択したリソース特性がデータベースから削除されてないか確認する
 		ContainSelectedResourceCharacteristicService containSelectedResourceCharacteristicService = new ContainSelectedResourceCharacteristicService(facilityIdListForResourceSelect,facilityList);
 		//boolean型の変数を用意
 
-			boolean selectedResourceCharacteristic;
-				if(containSelectedResourceCharacteristicService.validate()){
+		boolean selectedResourceCharacteristic;
+			if(containSelectedResourceCharacteristicService.validate()){
 
-						containSelectedResourceCharacteristicService.execute();
-						selectedResourceCharacteristic=containSelectedResourceCharacteristicService.getResult();
+					containSelectedResourceCharacteristicService.execute();
+					selectedResourceCharacteristic=containSelectedResourceCharacteristicService.getResult();
 
-						if(selectedResourceCharacteristic==false){
-							_log.error("Noselected");
-							return ERROR_PAGE;
-						}
+					if(selectedResourceCharacteristic==false){
+						_log.error("Noselected");
+						return ERROR_PAGE;
+					}
 
 				}else{
 					_log.error("validateError");
