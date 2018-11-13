@@ -8,6 +8,7 @@ package handler;
 public class ViewHolder {
 
 
+	public static final String RESERVATION_DETAILS ="/WEB-INF/reserve/ReservationDetails.jsp";
     public static final String LOG_IN  = "/Login.jsp";
     public static final String RESERVE_LIST  = "/WEB-INF/reserve/ReservationList.jsp";
     public static final String RESOURCE_LIST  = "/WEB-INF/resource/ResourceList.jsp";
