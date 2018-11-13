@@ -17,6 +17,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dto.AttendanceTypeDto;
 import dto.ReservationDto;
 import dto.Resource;
 import dto.TimeDto;
@@ -54,15 +55,40 @@ public class ReservationDao {
 
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
+		ReservationDto reservationDto;
 
 
 		try {
 			//実行するSQL文
 			String sql
-			="select * from reservations, resources,attendance_types "
-		   + "where resources.resource_id = reservations.resource_id "
-		   + "and attendance_types.attendance_type_id = reservations.attendance_type_id"
-		   + "and reserve_id = ?;";
+			="select resources.resource_id, usage_start_date, usage_end_date, "
+					+ " reservation_name ,reserved_person_id, co_reserved_person_id, "
+					+ "number_of_participants, attendance_types.attendance_type_id, "
+					+ "reserve_supplement, reservations.deleted as reservation_deleted, "
+					+ "resource_name, office_name, category_name, capacity, supplement, "
+					+ "usage_stop_start_date, usage_stop_end_date, "
+					+ "resources.deleted as resource_deleted, "
+					+ "	attendance_type, "
+					+ "resource_characteristic_name, "
+					+ "users.user_id, users.password, users.family_name, users.first_name, "
+					+ "users.authority, users.tel, users.mail_address,"
+					+ "cousers.user_id as co_user_id, cousers.password as co_password, "
+					+ "cousers.family_name as co_family_name, cousers.first_name as co_first_name,"
+					+ " cousers.authority as co_authority, cousers.tel as co_tel, "
+					+ "cousers.mail_address as co_mail_address "
+
+			+ "from reservations, resources, attendance_types, users , users as cousers ,"
+					+ " resource_features,resource_characteristics , offices , categories "
+			+ "where resources.resource_id = reservations.resource_id"
+				+ "and resource_features.resource_characteristic_id = resource_characteristics.resource_characteristic_id "
+				+ "and attendance_types.attendance_type_id = reservations.attendance_type_id "
+				+ "and users.user_id = reservations.reserved_person_id "
+				+ "and cousers.user_id = reservations.co_reserved_person_id "
+				+ "and resources.resource_id = resource_features.resource_id "
+				+ "and resources.office_id = offices.office_id "
+				+ "and resources.category_id = categories.category_id "
+				+ "and reserve_id = ?;";
+
 
 			preparedStatement = _con.prepareStatement(sql);
 			preparedStatement.setInt(1,reserveId);
@@ -71,51 +97,51 @@ public class ReservationDao {
 
 
 			//reservationsテーブルのカラムをセットするために用意
-			String resourceId;	//リソースID
-			Timestamp usageStartDate; //利用開始日時
-			Timestamp usageEndDate; //利用終了日時
-			String reservationName;	//予約名称
+			String resourceId = null;	//リソースID
+			Timestamp usageStartDate = null; //利用開始日時
+			Timestamp usageEndDate = null; //利用終了日時
+			String reservationName = null;	//予約名称
 			String reservedPersonId; //予約者ID
 			String coReservedPersonId;//共同予約者ID
-			int numberOfParticipants;	//利用人数
-			int attendanceTypeId;	//参加者種別ID
+			int numberOfParticipants = 0;	//利用人数
+			int attendanceTypeId = 0;	//参加者種別ID
 			Timestamp reserveSupplement; //補足
-			int reservationDeleted; //予約削除済み
+			int reservationDeleted = 0; //予約削除済み
 
 
 			//resourcesテーブルのカラムをセットするために用意
-			String resourceName;	//リソース名
-			String officeName;	//オフィス名
-			String category;	//カテゴリ
-			int capacity;	//定員
-			String supplement; //補足
+			String resourceName = null;	//リソース名
+			String officeName = null;	//オフィス名
+			String category = null;	//カテゴリ
+			int capacity = 0;	//定員
+			String supplement = null; //補足
 			List<String> facility;	//設備リスト
-			Timestamp usageStopStartDate;	//利用停止開始日時
-			Timestamp usageStopEndDate;	//利用停止終了日時
-			int resourceDeleted; //リソース削除済み
+			Timestamp usageStopStartDate = null;	//利用停止開始日時
+			Timestamp usageStopEndDate = null;	//利用停止終了日時
+			int resourceDeleted = 0; //リソース削除済み
 
 			//attendance_typesテーブルのカラムをセットするために用意
-			String attendance_type; //参加者種別
+			String attendanceType = null; //参加者種別
 
 			//List<String> facility を作るために用意
 			facility = new ArrayList<String>();
 
 			//「予約者」「共同予約者」のUserDtoを作るために用意
-			String userId;
-			String password;
-			int authority;
-			String familyName;
-			String firstName;
-			String phoneNumber;
-			String mailAddress;
+			String userId = null;
+			String password = null;
+			int authority = 0;
+			String familyName = null;
+			String firstName = null;
+			String phoneNumber = null;
+			String mailAddress = null;
 
-			String coUserId;
-			String coPassword;
-			int coAuthority;
-			String coFamilyName;
-			String coFirstName;
-			String coFhoneNumber;
-			String coMailAddress;
+			String coUserId = null;
+			String coPassword = null;
+			int coAuthority = 0;
+			String coFamilyName = null;
+			String coFirstName = null;
+			String coFhoneNumber = null;
+			String coMailAddress = null;
 
 
 
@@ -140,7 +166,7 @@ public class ReservationDao {
 				usageStopEndDate = rs.getTimestamp("usage_stop_end_date");
 				resourceDeleted = rs.getInt("resources_deleted");
 
-				attendance_type = rs.getString("attendance_type");
+				attendanceType = rs.getString("attendance_type");
 
 				facility.add(rs.getString("resource_characteristic_name"));
 
@@ -176,44 +202,40 @@ public class ReservationDao {
 			TimeDto usageEndTime = new TimeDto(usageEndDate);
 
 			//「予約者」のDTOを作る
-			User user = new User(userId, password, authority, familyName, firstName, phoneNumber, mailAddress);
+			User reservedPerson = new User(userId, password, authority, familyName,
+					firstName, phoneNumber, mailAddress);
+
+			//「共同予約者」のDTOを作る
+			User coReservedPerson = new User(coUserId, coPassword, coAuthority,
+					coFamilyName, coFirstName, coFhoneNumber, coMailAddress);
+
+			//「参加者種別」のDTO
+			AttendanceTypeDto attendanceTypeDto =
+					new AttendanceTypeDto(attendanceTypeId, attendanceType);
 
 
-		//		private int _reservationId;				ok
-		//		private Resource _resource;				リソースDTO
-		//		private String _usageDate;				利用日
-		//		private TimeDto _usageStartTime;		利用開始時間
-		//		private TimeDto _usageEndTime;			利用終了時間
-		//		private String _reservationName;		ok
-		//		private User _reservedPerson;			予約者DTO
-		//		private User _coReservedPerson;			共同予約者DTO
-		//		private int _numberOfParticipants;		ok 利用人数
-		//		private AttendanceTypeDto _AttendanceTypeDto;	参加者種別DTO
-		//		private String _supplement;				ok 補足
-
-			ReservationDto reservationDto = new ReservationDto(reserveId, resource,
+			reservationDto = new ReservationDto(reserveId, resource,
 					usageDate, usageStartTime, usageEndTime, reservationName,
 					reservedPerson, coReservedPerson, numberOfParticipants,
-					AttendanceTypeDto, supplement);
+					attendanceTypeDto, supplement, reservationDeleted);
 
 		}finally{
 			try {
 				dbHelper.closeResource(rs);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				_log.error("SQLException");
+			} catch (Exception e1) {
+				e1.printStackTrace();
+				_log.error("queryById() Exception e1");
 			}
 
 			try {
 				dbHelper.closeResource(preparedStatement);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				_log.error("SQLException");
+			} catch (Exception e2) {
+				e2.printStackTrace();
+				_log.error("queryById() Exception e2");
 			}
 		}
 
-
-		return null;
+		return reservationDto;
 
 	}
 
