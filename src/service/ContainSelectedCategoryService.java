@@ -1,6 +1,5 @@
 package service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import dto.CategoryDto;
@@ -34,7 +33,7 @@ public class ContainSelectedCategoryService implements Service {
 	}
 
 	@Override
-	public void execute() throws SQLException {
+	public void execute(){
 		if (_categoryId == null) {
 			_result = true;
 		} else {

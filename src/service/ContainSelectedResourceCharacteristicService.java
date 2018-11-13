@@ -1,6 +1,5 @@
 package service;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import dto.FacilityDto;
@@ -28,7 +27,7 @@ public class ContainSelectedResourceCharacteristicService implements Service{
 	}
 
 	@Override
-	public void execute() throws SQLException {
+	public void execute(){
 		if (_facilityIdList == null) {
 			_result = true;
 		} else {

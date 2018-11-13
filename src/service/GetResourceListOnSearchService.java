@@ -3,6 +3,7 @@ package service;
 import java.sql.SQLException;
 import java.util.List;
 
+import dao.ResourceDao;
 import dto.Resource;
 import exception.MyException;
 
@@ -43,7 +44,8 @@ public class GetResourceListOnSearchService implements Service{
 
     @Override
     public void execute() throws SQLException {
-        // TODO 自動生成されたメソッド・スタブ
+
+        ResourceDao rDao = new ResourceDao();
 
     }
     public List<Resource> getResourceList(){
