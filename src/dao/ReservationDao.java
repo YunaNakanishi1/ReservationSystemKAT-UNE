@@ -312,7 +312,7 @@ public class ReservationDao {
 
 			while(rs.next()){
 				Resource resource = new Resource(rs.getString("resourceid"), rs.getString("resourcename"), rs.getString("officename"), rs.getString("categoryname"), 0, null, 0, null, null, null);
-				User user=new User(rs.getString("userid"), null, 0, rs.getString("familyname"), rs.getString("firstname"), null, null);
+				User user=new User(null, null, 0, rs.getString("familyname"), rs.getString("firstname"), null, null);
 				String resultUsageDate=new SimpleDateFormat("yyyy/MM/dd").format(rs.getTimestamp("starttime"));
 				TimeDto resultUsageStartTime=new TimeDto(rs.getTimestamp("starttime"));
 				TimeDto resultUsageEndTime=new TimeDto(rs.getTimestamp("endtime"));

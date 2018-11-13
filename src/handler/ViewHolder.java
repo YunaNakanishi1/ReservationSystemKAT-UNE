@@ -26,5 +26,7 @@ public class ViewHolder {
     public static final String RESOURCE_SELECT = "/WEB-INF/resource/ResourceSelect.jsp";
     public static final String DELETE_RESERVATION_SERVLET = "/reservesystem/deleteReservation";
     public static final String SEARCH_RESOURCE_LIST_SERVLET = "/reservesystem/searchResourceList";
+    public static final String SHOW_RESERVATION_DETAILS_SERVLET = "/reservesystem/showReservationDetails";
+
 
 }
