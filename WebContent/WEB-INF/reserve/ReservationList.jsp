@@ -62,7 +62,7 @@ function hyoji1()
 
 </script>
 
-	<script type="text/javascript" src="pulldownControll.js">	</script>
+	<script type="text/javascript" src="script/pulldownControll.js">	</script>
 
 
 </head>
@@ -82,7 +82,7 @@ function hyoji1()
 Javascriptを有効にしてください
 </div>
 </div>
-<script type="text/javascript" src="JavascriptErrorLabel.js">	</script>
+<script type="text/javascript" src="script/JavascriptErrorLabel.js">	</script>
 <!-- javascript警告ラベル終わり -->
 
 <div class="contents">
@@ -95,9 +95,10 @@ Javascriptを有効にしてください
 <input class="submit dialog2" type="submit" value="新規予約">
 </form>
 　
-<form action="pushQuickReservationButton" method="post">
+<form action="/ReservationSystemKAT-UNE/reservesystem/pushQuickReservationButton" method="post">
 <input class="submit dialog2" type="submit" value="今すぐ予約">
 </form>
+
 </div>
 <div class = "rightside">
 <form action="resourcelist" method="get">
@@ -113,7 +114,7 @@ Javascriptを有効にしてください
 </c:if>
 <table class="table4">
 <tbody>
-<form action="pushSearchButtonOnReservationList" method="post">
+<form action="reservesystem/pushSearchButtonOnReservationList" method="post">
 <tr>
 <td class="one" class="dialog"><b>　利用日</b><a class="red"> ※</a></td>
 <td class="right2">
@@ -225,7 +226,7 @@ selected
 <option value="aaa" selected>全て</option>
 <c:forEach var="obj" items="${categoryListForReservationList}" varStatus="status">
 <option value="<c:out value ="${obj.categoryId}"/>"
-<c:if test="${obj.cateogryId == categoryIdForReservationList }">
+<c:if test="${obj.categoryId == categoryIdForReservationList }">
 selected
 </c:if>
 ><c:out value="${obj.categoryName }"/>
@@ -276,7 +277,7 @@ checked
 </div><!-- diallogとじ -->
 <br>
 <form action = "">
-
+<c:if test="${reservationListForReservationListsize!=0 }">
 <table id="design-table" class="table table-striped table-bordered" style="width: 90%;" >
 					<thead>
 						<tr style="background-color: white;">
@@ -305,7 +306,7 @@ checked
 					</c:forEach>
 					</tbody>
 				</table>
-
+</c:if>
 </form>
 <br>
 <br>

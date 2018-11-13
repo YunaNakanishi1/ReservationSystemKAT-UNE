@@ -78,6 +78,7 @@ public class SearchReservationListHandler implements Handler {
 				}
 
 			_session.setAttribute("reservationListForReservationList", reservationList);
+			_session.setAttribute("reservationListSizeForReservationList", reservationList.size());
 			}
 
 		} catch (MyException e) {
@@ -85,6 +86,7 @@ public class SearchReservationListHandler implements Handler {
 			return false;
 		} catch (SQLException e) {
 			_log.error("database error");
+			e.printStackTrace();
 			return false;
 		}
 
