@@ -8,6 +8,7 @@ package handler;
 public class ViewHolder {
 
 
+	public static final String RESERVATION_DETAILS ="/WEB-INF/reserve/ReservationDetails.jsp";
     public static final String LOG_IN  = "/Login.jsp";
     public static final String RESERVE_LIST  = "/WEB-INF/reserve/ReservationList.jsp";
     public static final String RESOURCE_LIST  = "/WEB-INF/resource/ResourceList.jsp";
@@ -24,5 +25,6 @@ public class ViewHolder {
     public static final String QUIICK_RESERVATION = "/WEB-INF/reserve/QuickReservation.jsp";
     public static final String RESOURCE_SELECT = "/WEB-INF/resource/ResourceSelect.jsp";
     public static final String DELETE_RESERVATION_SERVLET = "/reservesystem/deleteReservation";
+    public static final String SEARCH_RESOURCE_LIST_SERVLET = "/reservesystem/searchResourceList";
 
 }
