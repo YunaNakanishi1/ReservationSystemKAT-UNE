@@ -67,10 +67,5 @@ public class DeleteReservationHandler implements Handler{
 
 
 
-
-
-
-
-
 	}
 }
