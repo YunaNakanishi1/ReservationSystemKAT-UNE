@@ -9,6 +9,9 @@ import static handler.ViewHolder.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import dto.TimeDto;
 import exception.MyException;
 import service.CheckResourceSelectInputService;
@@ -16,13 +19,15 @@ import service.CheckResourceSelectInputService;
 /**
  *
  * サーブレット番号：14
- * @author p000527259
+ * リソース選択のバリデーションチェックを行う
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
 public class PushSearchButtonOnResourceSelectHandler implements Handler {
+	private static Logger _log = LogManager.getLogger();
 
-	/* (非 Javadoc)
-	 * @see handler.Handler#handleService(javax.servlet.http.HttpServletRequest)
+	/**
+	 * リソース選択のバリデーションチェックを行うメソッド
 	 */
 	@Override
 	public String handleService(HttpServletRequest request) {
@@ -60,10 +65,13 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
 	        endMinutesInt = Integer.parseInt(endMinutesStr);
 	        actualUseTimeHourInt = Integer.parseInt(actualUseTimeHourStr);
 	        actualUseTimeMinutesInt = Integer.parseInt(actualUseTimeMinutesStr);
+
         } catch(NumberFormatException e) {
+        	_log.error("NumberFormatException");
         	return ERROR_PAGE;
         }
 
+        //入力時間をTimeDtoに変換
         TimeDto usageStartTimeForResourceSelect = new TimeDto(startHourInt, startMinutesInt);
         TimeDto usageEndTimeForResourceSelect = new TimeDto(endHourInt, endMinutesInt);
         TimeDto usageTimeForResourceSelect = new TimeDto(actualUseTimeHourInt, actualUseTimeMinutesInt);
@@ -72,6 +80,7 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         session.setAttribute("usageTimeForResourceSelect", usageTimeForResourceSelect);
 
 
+        //入力チェック
         CommonValidator validator = new CommonValidator();
         //日付入力有無チェック
         if(validator.notSetOn(dateStr)) {
@@ -90,19 +99,26 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         //入力バリデーションチェック
         CheckResourceSelectInputService checkResourceSelectInputService = new CheckResourceSelectInputService(dateStr, usageStartTimeForResourceSelect, usageEndTimeForResourceSelect, usageTimeForResourceSelect, capacityStr, resourceNameStr);
         try {
+        	//入力エラーがある場合
         	if(checkResourceSelectInputService.validate()) {
         		return SHOW_RESOURCE_SELECT_SERVLET;
         	}
         } catch (MyException e) {
+        	_log.error("validateion error");
         	return ERROR_PAGE;
         }
+
 
         int startTime = usageStartTimeForResourceSelect.getTimeMinutesValue();
         int endTime = usageEndTimeForResourceSelect.getTimeMinutesValue();
         int actualUseTime = usageTimeForResourceSelect.getTimeMinutesValue();
+
+        //利用開始時間, 利用終了時間の時間幅よりも実利用時間の方が長い場合
         if ((endTime - startTime) < actualUseTime) {
         	session.setAttribute("resultMessageForReservationListUpper",PM10);
         	TimeDto updateUsageTime = new TimeDto(endTime - startTime);
+
+        	//新たに実利用時間をセットしなおす
         	session.setAttribute("usageTimeForReservationSelect", updateUsageTime);
         }
 

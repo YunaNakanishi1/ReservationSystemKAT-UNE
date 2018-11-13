@@ -111,7 +111,7 @@ public class ServiceValidator {
 
 
  /**
-  * リソース選択のバリデーションチェック
+  * リソース選択のより厳密なバリデーションチェック
   * @param date 日付
   * @param usageStartTime 利用開始時間
   * @param usageEndTime 利用終了時間

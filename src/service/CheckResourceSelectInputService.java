@@ -4,6 +4,12 @@ import java.sql.SQLException;
 
 import dto.TimeDto;
 
+/**
+ *
+ * リソース選択のバリデーションチェックのためのサービス.
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ */
 public class CheckResourceSelectInputService implements Service {
 	private String _date;
 	private TimeDto _usageStartTime;
@@ -12,6 +18,15 @@ public class CheckResourceSelectInputService implements Service {
 	private String _capacity;
 	private String _resourceName;
 
+	/**
+	 * フィールドの初期化.
+	 * @param date 日付
+	 * @param usageStartTime 利用開始時間
+	 * @param usageEndTime 利用終了時間
+	 * @param usageTime 実利用時間
+	 * @param capacity 定員
+	 * @param resourceName リソース名
+	 */
 	public CheckResourceSelectInputService(String date, TimeDto usageStartTime, TimeDto usageEndTime, TimeDto usageTime, String capacity, String resourceName) {
 		this._date = date;
 		this._usageStartTime = usageStartTime;
