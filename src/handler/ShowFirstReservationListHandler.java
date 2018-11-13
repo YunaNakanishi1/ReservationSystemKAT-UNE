@@ -35,8 +35,8 @@ public class ShowFirstReservationListHandler implements Handler {
 
 		session.setAttribute("reservationListForReservationList", new ArrayList<ReservationDto>());
 		session.setAttribute("usageDateForReservationList", usageDateForReservationList);
-		session.setAttribute("usageStartHourForReservationList", new TimeDto(0, 0));
-		session.setAttribute("usageEndHourForReservationList", new TimeDto(24, 0));
+		session.setAttribute("usageStartTimeForReservationList", new TimeDto(0, 0));
+		session.setAttribute("usageEndTimeForReservationList", new TimeDto(24, 0));
 		session.setAttribute("displayOnlyMyReservation", true);
 		session.setAttribute("displayPastReservation", false);
 		session.setAttribute("displayDeletedReservation", false);

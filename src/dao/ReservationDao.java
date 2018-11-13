@@ -240,6 +240,7 @@ public class ReservationDao {
 	}
 
 	public List<ReservationDto> queryByInput(String usageDate,TimeDto usageStartTime,TimeDto usageEndTime,String officeId,String categoryId,String userId,boolean onlyMyReservation,boolean pastReservation,boolean deletedReservation)throws SQLException{
+
 		List<ReservationDto> reservationList=new ArrayList<ReservationDto>();
 
 		DBHelper dbHelper = new DBHelper();
@@ -255,47 +256,47 @@ public class ReservationDao {
 		StringBuilder sqlBuilder=new StringBuilder();
 
 		try{
-			sqlBuilder.append("WITH params AS ( SELECT ? AS p1_usage_date,? AS p2_after_30_date,? AS p3_usage_start_minute_value,? AS p4_usage_end_minute_value ,? AS p5_office_id ? AS p6_category_id,? AS p7_user_id");
-			sqlBuilder.append("SELECT reserve_id reserveid,reservations.resource_id resourceid,resource_name resourcename,office_name officename,category_name categoryname,usage_start_time starttime,usage_end_time endtime,reservation_name reservename,reservations.user_id userid, family_name familyname,first_name firstname,deleted deleted");
-			sqlBuilder.append("FROM reservations,users,resources,categories,offices,params");
-			sqlBuilder.append("WHERE reservations.resource_id=resources.resource_id AND resources.officeId=offices.officeId AND resources.category_id=categories_category_id AND reserved_person_id=user_id");
+			sqlBuilder.append("WITH params AS ( SELECT ?::timestamp  AS p1_usage_date,?::timestamp AS p2_after_30_date,? AS p3_usage_start_minute_value,? AS p4_usage_end_minute_value ,? AS p5_office_id,? AS p6_category_id,? AS p7_user_id )");
+			sqlBuilder.append("SELECT reserve_id reserveid,reservations.resource_id resourceid,resource_name resourcename,office_name officename,category_name categoryname,usage_start_date starttime,usage_end_date endtime,reservation_name reservename,family_name familyname,first_name firstname,reservations.deleted reservedeleted ");
+			sqlBuilder.append("FROM reservations,users,resources,categories,offices,params ");
+			sqlBuilder.append("WHERE reservations.resource_id=resources.resource_id AND resources.office_id=offices.office_id AND resources.category_id=categories.category_id AND reserved_person_id=user_id ");
 
-			Timestamp usageDateTimestamp=null;
-			Timestamp after30Timestamp=null;
+			Timestamp usageDateTimestamp=new Timestamp(0);
+			Timestamp after30Timestamp=new Timestamp(0);
 			if(usageDate!=null){
-				sqlBuilder.append("AND usage_start_time > p1_usage_date AND usage_end_time < p2_after_30_date");
+				sqlBuilder.append("AND usage_start_date > p1_usage_date AND usage_end_date < p2_after_30_date ");
 				usageDateTimestamp=new TimeDto(0).getTimeStamp(usageDate);
 				Calendar calendar=Calendar.getInstance();
 				calendar.setTime(usageDateTimestamp);
-				calendar.add(Calendar.DATE, TERM_FOR_RESERVATION_SEARCH);
+				calendar.add(Calendar.DAY_OF_MONTH, TERM_FOR_RESERVATION_SEARCH);
 				after30Timestamp=new Timestamp(calendar.getTime().getTime());
 			}
 
-			sqlBuilder.append("AND EXTRACT(hour FROM usage_start_time)*60+EXTRACT(minute usage_start_time)>p3_usage_start_minute_value AND EXTRACT(hour FROM usage_end_time)*60+EXTRACT(minute usage_end_time)<p4_usage_end_minute_value");
+			sqlBuilder.append("AND (EXTRACT(hour FROM usage_start_date)*60 + EXTRACT(minute FROM usage_start_date)) > p3_usage_start_minute_value AND (EXTRACT(hour FROM usage_end_date)*60 + EXTRACT(minute FROM usage_end_date)) < p4_usage_end_minute_value ");
 
 			if(officeId!=null){
-				sqlBuilder.append("AND resources.officeId=p5_office_id ");
+				sqlBuilder.append("AND resources.office_id=p5_office_id ");
 			}
 
 			if(categoryId!=null){
-				sqlBuilder.append("AND resources.categoryId=p6_category_id");
+				sqlBuilder.append("AND resources.category_id=p6_category_id ");
 			}
 
 			if(onlyMyReservation){
-				sqlBuilder.append("AND (reserved_person_id=p7_user_id OR co_reserved_person_id=p7_user_id)");
+				sqlBuilder.append("AND (reserved_person_id = p7_user_id OR co_reserved_person_id = p7_user_id) ");
 			}
 
 			if(!pastReservation){
-				sqlBuilder.append("AND usage_end_time>current_timestamp");
+				sqlBuilder.append("AND usage_end_date > current_timestamp ");
 			}
 
 			if(deletedReservation){
-				sqlBuilder.append("AND (deleted = 0 OR (reserved_person_id=p7_user_id OR co_reserved_person_id=p7_user_id))");
+				sqlBuilder.append("AND (reservations.deleted = 0 OR (reserved_person_id=p7_user_id OR co_reserved_person_id=p7_user_id)) ");
 			}else{
-				sqlBuilder.append("AND deleted = 0");
+				sqlBuilder.append("AND reservations.deleted = 0 ");
 			}
 
-			sqlBuilder.append("ORDER BY usage_start_time , resources.office_id,resources.category_id,reservations.resource_id,reserve_id");
+			sqlBuilder.append("ORDER BY usage_start_date , resources.office_id,resources.category_id,reservations.resource_id,reserve_id;");
 
 			preparedStatement=_con.prepareStatement(sqlBuilder.toString());
 
