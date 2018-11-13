@@ -28,7 +28,7 @@ public class ContainSelectedResourceCharacteristicService implements Service{
 
 	@Override
 	public void execute(){
-		if (_facilityIdList == null) {
+		if (_facilityIdList.isEmpty()) {
 			_result = true;
 		} else {
 			_result = true;
