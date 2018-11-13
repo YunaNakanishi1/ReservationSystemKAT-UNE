@@ -471,7 +471,42 @@ public class ResourceDao {
 		}
 		return maxId;
 	}
-	public List<Resource> queryByInput(int capacity,String resourceName, String categoryId, String officeId,  List<String> facilityIdList){
+	public List<Resource> queryByInput(int capacity,String resourceName, String categoryId, String officeId,  List<String> facilityIdList) throws SQLException{
+	    List<Resource> resources;
+	    DBHelper dbHelper = new DBHelper();
+        Statement stmt=null;
+        ResultSet rs=null;
+        String sql = "SELECT MAX(resource_id) from resources;";
+
+        try{
+            _con = dbHelper.connectDb(); // データベースに接続
+
+            if (_con == null) {
+                _log.error("DatabaseConnectError");
+                throw new SQLException();
+            }
+            stmt=_con.createStatement();
+            rs=stmt.executeQuery(sql);
+            if(rs.next()){
+
+            }
+        }finally{
+            try{
+                dbHelper.closeResource(rs);
+            }catch(Exception e1){
+                e1.printStackTrace();
+                _log.error("queryByInput() Exception e1");
+            }
+            try{
+                dbHelper.closeResource(stmt);
+            }catch(Exception e2){
+                e2.printStackTrace();
+                _log.error("queryByInput() Exception e2");
+            }
+            dbHelper.closeDb();
+        }
+
+
 	    return null;
 	}
 }
