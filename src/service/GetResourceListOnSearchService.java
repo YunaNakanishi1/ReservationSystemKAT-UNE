@@ -46,6 +46,7 @@ public class GetResourceListOnSearchService implements Service{
     public void execute() throws SQLException {
 
         ResourceDao rDao = new ResourceDao();
+        _resourceList = rDao.queryByInput(_capacity, _resourceName, _categoryId, _officeId, _facilityIdList);
 
     }
     public List<Resource> getResourceList(){
