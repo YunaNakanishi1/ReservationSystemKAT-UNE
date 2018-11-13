@@ -34,11 +34,13 @@ public class ShowQuickReservationHandler implements Handler {
 		String officeId = (String)session.getAttribute("officeIdForResourceSelect");
 
 		boolean hasOfficeAndCategory = handlerHelper.getOfficeAndCategory(categoryId, officeId);
+
 		if (hasOfficeAndCategory) {
 			List<CategoryDto> categoryList = handlerHelper.getCategoryList();
 			request.setAttribute("categoryListForResourceSelect", categoryList);
 			List<OfficeDto> officeList = handlerHelper.getOfficeList();
 			request.setAttribute("officeListForResourceSelect", officeList);
+
 		} else {
 			return ERROR_PAGE;
 		}
