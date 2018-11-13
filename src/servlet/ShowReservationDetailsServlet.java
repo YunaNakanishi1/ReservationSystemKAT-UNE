@@ -6,6 +6,7 @@ package servlet;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,7 +29,9 @@ public class ShowReservationDetailsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String reservedId = request.getParameter("reservedId");
+		String reservedIdStr = request.getParameter("reservedId");
+
+		int reservedId = Integer.parseInt(reservedIdStr);
 
 		HttpSession session = request.getSession(true);
 		session.setAttribute("reservedId", reservedId);
@@ -48,7 +51,10 @@ public class ShowReservationDetailsServlet extends HttpServlet {
 		 ShowReservationDetailsHandler showReservationDetailsHandler
 		 = new ShowReservationDetailsHandler();
 
-		 showReservationDetailsHandler.handleService(request);
+		 String view = showReservationDetailsHandler.handleService(request);
+
+		 RequestDispatcher rd = request.getRequestDispatcher(view);
+	        rd.forward(request, response);
 
 	}
 
