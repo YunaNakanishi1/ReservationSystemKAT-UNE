@@ -471,21 +471,23 @@ public class ResourceDao {
         }
         return maxId;
     }
+    /**
+     * 検索条件からリソースの一覧を返す
+     * @param capacity
+     * @param resourceName
+     * @param categoryId
+     * @param officeId
+     * @param facilityIdList
+     * @return
+     * @throws SQLException
+     */
     public List<Resource> queryByInput(int capacity,String resourceName, String categoryId, String officeId,  List<String> facilityIdList) throws SQLException{
-        List<Resource> resources;
+        List<Resource> resources = new ArrayList<>();
         DBHelper dbHelper = new DBHelper();
-        Statement stmt=null;
+        PreparedStatement pstmt=null;
         ResultSet rs=null;
-        String sql = "with params as("
-                +"select"
-                +"? as facility_id_1,"
-                +"? as facility_id_2,"
-                +"? as facility_checked_num,"
-                +"? as resource_name,"
-                +"? as category_id,"
-                +"? as office_id,"
-                +"? as capacity"
-                +")";
+
+
 
         try{
             _con = dbHelper.connectDb(); // データベースに接続
@@ -494,10 +496,99 @@ public class ResourceDao {
                 _log.error("DatabaseConnectError");
                 throw new SQLException();
             }
-            stmt=_con.createStatement();
-            rs=stmt.executeQuery(sql);
-            if(rs.next()){
 
+        //SQL文生成
+            //リソース特性のパラメータ（facility_id_[n])
+            String facilityIdParams = "";
+            for (int i=0;i < facilityIdList.size();i++) {
+                facilityIdParams += "? as facility_id_"+i+", ";
+            }
+            //SQL文(With句)
+            String sqlWith = "with params as( "
+                    +"select "
+                    + facilityIdParams
+                    +"? as facility_checked_num, "
+                    +"? as resource_name, "
+                    +"? as category_id, "
+                    +"? as office_id, "
+                    +"? as capacity "
+                    +") ";
+
+
+
+            //SQL文（Select句）
+            String sqlSelect = "select * from resources,offices,categories,params where offices.office_id = resources.office_id and categories.category_id=resources.category_id ";
+            if(resourceName != null){
+                //リソース名が指定されている
+                sqlSelect += "and resource_name like (params.resource_name) ";
+            }
+            if(categoryId != null){
+                //カテゴリIDが指定されている
+                sqlSelect += "and category_id = params.category_id ";
+            }
+            if(officeId != null){
+                //オフィスIDが指定されている
+                sqlSelect += "office_id = params.office_id ";
+            }
+
+            //定員
+            sqlSelect += "and capacity >= params.capacity ";
+
+            if(facilityIdList.size() > 0){
+                //リソース特性IDが指定されている
+                sqlSelect += "and resource_id in ( "
+                        +"select resource_features.resource_id "
+                        +"from resources "
+                        +"inner join resource_features "
+                        +"on resources.resource_id = resource_features.resource_id "
+                        +"where 1=0 ";
+                for(int i=0;i<facilityIdList.size();i++){
+                    sqlSelect += "or resource_characteristic_id = params.facility_id_"+i+" ";
+                }
+                sqlSelect += "group by resource_features.resource_id having count(*) >= params.facility_checked_num";
+
+            }
+            //SQL文作成
+            String sql = sqlWith + sqlSelect;
+        //パラメータセット
+            //preparedStatement用カウント変数
+            int pCount = 1;
+            pstmt = _con.prepareStatement(sql);
+            //リソース特性の?セット
+            for (int i=0;i < facilityIdList.size();i++) {
+                pstmt.setString(pCount++, facilityIdList.get(i));
+            }
+            //リソース特性の検索数をセット
+            pstmt.setInt(pCount++, facilityIdList.size());
+
+            //リソース名
+            pstmt.setString(pCount++, "%"+resourceName+"%");
+
+
+            //カテゴリID
+            pstmt.setString(pCount++, categoryId);
+
+            //オフィスID
+            pstmt.setString(pCount++, officeId);
+
+            //定員
+            pstmt.setInt(pCount++, capacity);
+
+          //実行
+            rs=pstmt.executeQuery(sql);
+            if(rs.next()){
+                String resourceIdResult = rs.getString("resource_id");
+                String resourceNameResult = rs.getString("resource_name");
+                String officeNameResult = rs.getString("office_name");
+                String categoryResult = rs.getString("category_name");
+                int capacityResult = rs.getInt("capacity");
+                String supplementResult = rs.getString("supplement");
+                int deletedResult = rs.getInt("deleted");
+                Timestamp usageStopStartDateResult = rs.getTimestamp("usage_stop_start_date");
+                Timestamp usageStopEndDateResult = rs.getTimestamp("usage_stop_end_date");
+
+                Resource resource = new Resource(resourceIdResult, resourceNameResult, officeNameResult, categoryResult, capacityResult, supplementResult, deletedResult, null, usageStopStartDateResult, usageStopEndDateResult);
+                resources.add(resource);
             }
         }finally{
             try{
@@ -507,7 +598,7 @@ public class ResourceDao {
                 _log.error("queryByInput() Exception e1");
             }
             try{
-                dbHelper.closeResource(stmt);
+                dbHelper.closeResource(pstmt);
             }catch(Exception e2){
                 e2.printStackTrace();
                 _log.error("queryByInput() Exception e2");
@@ -516,7 +607,7 @@ public class ResourceDao {
         }
 
 
-        return null;
+        return resources;
     }
 }
 
