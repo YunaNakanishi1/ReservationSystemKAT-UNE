@@ -152,7 +152,7 @@ selected
 					</form>
 					</td>
 					<td></td>
-					<td><form action="/ReservationSystemKAT-UNE/reservesystem/showfirstreservationlist" method="get">
+					<td><form action="/ReservationSystemKAT-UNE/reservesystem/showfirstreservationlist" method="post">
 							<input class="submit" type="submit" value="戻る">
 						</form></td>
 				</tr>
