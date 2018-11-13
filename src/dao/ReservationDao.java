@@ -9,14 +9,18 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dto.ReservationDto;
-import dto.TimeDto;
+import dto.Resource;
 
 /**
   * (6 8 10 11 12 13 17 18).
@@ -48,7 +52,10 @@ public class ReservationDao {
 
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
+		PreparedStatement preparedStatementForFacility = null;
+		ResultSet rsForFacility = null;
 
+		try {
 		//実行するSQL文
 		String selectReservationsSql
 		="select * from reservations, resources,attendance_types "
@@ -81,6 +88,7 @@ public class ReservationDao {
 		String category;	//カテゴリ
 		int capacity;	//定員
 		String supplement; //補足
+			List<String> facility;
 		Timestamp usageStopStartDate;	//利用停止開始日時
 		Timestamp usageStopEndDate;	//利用停止終了日時
 
@@ -100,18 +108,67 @@ public class ReservationDao {
 			reserveSupplement = rs.getTimestamp("reserve_supplement");
 			deleted = rs.getInt("deleted");
 
-			resourceName = rs.getString("resourceName");
-			officeName = rs.getString("officeName");
+				resourceName = rs.getString("resource_name");
+				officeName = rs.getString("office_name");
 			category = rs.getString("category");
 			capacity = rs.getInt("capacity");
 			supplement = rs.getString("supplement");
-			usageStopStartDate = rs.getTimestamp("usageStopStartDate");
-			usageStopEndDate = rs.getTimestamp("usageStopEndDate");
+				usageStopStartDate = rs.getTimestamp("usage_stop_start_date");
+				usageStopEndDate = rs.getTimestamp("usage_stop_end_date");
 
 			attendance_type = rs.getString("resource_id");
 		}
 
 
+			//List<String> facility を作るために、実行するSQL文
+			String selectResourceCharacteristicNameSql
+			="select resource_characteristics.resource_characteristic_name "
+			+ "from resource_features,resources,resource_characteristics "
+			+ "where resource_features.resource_characteristic_id = resource_characteristics.resource_characteristic_id  "
+			+ "and resources.resource_id = resource_features.resource_id "
+			+ "and resources.resource_id = ? ;";
+
+			preparedStatementForFacility = _con.prepareStatement(selectResourceCharacteristicNameSql);
+			preparedStatementForFacility.setString(1,resourceId);
+			rsForFacility = preparedStatementForFacility.executeQuery();	//実行
+
+			facility = new ArrayList<String>();
+
+			while (rs.next()) {
+				facility.add(rsForFacility.getString("resource_characteristic_name"));
+			}
+
+			//ResourceDtoを作成
+			Resource resource = new Resource(resourceId, resourceName, officeName, category,
+				capacity, supplement, deleted, facility, usageStopStartDate,usageStopEndDate);
+
+			
+			//「利用日」「利用開始時間」「利用終了時間」を作る
+			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy年M月d");
+
+//			/* 「yyyy/MM/dd」形式で正しい日付か	*/
+//			SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy/MM/dd");
+//			inputFormat.setLenient(false); // 日時解析を厳密に行う
+//
+//			SimpleDateFormat timestampFormat = new SimpleDateFormat("yyyy-MM-dd");
+//			timestampFormat.setLenient(false); // 日時解析を厳密に行う
+//
+//			datePattern = Pattern.compile("^[0-9]{4}/[0-9]{2}/[0-9]{2}$");
+//			Matcher m = datePattern.matcher(date);
+//			notDate = !m.find();
+//
+//			/* 「yyyy/MM/dd」形式で正しい日付か */
+//			if (!notDate) {
+//
+//				try {
+//					_date = Timestamp
+//							.valueOf(timestampFormat.format(inputFormat.parse(date)) + " " + hour + ":" + minute + ":00");
+//					notDate = false;
+//				} catch (ParseException e) {
+//					notDate = true;
+//				}
+//			}
+			
 
 //		private int _reservationId;				ok
 //		private Resource _resource;				リソースDTO
@@ -125,17 +182,31 @@ public class ReservationDao {
 //		private AttendanceTypeDto _AttendanceTypeDto;	参加者種別DTO
 //		private String _supplement;				ok 補足
 
-		ReservationDto reservationDto = new ReservationDto(reserveId, _resource,
-				_usageDate, _usageStartTime, _usageEndTime, _reservationName,
+			ReservationDto reservationDto = new ReservationDto(reserveId, resource,
+					usageDate, _usageStartTime, _usageEndTime, _reservationName,
 				_reservedPerson, _coReservedPerson, _numberOfParticipants,
 				_AttendanceTypeDto, supplement);
+
+		}finally{
+			try {
+				dbHelper.closeResource(rs);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				_log.error("SQLException");
+			}
+
+			try {
+				dbHelper.closeResource(preparedStatement);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				_log.error("SQLException");
+			}
+	}
+
 
 		return null;
 
 	}
-
-
-
 
 	public List<ReservationDto> queryByInput(Timestamp currenTime,String usageDate,TimeDto usageStartTime,TimeDto usagEndTime,String officeId,String categoryId,String userId,boolean onlyMyReservation,boolean pastReservation,boolean deletedReservation)throws SQLException{
 		List<ReservationDto> reservationList=new ArrayList<ReservationDto>();
