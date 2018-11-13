@@ -21,21 +21,21 @@ public class ReservationDto {
 	private int _deleted;
 
 
-	public ReservationDto(int _reservationId, Resource _resource, String _usageDate,
-			TimeDto _usageStartTime,TimeDto _usageEndTime, String _reservationName,
-			User _reservedPerson, User _coReservedPerson,int _numberOfParticipants,
-			AttendanceTypeDto _AttendanceTypeDto, String supplement, int deleted) {
+	public ReservationDto(int reservationId, Resource resource, String usageDate,
+			TimeDto usageStartTime,TimeDto usageEndTime, String reservationName,
+			User reservedPerson, User coReservedPerson,int numberOfParticipants,
+			AttendanceTypeDto AttendanceTypeDto, String supplement, int deleted) {
 		super();
-		this._reservationId = _reservationId;
-		this._resource = _resource;
-		this._usageDate = _usageDate;
-		this._usageStartTime = _usageStartTime;
-		this._usageEndTime = _usageEndTime;
-		this._reservationName = _reservationName;
-		this._reservedPerson = _reservedPerson;
-		this._coReservedPerson = _coReservedPerson;
-		this._numberOfParticipants = _numberOfParticipants;
-		this._AttendanceTypeDto = _AttendanceTypeDto;
+		this._reservationId = reservationId;
+		this._resource = resource;
+		this._usageDate = usageDate;
+		this._usageStartTime = usageStartTime;
+		this._usageEndTime = usageEndTime;
+		this._reservationName = reservationName;
+		this._reservedPerson = reservedPerson;
+		this._coReservedPerson = coReservedPerson;
+		this._numberOfParticipants = numberOfParticipants;
+		this._AttendanceTypeDto = AttendanceTypeDto;
 		this._supplement = supplement;
 		this._deleted = deleted;
 	}

@@ -91,16 +91,16 @@ Javascriptを有効にしてください
 <h2>予約一覧</h2>
 <div class = "reframe">
 <div class = "leftside">
-<form action="newReservation" method="get">
+<form action="pushNewReservationButton" method="get">
 <input class="submit dialog2" type="submit" value="新規予約">
 </form>
 　
-<form action="/ReservationSystemKAT-UNE/reservesystem/pushQuickReservationButton" method="post">
+<form action="pushQuickReservationButton" method="post">
 <input class="submit dialog2" type="submit" value="今すぐ予約">
 </form>
 </div>
 <div class = "rightside">
-<form action="newReservation" method="get">
+<form action="resourcelist" method="get">
 <input class="submit dialog2" type="submit" value="リソース一覧">
 </form>
 </div>
@@ -113,6 +113,7 @@ Javascriptを有効にしてください
 </c:if>
 <table class="table4">
 <tbody>
+<form action="pushSearchButtonOnReservationList" method="post">
 <tr>
 <td class="one" class="dialog"><b>　利用日</b><a class="red"> ※</a></td>
 <td class="right2">
@@ -234,7 +235,6 @@ selected
  </td>
 </tr>
 </table>
-
 <input type="checkbox" name="displayOnlyMyReservation" value="displayOnlyMyReservation"
 <c:if test="${displayOnlyMyReservation }">
 checked
@@ -253,13 +253,11 @@ checked
 <br><br>
 <table class="table3">
 <tr>
-<br>
+<br/>
 <td>
-<form action="setresource" method="post">
 <input class="submit dialog2" type = "submit" value = "検索"></td>
-</form>
 </tr>
-
+</form>
 </table>
 
 
@@ -302,93 +300,9 @@ checked
 					<td><c:out value="${obj.resource.officeName }"/></td>
 					<td><c:out value="${obj.resource.category }"/></td>
 					<td><c:out value="${obj.reservedPerson.userId }"/></td>
-
-
-
-
+					<td><c:out value="${obj.deleted }"/></td>
+					</tr>
 					</c:forEach>
-
-							<tr>
-							<td>2020/12/25</td>
-							<td>13:00～14:00</td>
-							<td><a href="xxx">UCS</a></td>
-							<td>UCS001</td>
-							<td>晴海</td>
-							<td>UCS</td>
-							<td>理工五郎</td>
-							<td>未削除</td>
-							</tr>
-							<tr style="background-color: white;">
-							<td>2020/12/25</td>
-							<td>18:00～19:00</td>
-							<td><a href="xxx">時間ではじく</a></td>
-							<td>晴海412S</td>
-							<td>晴海</td>
-							<td>会議室</td>
-							<td>理工五郎</td>
-							<td>未削除</td>
-							</tr>
-							<tr>
-							<td>2020/12/26</td>
-							<td>15:00～18:00</td>
-							<td><a href="xxx">新横浜</a></td>
-							<td>新横浜412S</td>
-							<td>新横浜</td>
-							<td>会議室</td>
-							<td>理工五郎</td>
-							<td>未削除</td>
-							</tr>
-							<tr style="background-color: white;">
-							<td>2020/12/28</td>
-							<td>9:00～10:00</td>
-							<td><a href="xxx">あいうえおあいうえおあいうえおあいうえおあいうえおあいうえお</a></td>
-							<td>晴海412S</td>
-							<td>晴海</td>
-							<td>会議室</td>
-							<td>理工五郎</td>
-							<td>未削除</td>
-							</tr>
-							<tr>
-							<td>2020/12/28</td>
-							<td>10:00～11:00</td>
-							<td><a href="xxx">あ</a></td>
-							<td>晴海415M</td>
-							<td>晴海</td>
-							<td>会議室</td>
-							<td>理工五郎</td>
-							<td>未削除</td>
-							</tr>
-							<tr style="background-color: white;">
-							<td>2020/12/31</td>
-							<td>15:00～17:00</td>
-							<td><a href="xxx">五郎なし</a></td>
-							<td>晴海412S</td>
-							<td>晴海</td>
-							<td>会議室</td>
-							<td>理工三郎</td>
-							<td>未削除</td>
-							</tr>
-							<tr>
-							<td>2020/1/22</td>
-							<td>15:00～17:00</td>
-							<td><a href="xxx">共同予約者五郎</a></td>
-							<td>晴海412S</td>
-							<td>晴海</td>
-							<td>会議室</td>
-							<td>理工三郎</td>
-							<td>未削除</td>
-							</tr>
-							<tr style="background-color: white;">
-							<td>2020/1/23</td>
-							<td>15:00～17:00</td>
-							<td><a href="xxx">30日目（晴海会議室）</a></td>
-							<td>晴海412S</td>
-							<td>晴海</td>
-							<td>会議室</td>
-							<td>理工五郎</td>
-							<td>未削除</td>
-							</tr>
-
 					</tbody>
 				</table>
 
