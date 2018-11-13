@@ -95,9 +95,10 @@ Javascriptを有効にしてください
 <input class="submit dialog2" type="submit" value="新規予約">
 </form>
 　
-<form action="pushQuickReservationButton" method="post">
+<form action="/ReservationSystemKAT-UNE/reservesystem/pushQuickReservationButton" method="post">
 <input class="submit dialog2" type="submit" value="今すぐ予約">
 </form>
+
 </div>
 <div class = "rightside">
 <form action="resourcelist" method="get">
@@ -225,7 +226,7 @@ selected
 <option value="aaa" selected>全て</option>
 <c:forEach var="obj" items="${categoryListForReservationList}" varStatus="status">
 <option value="<c:out value ="${obj.categoryId}"/>"
-<c:if test="${obj.cateogryId == categoryIdForReservationList }">
+<c:if test="${obj.categoryId == categoryIdForReservationList }">
 selected
 </c:if>
 ><c:out value="${obj.categoryName }"/>

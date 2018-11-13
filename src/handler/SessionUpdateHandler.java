@@ -35,10 +35,10 @@ public class SessionUpdateHandler implements Handler{
 		HttpSession session =request.getSession(true);
 
 		//新
-		Object authorityCheck = session.getAttribute("authority");
+		Object authorityCheck = session.getAttribute("authorityOfLoggedIn");
 		//新
 		if(authorityCheck!=null){
-			String userId=(String)session.getAttribute("userId");
+			String userId=(String)session.getAttribute("userIdOfLoggedIn");
 
 
 			CheckAuthorityService checkAuthorityService =new CheckAuthorityService(userId);
@@ -52,8 +52,8 @@ public class SessionUpdateHandler implements Handler{
 					System.out.println(authority);
 
 					if(authority==0||authority==1){
-						session.setAttribute("userId", userId);//sessionに変更
-						session.setAttribute("authority", authority);//sessionに変更
+						session.setAttribute("userIdOfLoggedIn", userId);//sessionに変更
+						session.setAttribute("authorityOfLoggedIn", authority);//sessionに変更
 						return null;
 					}else{
                         _log.error("authority is not 0 or 1");

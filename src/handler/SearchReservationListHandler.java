@@ -85,6 +85,7 @@ public class SearchReservationListHandler implements Handler {
 			return false;
 		} catch (SQLException e) {
 			_log.error("database error");
+			e.printStackTrace();
 			return false;
 		}
 

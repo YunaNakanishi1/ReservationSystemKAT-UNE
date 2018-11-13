@@ -19,7 +19,7 @@ import exception.MyException;
 
 /**
  * servlet番号：9
- * 今すぐ予約画面の開始時刻、終了時刻を設定するメソッド
+ * 今すぐ予約画面の開始時刻、終了時刻を設定する
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
@@ -32,8 +32,8 @@ public class PushQuickReservationButtonHandler implements Handler {
 	private Logger _log = LogManager.getLogger();
 
 
-	/* (非 Javadoc)
-	 * @see handler.Handler#handleService(javax.servlet.http.HttpServletRequest)
+	/**
+	 *今すぐ予約画面の開始時刻、終了時刻を設定するメソッド
 	 */
 	@Override
 	public String handleService(HttpServletRequest request) {
