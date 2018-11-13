@@ -76,6 +76,11 @@ public class FacilityDao {
 		return facilityList;
 	}
 
+	/**
+	 * リソース特性を全件取得するメソッド
+	 * @return FacilityDtoのリスト(リソース特性テーブルが0件の場合、空のリストを返す）
+	 * @throws SQLException データベースに接続できない場合、SQLの実行に失敗した場合
+	 */
 	public List<FacilityDto> queryAll() throws SQLException {
 		List<FacilityDto> facilityList = new ArrayList<FacilityDto>();
 		DBHelper dbHelper=new DBHelper();
