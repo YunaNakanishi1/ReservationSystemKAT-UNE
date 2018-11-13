@@ -105,12 +105,14 @@ Javascriptを有効にしてください
  <tr>
  <td><b>参加者種別</b></td>
  <td class="right2" class="dialog">
- <c:out value="${reservationDTOForReservationDetails.attendanceTypeDto}"/>
+ <c:out value="${reservationDTOForReservationDetails.attendanceTypeDto.attendanceTypeName}"/>
  </td>
  </tr>
  <tr>
  <td class="dialog"><b>詳細</b></td>
- <td class="right2"><div class="scroll2">&lt;script&gt;alert("B");&lt;/script&gt;</div></td>
+ <td class="right2"><div class="scroll2">
+ <c:out value="${reservationDTOForReservationDetails.supplement}"/>
+ </div></td>
  </tr>
  </tbody>
  </table>
