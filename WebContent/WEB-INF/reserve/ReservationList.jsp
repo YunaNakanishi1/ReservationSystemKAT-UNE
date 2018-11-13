@@ -98,6 +98,7 @@ Javascriptを有効にしてください
 <form action="/ReservationSystemKAT-UNE/reservesystem/pushQuickReservationButton" method="post">
 <input class="submit dialog2" type="submit" value="今すぐ予約">
 </form>
+
 </div>
 <div class = "rightside">
 <form action="resourcelist" method="get">
