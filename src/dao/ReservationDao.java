@@ -9,12 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -31,6 +29,8 @@ public class ReservationDao {
 
 	private Connection _con = null;
 	private static Logger _log = LogManager.getLogger();
+
+	private static final int TERM_FOR_RESERVATION_SEARCH=30;
 
 
 
@@ -156,8 +156,8 @@ public class ReservationDao {
 
 
 			//「予約者」「共同予約者」のUserDtoを作る
-			
-			
+
+
 //			private String _userId;
 //			private String _password;
 //			private int _authority;
@@ -165,7 +165,7 @@ public class ReservationDao {
 //			private String _firstName;
 //			private String _phoneNumber;
 //			private String _mailAddress;
-//			
+//
 //			user_id  | password | family_name | first_name | authority |     tel      |       mail_address
 
 		//		private int _reservationId;				ok
@@ -206,7 +206,7 @@ public class ReservationDao {
 
 	}
 
-	public List<ReservationDto> queryByInput(Timestamp currenTime,String usageDate,TimeDto usageStartTime,TimeDto usagEndTime,String officeId,String categoryId,String userId,boolean onlyMyReservation,boolean pastReservation,boolean deletedReservation)throws SQLException{
+	public List<ReservationDto> queryByInput(String usageDate,TimeDto usageStartTime,TimeDto usagEndTime,String officeId,String categoryId,String userId,boolean onlyMyReservation,boolean pastReservation,boolean deletedReservation)throws SQLException{
 		List<ReservationDto> reservationList=new ArrayList<ReservationDto>();
 
 		DBHelper dbHelper = new DBHelper();
@@ -222,7 +222,21 @@ public class ReservationDao {
 		StringBuilder sqlBuilder=new StringBuilder();
 
 		try{
-			sqlBuilder.append("WITH PARAMS AS ( SELECT ? AS p1_current_time,? AS p2_usage_date,? AS p3 _");
+			sqlBuilder.append("WITH params AS ( SELECT ? AS p1_usage_date,? AS p2_after_30_date,? AS p3_usage_start_minute_value,? AS p4_usage_end_minute_value ,? AS p5_office_id ? AS p6_category_id,? AS p7_user_id");
+			sqlBuilder.append("SELECT reserve_id,reservations.resource_id,resource_name,office_name,category_name,usage_start_time,usage_end_time,reservation_name,reservations.user_id, user_name,deleted");
+			sqlBuilder.append("FROM reservations,users,resources,categories,offices,params");
+			sqlBuilder.append("WHERE reservations.resource_id=resources.resource_id AND resources.officeId=offices.officeId AND resources.category_id=categories_category_id AND reserved_person_id=user_id");
+
+			Timestamp usageDateTimestamp=null;
+			Timestamp after30Timestamp=null;
+			if(usageDate!=null){
+				sqlBuilder.append("AND usage_start_time > p1_usage_date AND usage_end_time < p2_after_30_date");
+				usageDateTimestamp=new TimeDto(0).getTimeStamp(usageDate);
+				Calendar calendar=Calendar.getInstance();
+				calendar.setTime(usageDateTimestamp);
+				calendar.add(Calendar.DATE, 30);
+				after30Timestamp=new Timestamp(calendar.getTime().getTime());
+			}
 
 
 		}finally{
