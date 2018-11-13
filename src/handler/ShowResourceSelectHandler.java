@@ -23,7 +23,9 @@ import service.GetResourceCharacteristicListService;
 
 
 /**
- * @author z00h230741
+ * サーブレット番号：36
+ * リソース選択画面を表示するための情報をセット.
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
 public class ShowResourceSelectHandler implements Handler{
@@ -32,10 +34,9 @@ public class ShowResourceSelectHandler implements Handler{
 	@Override
 	public String handleService(HttpServletRequest request){
 		HttpSession session =request.getSession(true);
-		HandlerHelper handlerHelper = new HandlerHelper();
 
-		String categoryId = (String)session.getAttribute("categoryIdForResourceSelect");
-		String officeId = (String)session.getAttribute("officeIdForResourceSelect");
+		String categoryListForResourceSelect = (String)session.getAttribute("ForResourceSelect");
+		String officeListForResourceSelect = (String)session.getAttribute("officeListForResourceSelectForResourceSelect");
 		List<String> facilityIdListForResourceSelect = (List<String>)session.getAttribute("facilityIdListForResourceSelect");
 
 		//事務所・カテゴリ一覧取得
@@ -84,7 +85,7 @@ public class ShowResourceSelectHandler implements Handler{
 		}
 
 		//カテゴリ選択チェック取得
-		ContainSelectedCategoryService containSelectedCategoryService = new ContainSelectedCategoryService(categoryList,categoryId);
+		ContainSelectedCategoryService containSelectedCategoryService = new ContainSelectedCategoryService(categoryList,categoryListForResourceSelect);
 		//boolean型の変数を用意
 		boolean selectedCategory;
 		if(containSelectedCategoryService.validate()){
@@ -102,7 +103,7 @@ public class ShowResourceSelectHandler implements Handler{
 		}
 
 		//事業所選択チェック取得
-		ContainSelectedOfficeService containSelectedOfficeService = new ContainSelectedOfficeService(officeList,officeId);
+		ContainSelectedOfficeService containSelectedOfficeService = new ContainSelectedOfficeService(officeList,officeListForResourceSelect);
 		//boolean型の変数を用意
 		boolean selectedOffice;
 			if(containSelectedOfficeService.validate()){
@@ -140,8 +141,12 @@ public class ShowResourceSelectHandler implements Handler{
 					return ERROR_PAGE;
 				}
 
-		//sessionに各値をセット
+		//requestに各値をセット
+				request.setAttribute("categoryListForResourceSelect",categoryList);
+				request.setAttribute("officeListForResourceSelect",officeList);
+				request.setAttribute("facilityListForResourceSelect", facilityList);
 
+				return RESOURCE_SELECT;
 
 		}
 
