@@ -101,13 +101,8 @@ public class DeleteReservationHandler implements Handler{
 			 _log.error("reservedPersonIsNull");
 			 return ERROR_PAGE;
 		}
-<<<<<<< HEAD
 
 
-
-
-=======
->>>>>>> refs/remotes/origin/develop
 
 
 
