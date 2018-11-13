@@ -342,4 +342,52 @@ public class ReservationDao {
 
 		return reservationList;
 	}
+
+	public List<ReservationDto> queryByResources(List<String> resourceIdList, Timestamp startTime, Timestamp endTime) throws SQLException
+	{
+	    List<ReservationDto> reservationList = new ArrayList<>();
+
+	    DBHelper dbHelper = new DBHelper();
+        _con = dbHelper.connectDb(); //dbに接続
+
+        if (_con == null) {
+            _log.error("DatabaseConnectError");
+            throw new SQLException();   //エラー処理はハンドラーに任せる
+        }
+
+        PreparedStatement preparedStatement = null;
+        ResultSet rs = null;
+        String sql = "";
+        
+        try{
+            preparedStatement = _con.prepareStatement(sql);
+            //preparedStatement.setInt(1,reserveId);
+            rs = preparedStatement.executeQuery();  //実行
+            while(rs.next()){
+
+            }
+
+
+        }finally{
+            try {
+                dbHelper.closeResource(rs);
+            } catch (Exception e) {
+                e.printStackTrace();
+                _log.error("Exception");
+            }
+
+            try {
+                dbHelper.closeResource(preparedStatement);
+            } catch (Exception e) {
+                e.printStackTrace();
+                _log.error("Exception");
+            }
+            dbHelper.closeDb();
+
+        }
+
+	    return reservationList;
+	}
 }
+
+

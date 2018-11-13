@@ -226,7 +226,7 @@ selected
 <option value="aaa" selected>全て</option>
 <c:forEach var="obj" items="${categoryListForReservationList}" varStatus="status">
 <option value="<c:out value ="${obj.categoryId}"/>"
-<c:if test="${obj.cateogryId == categoryIdForReservationList }">
+<c:if test="${obj.categoryId == categoryIdForReservationList }">
 selected
 </c:if>
 ><c:out value="${obj.categoryName }"/>
@@ -296,7 +296,7 @@ checked
 					<tr>
 					<td><c:out value="${obj.usageDate }"/></td>
 					<td><c:out value="${obj.usageStartTime }"/>～<c:out value="${obj.usageEndTime }"/></td>
-					<td><a href="showReservationDetails?reservationId=${obj.reservationId }"><c:out value="${obj.reservationName }"/></a></td>
+					<td><a href="reservesystem/showReservationDetails?reservedId=${obj.reservationId }"><c:out value="${obj.reservationName }"/></a></td>
 					<td><c:out value="${obj.resource.resourceName }"/></td>
 					<td><c:out value="${obj.resource.officeName }"/></td>
 					<td><c:out value="${obj.resource.category }"/></td>
