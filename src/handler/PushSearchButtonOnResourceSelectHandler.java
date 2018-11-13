@@ -6,6 +6,9 @@ package handler;
 import static handler.MessageHolder.*;
 import static handler.ViewHolder.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -47,6 +50,10 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         String capacityStr = request.getParameter("capacity");
         String resourceNameStr = request.getParameter("resourceName");
         String[] resourceCaracteristicsStrArray = request.getParameterValues("resourceCaracteristics");
+        List<String> resourceCaracteristicsList = new ArrayList<String>();
+        for (int i = 0; i < resourceCaracteristicsStrArray.length; i++) {
+        	resourceCaracteristicsList.add(resourceCaracteristicsStrArray[i]);
+        }
 
         //再表示用にセット
         session.setAttribute("usageDateForReservationRegist", dateStr);
@@ -54,7 +61,7 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         session.setAttribute("officeIdForResourceSelect", officeStr);
         session.setAttribute("displayCapacityForResourceSelect",capacityStr);
         session.setAttribute("resourceNameForResourceSelect", resourceNameStr);
-        session.setAttribute("facilityIdListForResourceSelect", resourceCaracteristicsStrArray);
+        session.setAttribute("facilityIdListForResourceSelect", resourceCaracteristicsList);
 
         //数値に変換
         int startHourInt, startMinutesInt, endHourInt, endMinutesInt, actualUseTimeHourInt, actualUseTimeMinutesInt;
