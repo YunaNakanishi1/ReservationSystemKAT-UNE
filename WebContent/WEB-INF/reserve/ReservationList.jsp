@@ -95,12 +95,12 @@ Javascriptを有効にしてください
 <input class="submit dialog2" type="submit" value="新規予約">
 </form>
 　
-<form action="/ReservationSystemKAT-UNE/reservesystem/pushQuickReservationButton" method="post">
+<form action="pushQuickReservationButton" method="post">
 <input class="submit dialog2" type="submit" value="今すぐ予約">
 </form>
 </div>
 <div class = "rightside">
-<form action="newReservation" method="get">
+<form action="resourcelist" method="get">
 <input class="submit dialog2" type="submit" value="リソース一覧">
 </form>
 </div>
@@ -113,6 +113,7 @@ Javascriptを有効にしてください
 </c:if>
 <table class="table4">
 <tbody>
+<form action="pushSearchButtonOnReservationList" method="post">
 <tr>
 <td class="one" class="dialog"><b>　利用日</b><a class="red"> ※</a></td>
 <td class="right2">
@@ -234,7 +235,6 @@ selected
  </td>
 </tr>
 </table>
-
 <input type="checkbox" name="displayOnlyMyReservation" value="displayOnlyMyReservation"
 <c:if test="${displayOnlyMyReservation }">
 checked
@@ -253,13 +253,11 @@ checked
 <br><br>
 <table class="table3">
 <tr>
-<br>
+<br/>
 <td>
-<form action="setresource" method="post">
 <input class="submit dialog2" type = "submit" value = "検索"></td>
-</form>
 </tr>
-
+</form>
 </table>
 
 
