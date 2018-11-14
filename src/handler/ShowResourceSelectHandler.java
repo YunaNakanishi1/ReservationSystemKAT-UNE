@@ -41,7 +41,7 @@ public class ShowResourceSelectHandler implements Handler{
 		String officeIdForResourceSelect = (String)session.getAttribute("officeListForResourceSelectForResourceSelect");
 		List<String> facilityIdListForResourceSelect = (List<String>)session.getAttribute("facilityIdListForResourceSelect");
 
-		
+
 		GetOfficeAndCategoryListService getOfficeAndCategoryListService = new GetOfficeAndCategoryListService();
 		//空のリストを用意
 		List<CategoryDto> categoryList=new ArrayList<CategoryDto>();
@@ -55,7 +55,7 @@ public class ShowResourceSelectHandler implements Handler{
 				categoryList= getOfficeAndCategoryListService.getCategoryList();
 				officeList= getOfficeAndCategoryListService.getOfficeList();
 			}catch(SQLException e){
-			    _log.error("SQLException");
+			    _log.error("SQLException1");
 				return ERROR_PAGE;
 			}
 
@@ -65,7 +65,7 @@ public class ShowResourceSelectHandler implements Handler{
 			return ERROR_PAGE;
 		}
 
-		
+
 		GetResourceCharacteristicListService getResourceCharacteristicListService = new GetResourceCharacteristicListService();
 		//空のリストを取得
 		List<FacilityDto> facilityList=new ArrayList<FacilityDto>();
@@ -76,7 +76,7 @@ public class ShowResourceSelectHandler implements Handler{
 				getResourceCharacteristicListService.execute();
 				facilityList= getResourceCharacteristicListService.getFacilityList();
 			}catch(SQLException e){
-			    _log.error("SQLException");
+			    _log.error("SQLException2");
 				return ERROR_PAGE;
 			}
 
@@ -87,14 +87,14 @@ public class ShowResourceSelectHandler implements Handler{
 			return ERROR_PAGE;
 		}
 
-		
+
 		ContainSelectedCategoryService containSelectedCategoryService = new ContainSelectedCategoryService(categoryList,categoryIdForResourceSelect);
 		//boolean型の変数を用意
 		boolean selectedCategory;
-		
-		
+
+
 		//選択したカテゴリがデータベースから削除されてないか確認する
-		
+
 		if(containSelectedCategoryService.validate()){
 
 				containSelectedCategoryService.execute();
