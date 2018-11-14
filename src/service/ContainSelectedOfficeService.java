@@ -6,7 +6,7 @@ import dto.OfficeDto;
 import exception.MyException;
 
 /**
- * 事業所IDがリストに含まれているか調べるサービス. 18
+ * 事業所IDがnullまたはリストに含まれているか調べるサービス. 18
  *
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
@@ -33,11 +33,13 @@ public class ContainSelectedOfficeService implements Service {
 
 	@Override
 	public void execute(){
+
 		if (_officeId == null) {
 			_result = true;
 		} else {
 			_result = false;
 			for (OfficeDto office : _officeList) {
+
 				if (_officeId.equals(office.getOfficeId())) {
 					_result = true;
 				}
