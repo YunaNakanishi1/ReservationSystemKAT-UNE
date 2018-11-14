@@ -91,7 +91,7 @@ Javascriptを有効にしてください
 <h2>予約一覧</h2>
 <div class = "reframe">
 <div class = "leftside">
-<form action="pushNewReservationButton" method="get">
+<form action="/ReservationSystemKAT-UNE/reservesystem/pushNewReservationButton" method="get">
 <input class="submit dialog2" type="submit" value="新規予約">
 </form>
 　
@@ -101,7 +101,7 @@ Javascriptを有効にしてください
 
 </div>
 <div class = "rightside">
-<form action="resourcelist" method="get">
+<form action="/ReservationSystemKAT-UNE/reservesystem/resourcelist" method="get">
 <input class="submit dialog2" type="submit" value="リソース一覧">
 </form>
 </div>
@@ -296,12 +296,15 @@ checked
 					<tr>
 					<td><c:out value="${obj.usageDate }"/></td>
 					<td><c:out value="${obj.usageStartTime }"/>～<c:out value="${obj.usageEndTime }"/></td>
-					<td><a href="reservesystem/showReservationDetails?reservedId=${obj.reservationId }"><c:out value="${obj.reservationName }"/></a></td>
+					<td><a href="/ReservationSystemKAT-UNE/reservesystem/showReservationDetails?reservedId=${obj.reservationId }"><c:out value="${obj.reservationName }"/></a></td>
 					<td><c:out value="${obj.resource.resourceName }"/></td>
 					<td><c:out value="${obj.resource.officeName }"/></td>
 					<td><c:out value="${obj.resource.category }"/></td>
 					<td><c:out value="${obj.reservedPerson.familyName }"/><c:out value="${obj.reservedPerson.firstName }"/></td>
-					<td><c:out value="${obj.deleted }"/></td>
+					<td><c:choose>
+					<c:when test="${obj.deleted == 1}">削除済み</c:when>
+					<c:otherwise>未削除</c:otherwise>
+					</c:choose></td>
 					</tr>
 					</c:forEach>
 					</tbody>
