@@ -90,6 +90,11 @@ public class SearchResourceListHandler implements Handler {
 
         return resources;
     }
+    /**
+     * 予約可能状況を取得する
+     * @param resourceList
+     * @return
+     */
     private List<AvailableDto> getAvailableList(List<Resource> resourceList){
         TimeDto startTime = (TimeDto) _session.getAttribute("usageStartTimeForResourceSelect");
         TimeDto endTime = (TimeDto) _session.getAttribute("usageEndTimeForResourceSelect");
