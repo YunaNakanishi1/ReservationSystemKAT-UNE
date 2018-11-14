@@ -358,7 +358,7 @@ public class ReservationDao {
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
         String sql = "";
-        
+
         try{
             preparedStatement = _con.prepareStatement(sql);
             //preparedStatement.setInt(1,reserveId);
@@ -388,6 +388,47 @@ public class ReservationDao {
 
 	    return reservationList;
 	}
-}
+	public int deleteReservation(int reserveId) throws SQLException{
+		DBHelper dbHelper = new DBHelper();
+		_con = dbHelper.connectDb(); //dbに接続
+
+		if (_con == null) {
+			_log.error("DatabaseConnectError");
+			throw new SQLException();	//エラー処理はハンドラーに任せる
+		}
+
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		int result;
+
+		try{
+			String sql = "UPDATE reservations SET deleted = 1 WHERE reserve_id = ?";
+			preparedStatement = _con.prepareStatement(sql);
+			preparedStatement.setInt(1, reserveId);
+            result = preparedStatement.executeUpdate();
+
+		}finally{
+            try {
+                dbHelper.closeResource(rs);
+            } catch (Exception e) {
+                e.printStackTrace();
+                _log.error("Exception");
+            }
+
+            try {
+                dbHelper.closeResource(preparedStatement);
+            } catch (Exception e) {
+                e.printStackTrace();
+                _log.error("Exception");
+            }
+            dbHelper.closeDb();
+
+        }
+
+	    return result;
+
+	}
+	}
+
 
 
