@@ -178,11 +178,16 @@ public class ServiceValidator {
     		return true;
     	}
 
-    	//capacityが半角の整数でなかったらエラー
+    	//入力されていない場合は0をセット
+    	if(capacity.length() == 0){
+    	    capacity = "0";
+    	}
+        //capacityが半角の整数でなかったらエラー
     	if (!capacity.matches("^[0-9]+")) {
     		_validationMessage = EM31;
     		return true;
-    	}
+    	    }
+
 
     	int capacityInt = 0;
     	try {

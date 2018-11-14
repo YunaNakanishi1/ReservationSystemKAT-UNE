@@ -61,7 +61,7 @@ function hyoji1()
 </script>
 
 
-	<script type="text/javascript" src="pulldownControll.js">	</script>
+	<script type="text/javascript" src="/ReservationSystemKAT-UNE/pulldownControll.js">	</script>
 
 </head>
 
@@ -81,7 +81,7 @@ function hyoji1()
 Javascriptを有効にしてください
 </div>
 </div>
-<script type="text/javascript" src="JavascriptErrorLabel.js">	</script>
+<script type="text/javascript" src="/ReservationSystemKAT-UNE/JavascriptErrorLabel.js">	</script>
 <!-- javascript警告ラベル終わり -->
 
 
