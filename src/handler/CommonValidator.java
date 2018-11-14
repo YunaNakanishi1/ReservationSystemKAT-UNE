@@ -55,7 +55,7 @@ public class CommonValidator {
 	    }
 		boolean notNumeric=false;
 		Pattern numericPattern;
-		numericPattern=Pattern.compile("^[0-9]+$");
+		numericPattern=Pattern.compile("^-?[0-9]+$");
 		Matcher m = numericPattern.matcher(val);
 		notNumeric = !m.find();
 
@@ -221,10 +221,11 @@ public class CommonValidator {
      * @return 定員（数値）
      */
     protected int getCapacityValue(String capacity) {
-
+    	System.out.println(capacity);
     	if(!notSetOn(capacity)) {
     		if(!notNumericOn(capacity)) {
     			int capacityInt = Integer.parseInt(capacity);
+
     			return capacityInt;
     		} else {
     			throw new MyException();

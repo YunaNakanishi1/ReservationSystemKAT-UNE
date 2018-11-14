@@ -33,6 +33,7 @@ public class ContainSelectedCategoryService implements Service {
 
 	@Override
 	public void execute(){
+
 		if (_categoryId == null) {
 			_result = true;
 		} else {
