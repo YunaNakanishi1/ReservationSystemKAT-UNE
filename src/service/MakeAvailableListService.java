@@ -1,9 +1,12 @@
 package service;
 
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
+import dao.ReservationDao;
 import dto.AvailableDto;
+import dto.ReservationDto;
 import dto.Resource;
 import dto.TimeDto;
 import exception.MyException;
@@ -37,6 +40,11 @@ public class MakeAvailableListService implements Service{
 
     @Override
     public void execute() throws SQLException {
+        ReservationDao rDao = new ReservationDao();
+        Timestamp startTime = _usageStartTime.getTimeStamp(_usageDate);
+        Timestamp endTime = _usageEndTime.getTimeStamp(_usageDate);
+
+        List<ReservationDto> reservationList = rDao.queryByResources(_resourceList, startTime, endTime);
 
     }
     public List<AvailableDto> getAvailableList(){
