@@ -3,10 +3,15 @@
  */
 package handler;
 
+import static handler.MessageHolder.*;
+import static handler.ViewHolder.*;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import dto.TimeDto;
+import exception.MyException;
+import service.PushSearchButtonOnQuickReservationService;
 
 /**
  *
@@ -24,14 +29,56 @@ public class PushSearchButtonOnQuickReservationHandler implements Handler {
 		HttpSession session = request.getSession(true);
 		String usageEndHourForResourceSelect = request.getParameter("usageEndHour");
 		String usageEndMinuteForResourceSelect = request.getParameter("usageEndMinute");
-		String capacityForResourceSelect = request.getParameter("capacityForResourceSelect");
+		String capacityForResourceSelect = request.getParameter("capacity");
+		String categoryIdForResourceSelect = request.getParameter("category");
+		String officeIdForResourceSelect = request.getParameter("office");
 
 		TimeDto usageStartTimeForResourceSelect  = (TimeDto)session.getAttribute("usageStartTimeForResourceSelect");
 
+		//定員の入力チェック
 		CommonValidator commonValidator = new CommonValidator();
-		commonValidator.
+		int capacityInt = 0;
+		try {
+			capacityInt = commonValidator.getCapacityValue(capacityForResourceSelect);
 
-		return null;
+		} catch(MyException e) {
+			//入力が正しくない場合、再度今すぐ予約画面を表示
+			request.setAttribute("messageForQuickReservation", EM31);
+			return SHOW_QUICK_RESERVATION_SERVLET;
+		}
+
+		int usageEndHourInt = Integer.parseInt(usageEndHourForResourceSelect);
+		int usageEndMinuteInt = Integer.parseInt(usageEndMinuteForResourceSelect);
+
+		TimeDto usageEndTimeForResourceSelect = new TimeDto(usageEndHourInt, usageEndMinuteInt);
+
+		 PushSearchButtonOnQuickReservationService pushSearchButtonOnQuickReservationService = new PushSearchButtonOnQuickReservationService(usageStartTimeForResourceSelect, usageEndTimeForResourceSelect, capacityInt);
+
+		 //バリデーションチェックに成功した場合
+		 if (pushSearchButtonOnQuickReservationService.validate()) {
+			 //開始・終了時間
+			 int usageStartMinutes = usageStartTimeForResourceSelect.getTimeMinutesValue();
+			 int usageEndMinutes = usageEndTimeForResourceSelect.getTimeMinutesValue();
+
+			 //実利用時間
+			 TimeDto usageTimeForReservationSelect = new TimeDto(usageEndMinutes - usageStartMinutes);
+
+			 //入力内容をsessionにセット
+			 //session.setAttribute("usageStartTimeForResourceSelect", usageStartTimeForResourceSelect);
+			 session.setAttribute("usageEndTimeForResourceSelect", usageEndTimeForResourceSelect);
+			 session.setAttribute("usageTimeForReservationSelect", usageTimeForReservationSelect);
+
+			 session.setAttribute("categoryIdForResourceSelect", categoryIdForResourceSelect);
+			 session.setAttribute("officeIdForResourceSelect", officeIdForResourceSelect);
+			 session.setAttribute("capacityForResourceSelect", capacityForResourceSelect);
+
+		 } else {
+			 String message = pushSearchButtonOnQuickReservationService.getValidationMessage();
+			 request.setAttribute("messageForQuickReservation", message);
+			 return SHOW_QUICK_RESERVATION_SERVLET;
+		 }
+
+		return SEARCH_RESOURCE_LIST_SERVLET;
 	}
 
 }

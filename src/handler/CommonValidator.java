@@ -12,6 +12,8 @@ import java.util.Calendar;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import exception.MyException;
+
 /**
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
@@ -209,6 +211,27 @@ public class CommonValidator {
         }catch (ParseException e) {
             return true;
         }
+    }
+
+    /**
+     * 定員の入力が半角整数だった場合その値を返却する.
+     * 定員の入力が無かった場合、0を返却.
+     * それ以外の場合、MyException
+     * @param capacity 定員（文字列）
+     * @return 定員（数値）
+     */
+    protected int getCapacityValue(String capacity) {
+    	if(!notSetOn(capacity)) {
+    		if(!notNumericOn(capacity)) {
+    			int capacityInt = Integer.parseInt(capacity);
+    			return capacityInt;
+    		} else {
+    			throw new MyException();
+    		}
+    	} else {
+    		return 0;
+    	}
+
     }
 
     protected String getDateStr() {

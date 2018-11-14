@@ -50,7 +50,7 @@ public class SetResourceDetailsHandler implements Handler {
 		// セッションから権限を取得
 		//管理者でないもののアクセスは許可しない
 		HttpSession session = request.getSession(false);
-		int authority = (int) session.getAttribute("authority");
+		int authority = (int) session.getAttribute("authorityOfLoggedIn");
 
 
 		if (authority == 0) {//0:管理者 1:一般利用者

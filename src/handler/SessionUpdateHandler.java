@@ -49,7 +49,6 @@ public class SessionUpdateHandler implements Handler{
 
 					int authority = checkAuthorityService.getAuthority();
 
-					System.out.println(authority);
 
 					if(authority==0||authority==1){
 						session.setAttribute("userIdOfLoggedIn", userId);//sessionに変更

@@ -71,15 +71,15 @@ public class ReservationDao {
 					+ "	attendance_type, "
 					+ "resource_characteristic_name, "
 					+ "users.user_id, users.password, users.family_name, users.first_name, "
-					+ "users.authority, users.tel, users.mail_address,"
+					+ "users.authority, users.tel, users.mail_address, "
 					+ "cousers.user_id as co_user_id, cousers.password as co_password, "
-					+ "cousers.family_name as co_family_name, cousers.first_name as co_first_name,"
+					+ "cousers.family_name as co_family_name, cousers.first_name as co_first_name, "
 					+ " cousers.authority as co_authority, cousers.tel as co_tel, "
 					+ "cousers.mail_address as co_mail_address "
 
 			+ "from reservations, resources, attendance_types, users , users as cousers ,"
 					+ " resource_features,resource_characteristics , offices , categories "
-			+ "where resources.resource_id = reservations.resource_id"
+			+ "where resources.resource_id = reservations.resource_id "
 				+ "and resource_features.resource_characteristic_id = resource_characteristics.resource_characteristic_id "
 				+ "and attendance_types.attendance_type_id = reservations.attendance_type_id "
 				+ "and users.user_id = reservations.reserved_person_id "
@@ -105,7 +105,7 @@ public class ReservationDao {
 			String coReservedPersonId;//共同予約者ID
 			int numberOfParticipants = 0;	//利用人数
 			int attendanceTypeId = 0;	//参加者種別ID
-			Timestamp reserveSupplement; //補足
+			String reserveSupplement; //補足
 			int reservationDeleted = 0; //予約削除済み
 
 
@@ -154,7 +154,7 @@ public class ReservationDao {
 				coReservedPersonId = rs.getString("co_reserved_person_id");
 				numberOfParticipants = rs.getInt("number_of_participants");
 				attendanceTypeId = rs.getInt("attendance_type_id");
-				reserveSupplement = rs.getTimestamp("reserve_supplement");
+				reserveSupplement = rs.getString("reserve_supplement");
 				reservationDeleted = rs.getInt("reservation_deleted");
 
 				resourceName = rs.getString("resource_name");
@@ -164,7 +164,7 @@ public class ReservationDao {
 				supplement = rs.getString("supplement");
 				usageStopStartDate = rs.getTimestamp("usage_stop_start_date");
 				usageStopEndDate = rs.getTimestamp("usage_stop_end_date");
-				resourceDeleted = rs.getInt("resources_deleted");
+				resourceDeleted = rs.getInt("resource_deleted");
 
 				attendanceType = rs.getString("attendance_type");
 
@@ -264,7 +264,7 @@ public class ReservationDao {
 			Timestamp usageDateTimestamp=new Timestamp(0);
 			Timestamp after30Timestamp=new Timestamp(0);
 			if(usageDate!=null){
-				sqlBuilder.append("AND usage_start_date > p1_usage_date AND usage_end_date < p2_after_30_date ");
+				sqlBuilder.append("AND usage_start_date >= p1_usage_date AND usage_end_date <= p2_after_30_date ");
 				usageDateTimestamp=new TimeDto(0).getTimeStamp(usageDate);
 				Calendar calendar=Calendar.getInstance();
 				calendar.setTime(usageDateTimestamp);
@@ -272,7 +272,7 @@ public class ReservationDao {
 				after30Timestamp=new Timestamp(calendar.getTime().getTime());
 			}
 
-			sqlBuilder.append("AND (EXTRACT(hour FROM usage_start_date)*60 + EXTRACT(minute FROM usage_start_date)) > p3_usage_start_minute_value AND (EXTRACT(hour FROM usage_end_date)*60 + EXTRACT(minute FROM usage_end_date)) < p4_usage_end_minute_value ");
+			sqlBuilder.append("AND (EXTRACT(hour FROM usage_start_date)*60 + EXTRACT(minute FROM usage_start_date)) >= p3_usage_start_minute_value AND (EXTRACT(hour FROM usage_end_date)*60 + EXTRACT(minute FROM usage_end_date)) <= p4_usage_end_minute_value ");
 
 			if(officeId!=null){
 				sqlBuilder.append("AND resources.office_id=p5_office_id ");
@@ -422,7 +422,7 @@ public class ReservationDao {
 		if (_con == null) {
 			_log.error("DatabaseConnectError");
 			throw new SQLException();	//エラー処理はハンドラーに任せる
-}
+            }
 
 		PreparedStatement preparedStatement = null;
 		ResultSet rs = null;
@@ -434,7 +434,7 @@ public class ReservationDao {
 			preparedStatement.setInt(1, reserveId);
             result = preparedStatement.executeUpdate();
 
-		}finally{
+        }finally{
             try {
                 dbHelper.closeResource(rs);
             } catch (Exception e) {
@@ -455,7 +455,6 @@ public class ReservationDao {
 	    return result;
 
 	}
-	}
-
+}
 
 

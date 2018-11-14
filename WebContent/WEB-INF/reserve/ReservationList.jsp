@@ -61,8 +61,15 @@ function hyoji1()
 }
 
 </script>
-
-	<script type="text/javascript" src="script/pulldownControll.js">	</script>
+<script>
+    $(function () {
+      $("#clear").click( function() {
+        //利用日の入力欄をクリアする
+        $("#usageDate").val("");
+      });
+    });
+</script>
+	<script type="text/javascript" src="/ReservationSystemKAT-UNE/script/pulldownControll.js">	</script>
 
 
 </head>
@@ -82,7 +89,7 @@ function hyoji1()
 Javascriptを有効にしてください
 </div>
 </div>
-<script type="text/javascript" src="script/JavascriptErrorLabel.js">	</script>
+<script type="text/javascript" src="/ReservationSystemKAT-UNE/script/JavascriptErrorLabel.js">	</script>
 <!-- javascript警告ラベル終わり -->
 
 <div class="contents">
@@ -91,7 +98,7 @@ Javascriptを有効にしてください
 <h2>予約一覧</h2>
 <div class = "reframe">
 <div class = "leftside">
-<form action="pushNewReservationButton" method="get">
+<form action="/ReservationSystemKAT-UNE/reservesystem/pushNewReservationButton" method="post">
 <input class="submit dialog2" type="submit" value="新規予約">
 </form>
 　
@@ -101,7 +108,7 @@ Javascriptを有効にしてください
 
 </div>
 <div class = "rightside">
-<form action="resourcelist" method="get">
+<form action="/ReservationSystemKAT-UNE/reservesystem/resourcelist" method="get">
 <input class="submit dialog2" type="submit" value="リソース一覧">
 </form>
 </div>
@@ -114,17 +121,17 @@ Javascriptを有効にしてください
 </c:if>
 <table class="table4">
 <tbody>
-<form action="reservesystem/pushSearchButtonOnReservationList" method="post">
+<form action="/ReservationSystemKAT-UNE/reservesystem/pushSearchButtonOnReservationList" method="post">
 <tr>
 <td class="one" class="dialog"><b>　利用日</b><a class="red"> ※</a></td>
 <td class="right2">
 <div class="dialog2">
-<input type="text" placeholder="2018/1/1（年は省略可）"  name="usageDate"
+<input type="text" placeholder="2018/1/1（年は省略可）"  name="usageDate" id="usageDate"
 <c:if test="${usageDateForReservationList!=null }">
 value="<c:out value="${usageDateForReservationList }"/>"
 </c:if>
 
-><font color = "red">×</font> 以降30日間表示
+><a id="clear" class="red">×</a> 以降30日間表示
 </div>
 </td>
 </tr>
@@ -207,7 +214,7 @@ selected
 <td class="dialog"><b>事業所</b></td>
 <td class="right2">
 <select name ="officeId">
-<option >全て</option>
+<option value="" >全て</option>
 <c:forEach var="obj" items="${officeListForReservationList}" varStatus="status">
 <option value="<c:out value ="${obj.officeId}"/>"
 <c:if test="${obj.officeId == officeIdForReservationList }">
@@ -222,8 +229,8 @@ selected
 <tr>
 <td class="dialog"><b>カテゴリ</b></td>
 <td class="right2">
-<select name ="category">
-<option value="aaa" selected>全て</option>
+<select name ="categoryId">
+<option value="" selected>全て</option>
 <c:forEach var="obj" items="${categoryListForReservationList}" varStatus="status">
 <option value="<c:out value ="${obj.categoryId}"/>"
 <c:if test="${obj.categoryId == categoryIdForReservationList }">
@@ -250,7 +257,7 @@ checked
 <c:if test="${displayDeletedReservation }">
 checked
 </c:if>
->削除済み予約を表示　
+>削除済み予約も表示　
 <br><br>
 <table class="table3">
 <tr>
@@ -296,12 +303,15 @@ checked
 					<tr>
 					<td><c:out value="${obj.usageDate }"/></td>
 					<td><c:out value="${obj.usageStartTime }"/>～<c:out value="${obj.usageEndTime }"/></td>
-					<td><a href="reservesystem/showReservationDetails?reservedId=${obj.reservationId }"><c:out value="${obj.reservationName }"/></a></td>
+					<td><a href="/ReservationSystemKAT-UNE/reservesystem/showReservationDetails?reservedId=${obj.reservationId }"><c:out value="${obj.reservationName }"/></a></td>
 					<td><c:out value="${obj.resource.resourceName }"/></td>
 					<td><c:out value="${obj.resource.officeName }"/></td>
 					<td><c:out value="${obj.resource.category }"/></td>
 					<td><c:out value="${obj.reservedPerson.familyName }"/><c:out value="${obj.reservedPerson.firstName }"/></td>
-					<td><c:out value="${obj.deleted }"/></td>
+					<td><c:choose>
+					<c:when test="${obj.deleted == 1}">削除済み</c:when>
+					<c:otherwise>未削除</c:otherwise>
+					</c:choose></td>
 					</tr>
 					</c:forEach>
 					</tbody>
