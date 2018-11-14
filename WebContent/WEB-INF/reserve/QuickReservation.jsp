@@ -52,9 +52,7 @@ Javascriptを有効にしてください
 						<td class="right2">
 						<select name ="officeIdForResourceSelect">
 							<option value = ""
-								<c:if test="${obj==null}">
-								 selected
-								</c:if>>全て
+								>全て
 							</option>
 
 							<c:forEach var="obj" items="${officeListForResourceSelect}" varStatus="status">
@@ -71,9 +69,7 @@ Javascriptを有効にしてください
 						<td class="dialog"><b>　　　カテゴリ</b></td>
 						<td class="right2"><select name ="categoryIdForResourceSelect">
 							<option value = ""
-								<c:if test="${obj==null}">
-								 selected
-								</c:if>>全て
+								>全て
 							</option>
 
 							<c:forEach var="obj" items="${categoryListForResourceSelect}" varStatus="status">
