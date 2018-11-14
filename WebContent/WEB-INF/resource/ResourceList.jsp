@@ -67,7 +67,7 @@ $(document).ready(function(){
 				<a href="reserveList" method="post">予約一覧に戻る</a>
 			</p>
 
-			<c:if test="${authority == 0}">
+			<c:if test="${authorityOfLoggedIn == 0}">
 				<form action="resourceregist" method="get">
 					<input type="hidden" name="type" value="regist"> <input
 						class="submit" type="submit" value="リソース登録">
