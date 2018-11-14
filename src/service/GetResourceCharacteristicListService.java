@@ -7,8 +7,8 @@ import dao.FacilityDao;
 import dto.FacilityDto;
 
 /**
- *
- * @author z00h230741
+ * リソース特性一覧を取得するサービス.22
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
 public class GetResourceCharacteristicListService implements Service{

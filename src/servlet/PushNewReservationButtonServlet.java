@@ -14,6 +14,7 @@ import handler.PushNewReservationButtonHandler;
 
 /**
  * サーブレット番号：7
+ *
  * Servlet implementation class PushQuickReservationButtonServlet
  */
 @WebServlet("/reservesystem/pushNewReservationButton")
