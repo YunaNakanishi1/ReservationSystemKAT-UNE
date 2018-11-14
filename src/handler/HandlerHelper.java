@@ -174,6 +174,7 @@ public class HandlerHelper {
 
 		try {
 			ContainSelectedOfficeService containSelectedOfficeService =new ContainSelectedOfficeService(_officeList, officeId);
+
 			if(containSelectedOfficeService.validate()){
 				containSelectedOfficeService.execute();
 				if(!containSelectedOfficeService.getResult()){

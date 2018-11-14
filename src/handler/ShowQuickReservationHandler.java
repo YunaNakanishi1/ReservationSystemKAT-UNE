@@ -33,7 +33,7 @@ public class ShowQuickReservationHandler implements Handler {
 		String categoryId = (String)session.getAttribute("categoryIdForResourceSelect");
 		String officeId = (String)session.getAttribute("officeIdForResourceSelect");
 
-		boolean hasOfficeAndCategory = handlerHelper.getOfficeAndCategory(categoryId, officeId);
+		boolean hasOfficeAndCategory = handlerHelper.getOfficeAndCategory(officeId, categoryId);
 
 		if (hasOfficeAndCategory) {
 			List<CategoryDto> categoryList = handlerHelper.getCategoryList();
