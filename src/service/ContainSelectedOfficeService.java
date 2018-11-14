@@ -6,7 +6,7 @@ import dto.OfficeDto;
 import exception.MyException;
 
 /**
- * 事業所IDがリストに含まれているか調べるサービス. 18
+ * 事業所IDがnullまたはリストに含まれているか調べるサービス. 18
  *
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
