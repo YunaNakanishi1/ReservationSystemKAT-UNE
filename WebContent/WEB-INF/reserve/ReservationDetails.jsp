@@ -29,7 +29,7 @@
 Javascriptを有効にしてください
 </div>
 </div>
-<script type="text/javascript" src="JavascriptErrorLabel.js">	</script>
+<script type="text/javascript" src="/ReservationSystemKAT-UNE/script/JavascriptErrorLabel.js">	</script>
 <!-- javascript警告ラベル終わり -->
 
 
@@ -49,7 +49,7 @@ Javascriptを有効にしてください
  <tr>
  <td class="dialog"><b>リソース</b></td>
  <td class="right2">
-	 <a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?resourceId=${reservationDTOForReservationDetails.resource.resourceId}">
+	 <a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?reservationIdForReservationDetails=${reservationDTOForReservationDetails.reservationId}">
 	 <c:out value="${reservationDTOForReservationDetails.resource.resourceName}" /></a>
 
 
@@ -148,20 +148,21 @@ Javascriptを有効にしてください
  <tr>
  <td>
  	<c:if test="${flagForShowingDeleteAndChangeButton == true}">
-		 <form action="resourcechange" method="get">
+		 <form action="/ReservationSystemKAT-UNE/reservesystem/pushChangeReservationButton" method="get">
 		 <input class="submit" class="dialog" type = "submit" value ="変更">
 		 </form>
 	</c:if>
  </td>
  <td>　</td>
 
- <td><form action = "deleteresource" method = "post">
+ <td><form action = "/ReservationSystemKAT-UNE/reservesystem/pushCopyReservationButton" method = "post">
 <input class="submit" type = "submit" value = "コピーして予約"></form>
  </td>
 
  <td>　</td>
  	<c:if test="${flagForShowingDeleteAndChangeButton == true}">
 		<td><form action = "/ReservationSystemKAT-UNE/reservesystem/deleteReservation" method = "post">
+		<input type="hidden" name="reservationIdForReservationDetails" value="${reservationDTOForReservationDetails.reservationId}">
 		<input class="submit" type = "submit" value = "削除"></form>
 		</td>
 	</c:if>

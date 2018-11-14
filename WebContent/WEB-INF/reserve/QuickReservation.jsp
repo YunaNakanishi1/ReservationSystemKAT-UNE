@@ -38,10 +38,10 @@
 			<div class="dialog">
 				<h2>今すぐ予約</h2>
 				<p>
-					<font color="red"><!--メッセージ  --></font>
+					<font color="red"><c:out value = "${messageForQuickReservation}" /> </font>
 				</p>
 			</div>
-
+<form action="/ReservationSystemKAT-UNE/reservesystem/pushSearchButtonOnQuickReservation" method="post">
 			<table class="table2" style="width:790px">
 				<tbody>
 
@@ -49,8 +49,8 @@
 					<!-- nullの時全てってやつ -->
 						<td class="one" class="dialog"><b>　　　事業所</b></td>
 						<td class="right2">
-						<select name ="office">
-							<option value="全て"
+						<select name ="officeIdForResourceSelect">
+							<option value=""
 								<c:if test="${obj==null}">
 								 selected
 								</c:if>>全て
@@ -68,8 +68,8 @@
 					</tr>
 					<tr>
 						<td class="dialog"><b>　　　カテゴリ</b></td>
-						<td class="right2"><select name ="category">
-							<option value="全て"
+						<td class="right2"><select name ="categoryIdForResourceSelect">
+							<option value=""
 								<c:if test="${obj==null}">
 								 selected
 								</c:if>>全て
@@ -87,23 +87,30 @@
 					<tr>
 						<td class="dialog"><b>　　　定員</b></td>
 						<td class="right2">(※定員がないものは0人で登録されています)<br> <input
-							type="text" name="capacity" placeholder="半角数字のみ">人以上
+							type="text" name="capacityForResourceSelect" placeholder="半角数字のみ"
+							<c:if test="${displayCapacityForResourceSelect != null}">
+ 								value="<c:out value="${displayCapacityForResourceSelect}" />"
+ 							</c:if>
+							>人以上
 						</td>
 					</tr>
 
 					<tr>
 						<td class="dialog"><b>　　　利用時間</b></td>
 						<td class="right2">
-						<c:out value = "${usageStartTimeForResourceSelect.hour}"/>:<c:out value = "${usageStartTimeForResourceSelect.minutes}"/>
-						 ～
-						<!--  09:45 ～-->
+						<c:out value = "${usageStartTimeForResourceSelect.hour}"/>:
+							<c:if test="${usageStartTimeForResourceSelect.minutes < 10}">
+								0<c:out value = "${usageStartTimeForResourceSelect.minutes}"/>
+							</c:if>
+							<c:if test="${usageStartTimeForResourceSelect.minutes >= 10}">
+								<c:out value = "${usageStartTimeForResourceSelect.minutes}"/>
+							</c:if>
 
-						<select name = "usageEndHour" id = "usageEndHour"  onchange="hourChange('usageEndHour','usageEndMinute')">
-						<!--
-						<select name="usageEndHourForResourceSelect"
-							id="usageEndHourForResourceSelect"
-							onchange="hourChange('usageEndHourForResourceSelect','QuickStartMinute')">
-							 -->
+						 ～
+
+
+						<select name = "usageEndHourForResourceSelect" id = "usageEndHour"  onchange="hourChange('usageEndHour','usageEndMinute')">
+
 
 								<c:forEach begin="0" end="9" varStatus="status">
 									<option value="0<c:out value="${status.index}"/>"
@@ -126,7 +133,7 @@ selected
 								</c:forEach>
 						</select> :
 
-	<select name = "usageEndMinute" id = "usageEndMinute"  onchange="hourChange('usageEndHour','usageEndMinute')">
+	<select name = "usageEndMinuteForResourceSelect" id = "usageEndMinute"  onchange="hourChange('usageEndHour','usageEndMinute')">
 						<!-- <select name="usageEndMinutesForResourceSelect" id="QuickEndMinute"> -->
 
 				<option value="00"
@@ -155,8 +162,11 @@ selected
 			<table class="table3">
 				<tr>
 					<td>
+					<!--
 					<form action="/ReservationSystemKAT-UNE/reservesystem/pushSearchButtonOnQuickReservation" method="post">
-							<input class="submit" class="dialog" type="submit" value="検索">
+					 -->
+					 		<input class="submit" class="dialog" type="submit" value="検索">
+
 					</form>
 					</td>
 					<td></td>

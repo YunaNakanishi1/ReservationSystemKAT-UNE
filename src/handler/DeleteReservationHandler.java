@@ -29,7 +29,10 @@ public class DeleteReservationHandler implements Handler{
 	public String handleService(HttpServletRequest request){
 		HttpSession session =request.getSession(true);
 
-		int reservationIdForReservationDetails = (int)request.getAttribute("reservationIdForReservationDetails");
+		String reservationIdForReservationDetailsStr = request.getParameter("reservationIdForReservationDetails");
+
+		int reservationIdForReservationDetails = Integer.parseInt(reservationIdForReservationDetailsStr);
+
 		session.setAttribute("reservationIdForReservationDetails",reservationIdForReservationDetails);
 
 		String userIdOfLoggedIn = (String)session.getAttribute("userIdOfLoggedIn");
