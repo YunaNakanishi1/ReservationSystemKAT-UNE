@@ -49,7 +49,7 @@ Javascriptを有効にしてください
  <tr>
  <td class="dialog"><b>リソース</b></td>
  <td class="right2">
- <c:if test="${linkToResourceDetails == true} }">
+ <c:if test="${linkToResourceDetails == true}">
  	 <a href="showresourcedetailstab?resourceId=${reservationDTOForReservationDetails.resource.resourceId}">
  <c:out value="${obj.resourceName}" /></a> </c:if>
 
@@ -68,18 +68,40 @@ Javascriptを有効にしてください
  <tr>
  <td class="dialog"><b>利用時間</b></td> <!-- ●●：●●～●●：●● -->
  <td class="right2">
+ <c:if test="${reservationDTOForReservationDetails.usageStartTime.hour < 10}">
+ 0<c:out value="${reservationDTOForReservationDetails.usageStartTime.hour}"/>
+ </c:if>
+ <c:if test="${reservationDTOForReservationDetails.usageStartTime.hour >= 10}">
  <c:out value="${reservationDTOForReservationDetails.usageStartTime.hour}"/>
+ </c:if>
   :
+  <c:if test="${reservationDTOForReservationDetails.usageStartTime.minutes < 10}">
+ 0<c:out value="${reservationDTOForReservationDetails.usageStartTime.minutes}"/>
+ </c:if>
+ <c:if test="${reservationDTOForReservationDetails.usageStartTime.minutes >= 10}">
  <c:out value="${reservationDTOForReservationDetails.usageStartTime.minutes}"/>
+ </c:if>
    ～
+ <c:if test="${reservationDTOForReservationDetails.usageEndTime.hour < 10}">
+ 0<c:out value="${reservationDTOForReservationDetails.usageEndTime.hour}"/>
+ </c:if>
+ <c:if test="${reservationDTOForReservationDetails.usageEndTime.hour >= 10}">
  <c:out value="${reservationDTOForReservationDetails.usageEndTime.hour}"/>
+ </c:if>
   :
- <c:out value="${reservationDTOForReservationDetails.usageEndTime.minutes}"/>  </td>
+ <c:if test="${reservationDTOForReservationDetails.usageEndTime.minutes < 10}">
+ 0<c:out value="${reservationDTOForReservationDetails.usageEndTime.minutes}"/>
+ </c:if>
+ <c:if test="${reservationDTOForReservationDetails.usageEndTime.minutes >= 10}">
+ <c:out value="${reservationDTOForReservationDetails.usageEndTime.minutes}"/>
+ </c:if>
+ </td>
+
  </tr>
  <tr>
  <td class="dialog"><b>予約名称</b></td>
  <td class="right2">
- <c;out value="${reservationDTOForReservationDetails.reservationName}"/>
+ <c:out value="${reservationDTOForReservationDetails.reservationName}"/>
  </td>
  </tr>
  <tr>
@@ -153,10 +175,8 @@ Javascriptを有効にしてください
 <br>
 
 
+<a class="dialog" href = "showfirstreservationlist" method = "post">予約一覧に戻る</a>
 
-
-
-<a class="dialog" href = "/ReservationSystemKAT-UNE/reservesystem/resourcelist" method="get">予約一覧に戻る</a>
 
 
 
