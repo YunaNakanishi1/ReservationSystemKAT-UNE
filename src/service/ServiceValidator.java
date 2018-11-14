@@ -206,4 +206,35 @@ public class ServiceValidator {
     	return false;
     }
 
+
+    /**
+     * 今すぐ予約画面のバリデーションチェック
+     * @param capacity 定員
+     * @param usageStartTime 利用開始時間
+     * @param usageEndTime 利用終了時間
+     * @return
+     */
+    public boolean checkQuickReservationValidate(int capacity, TimeDto usageStartTime, TimeDto usageEndTime) {
+    	//定員が既定の範囲外
+    	if (capacity < 0 || capacity > 999) {
+    		_validationMessage = EM32;
+    		return false;
+    	}
+
+    	//当日時間
+    	Date today = new Date();
+    	TimeDto now = new TimeDto(today);
+    	int nowMinutes = now.getTimeMinutesValue();
+
+    	int usageStartMinutes = usageStartTime.getTimeMinutesValue();
+		int usageEndMinutes = usageEndTime.getTimeMinutesValue();
+
+    	//利用終了時間が利用開始時間より前 または 利用終了時間が現在時刻より前
+    	if ((usageEndMinutes < usageStartMinutes) || (usageEndMinutes < nowMinutes)) {
+    		_validationMessage = EM40;
+    		return false;
+    	}
+
+    	return true;
+    }
 }
