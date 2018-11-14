@@ -229,34 +229,29 @@ selected
 <td class="dialog"><b>事業所／カテゴリ</b></td>
 <td class="right2">
 <select name ="office">
-	<option value="全て"
-		<c:if test="${obj==null}">selected
-			</c:if>>全て
+	<option value="">全て
 	</option>
 
 	<c:forEach var="obj" items="${officeListForResourceSelect}" varStatus="status">
-		<option value="${obj}"
-			<c:if test="${obj==officeIdForResourceSelect}">
+		<option value="${obj.officeId}"
+			<c:if test="${obj.officeId==officeIdForResourceSelect}">
 			selected
 			</c:if>>
-			<c:out value="${obj}"/>
+			<c:out value="${obj.officeName}"/>
 		</option>
 	</c:forEach>
 </select>
 ／
 <select name ="category">
-<option value="全て"
-	<c:if test="${obj==null}">
-		selected
-	</c:if>>全て
+<option value="">全て
 </option>
 
 <c:forEach var="obj" items="${categoryListForResourceSelect}" varStatus="status">
-	<option value="${obj}"
-		<c:if test="${obj==categoryIdForResourceSelect}">
+	<option value="${obj.categoryId}"
+		<c:if test="${obj.categoryId==categoryIdForResourceSelect}">
 		 selected
 		</c:if>>
-	<c:out value="${obj}"/></option>
+	<c:out value="${obj.categoryName}"/></option>
 </c:forEach>
 </select>
 
