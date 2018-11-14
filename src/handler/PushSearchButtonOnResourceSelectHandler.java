@@ -46,7 +46,6 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         String actualUseTimeMinutesStr = request.getParameter("actualUseTimeMinutes");
 
         String officeStr = request.getParameter("office");
-        System.out.println(officeStr);
         String categoryStr = request.getParameter("category");
         String capacityStr = request.getParameter("capacity");
         String resourceNameStr = request.getParameter("resourceName");
@@ -96,13 +95,13 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         CommonValidator validator = new CommonValidator();
         //日付入力有無チェック
         if(validator.notSetOn(dateStr)) {
-        	session.setAttribute("messageForResourceSelectUpper", EM13);
+        	request.setAttribute("messageForResourceSelectUpper", EM13);
         	return SHOW_RESOURCE_SELECT_SERVLET;
         }
 
         //日付の入力チェック
         if(validator.notLenientDateOn(dateStr)) {
-        	session.setAttribute("messageForResourceSelectUpper", EM42);
+        	request.setAttribute("messageForResourceSelectUpper", EM42);
         	return SHOW_RESOURCE_SELECT_SERVLET;
         } else {
         	dateStr = validator.getDateStr();

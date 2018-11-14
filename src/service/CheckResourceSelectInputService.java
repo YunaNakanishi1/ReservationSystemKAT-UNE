@@ -18,6 +18,8 @@ public class CheckResourceSelectInputService implements Service {
 	private TimeDto _usageTime;
 	private String _capacity;
 	private String _resourceName;
+	private String _validationMessage;
+
 
 	/**
 	 * フィールドの初期化.
@@ -41,12 +43,21 @@ public class CheckResourceSelectInputService implements Service {
 	public boolean validate() throws MyException {
 		ServiceValidator serviceValidator = new ServiceValidator();
 		boolean serviceValidate =  serviceValidator.checkQuickReservationValidate(_date, _usageStartTime, _usageEndTime, _usageTime, _capacity, _resourceName);
-		return serviceValidate;
+		if (!serviceValidate) {
+			_validationMessage = serviceValidator.getValidationMessage();
+			return false;
+		}
+		return true;
 	}
 
 	@Override
 	public void execute() throws SQLException {
 
+	}
+
+
+	public String get_validationMessage() {
+		return _validationMessage;
 	}
 
 }
