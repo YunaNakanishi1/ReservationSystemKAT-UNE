@@ -1,6 +1,7 @@
 package handler;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -141,12 +142,14 @@ public class HandlerHelper {
 	 */
 	public boolean getOfficeAndCategory(String officeId, String categoryId) {
 		//カテゴリと事業所の一覧の取得
+		List<OfficeDto> officeList=new ArrayList<OfficeDto>();
+		List<CategoryDto>categoryList=new ArrayList<CategoryDto>();
 		GetOfficeAndCategoryListService getOfficeAndCategoryService = new GetOfficeAndCategoryListService();
 		if (getOfficeAndCategoryService.validate()) {
 			try {
 				getOfficeAndCategoryService.execute();
-				_officeList = getOfficeAndCategoryService.getOfficeList();
-				_categoryList = getOfficeAndCategoryService.getCategoryList();
+				officeList = getOfficeAndCategoryService.getOfficeList();
+				categoryList = getOfficeAndCategoryService.getCategoryList();
 			} catch (SQLException e) {
 				_log.error("getOfficeAndCategoryError");
 				return false;
@@ -158,7 +161,7 @@ public class HandlerHelper {
 
 		//選択されているカテゴリが一覧にあるか調べる
 		try {
-			ContainSelectedCategoryService containSelectedCategoryService =new ContainSelectedCategoryService(_categoryList, categoryId);
+			ContainSelectedCategoryService containSelectedCategoryService =new ContainSelectedCategoryService(categoryList, categoryId);
 			if(containSelectedCategoryService.validate()){
 				containSelectedCategoryService.execute();
 				if(!containSelectedCategoryService.getResult()){
@@ -176,7 +179,7 @@ public class HandlerHelper {
 
 		//選択されている事業所が一覧にあるか調べる
 		try {
-			ContainSelectedOfficeService containSelectedOfficeService =new ContainSelectedOfficeService(_officeList, officeId);
+			ContainSelectedOfficeService containSelectedOfficeService =new ContainSelectedOfficeService(officeList, officeId);
 
 			if(containSelectedOfficeService.validate()){
 				containSelectedOfficeService.execute();
@@ -192,6 +195,8 @@ public class HandlerHelper {
 			_log.error("officeListIsNull");
 			return false;
 		}
+		_categoryList=categoryList;
+		_officeList=officeList;
 
 		return true;
 	}

@@ -47,7 +47,7 @@ public class PushNewReservationButtonHandler implements Handler {
 		session.setAttribute("facilityIdListForResourceSelect",new ArrayList<String>());
 
 		//戻るボタンの行き先をセットする
-		session.setAttribute("ShowfirstReservationListServlet",RESERVE_LIST);
+		session.setAttribute("returnPageForResourceSelect",SHOW_FIRST_RESERVATION_LIST_SERVLET);
 
 		return SHOW_RESOURCE_SELECT_SERVLET;
 
