@@ -32,7 +32,7 @@ public class ShowResourceListHandler implements Handler{
 
         HttpSession httpSession = request.getSession(false);
         //フィルタを通しているのでセッションは必ず存在する
-        authority = (int) httpSession.getAttribute("authority");
+        authority = (int) httpSession.getAttribute("authorityOfLoggedIn");
 
 
         ShowResourceListService service = new ShowResourceListService();

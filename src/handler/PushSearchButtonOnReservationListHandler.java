@@ -19,7 +19,7 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
     public String handleService(HttpServletRequest request) {
         HttpSession session = request.getSession(true);
 
-        CommonValidator commonValidator = new CommonValidator();
+        CommonValidator cValidator = new CommonValidator();
 
         //入力項目の取得
         String dateStr = request.getParameter("usageDate");
@@ -29,9 +29,9 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
         String endMinutesStr = request.getParameter("usageEndMinute");
         String officeIdStr = request.getParameter("officeId");
         String categoryIdStr = request.getParameter("categoryId");
-        boolean displayOnlyMyReservationStr =  !commonValidator.notSetOn(request.getParameter("displayOnlyMyReservation"));
-        boolean displayPastReservationStr = !commonValidator.notSetOn(request.getParameter("displayPastReservation"));
-        boolean displayDeletedReservationStr = !commonValidator.notSetOn(request.getParameter("displayDeletedReservation"));
+        boolean displayOnlyMyReservationStr =  !cValidator.notSetOn(request.getParameter("displayOnlyMyReservation"));
+        boolean displayPastReservationStr = !cValidator.notSetOn(request.getParameter("displayPastReservation"));
+        boolean displayDeletedReservationStr = !cValidator.notSetOn(request.getParameter("displayDeletedReservation"));
 
         //TimeDto生成のための変数
         int startHour;
@@ -53,10 +53,10 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
         TimeDto startTime = new TimeDto(startHour, startMinutes);
         TimeDto endTime = new TimeDto(endHour, endMinutes);
 
-        if(commonValidator.notSetOn(officeIdStr)){
+        if(cValidator.notSetOn(officeIdStr)){
         	officeIdStr=null;
         }
-        if(commonValidator.notSetOn(categoryIdStr)){
+        if(cValidator.notSetOn(categoryIdStr)){
         	categoryIdStr=null;
         }
 
@@ -71,7 +71,7 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
         session.setAttribute("displayDeletedReservation", displayDeletedReservationStr);
 
         //入力された日付が正しいか
-        CommonValidator cValidator = new CommonValidator();
+
         boolean notCorrectDate = cValidator.notLenientDateOn(dateStr);
         if(notCorrectDate){
             //バリデーションNG時の処理
@@ -85,6 +85,7 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
                 return ERROR_PAGE;
             }
         }
+        dateStr=cValidator.getDateStr();
         CheckSearchReservationListService cService;
         try{
             cService = new CheckSearchReservationListService(startTime, endTime);
@@ -105,6 +106,7 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
                 return ERROR_PAGE;
             }
         }
+        session.setAttribute("usageDateForReservationList", dateStr);
 
 
 

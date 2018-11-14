@@ -95,7 +95,9 @@ public class FacilityDao {
 		ResultSet rs=null;
 
 		try{
-			String sql="select _facilityId,_facilityName from resource_characteristics order by _facilityId";
+			String sql="select resource_characteristic_id,resource_characteristic_name "
+					+ "from resource_characteristics "
+					+ "order by resource_characteristic_id;";
 
 
 			stmt=_con.createStatement();
