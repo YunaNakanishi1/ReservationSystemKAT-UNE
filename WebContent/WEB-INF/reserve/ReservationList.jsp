@@ -301,7 +301,10 @@ checked
 					<td><c:out value="${obj.resource.officeName }"/></td>
 					<td><c:out value="${obj.resource.category }"/></td>
 					<td><c:out value="${obj.reservedPerson.familyName }"/><c:out value="${obj.reservedPerson.firstName }"/></td>
-					<td><c:out value="${obj.deleted }"/></td>
+					<td><c:choose>
+					<c:when test="${obj.deleted == 1}">削除済み</c:when>
+					<c:otherwise>未削除</c:otherwise>
+					</c:choose></td>
 					</tr>
 					</c:forEach>
 					</tbody>

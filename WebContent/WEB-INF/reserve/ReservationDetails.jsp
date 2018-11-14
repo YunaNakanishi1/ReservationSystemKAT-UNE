@@ -50,8 +50,10 @@ Javascriptを有効にしてください
  <td class="dialog"><b>リソース</b></td>
  <td class="right2">
  <c:if test="${linkToResourceDetails == true}">
- 	 <a href="showresourcedetailstab?resourceId=${reservationDTOForReservationDetails.resource.resourceId}">
- <c:out value="${obj.resourceName}" /></a> </c:if>
+ 	 <a href="showresourcedetailstab?resourceId
+ 	 =${reservationDTOForReservationDetails.resource.resourceId}" target="_blank">
+ 	 <c:out value="${obj.resourceName}" /></a>
+ </c:if>
 
 
  <c:out value="${reservationDTOForReservationDetails.resource.resourceName}" /></a></td>
@@ -145,26 +147,27 @@ Javascriptを有効にしてください
 
 
 
- <table class="table3">
+ <table class="table3">	<!-- 変更と削除ボタンは予約者と共同予約者しかでない -->
  <tr>
  <td>
- <form action="resourcechange" method="get">
- <input class="submit" class="dialog" type = "submit" value ="変更">
- </form>
+ 	<c:if test="${flagForShowingDeleteAndChangeButton == true}">
+		 <form action="resourcechange" method="get">
+		 <input class="submit" class="dialog" type = "submit" value ="変更">
+		 </form>
+	</c:if>
  </td>
  <td>　</td>
+
  <td><form action = "deleteresource" method = "post">
-
-
-
-
-
 <input class="submit" type = "submit" value = "コピーして予約"></form>
  </td>
+
  <td>　</td>
- <td><form action = "deleteresource" method = "post">
- <input class="submit" type = "submit" value = "削除"></form>
- </td>
+ 	<c:if test="${flagForShowingDeleteAndChangeButton == true}">
+		<td><form action = "/ReservationSystemKAT-UNE/reservesystem/deleteReservation" method = "post">
+		<input class="submit" type = "submit" value = "削除"></form>
+		</td>
+	</c:if>
  </tr>
  </table>
 
@@ -175,7 +178,7 @@ Javascriptを有効にしてください
 <br>
 
 
-<a class="dialog" href = "showfirstreservationlist" method = "post">予約一覧に戻る</a>
+<a class="dialog" href = "/reservesystem/showfirstreservationlist" method = "post">予約一覧に戻る</a>
 
 
 
