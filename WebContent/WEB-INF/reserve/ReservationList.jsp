@@ -61,7 +61,14 @@ function hyoji1()
 }
 
 </script>
-
+<script>
+    $(function () {
+      $("#clear").click( function() {
+        //利用日の入力欄をクリアする
+        $("#usageDate").val("");
+      });
+    });
+</script>
 	<script type="text/javascript" src="/ReservationSystemKAT-UNE/script/pulldownControll.js">	</script>
 
 
@@ -119,12 +126,12 @@ Javascriptを有効にしてください
 <td class="one" class="dialog"><b>　利用日</b><a class="red"> ※</a></td>
 <td class="right2">
 <div class="dialog2">
-<input type="text" placeholder="2018/1/1（年は省略可）"  name="usageDate"
+<input type="text" placeholder="2018/1/1（年は省略可）"  name="usageDate" id="usageDate"
 <c:if test="${usageDateForReservationList!=null }">
 value="<c:out value="${usageDateForReservationList }"/>"
 </c:if>
 
-><font color = "red">×</font> 以降30日間表示
+><a id="clear" class="red">×</a> 以降30日間表示
 </div>
 </td>
 </tr>
