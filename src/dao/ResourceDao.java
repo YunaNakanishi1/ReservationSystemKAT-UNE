@@ -488,6 +488,11 @@ public class ResourceDao {
         ResultSet rs=null;
 
 
+        System.out.println("capacity:"+capacity);
+        System.out.println("resourceName:"+resourceName);
+        System.out.println("categoryId:"+categoryId);
+        System.out.println("officeId:"+officeId);
+        System.out.println("facilityIdList:"+facilityIdList);
 
         try{
             _con = dbHelper.connectDb(); // データベースに接続
@@ -528,7 +533,7 @@ public class ResourceDao {
             }
             if(officeId != null){
                 //オフィスIDが指定されている
-                sqlSelect += "office_id = params.office_id ";
+                sqlSelect += "and office_id = params.office_id ";
             }
 
             //定員
@@ -545,11 +550,12 @@ public class ResourceDao {
                 for(int i=0;i<facilityIdList.size();i++){
                     sqlSelect += "or resource_characteristic_id = params.facility_id_"+i+" ";
                 }
-                sqlSelect += "group by resource_features.resource_id having count(*) >= params.facility_checked_num";
+                sqlSelect += "group by resource_features.resource_id having count(*) >= params.facility_checked_num) ";
 
             }
             //SQL文作成
             String sql = sqlWith + sqlSelect;
+            System.out.println(sql);
         //パラメータセット
             //preparedStatement用カウント変数
             int pCount = 1;
