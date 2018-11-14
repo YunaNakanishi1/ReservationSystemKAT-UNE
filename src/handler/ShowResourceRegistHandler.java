@@ -36,7 +36,7 @@ public class ShowResourceRegistHandler implements Handler {
 		// セッションから権限を取得
 		HttpSession session = request.getSession(false);
 
-		int authority = (int) session.getAttribute("authority");
+		int authority = (int) session.getAttribute("authorityOfLoggedIn");
 
 		//リソース管理者
 		if (authority == 0) {
