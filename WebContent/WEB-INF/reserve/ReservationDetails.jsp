@@ -49,7 +49,7 @@ Javascriptを有効にしてください
  <tr>
  <td class="dialog"><b>リソース</b></td>
  <td class="right2">
-	 <a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?resourceId=${reservationDTOForReservationDetails.resource.resourceId}">
+	 <a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?reservationIdForReservationDetails=${reservationDTOForReservationDetails.reservationId}">
 	 <c:out value="${reservationDTOForReservationDetails.resource.resourceName}" /></a>
 
 
@@ -162,6 +162,7 @@ Javascriptを有効にしてください
  <td>　</td>
  	<c:if test="${flagForShowingDeleteAndChangeButton == true}">
 		<td><form action = "/ReservationSystemKAT-UNE/reservesystem/deleteReservation" method = "post">
+		<input type="hidden" name="reservationIdForReservationDetails" value="${reservationDTOForReservationDetails.reservationId}">
 		<input class="submit" type = "submit" value = "削除"></form>
 		</td>
 	</c:if>
