@@ -27,13 +27,18 @@ public class PushSearchButtonOnQuickReservationHandler implements Handler {
 	@Override
 	public String handleService(HttpServletRequest request) {
 		HttpSession session = request.getSession(true);
-		String usageEndHourForResourceSelect = request.getParameter("usageEndHour");
-		String usageEndMinuteForResourceSelect = request.getParameter("usageEndMinute");
-		String capacityForResourceSelect = request.getParameter("capacity");
-		String categoryIdForResourceSelect = request.getParameter("category");
-		String officeIdForResourceSelect = request.getParameter("office");
+		String usageEndHourForResourceSelect = request.getParameter("usageEndHourForResourceSelect");
+		String usageEndMinuteForResourceSelect = request.getParameter("usageEndMinuteForResourceSelect");
+		String capacityForResourceSelect = request.getParameter("capacityForResourceSelect");
+		String categoryIdForResourceSelect = request.getParameter("categoryIdForResourceSelect");
+		String officeIdForResourceSelect = request.getParameter("officeIdForResourceSelect");
 
 		TimeDto usageStartTimeForResourceSelect  = (TimeDto)session.getAttribute("usageStartTimeForResourceSelect");
+
+		//再表示用にセット
+		 session.setAttribute("categoryIdForResourceSelect", categoryIdForResourceSelect);
+		 session.setAttribute("officeIdForResourceSelect", officeIdForResourceSelect);
+		 session.setAttribute("displayCapacityForResourceSelect", capacityForResourceSelect);
 
 		//定員の入力チェック
 		CommonValidator commonValidator = new CommonValidator();
@@ -62,16 +67,10 @@ public class PushSearchButtonOnQuickReservationHandler implements Handler {
 
 			 //実利用時間
 			 TimeDto usageTimeForReservationSelect = new TimeDto(usageEndMinutes - usageStartMinutes);
-
 			 //入力内容をsessionにセット
-			 //session.setAttribute("usageStartTimeForResourceSelect", usageStartTimeForResourceSelect);
 			 session.setAttribute("usageEndTimeForResourceSelect", usageEndTimeForResourceSelect);
 			 session.setAttribute("usageTimeForReservationSelect", usageTimeForReservationSelect);
-
-			 session.setAttribute("categoryIdForResourceSelect", categoryIdForResourceSelect);
-			 session.setAttribute("officeIdForResourceSelect", officeIdForResourceSelect);
 			 session.setAttribute("capacityForResourceSelect", capacityForResourceSelect);
-
 		 } else {
 			 String message = pushSearchButtonOnQuickReservationService.getValidationMessage();
 			 request.setAttribute("messageForQuickReservation", message);

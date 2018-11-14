@@ -239,6 +239,19 @@ public class ReservationDao {
 
 	}
 
+	/**入力の条件を満たすリソースの一覧を返す.
+	 * @param usageDate 利用日
+	 * @param usageStartTime 利用開始時間
+	 * @param usageEndTime 利用終了時間
+	 * @param officeId 事業所ID
+	 * @param categoryId カテゴリID
+	 * @param userId ユーザーID
+	 * @param onlyMyReservation 自分の予約のみ表示
+	 * @param pastReservation 過去の予約も表示
+	 * @param deletedReservation 削除済みの予約も表示
+	 * @return 予約の一覧
+	 * @throws SQLException データベースエラー
+	 */
 	public List<ReservationDto> queryByInput(String usageDate,TimeDto usageStartTime,TimeDto usageEndTime,String officeId,String categoryId,String userId,boolean onlyMyReservation,boolean pastReservation,boolean deletedReservation)throws SQLException{
 
 		List<ReservationDto> reservationList=new ArrayList<ReservationDto>();
@@ -256,6 +269,8 @@ public class ReservationDao {
 		StringBuilder sqlBuilder=new StringBuilder();
 
 		try{
+
+			//SQL文の作成
 			sqlBuilder.append("WITH params AS ( SELECT ?::timestamp  AS p1_usage_date,?::timestamp AS p2_after_30_date,? AS p3_usage_start_minute_value,? AS p4_usage_end_minute_value ,? AS p5_office_id,? AS p6_category_id,? AS p7_user_id )");
 			sqlBuilder.append("SELECT reserve_id reserveid,reservations.resource_id resourceid,resource_name resourcename,office_name officename,category_name categoryname,usage_start_date starttime,usage_end_date endtime,reservation_name reservename,family_name familyname,first_name firstname,reservations.deleted reservedeleted ");
 			sqlBuilder.append("FROM reservations,users,resources,categories,offices,params ");
@@ -308,8 +323,10 @@ public class ReservationDao {
 			preparedStatement.setString(6, categoryId);
 			preparedStatement.setString(7, userId);
 
+			//SQLの実行
 			rs=preparedStatement.executeQuery();
 
+			//結果の取得
 			while(rs.next()){
 				Resource resource = new Resource(rs.getString("resourceid"), rs.getString("resourcename"), rs.getString("officename"), rs.getString("categoryname"), 0, null, 0, null, null, null);
 				User user=new User(null, null, 0, rs.getString("familyname"), rs.getString("firstname"), null, null);
@@ -359,7 +376,7 @@ public class ReservationDao {
         ResultSet rs = null;
 
         //SQLの前半部分　NOTMUCHRESOURCEIDはリソースIDの文字をつなげやすくするためのダミー要素
-        String sql = "select * from reserve_id reserveid,reservations.resource_id resourceid,resource_name resourcename,office_name officename,category_name categoryname,usage_start_date starttime,usage_end_date endtime,reservation_name reservename,family_name familyname,first_name firstname,reservations.deleted reservedeleted  "
+        String sql = "select * from reserve_id reserveid,reservations.resource_id resourceid,resource_name resourcename,office_name officename,category_name categoryname,usage_start_date starttime,usage_end_date endtime,reservation_name reservename,family_name familyname,first_name firstname,reservations.deleted reservedeleted,resources.capacity capacity,resources.supplement supplement,usage_stop_start_date ,usage_stop_end_date "
                     +"where reservations.resource_id=resources.resource_id AND resources.office_id=offices.office_id AND resources.category_id=categories.category_id AND reserved_person_id=user_id "
                     +"and deleted=0 "
                     +"and usage_start_date >= ? "
@@ -386,7 +403,7 @@ public class ReservationDao {
             rs = preparedStatement.executeQuery();  //実行
             while(rs.next()){
 
-                Resource resource = new Resource(rs.getString("resource_id"), rs.getString("resourcename"), rs.getString("officename"), rs.getString("categoryname"), 0, null, 0, null, null, null);
+                Resource resource = new Resource(rs.getString("resource_id"), rs.getString("resourcename"), rs.getString("officename"), rs.getString("categoryname"), rs.getInt("capacity"), rs.getString("supplement"), 0, null, rs.getTimestamp("usage_stop_start_date"), rs.getTimestamp("usage_stop_end_date"));
                 String resultUsageDate=new SimpleDateFormat("yyyy/MM/dd").format(rs.getTimestamp("starttime"));
                 TimeDto resultUsageStartTime=new TimeDto(rs.getTimestamp("starttime"));
                 TimeDto resultUsageEndTime=new TimeDto(rs.getTimestamp("endtime"));

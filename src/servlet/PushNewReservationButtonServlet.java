@@ -24,7 +24,10 @@ public class PushNewReservationButtonServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< HEAD
 
+=======
+>>>>>>> refs/remotes/origin/develop
 		Handler pushNewReservationHandler = new PushNewReservationButtonHandler();
 
 	       String view = pushNewReservationHandler.handleService(request);

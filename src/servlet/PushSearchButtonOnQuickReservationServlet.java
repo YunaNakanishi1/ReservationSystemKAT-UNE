@@ -14,7 +14,7 @@ import handler.PushSearchButtonOnQuickReservationHandler;
 /**
  * Servlet implementation class PushSearchButtonOnReservationServlet
  */
-@WebServlet("/reservesystem/pushQuickReservationButtonOnQuickReservation")
+@WebServlet("/reservesystem/pushSearchButtonOnQuickReservation")
 public class PushSearchButtonOnQuickReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

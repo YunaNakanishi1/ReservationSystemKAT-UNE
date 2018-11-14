@@ -140,6 +140,7 @@ public class HandlerHelper {
 	 * @return 正常に処理が終了すればtrue
 	 */
 	public boolean getOfficeAndCategory(String officeId, String categoryId) {
+		//カテゴリと事業所の一覧の取得
 		GetOfficeAndCategoryListService getOfficeAndCategoryService = new GetOfficeAndCategoryListService();
 		if (getOfficeAndCategoryService.validate()) {
 			try {
@@ -155,6 +156,7 @@ public class HandlerHelper {
 			return false;
 		}
 
+		//選択されているカテゴリが一覧にあるか調べる
 		try {
 			ContainSelectedCategoryService containSelectedCategoryService =new ContainSelectedCategoryService(_categoryList, categoryId);
 			if(containSelectedCategoryService.validate()){
@@ -172,8 +174,10 @@ public class HandlerHelper {
 			return false;
 		}
 
+		//選択されている事業所が一覧にあるか調べる
 		try {
 			ContainSelectedOfficeService containSelectedOfficeService =new ContainSelectedOfficeService(_officeList, officeId);
+
 			if(containSelectedOfficeService.validate()){
 				containSelectedOfficeService.execute();
 				if(!containSelectedOfficeService.getResult()){

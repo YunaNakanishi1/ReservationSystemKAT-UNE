@@ -12,6 +12,11 @@ import dto.TimeDto;
 import exception.MyException;
 import service.CheckSearchReservationListService;
 
+/**
+ * 入力のバリデーションチェック及び、バリデーションNG時には再表示の準備をする
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ */
 public class PushSearchButtonOnReservationListHandler implements Handler{
     private static Logger _log = LogManager.getLogger();
 
@@ -85,6 +90,7 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
                 return ERROR_PAGE;
             }
         }
+        dateStr=cValidator.getDateStr();
         CheckSearchReservationListService cService;
         try{
             cService = new CheckSearchReservationListService(startTime, endTime);
@@ -105,6 +111,7 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
                 return ERROR_PAGE;
             }
         }
+        session.setAttribute("usageDateForReservationList", dateStr);
 
 
 

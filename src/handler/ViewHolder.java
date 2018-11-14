@@ -23,7 +23,7 @@ public class ViewHolder {
     public static final String SHOW_QUICK_RESERVATION_SERVLET = "showquickreservation";
     public static final String SHOW_RESOURCE_SELECT_SERVLET="/reservesystem/showResourceSelect";
     public static final String QUIICK_RESERVATION = "/WEB-INF/reserve/QuickReservation.jsp";
-    public static final String RESOURCE_SELECT = "/WEB-INF/resource/ResourceSelect.jsp";
+    public static final String RESOURCE_SELECT = "/WEB-INF/reserve/ResourceSelect.jsp";
     public static final String DELETE_RESERVATION_SERVLET = "/reservesystem/deleteReservation";
     public static final String SEARCH_RESOURCE_LIST_SERVLET = "/reservesystem/searchResourceList";
     public static final String SHOW_RESERVATION_DETAILS_SERVLET = "/reservesystem/showReservationDetails";
