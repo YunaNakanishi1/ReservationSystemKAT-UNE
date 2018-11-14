@@ -7,8 +7,8 @@ import exception.MyException;
 import handler.MessageHolder;
 
 /**
- * 予約一覧のバリデーションチェックのためのサービス
- * @author リコーITソリューションズ株式会社 z00s600124
+ * 予約一覧のバリデーションチェックのためのサービス. 31
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
 public class CheckSearchReservationListService implements Service {

@@ -31,56 +31,66 @@ public class SearchReservationListHandler implements Handler {
 
 	@Override
 	public String handleService(HttpServletRequest request) {
-		_session=request.getSession(true);
-		_request=request;
+		_session = request.getSession(true);
+		_request = request;
 		HandlerHelper handlerHelper = new HandlerHelper();
 
-		boolean result=handlerHelper.getOfficeAndCategory((String)_session.getAttribute("officeIdForReservationList"), (String)_session.getAttribute("categoryIdForReservationList"));
-		if(result){
+		// 事業所、カテゴリの取得及び選択されているものが残っているか調べる
+		boolean result = handlerHelper.getOfficeAndCategory(
+				(String) _session.getAttribute("officeIdForReservationList"),
+				(String) _session.getAttribute("categoryIdForReservationList"));
+		if (result) {
 			_request.setAttribute("categoryListForReservationList", handlerHelper.getCategoryList());
 			_request.setAttribute("officeListForReservationList", handlerHelper.getOfficeList());
-		}else{
+		} else {
 			return ERROR_PAGE;
 		}
 
-		if(!search()){
+		// リソースを検索
+		if (!search()) {
 			return ERROR_PAGE;
 		}
 
 		return RESERVE_LIST;
 	}
 
-	/**予約検索を行う内部メソッド.
+	/**
+	 * 予約検索を行う内部メソッド.
+	 *
 	 * @return 正常に処理が終了したか
 	 */
-	private boolean search(){
-		String officeId=(String)_session.getAttribute("officeIdForReservationList");
-		String categoryId=(String)_session.getAttribute("categoryIdForReservationList");
-		String usageDate=(String)_session.getAttribute("usageDateForReservationList");
-		TimeDto usageStartTime=(TimeDto)_session.getAttribute("usageStartTimeForReservationList");
-		TimeDto usageEndTime=(TimeDto)_session.getAttribute("usageEndTimeForReservationList");
-		String userId=(String)_session.getAttribute("userIdOfLoggedIn");
-		boolean onlyMyReservation=(boolean)_session.getAttribute("displayOnlyMyReservation");
-		boolean pastReservation=(boolean)_session.getAttribute("displayPastReservation");
-		boolean deletedReservation=(boolean)_session.getAttribute("displayDeletedReservation");
+	private boolean search() {
+		// 入力情報の取得
+		String officeId = (String) _session.getAttribute("officeIdForReservationList");
+		String categoryId = (String) _session.getAttribute("categoryIdForReservationList");
+		String usageDate = (String) _session.getAttribute("usageDateForReservationList");
+		TimeDto usageStartTime = (TimeDto) _session.getAttribute("usageStartTimeForReservationList");
+		TimeDto usageEndTime = (TimeDto) _session.getAttribute("usageEndTimeForReservationList");
+		String userId = (String) _session.getAttribute("userIdOfLoggedIn");
+		boolean onlyMyReservation = (boolean) _session.getAttribute("displayOnlyMyReservation");
+		boolean pastReservation = (boolean) _session.getAttribute("displayPastReservation");
+		boolean deletedReservation = (boolean) _session.getAttribute("displayDeletedReservation");
 
+		//予約を検索する
 		try {
-			SearchReservationListService searchReservationListService = new SearchReservationListService(officeId, categoryId, usageDate, usageStartTime, usageEndTime, userId, onlyMyReservation, pastReservation, deletedReservation);
+			SearchReservationListService searchReservationListService = new SearchReservationListService(officeId,
+					categoryId, usageDate, usageStartTime, usageEndTime, userId, onlyMyReservation, pastReservation,
+					deletedReservation);
 
-			if(searchReservationListService.validate()){
+			if (searchReservationListService.validate()) {
 				searchReservationListService.execute();
-				List<ReservationDto> reservationList=searchReservationListService.getReservationList();
-				if(reservationList==null){
+				List<ReservationDto> reservationList = searchReservationListService.getReservationList();
+				if (reservationList == null) {
 					_log.error("reservationList is null");
 					return false;
-				}else if(reservationList.size()==0){
+				} else if (reservationList.size() == 0) {
 					_session.setAttribute("messageForReservationListLower", EM08);
-				}else{
+				} else {
 					_session.setAttribute("messageForReservationListLower", null);
 				}
 
-			_session.setAttribute("reservationListForReservationList", reservationList);
-			_session.setAttribute("reservationListSizeForReservationList", reservationList.size());
+				_session.setAttribute("reservationListForReservationList", reservationList);
+				_session.setAttribute("reservationListSizeForReservationList", reservationList.size());
 			}
 
 		} catch (MyException e) {
