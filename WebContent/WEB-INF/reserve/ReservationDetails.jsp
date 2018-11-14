@@ -178,10 +178,10 @@ Javascriptを有効にしてください
 <br>
 
 
-<a class="dialog" href = "/reservesystem/showfirstreservationlist" method = "post">予約一覧に戻る</a>
-
-
-
+<A href ="" onclick="document.form1.submit();return false;" >予約一覧に戻る</A>
+<form name="form1" method="POST" action="/ReservationSystemKAT-UNE/reservesystem/showfirstreservationlist">
+<input type=hidden name="aaa" value="bbb">
+</form>
 
 
 
