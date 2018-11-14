@@ -179,10 +179,12 @@ public class ServiceValidator {
     	}
 
     	//capacityが半角の整数でなかったらエラー
-    	if (!capacity.matches("^[0-9]+")) {
-    		_validationMessage = EM31;
-    		return true;
-    	}
+
+    	//if (!capacity.matches("^[0-9]+")) {
+//    	if (!capacity.matches("^-?[0-9]+$")) {
+//    		_validationMessage = EM31;
+//    		return true;
+//    	}
 
     	int capacityInt = 0;
     	try {

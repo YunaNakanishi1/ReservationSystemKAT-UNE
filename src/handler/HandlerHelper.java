@@ -164,6 +164,7 @@ public class HandlerHelper {
 			ContainSelectedCategoryService containSelectedCategoryService =new ContainSelectedCategoryService(categoryList, categoryId);
 			if(containSelectedCategoryService.validate()){
 				containSelectedCategoryService.execute();
+
 				if(!containSelectedCategoryService.getResult()){
 					_log.error("selectedCategoryIsNotFound");
 					return false;

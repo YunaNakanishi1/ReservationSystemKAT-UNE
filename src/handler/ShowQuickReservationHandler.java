@@ -33,6 +33,15 @@ public class ShowQuickReservationHandler implements Handler {
 		String categoryId = (String)session.getAttribute("categoryIdForResourceSelect");
 		String officeId = (String)session.getAttribute("officeIdForResourceSelect");
 
+		CommonValidator validate = new CommonValidator();
+		if(validate.notSetOn(categoryId)) {
+			categoryId = null;
+		}
+		if(validate.notSetOn(officeId)) {
+			officeId = null;
+		}
+
+
 		boolean hasOfficeAndCategory = handlerHelper.getOfficeAndCategory(officeId, categoryId);
 
 		if (hasOfficeAndCategory) {

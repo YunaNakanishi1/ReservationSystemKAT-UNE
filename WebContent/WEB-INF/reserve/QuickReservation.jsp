@@ -51,7 +51,7 @@ Javascriptを有効にしてください
 						<td class="one" class="dialog"><b>　　　事業所</b></td>
 						<td class="right2">
 						<select name ="officeIdForResourceSelect">
-							<option value=""
+							<option value = ""
 								<c:if test="${obj==null}">
 								 selected
 								</c:if>>全て
@@ -70,7 +70,7 @@ Javascriptを有効にしてください
 					<tr>
 						<td class="dialog"><b>　　　カテゴリ</b></td>
 						<td class="right2"><select name ="categoryIdForResourceSelect">
-							<option value=""
+							<option value = ""
 								<c:if test="${obj==null}">
 								 selected
 								</c:if>>全て
