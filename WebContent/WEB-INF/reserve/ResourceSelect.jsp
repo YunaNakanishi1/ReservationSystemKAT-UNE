@@ -277,9 +277,7 @@ selected
 
 <div class="dialog2">
 <input type="text" name="capacity"
-<c:if test ="${displayCapacityForResourceSelect!= null}">
 value = "<c:out value="${displayCapacityForResourceSelect}" />"
-</c:if>
 >人以上
 </div>
 </td>
