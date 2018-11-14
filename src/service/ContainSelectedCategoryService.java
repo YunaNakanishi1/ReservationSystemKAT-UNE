@@ -7,7 +7,6 @@ import exception.MyException;
 
 /**
  * カテゴリIDがnullまたはリストに含まれているかを調べる. 17
- *
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
@@ -46,6 +45,7 @@ public class ContainSelectedCategoryService implements Service {
 		}
 	}
 
+	//結果をboolean型で取得し_resultを返す
 	public boolean getResult() {
 		return _result;
 	}

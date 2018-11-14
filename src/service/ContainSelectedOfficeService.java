@@ -7,7 +7,6 @@ import exception.MyException;
 
 /**
  * 事業所IDがnullまたはリストに含まれているか調べるサービス. 18
- *
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
@@ -17,6 +16,12 @@ public class ContainSelectedOfficeService implements Service {
 
 	private boolean _result;
 
+	/**
+	 * フィールドの初期化.
+	 * @param _officeList 指定した事業所IDのリスト
+	 * @param officeId 事業所ID
+	 *
+	 */
 	public ContainSelectedOfficeService(List<OfficeDto> _officeList, String officeId) throws MyException {
 		super();
 		if (_officeList == null) {
@@ -47,6 +52,7 @@ public class ContainSelectedOfficeService implements Service {
 		}
 	}
 
+	//結果をboolean型で取得し_resultを返す
 	public boolean getResult() {
 		return _result;
 	}

@@ -5,6 +5,10 @@ import java.util.List;
 import dto.FacilityDto;
 import exception.MyException;
 
+/**
+ * リソース特性IDがnullまたはリストに含まれているかを調べる. 19
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ */
 public class ContainSelectedResourceCharacteristicService implements Service{
 
 	private List<String> _facilityIdList;
@@ -44,6 +48,7 @@ public class ContainSelectedResourceCharacteristicService implements Service{
 
 	}
 
+	//結果をboolean型で取得し_resultを返す
 	public boolean getResult() {
 		return _result;
 	}
