@@ -85,6 +85,7 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
                 return ERROR_PAGE;
             }
         }
+        dateStr=cValidator.getDateStr();
         CheckSearchReservationListService cService;
         try{
             cService = new CheckSearchReservationListService(startTime, endTime);
@@ -105,6 +106,7 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
                 return ERROR_PAGE;
             }
         }
+        session.setAttribute("usageDateForReservationList", dateStr);
 
 
 
