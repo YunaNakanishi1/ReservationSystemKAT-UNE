@@ -21,7 +21,7 @@ import handler.SearchReservationListHandler;
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
-@WebServlet("/searchReservationList")
+@WebServlet("/reservesystem/searchReservationList")
 public class SearchReservationListServlet extends HttpServlet {
 
 

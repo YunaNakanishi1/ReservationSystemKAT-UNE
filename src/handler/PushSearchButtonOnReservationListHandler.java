@@ -24,9 +24,9 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
         //入力項目の取得
         String dateStr = request.getParameter("usageDate");
         String startHourStr = request.getParameter("usageStartHour");
-        String startMinutesStr = request.getParameter("usageStartMinutes");
+        String startMinutesStr = request.getParameter("usageStartMinute");
         String endHourStr = request.getParameter("usageEndHour");
-        String endMinutesStr = request.getParameter("usageEndMinutes");
+        String endMinutesStr = request.getParameter("usageEndMinute");
         String officeIdStr = request.getParameter("officeId");
         String categoryIdStr = request.getParameter("categoryId");
         boolean displayOnlyMyReservationStr =  !commonValidator.notSetOn(request.getParameter("displayOnlyMyReservation"));
@@ -53,12 +53,19 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
         TimeDto startTime = new TimeDto(startHour, startMinutes);
         TimeDto endTime = new TimeDto(endHour, endMinutes);
 
+        if(commonValidator.notSetOn(officeIdStr)){
+        	officeIdStr=null;
+        }
+        if(commonValidator.notSetOn(categoryIdStr)){
+        	categoryIdStr=null;
+        }
+
         //再表示用にセッションにセット
-        session.setAttribute("IDcategoryIdForReservationList", categoryIdStr);
-        session.setAttribute("IDofficeIdForReservationList", officeIdStr);
+        session.setAttribute("categoryIdForReservationList", categoryIdStr);
+        session.setAttribute("officeIdForReservationList", officeIdStr);
         session.setAttribute("usageDateForReservationList", dateStr);
-        session.setAttribute("usageStartHourForReservationList", startTime);
-        session.setAttribute("usageEndHourForResourceSelect", endTime);
+        session.setAttribute("usageStartTimeForReservationList", startTime);
+        session.setAttribute("usageEndTimeForReservationList", endTime);
         session.setAttribute("displayOnlyMyReservation", displayOnlyMyReservationStr);
         session.setAttribute("displayPastReservation", displayPastReservationStr);
         session.setAttribute("displayDeletedReservation", displayDeletedReservationStr);

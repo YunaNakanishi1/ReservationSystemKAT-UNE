@@ -21,7 +21,7 @@ import handler.ShowFirstReservationListHandler;
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
-@WebServlet("/showfirstreservationlist")
+@WebServlet("/reservesystem/showfirstreservationlist")
 public class ShowFirstReservationListServlet extends HttpServlet {
 
 	/**
