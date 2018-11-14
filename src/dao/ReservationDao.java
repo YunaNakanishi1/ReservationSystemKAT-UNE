@@ -105,7 +105,7 @@ public class ReservationDao {
 			String coReservedPersonId;//共同予約者ID
 			int numberOfParticipants = 0;	//利用人数
 			int attendanceTypeId = 0;	//参加者種別ID
-			String reserveSupplement; //補足
+			String reserveSupplement=null; //補足
 			int reservationDeleted = 0; //予約削除済み
 
 
@@ -217,7 +217,7 @@ public class ReservationDao {
 			reservationDto = new ReservationDto(reserveId, resource,
 					usageDate, usageStartTime, usageEndTime, reservationName,
 					reservedPerson, coReservedPerson, numberOfParticipants,
-					attendanceTypeDto, supplement, reservationDeleted);
+					attendanceTypeDto, reserveSupplement, reservationDeleted);
 
 		}finally{
 			try {
@@ -471,6 +471,201 @@ public class ReservationDao {
 
 	    return result;
 
+	}
+
+	public List<ReservationDto> queryBetweenDate(String resourceId,Timestamp startTime,Timestamp endTime) throws SQLException{
+		List<ReservationDto> reservationList = new ArrayList<ReservationDto>();
+
+		DBHelper dbHelper = new DBHelper();
+		_con = dbHelper.connectDb(); //dbに接続
+
+		if (_con == null) {
+			_log.error("DatabaseConnectError");
+			throw new SQLException();	//エラー処理はハンドラーに任せる
+            }
+
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+
+		try{
+
+			StringBuilder sqlBuilder = new StringBuilder("select reserve_id resources.resource_id, usage_start_date, usage_end_date, "
+					+ " reservation_name ,reserved_person_id, co_reserved_person_id, "
+					+ "number_of_participants, attendance_types.attendance_type_id, "
+					+ "reserve_supplement, reservations.deleted as reservation_deleted, "
+					+ "resource_name, office_name, category_name, capacity, supplement, "
+					+ "usage_stop_start_date, usage_stop_end_date, "
+					+ "resources.deleted as resource_deleted, "
+					+ "	attendance_type, "
+					+ "resource_characteristic_name, "
+					+ "users.user_id, users.password, users.family_name, users.first_name, "
+					+ "users.authority, users.tel, users.mail_address, "
+					+ "cousers.user_id as co_user_id, cousers.password as co_password, "
+					+ "cousers.family_name as co_family_name, cousers.first_name as co_first_name, "
+					+ " cousers.authority as co_authority, cousers.tel as co_tel, "
+					+ "cousers.mail_address as co_mail_address ");
+			sqlBuilder.append("from reservations, resources, attendance_types, users , users as cousers ,"
+					+ " resource_features,resource_characteristics , offices , categories ");
+			sqlBuilder.append("where resources.resource_id = reservations.resource_id "
+				+ "and resource_features.resource_characteristic_id = resource_characteristics.resource_characteristic_id "
+				+ "and attendance_types.attendance_type_id = reservations.attendance_type_id "
+				+ "and users.user_id = reservations.reserved_person_id "
+				+ "and cousers.user_id = reservations.co_reserved_person_id "
+				+ "and resources.resource_id = resource_features.resource_id "
+				+ "and resources.office_id = offices.office_id "
+				+ "and resources.category_id = categories.category_id ");
+			sqlBuilder.append("and reservations.resourceId=? and usage_end_date > ? and usage_start_date < ? ");
+			sqlBuilder.append("order by reserve_id");
+
+			preparedStatement=_con.prepareStatement(sqlBuilder.toString());
+
+			preparedStatement.setString(1, resourceId);
+			preparedStatement.setTimestamp(2, endTime);
+			preparedStatement.setTimestamp(3, startTime);
+
+			rs=preparedStatement.executeQuery();
+
+			//reservationsテーブルのカラムをセットするために用意
+			int reserveId=0;
+			Timestamp usageStartDate = null; //利用開始日時
+			Timestamp usageEndDate = null; //利用終了日時
+			String reservationName = null;	//予約名称
+			int numberOfParticipants = 0;	//利用人数
+			int attendanceTypeId = 0;	//参加者種別ID
+			String reserveSupplement=null; //補足
+			int reservationDeleted = 0; //予約削除済み
+
+
+			//resourcesテーブルのカラムをセットするために用意
+			String resourceName = null;	//リソース名
+			String officeName = null;	//オフィス名
+			String category = null;	//カテゴリ
+			int capacity = 0;	//定員
+			String supplement = null; //補足
+			List<String> facility;	//設備リスト
+			Timestamp usageStopStartDate = null;	//利用停止開始日時
+			Timestamp usageStopEndDate = null;	//利用停止終了日時
+			int resourceDeleted = 0; //リソース削除済み
+
+			//attendance_typesテーブルのカラムをセットするために用意
+			String attendanceType = null; //参加者種別
+
+			//List<String> facility を作るために用意
+			facility = new ArrayList<String>();
+
+			//「予約者」「共同予約者」のUserDtoを作るために用意
+			String userId = null;
+			String password = null;
+			int authority = 0;
+			String familyName = null;
+			String firstName = null;
+			String phoneNumber = null;
+			String mailAddress = null;
+
+			String coUserId = null;
+			String coPassword = null;
+			int coAuthority = 0;
+			String coFamilyName = null;
+			String coFirstName = null;
+			String coFhoneNumber = null;
+			String coMailAddress = null;
+
+			while (rs.next()) {
+				reserveId = rs.getInt("reserve_id");
+				usageStartDate = rs.getTimestamp("usage_start_date");
+				usageEndDate = rs.getTimestamp("usage_end_date");
+				reservationName = rs.getString("reservation_name");
+				numberOfParticipants = rs.getInt("number_of_participants");
+				attendanceTypeId = rs.getInt("attendance_type_id");
+				reserveSupplement = rs.getString("reserve_supplement");
+				reservationDeleted = rs.getInt("reservation_deleted");
+
+				resourceName = rs.getString("resource_name");
+				officeName = rs.getString("office_name");
+				category = rs.getString("category_name");
+				capacity = rs.getInt("capacity");
+				supplement = rs.getString("supplement");
+				usageStopStartDate = rs.getTimestamp("usage_stop_start_date");
+				usageStopEndDate = rs.getTimestamp("usage_stop_end_date");
+				resourceDeleted = rs.getInt("resource_deleted");
+
+				attendanceType = rs.getString("attendance_type");
+
+				facility.add(rs.getString("resource_characteristic_name"));
+
+
+				userId = rs.getString("user_id");
+				password = rs.getString("password");
+				familyName = rs.getString("family_name");
+				firstName = rs.getString("first_name");
+				authority = rs.getInt("authority");
+				phoneNumber = rs.getString("tel");
+				mailAddress = rs.getString("mail_address");
+
+				coUserId = rs.getString("co_user_id");
+				coPassword = rs.getString("co_password");
+				coFamilyName = rs.getString("co_family_name");
+				coFirstName = rs.getString("co_first_name");
+				coAuthority = rs.getInt("co_authority");
+				coFhoneNumber = rs.getString("co_tel");
+				coMailAddress = rs.getString("co_mail_address");
+
+				//ResourceDtoを作成
+				Resource resource = new Resource(resourceId, resourceName, officeName, category,
+					capacity, supplement, resourceDeleted, facility, usageStopStartDate,usageStopEndDate);
+
+
+				//「利用日」を作る
+				SimpleDateFormat usageDateFormat = new SimpleDateFormat("yyyy年M月d日");
+				String usageDate = usageDateFormat.format(usageStartDate);
+
+				//「利用開始時間」「利用終了時間」のDTOを作る
+				TimeDto usageStartTime = new TimeDto(usageStartDate);
+				TimeDto usageEndTime = new TimeDto(usageEndDate);
+
+				//「予約者」のDTOを作る
+				User reservedPerson = new User(userId, password, authority, familyName,
+						firstName, phoneNumber, mailAddress);
+
+				//「共同予約者」のDTOを作る
+				User coReservedPerson = new User(coUserId, coPassword, coAuthority,
+						coFamilyName, coFirstName, coFhoneNumber, coMailAddress);
+
+				//「参加者種別」のDTO
+				AttendanceTypeDto attendanceTypeDto =
+						new AttendanceTypeDto(attendanceTypeId, attendanceType);
+
+
+				ReservationDto reservationDto = new ReservationDto(reserveId, resource,
+						usageDate, usageStartTime, usageEndTime, reservationName,
+						reservedPerson, coReservedPerson, numberOfParticipants,
+						attendanceTypeDto, reserveSupplement, reservationDeleted);
+
+				reservationList.add(reservationDto);
+			}
+
+
+
+		}finally{
+
+			try {
+                dbHelper.closeResource(rs);
+            } catch (Exception e) {
+                e.printStackTrace();
+                _log.error("Exception");
+            }
+
+            try {
+                dbHelper.closeResource(preparedStatement);
+            } catch (Exception e) {
+                e.printStackTrace();
+                _log.error("Exception");
+            }
+            dbHelper.closeDb();
+
+		}
+
+		return reservationList;
 	}
 }
 
