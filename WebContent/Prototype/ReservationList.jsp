@@ -91,7 +91,7 @@ Javascriptを有効にしてください
 <h2>予約一覧</h2>
 <div class = "reframe">
 <div class = "leftside">
-<form action="newReservation" method="get">
+<form action="" method="get">
 <input class="submit dialog2" type="submit" value="新規予約">
 </form>
 　
@@ -227,11 +227,10 @@ selected
 <br><br>
 
 <p><font color = "red">検索結果は0件です</font></p>
-
 </div><!-- diallogとじ -->
 <br>
 <form action = "">
-<!--
+
 <table id="design-table" class="table table-striped table-bordered" style="width: 90%;" >
 					<thead>
 						<tr style="background-color: white;">
@@ -329,7 +328,7 @@ selected
 
 					</tbody>
 				</table>
-				 -->
+
 </form>
 <br>
 <br>

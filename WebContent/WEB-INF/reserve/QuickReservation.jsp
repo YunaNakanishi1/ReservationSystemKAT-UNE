@@ -26,14 +26,15 @@
 				<input class="logintop" type="submit" value="ログアウト">
 			</form>
 		</header>
-		<!-- javascript警告ラベル始まり -->
-		<div id="JavascriptLabelBox">
-			<div id="JavascriptErrorLabel">Javascriptを有効にしてください</div>
-		</div>
-		<script type="text/javascript" src="JavascriptErrorLabel.js">
 
-		</script>
-		<!-- javascript警告ラベル終わり -->
+<!-- javascript警告ラベル始まり -->
+<div id="JavascriptLabelBox">
+<div id = "JavascriptErrorLabel">
+Javascriptを有効にしてください
+</div>
+</div>
+<script type="text/javascript" src="/ReservationSystemKAT-UNE/script/JavascriptErrorLabel.js">	</script>
+<!-- javascript警告ラベル終わり -->
 		<div class="contents">
 			<div class="dialog">
 				<h2>今すぐ予約</h2>

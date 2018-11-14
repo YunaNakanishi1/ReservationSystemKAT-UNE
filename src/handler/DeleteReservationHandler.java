@@ -27,22 +27,37 @@ public class DeleteReservationHandler implements Handler{
 
 	@Override
 	public String handleService(HttpServletRequest request){
+		//セッション作成
 		HttpSession session =request.getSession(true);
 
+		//リクエストからreservationIdをString型で受け取る
 		String reservationIdForReservationDetailsStr = request.getParameter("reservationIdForReservationDetails");
 
-		int reservationIdForReservationDetails = Integer.parseInt(reservationIdForReservationDetailsStr);
+		int reservationIdForReservationDetails;
 
+		//reservationIdをint型になおす
+		try{
+			reservationIdForReservationDetails = Integer.parseInt(reservationIdForReservationDetailsStr);
+		}catch(NumberFormatException e){
+			_log.error("NumberFormatException");
+			return ERROR_PAGE;
+		}
+
+		//セッションにreservationIdを保存
 		session.setAttribute("reservationIdForReservationDetails",reservationIdForReservationDetails);
 
+		//セッションから現在利用しているユーザのIDを取得する
+		//ユーザに予約を削除する権利があるかどうか（現在利用しているユーザが利用者or共同利用者なのか）判断するのに使用します
 		String userIdOfLoggedIn = (String)session.getAttribute("userIdOfLoggedIn");
 
+		//ユーザのIDのnullチェック
 		CommonValidator commonValidator = new CommonValidator();
 		if(commonValidator.notSetOn(userIdOfLoggedIn)){
 			 _log.error("commonValidateError");
 			 return ERROR_PAGE;
 		}
 
+		//reservationIdからreservationDtoを取得する
 		GetReservationFromIdService getReservationFromIdService = new GetReservationFromIdService(reservationIdForReservationDetails);
 		if(getReservationFromIdService.validate()){
 			try {
@@ -58,6 +73,7 @@ public class DeleteReservationHandler implements Handler{
 		}
 
 		//reservationDto(フィールド)を取得
+		//nullだったらエラーページ、nullじゃなかったらsessionにセット
 		ReservationDto reservationDto = getReservationFromIdService.getReservation();
 		if(reservationDto != null){
 			session.setAttribute("reservationDtoForReservationDetails",reservationDto);
@@ -66,8 +82,16 @@ public class DeleteReservationHandler implements Handler{
 			 return ERROR_PAGE;
 		}
 
+		//reservationDtoから予約者・共同予約者（User型）を取得
 		User reservedPerson =reservationDto.getReservedPerson();
 		User coReservedPerson =reservationDto.getCoReservedPerson();
+
+
+		//①予約者がnullでない場合
+		//②予約者・共同予約者ID（string型）を取得
+		//③利用者のIDがreservationDtoの予約者・共同予約者ID（string型）と一致した場合に予約の削除処理を行う
+		//④削除した件数が一件の場合⇒予約削除処理成功！！次のサーブレットに飛ばす
+		//※予約者がnullでない場合、削除処理に失敗した場合、削除した件数が一件ではない⇒エラーページ
 
 		if(reservedPerson!=null){
 			String reservedPersonId = reservedPerson.getUserId();
