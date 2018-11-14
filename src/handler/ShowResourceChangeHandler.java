@@ -38,7 +38,7 @@ public class ShowResourceChangeHandler implements Handler {
 		// セッションから権限を取得
 		HttpSession session = request.getSession(false);
 
-		int authority = (int) session.getAttribute("authority");
+		int authority = (int) session.getAttribute("authorityOfLoggedIn");
 
 		if (authority == 0) {
 
