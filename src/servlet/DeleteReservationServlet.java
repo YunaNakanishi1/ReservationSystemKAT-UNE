@@ -15,7 +15,7 @@ import handler.Handler;
 /**
  * Servlet implementation class DeleteReservationServlet
  */
-@WebServlet("/reservesysyem/deleteReservation")
+@WebServlet("/reservesystem/deleteReservation")
 public class DeleteReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
