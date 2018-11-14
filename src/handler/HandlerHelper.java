@@ -1,3 +1,7 @@
+/*
+ * Copyright© Ricoh IT Solutions Co.,Ltd.
+ * All Rights Reserved.
+ */
 package handler;
 
 import java.sql.SQLException;
@@ -20,6 +24,10 @@ import service.ContainSelectedCategoryService;
 import service.ContainSelectedOfficeService;
 import service.GetOfficeAndCategoryListService;
 
+/**
+ *
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ */
 public class HandlerHelper {
 
 	private static Logger _log = LogManager.getLogger();
