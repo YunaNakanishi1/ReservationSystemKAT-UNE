@@ -46,10 +46,13 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         String actualUseTimeMinutesStr = request.getParameter("actualUseTimeMinutes");
 
         String officeStr = request.getParameter("office");
+        System.out.println(officeStr);
         String categoryStr = request.getParameter("category");
         String capacityStr = request.getParameter("capacity");
         String resourceNameStr = request.getParameter("resourceName");
-        String[] resourceCaracteristicsStrArray = request.getParameterValues("resourceCaracteristics");
+        String[] resourceCaracteristicsStrArray = request.getParameterValues("resourceCharacteristics");
+
+
         List<String> resourceCaracteristicsList = new ArrayList<String>();
         for (int i = 0; i < resourceCaracteristicsStrArray.length; i++) {
         	resourceCaracteristicsList.add(resourceCaracteristicsStrArray[i]);
