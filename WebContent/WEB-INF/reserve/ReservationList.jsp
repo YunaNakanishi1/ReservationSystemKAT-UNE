@@ -98,7 +98,7 @@ Javascriptを有効にしてください
 <h2>予約一覧</h2>
 <div class = "reframe">
 <div class = "leftside">
-<form action="/ReservationSystemKAT-UNE/reservesystem/pushNewReservationButton" method="get">
+<form action="/ReservationSystemKAT-UNE/reservesystem/pushNewReservationButton" method="post">
 <input class="submit dialog2" type="submit" value="新規予約">
 </form>
 　

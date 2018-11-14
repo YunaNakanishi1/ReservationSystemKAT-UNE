@@ -30,7 +30,7 @@ public class DeleteResourceHandler implements Handler {
 
       HttpSession httpSession = request.getSession(false);
       //セッションは存在する
-      int authority = (int) httpSession.getAttribute("authority");
+      int authority = (int) httpSession.getAttribute("authorityOfLoggedIn");
       String deleteId = request.getParameter("resourceId");
 
       CommonValidator commonValidator = new CommonValidator();
@@ -40,8 +40,6 @@ public class DeleteResourceHandler implements Handler {
 		  _log.error("noResourceId");
           return ERROR_PAGE;
       }
-
-      authority = (int) httpSession.getAttribute("authority");
 
       //権限がある場合
       if (authority == 0) {

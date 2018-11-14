@@ -264,7 +264,7 @@ public class ReservationDao {
 			Timestamp usageDateTimestamp=new Timestamp(0);
 			Timestamp after30Timestamp=new Timestamp(0);
 			if(usageDate!=null){
-				sqlBuilder.append("AND usage_start_date > p1_usage_date AND usage_end_date < p2_after_30_date ");
+				sqlBuilder.append("AND usage_start_date >= p1_usage_date AND usage_end_date <= p2_after_30_date ");
 				usageDateTimestamp=new TimeDto(0).getTimeStamp(usageDate);
 				Calendar calendar=Calendar.getInstance();
 				calendar.setTime(usageDateTimestamp);
@@ -272,7 +272,7 @@ public class ReservationDao {
 				after30Timestamp=new Timestamp(calendar.getTime().getTime());
 			}
 
-			sqlBuilder.append("AND (EXTRACT(hour FROM usage_start_date)*60 + EXTRACT(minute FROM usage_start_date)) > p3_usage_start_minute_value AND (EXTRACT(hour FROM usage_end_date)*60 + EXTRACT(minute FROM usage_end_date)) < p4_usage_end_minute_value ");
+			sqlBuilder.append("AND (EXTRACT(hour FROM usage_start_date)*60 + EXTRACT(minute FROM usage_start_date)) >= p3_usage_start_minute_value AND (EXTRACT(hour FROM usage_end_date)*60 + EXTRACT(minute FROM usage_end_date)) <= p4_usage_end_minute_value ");
 
 			if(officeId!=null){
 				sqlBuilder.append("AND resources.office_id=p5_office_id ");

@@ -76,7 +76,7 @@
 </table>
 <br>
 
-<c:if test="${authority == 0}">
+<c:if test="${authorityOfLoggedIn == 0}">
 <c:if test="${resource.deleted == 0}">
 
 

@@ -23,17 +23,18 @@ public class PushNewReservationButtonServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
 		Handler pushNewReservationHandler = new PushNewReservationButtonHandler();
+
 	       String view = pushNewReservationHandler.handleService(request);
+
 
 		 RequestDispatcher rd = request.getRequestDispatcher(view);
 	        rd.forward(request, response);
 	 }
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 doGet(request, response);
-	 }
+
 
 
 
