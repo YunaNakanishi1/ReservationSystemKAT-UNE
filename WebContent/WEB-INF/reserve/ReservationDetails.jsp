@@ -49,14 +49,11 @@ Javascriptを有効にしてください
  <tr>
  <td class="dialog"><b>リソース</b></td>
  <td class="right2">
- <c:if test="${linkToResourceDetails == true}">
- 	 <a href="showresourcedetailstab?resourceId
- 	 =${reservationDTOForReservationDetails.resource.resourceId}" target="_blank">
- 	 <c:out value="${obj.resourceName}" /></a>
- </c:if>
+	 <a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?resourceId=${reservationDTOForReservationDetails.resource.resourceId}">
+	 <c:out value="${reservationDTOForReservationDetails.resource.resourceName}" /></a>
 
 
- <c:out value="${reservationDTOForReservationDetails.resource.resourceName}" /></a></td>
+
  </tr>
 
 
@@ -178,7 +175,7 @@ Javascriptを有効にしてください
 <br>
 
 
-<A href ="" onclick="document.form1.submit();return false;" >予約一覧に戻る</A>
+<a href ="" onclick="document.form1.submit();return false;" >予約一覧に戻る</a>
 <form name="form1" method="POST" action="/ReservationSystemKAT-UNE/reservesystem/showfirstreservationlist">
 <input type=hidden name="aaa" value="bbb">
 </form>
