@@ -9,8 +9,7 @@ import dto.CategoryDto;
 import dto.OfficeDto;
 
 /**
- * 事業所とカテゴリの一覧を取得する. 1
- *
+ * 事業所とカテゴリの一覧を取得するサービス.1
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
@@ -40,14 +39,5 @@ public class GetOfficeAndCategoryListService implements Service {
 	public List<CategoryDto> getCategoryList() {
 		return _categoryList;
 	}
-
-
-
-
-
-
-
-
-
 
 }
