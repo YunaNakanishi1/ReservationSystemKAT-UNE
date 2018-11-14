@@ -33,11 +33,13 @@ public class ContainSelectedOfficeService implements Service {
 
 	@Override
 	public void execute(){
+
 		if (_officeId == null) {
 			_result = true;
 		} else {
 			_result = false;
 			for (OfficeDto office : _officeList) {
+
 				if (_officeId.equals(office.getOfficeId())) {
 					_result = true;
 				}
