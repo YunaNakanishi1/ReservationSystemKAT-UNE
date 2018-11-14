@@ -533,7 +533,7 @@ public class ResourceDao {
             }
             if(officeId != null){
                 //オフィスIDが指定されている
-                sqlSelect += "office_id = params.office_id ";
+                sqlSelect += "and office_id = params.office_id ";
             }
 
             //定員
