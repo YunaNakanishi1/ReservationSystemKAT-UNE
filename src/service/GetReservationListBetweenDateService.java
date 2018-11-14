@@ -32,7 +32,7 @@ public class GetReservationListBetweenDateService implements Service{
 	@Override
 	public boolean validate() {
 
-		return false;
+		return true;
 	}
 
 	@Override
