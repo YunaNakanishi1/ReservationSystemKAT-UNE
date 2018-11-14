@@ -83,10 +83,8 @@ Javascriptを有効にしてください
 						<td class="dialog"><b>　　　定員</b></td>
 						<td class="right2">(※定員がないものは0人で登録されています)<br> <input
 							type="text" name="capacityForResourceSelect" placeholder="半角数字のみ"
-							<c:if test="${displayCapacityForResourceSelect != null}">
  								value="<c:out value="${displayCapacityForResourceSelect}" />"
- 							</c:if>
-							>人以上
+						>人以上
 						</td>
 					</tr>
 
