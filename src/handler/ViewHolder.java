@@ -27,6 +27,7 @@ public class ViewHolder {
     public static final String DELETE_RESERVATION_SERVLET = "/reservesystem/deleteReservation";
     public static final String SEARCH_RESOURCE_LIST_SERVLET = "/reservesystem/searchResourceList";
     public static final String SHOW_RESERVATION_DETAILS_SERVLET = "/reservesystem/showReservationDetails";
+    public static final String LOGIN_FIRST_RESERVATION_LIST_SERVLET="/reservesystem/showfirstreservationlist";
 
 
 }

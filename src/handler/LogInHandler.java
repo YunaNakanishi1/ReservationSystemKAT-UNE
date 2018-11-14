@@ -72,7 +72,7 @@ public class LogInHandler implements Handler {
 					session.setAttribute("familyNameOfLoggedIn", resultUser.getFamilyName());
 					session.setAttribute("lastNameOfLoggedIn", resultUser.getFirstName());
 					session.setMaxInactiveInterval(SESSION_INTERVAL);
-					return SHOW_FIRST_RESERVATION_LIST_SERVLET;
+					return LOGIN_FIRST_RESERVATION_LIST_SERVLET;
 
 				} else {
 					//ユーザ認証失敗(EM06)

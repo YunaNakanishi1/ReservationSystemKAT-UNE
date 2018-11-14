@@ -71,15 +71,15 @@ public class ReservationDao {
 					+ "	attendance_type, "
 					+ "resource_characteristic_name, "
 					+ "users.user_id, users.password, users.family_name, users.first_name, "
-					+ "users.authority, users.tel, users.mail_address,"
+					+ "users.authority, users.tel, users.mail_address, "
 					+ "cousers.user_id as co_user_id, cousers.password as co_password, "
-					+ "cousers.family_name as co_family_name, cousers.first_name as co_first_name,"
+					+ "cousers.family_name as co_family_name, cousers.first_name as co_first_name, "
 					+ " cousers.authority as co_authority, cousers.tel as co_tel, "
 					+ "cousers.mail_address as co_mail_address "
 
 			+ "from reservations, resources, attendance_types, users , users as cousers ,"
 					+ " resource_features,resource_characteristics , offices , categories "
-			+ "where resources.resource_id = reservations.resource_id"
+			+ "where resources.resource_id = reservations.resource_id "
 				+ "and resource_features.resource_characteristic_id = resource_characteristics.resource_characteristic_id "
 				+ "and attendance_types.attendance_type_id = reservations.attendance_type_id "
 				+ "and users.user_id = reservations.reserved_person_id "
@@ -105,7 +105,7 @@ public class ReservationDao {
 			String coReservedPersonId;//共同予約者ID
 			int numberOfParticipants = 0;	//利用人数
 			int attendanceTypeId = 0;	//参加者種別ID
-			Timestamp reserveSupplement; //補足
+			String reserveSupplement; //補足
 			int reservationDeleted = 0; //予約削除済み
 
 
@@ -154,7 +154,7 @@ public class ReservationDao {
 				coReservedPersonId = rs.getString("co_reserved_person_id");
 				numberOfParticipants = rs.getInt("number_of_participants");
 				attendanceTypeId = rs.getInt("attendance_type_id");
-				reserveSupplement = rs.getTimestamp("reserve_supplement");
+				reserveSupplement = rs.getString("reserve_supplement");
 				reservationDeleted = rs.getInt("reservation_deleted");
 
 				resourceName = rs.getString("resource_name");
@@ -164,7 +164,7 @@ public class ReservationDao {
 				supplement = rs.getString("supplement");
 				usageStopStartDate = rs.getTimestamp("usage_stop_start_date");
 				usageStopEndDate = rs.getTimestamp("usage_stop_end_date");
-				resourceDeleted = rs.getInt("resources_deleted");
+				resourceDeleted = rs.getInt("resource_deleted");
 
 				attendanceType = rs.getString("attendance_type");
 
@@ -343,7 +343,7 @@ public class ReservationDao {
 		return reservationList;
 	}
 
-	public List<ReservationDto> queryByResources(List<String> resourceIdList, Timestamp startTime, Timestamp endTime) throws SQLException
+	public List<ReservationDto> queryByResources(List<Resource> resourceIdList, Timestamp startTime, Timestamp endTime) throws SQLException
 	{
 	    List<ReservationDto> reservationList = new ArrayList<>();
 
@@ -357,15 +357,42 @@ public class ReservationDao {
 
         PreparedStatement preparedStatement = null;
         ResultSet rs = null;
-        String sql = "";
-        
+
+        //SQLの前半部分　NOTMUCHRESOURCEIDはリソースIDの文字をつなげやすくするためのダミー要素
+        String sql = "select * from reserve_id reserveid,reservations.resource_id resourceid,resource_name resourcename,office_name officename,category_name categoryname,usage_start_date starttime,usage_end_date endtime,reservation_name reservename,family_name familyname,first_name firstname,reservations.deleted reservedeleted  "
+                    +"where reservations.resource_id=resources.resource_id AND resources.office_id=offices.office_id AND resources.category_id=categories.category_id AND reserved_person_id=user_id "
+                    +"and deleted=0 "
+                    +"and usage_start_date >= ? "
+                    +"and usage_end_date <= ? "
+                    +"and resource_id in ('NOTMUCHRESOURCEID' ";
+
+        //リソースIDの要素
+        for(int i=0;i<resourceIdList.size();i++){
+            sql += ",? ";
+        }
+        //SQLの後半部分
+        sql += ");";
         try{
             preparedStatement = _con.prepareStatement(sql);
-            //preparedStatement.setInt(1,reserveId);
+
+            //パラメータの設定
+            int StatementCount = 1;
+            preparedStatement.setTimestamp(StatementCount++,startTime);
+            preparedStatement.setTimestamp(StatementCount++,endTime);
+            for(int i=0;i<resourceIdList.size();i++){
+                preparedStatement.setString(StatementCount++,resourceIdList.get(i).getResourceId());
+            }
+
             rs = preparedStatement.executeQuery();  //実行
             while(rs.next()){
 
-            }
+                Resource resource = new Resource(rs.getString("resource_id"), rs.getString("resourcename"), rs.getString("officename"), rs.getString("categoryname"), 0, null, 0, null, null, null);
+                String resultUsageDate=new SimpleDateFormat("yyyy/MM/dd").format(rs.getTimestamp("starttime"));
+                TimeDto resultUsageStartTime=new TimeDto(rs.getTimestamp("starttime"));
+                TimeDto resultUsageEndTime=new TimeDto(rs.getTimestamp("endtime"));
+
+                ReservationDto reservation = new ReservationDto(rs.getInt("reserveid"), resource, resultUsageDate, resultUsageStartTime, resultUsageEndTime, rs.getString("reservename"), null, null, 0, null, null, rs.getInt("reservedeleted"));
+                reservationList.add(reservation);            }
 
 
         }finally{
@@ -387,6 +414,46 @@ public class ReservationDao {
         }
 
 	    return reservationList;
+	}
+	public int deleteReservation(int reserveId) throws SQLException{
+		DBHelper dbHelper = new DBHelper();
+		_con = dbHelper.connectDb(); //dbに接続
+
+		if (_con == null) {
+			_log.error("DatabaseConnectError");
+			throw new SQLException();	//エラー処理はハンドラーに任せる
+            }
+
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		int result;
+
+		try{
+			String sql = "UPDATE reservations SET deleted = 1 WHERE reserve_id = ?";
+			preparedStatement = _con.prepareStatement(sql);
+			preparedStatement.setInt(1, reserveId);
+            result = preparedStatement.executeUpdate();
+
+        }finally{
+            try {
+                dbHelper.closeResource(rs);
+            } catch (Exception e) {
+                e.printStackTrace();
+                _log.error("Exception");
+            }
+
+            try {
+                dbHelper.closeResource(preparedStatement);
+            } catch (Exception e) {
+                e.printStackTrace();
+                _log.error("Exception");
+            }
+            dbHelper.closeDb();
+
+        }
+
+	    return result;
+
 	}
 }
 

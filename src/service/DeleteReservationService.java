@@ -20,7 +20,6 @@ public class DeleteReservationService implements Service{
 
 	@Override
 	public boolean validate() {
-
 		return true;
 	}
 

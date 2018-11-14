@@ -49,9 +49,11 @@ Javascriptを有効にしてください
  <tr>
  <td class="dialog"><b>リソース</b></td>
  <td class="right2">
- <c:if test="${linkToResourceDetails == true} }">
- 	 <a href="showresourcedetailstab?resourceId=${reservationDTOForReservationDetails.resource.resourceId}">
- <c:out value="${obj.resourceName}" /></a> </c:if>
+ <c:if test="${linkToResourceDetails == true}">
+ 	 <a href="showresourcedetailstab?resourceId
+ 	 =${reservationDTOForReservationDetails.resource.resourceId}" target="_blank">
+ 	 <c:out value="${obj.resourceName}" /></a>
+ </c:if>
 
 
  <c:out value="${reservationDTOForReservationDetails.resource.resourceName}" /></a></td>
@@ -68,18 +70,40 @@ Javascriptを有効にしてください
  <tr>
  <td class="dialog"><b>利用時間</b></td> <!-- ●●：●●～●●：●● -->
  <td class="right2">
+ <c:if test="${reservationDTOForReservationDetails.usageStartTime.hour < 10}">
+ 0<c:out value="${reservationDTOForReservationDetails.usageStartTime.hour}"/>
+ </c:if>
+ <c:if test="${reservationDTOForReservationDetails.usageStartTime.hour >= 10}">
  <c:out value="${reservationDTOForReservationDetails.usageStartTime.hour}"/>
+ </c:if>
   :
+  <c:if test="${reservationDTOForReservationDetails.usageStartTime.minutes < 10}">
+ 0<c:out value="${reservationDTOForReservationDetails.usageStartTime.minutes}"/>
+ </c:if>
+ <c:if test="${reservationDTOForReservationDetails.usageStartTime.minutes >= 10}">
  <c:out value="${reservationDTOForReservationDetails.usageStartTime.minutes}"/>
+ </c:if>
    ～
+ <c:if test="${reservationDTOForReservationDetails.usageEndTime.hour < 10}">
+ 0<c:out value="${reservationDTOForReservationDetails.usageEndTime.hour}"/>
+ </c:if>
+ <c:if test="${reservationDTOForReservationDetails.usageEndTime.hour >= 10}">
  <c:out value="${reservationDTOForReservationDetails.usageEndTime.hour}"/>
+ </c:if>
   :
- <c:out value="${reservationDTOForReservationDetails.usageEndTime.minutes}"/>  </td>
+ <c:if test="${reservationDTOForReservationDetails.usageEndTime.minutes < 10}">
+ 0<c:out value="${reservationDTOForReservationDetails.usageEndTime.minutes}"/>
+ </c:if>
+ <c:if test="${reservationDTOForReservationDetails.usageEndTime.minutes >= 10}">
+ <c:out value="${reservationDTOForReservationDetails.usageEndTime.minutes}"/>
+ </c:if>
+ </td>
+
  </tr>
  <tr>
  <td class="dialog"><b>予約名称</b></td>
  <td class="right2">
- <c;out value="${reservationDTOForReservationDetails.reservationName}"/>
+ <c:out value="${reservationDTOForReservationDetails.reservationName}"/>
  </td>
  </tr>
  <tr>
@@ -123,26 +147,27 @@ Javascriptを有効にしてください
 
 
 
- <table class="table3">
+ <table class="table3">	<!-- 変更と削除ボタンは予約者と共同予約者しかでない -->
  <tr>
  <td>
- <form action="resourcechange" method="get">
- <input class="submit" class="dialog" type = "submit" value ="変更">
- </form>
+ 	<c:if test="${flagForShowingDeleteAndChangeButton == true}">
+		 <form action="resourcechange" method="get">
+		 <input class="submit" class="dialog" type = "submit" value ="変更">
+		 </form>
+	</c:if>
  </td>
  <td>　</td>
+
  <td><form action = "deleteresource" method = "post">
-
-
-
-
-
 <input class="submit" type = "submit" value = "コピーして予約"></form>
  </td>
+
  <td>　</td>
- <td><form action = "deleteresource" method = "post">
- <input class="submit" type = "submit" value = "削除"></form>
- </td>
+ 	<c:if test="${flagForShowingDeleteAndChangeButton == true}">
+		<td><form action = "/ReservationSystemKAT-UNE/reservesystem/deleteReservation" method = "post">
+		<input class="submit" type = "submit" value = "削除"></form>
+		</td>
+	</c:if>
  </tr>
  </table>
 
@@ -153,10 +178,8 @@ Javascriptを有効にしてください
 <br>
 
 
+<a class="dialog" href = "/reservesystem/showfirstreservationlist" method = "post">予約一覧に戻る</a>
 
-
-
-<a class="dialog" href = "/ReservationSystemKAT-UNE/reservesystem/resourcelist" method="get">予約一覧に戻る</a>
 
 
 

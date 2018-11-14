@@ -75,6 +75,8 @@ public class SearchReservationListHandler implements Handler {
 					return false;
 				}else if(reservationList.size()==0){
 					_session.setAttribute("messageForReservationListLower", EM08);
+				}else{
+					_session.setAttribute("messageForReservationListLower", null);
 				}
 
 			_session.setAttribute("reservationListForReservationList", reservationList);
