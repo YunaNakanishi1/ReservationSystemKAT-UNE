@@ -112,6 +112,8 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         try {
         	//入力エラーがある場合
         	if(checkResourceSelectInputService.validate()) {
+        		String message = checkResourceSelectInputService.getValidationMessage();
+        		request.setAttribute("messageForResourceSelectUpper", message);
         		return SHOW_RESOURCE_SELECT_SERVLET;
         	}
         } catch (MyException e) {

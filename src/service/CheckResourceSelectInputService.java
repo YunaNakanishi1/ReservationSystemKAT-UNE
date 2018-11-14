@@ -56,7 +56,7 @@ public class CheckResourceSelectInputService implements Service {
 	}
 
 
-	public String get_validationMessage() {
+	public String getValidationMessage() {
 		return _validationMessage;
 	}
 
