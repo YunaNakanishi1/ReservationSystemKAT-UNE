@@ -43,7 +43,7 @@ public class CheckResourceSelectInputService implements Service {
 	public boolean validate() throws MyException {
 		ServiceValidator serviceValidator = new ServiceValidator();
 		boolean serviceValidate =  serviceValidator.checkQuickReservationValidate(_date, _usageStartTime, _usageEndTime, _usageTime, _capacity, _resourceName);
-		if (!serviceValidate) {
+		if (serviceValidate) {
 			_validationMessage = serviceValidator.getValidationMessage();
 			return false;
 		}

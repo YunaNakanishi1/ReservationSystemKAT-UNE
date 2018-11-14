@@ -178,7 +178,8 @@ public class ServiceValidator {
     		return true;
     	}
 
-    	//capacityが半角の整数でなかったらエラー
+        //capacityが半角の整数でなかったらエラー
+
 
     	//if (!capacity.matches("^[0-9]+")) {
 //    	if (!capacity.matches("^-?[0-9]+$")) {

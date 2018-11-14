@@ -39,6 +39,7 @@ public class SearchResourceListHandler implements Handler {
             }
         }catch (MyException e) {
             _log.error("Search Error");
+            e.printStackTrace();
             return ViewHolder.ERROR_PAGE;
 
         }
@@ -85,6 +86,7 @@ public class SearchResourceListHandler implements Handler {
 
         } catch (SQLException e) {
             _log.error("SQLException");
+            e.printStackTrace();
             throw new MyException();
             }
 

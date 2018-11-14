@@ -111,7 +111,7 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         CheckResourceSelectInputService checkResourceSelectInputService = new CheckResourceSelectInputService(dateStr, usageStartTimeForResourceSelect, usageEndTimeForResourceSelect, usageTimeForResourceSelect, capacityStr, resourceNameStr);
         try {
         	//入力エラーがある場合
-        	if(checkResourceSelectInputService.validate()) {
+        	if(!checkResourceSelectInputService.validate()) {
         		String message = checkResourceSelectInputService.getValidationMessage();
         		request.setAttribute("messageForResourceSelectUpper", message);
         		return SHOW_RESOURCE_SELECT_SERVLET;
