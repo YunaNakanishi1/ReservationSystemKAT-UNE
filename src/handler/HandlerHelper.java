@@ -10,9 +10,11 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dto.AttendanceTypeDto;
 import dto.CategoryDto;
 import dto.OfficeDto;
 import dto.TimeDto;
+import dto.User;
 import exception.MyException;
 import service.ContainSelectedCategoryService;
 import service.ContainSelectedOfficeService;
@@ -21,6 +23,8 @@ import service.GetOfficeAndCategoryListService;
 public class HandlerHelper {
 
 	private static Logger _log = LogManager.getLogger();
+	private List<User> _userList;
+	private List<AttendanceTypeDto> _attendanceTypeList;
 
 	/**
 	 * sessionに（属性名、初期値）の形でセット
@@ -211,5 +215,23 @@ public class HandlerHelper {
 	}
 
 
+	/**
+	 * @param userIs
+	 * @param attendanceTypeId
+	 * @return
+	 */
+	public boolean getUserAndAttendanceType(String userIs,String attendanceTypeId){
+		return false;
 
+	}
+
+	public List<User> getUserList(){
+		return _userList;
+
+	}
+
+	public List<AttendanceTypeDto> getAttendanceTypeList(){
+		return _attendanceTypeList;
+
+	}
 }
