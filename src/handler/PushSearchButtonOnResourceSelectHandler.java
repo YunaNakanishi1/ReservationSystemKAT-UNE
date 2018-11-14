@@ -54,8 +54,10 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
 
 
         List<String> resourceCaracteristicsList = new ArrayList<String>();
-        for (int i = 0; i < resourceCaracteristicsStrArray.length; i++) {
-        	resourceCaracteristicsList.add(resourceCaracteristicsStrArray[i]);
+        if (resourceCaracteristicsStrArray != null) {
+	        for (int i = 0; i < resourceCaracteristicsStrArray.length; i++) {
+	        	resourceCaracteristicsList.add(resourceCaracteristicsStrArray[i]);
+	        }
         }
 
         //再表示用にセット

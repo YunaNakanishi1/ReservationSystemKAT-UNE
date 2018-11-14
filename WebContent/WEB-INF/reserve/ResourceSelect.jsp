@@ -92,8 +92,8 @@ Javascriptを有効にしてください
 
 <div class = "frame">
 <p><font color="red"><c:out value = "${messageForResourceSelectUpper}"/></font></p>
-<form action="setresource" method="post">
 
+<form action = "/ReservationSystemKAT-UNE/reservesystem/pushSearchButtonOnResourceSelect" method = "post">
 
 <table class="table4">
 <tbody>
@@ -266,9 +266,11 @@ selected
 </table>
 
 <br>
-<form>
+<!--
+<form>  -->
 <input class="more-details" class="dialog2" type="button" value="もっと詳しく" onclick="hyoji1()">
-</form>
+<!--
+</form> -->
 
 <div id="disp" style="display:block;">
 <table class="table4">
@@ -323,7 +325,9 @@ checked
 <table class="table3">
 <tr>
 
-<td><form action = "${returnPageForResourceSelect}" method = "post">
+<td>
+
+<form action = "${returnPageForResourceSelect}" method = "post">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit dialog2" type = "submit" value = "戻る"></form>
 
@@ -331,7 +335,7 @@ checked
 <td>　</td>
 
 <td>
-<form action = "/ReservationSystemKAT-UNE/reservesystem/pushSearchButtonOnResourceSelect" method = "post">
+
 <input class="submit dialog2" type = "submit" value = "検索">
 </form>
 </td>
