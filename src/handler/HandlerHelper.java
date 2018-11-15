@@ -23,12 +23,14 @@ import exception.MyException;
 import service.ContainSelectedCategoryService;
 import service.ContainSelectedOfficeService;
 import service.GetOfficeAndCategoryListService;
+import service.GetUserAndAttendanceTypeListService;
 
 /**
  *
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 public class HandlerHelper {
+
 
 	private static Logger _log = LogManager.getLogger();
 	private List<User> _userList;
@@ -229,6 +231,22 @@ public class HandlerHelper {
 	 * @return
 	 */
 	public boolean getUserAndAttendanceType(String userIs,String attendanceTypeId){
+		GetUserAndAttendanceTypeListService getUserAndAttendanceTypeListService =
+				new GetUserAndAttendanceTypeListService();
+
+		if(getUserAndAttendanceTypeListService.validate()){
+			try {
+				getUserAndAttendanceTypeListService.execute();
+				_userList = getUserAndAttendanceTypeListService.getUserList();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}else{
+			return false;
+		}
+
+
 		return false;
 
 	}
@@ -242,4 +260,6 @@ public class HandlerHelper {
 		return _attendanceTypeList;
 
 	}
+
+
 }

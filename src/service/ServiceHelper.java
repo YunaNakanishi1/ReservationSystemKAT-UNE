@@ -11,6 +11,11 @@ import dto.Resource;
 import dto.TimeDto;
 
 public class ServiceHelper {
+
+
+	private static final int HOUR24=24;
+
+
     /**
      * 予約可能な時間帯をTimeDtoのリストで返す。
      *
@@ -75,4 +80,32 @@ public class ServiceHelper {
             return new TimeDto(convertTime);
         }
     }
+
+    public TimeDto getSliderLeftValue(TimeDto usageStartTime,List<ReservationDto> reservationList){
+		TimeDto leftValue=new TimeDto(0, 0);
+		for(ReservationDto reservation:reservationList){
+			if(usageStartTime.getTimeMinutesValue()<=reservation.getUsageEndTime().getTimeMinutesValue()){
+				if(leftValue.getTimeMinutesValue()<reservation.getUsageEndTime().getTimeMinutesValue()){
+					leftValue=reservation.getUsageEndTime();
+				}
+
+			}
+		}
+
+		return leftValue;
+	}
+
+	public TimeDto getSliderRightValue(TimeDto usageEndTime,List<ReservationDto> reservationList){
+		TimeDto rightValue=new TimeDto(HOUR24, 0);
+		for(ReservationDto reservation:reservationList){
+			if(usageEndTime.getTimeMinutesValue()>=reservation.getUsageStartTime().getTimeMinutesValue()){
+				if(rightValue.getTimeMinutesValue()<reservation.getUsageStartTime().getTimeMinutesValue()){
+					rightValue=reservation.getUsageEndTime();
+				}
+
+			}
+		}
+
+		return rightValue;
+	}
 }

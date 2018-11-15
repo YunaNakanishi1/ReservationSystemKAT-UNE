@@ -33,6 +33,7 @@ public class DeleteReservationHandler implements Handler{
 		//リクエストからreservationIdをString型で受け取る
 		String reservationIdForReservationDetailsStr = request.getParameter("reservationIdForReservationDetails");
 
+		//reservationIdのint型の変数を用意
 		int reservationIdForReservationDetails;
 
 		//reservationIdをint型になおす
@@ -59,9 +60,18 @@ public class DeleteReservationHandler implements Handler{
 
 		//reservationIdからreservationDtoを取得する
 		GetReservationFromIdService getReservationFromIdService = new GetReservationFromIdService(reservationIdForReservationDetails);
+		ReservationDto reservationDto;
 		if(getReservationFromIdService.validate()){
 			try {
 				getReservationFromIdService.execute();
+				//reservationDto(フィールド)を取得
+				reservationDto = getReservationFromIdService.getReservation();
+				if(reservationDto != null){
+					session.setAttribute("reservationDtoForReservationDetails",reservationDto);
+				}else{
+					 _log.error("reservationDtoIsNull");
+					 return ERROR_PAGE;
+				}
 			} catch (SQLException e) {
 				e.printStackTrace();
 				_log.error("SQLException");
@@ -72,15 +82,6 @@ public class DeleteReservationHandler implements Handler{
 			 return ERROR_PAGE;
 		}
 
-		//reservationDto(フィールド)を取得
-		//nullだったらエラーページ、nullじゃなかったらsessionにセット
-		ReservationDto reservationDto = getReservationFromIdService.getReservation();
-		if(reservationDto != null){
-			session.setAttribute("reservationDtoForReservationDetails",reservationDto);
-		}else{
-			 _log.error("reservationDtoIsNull");
-			 return ERROR_PAGE;
-		}
 
 		//reservationDtoから予約者・共同予約者（User型）を取得
 		User reservedPerson =reservationDto.getReservedPerson();

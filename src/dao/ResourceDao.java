@@ -506,51 +506,51 @@ public class ResourceDao {
             //リソース特性のパラメータ（facility_id_[n])
             String facilityIdParams = "";
             for (int i=0;i < facilityIdList.size();i++) {
-                facilityIdParams += "? as facility_id_"+i+", ";
+                facilityIdParams += "? as P_facility_id_"+i+"::text, ";
             }
             //SQL文(With句)
-            String sqlWith = "with params as( "
+            String sqlWith = "with params as ( "
                     +"select "
                     + facilityIdParams
-                    +"? as facility_checked_num, "
-                    +"? as resource_name, "
-                    +"? as category_id, "
-                    +"? as office_id, "
-                    +"? as capacity "
+                    +"? as P_facility_checked_num, "
+                    +"?::text as P_resource_name, "
+                    +"?::text as P_category_id, "
+                    +"?::text as P_office_id, "
+                    +"? as P_capacity "
                     +") ";
 
 
 
             //SQL文（Select句）
             String sqlSelect = "select * from resources,offices,categories,params where offices.office_id = resources.office_id and categories.category_id=resources.category_id ";
-            if(resourceName != null){
+            if(resourceName != null && resourceName != ""){
                 //リソース名が指定されている
-                sqlSelect += "and resource_name like (params.resource_name) ";
+                sqlSelect += "and resource_name like (params.P_resource_name) ";
             }
-            if(categoryId != null){
+            if(categoryId != null && categoryId != ""){
                 //カテゴリIDが指定されている
-                sqlSelect += "and category_id = params.category_id ";
+                sqlSelect += "and resources.category_id = params.P_category_id ";
             }
-            if(officeId != null){
+            if(officeId != null && officeId != ""){
                 //オフィスIDが指定されている
-                sqlSelect += "and office_id = params.office_id ";
+                sqlSelect += "and resources.office_id = params.P_office_id ";
             }
 
             //定員
-            sqlSelect += "and capacity >= params.capacity ";
+            sqlSelect += "and capacity >= params.P_capacity ";
 
             if(facilityIdList.size() > 0){
                 //リソース特性IDが指定されている
-                sqlSelect += "and resource_id in ( "
+                sqlSelect += "and resources.resource_id in ( "
                         +"select resource_features.resource_id "
                         +"from resources "
                         +"inner join resource_features "
                         +"on resources.resource_id = resource_features.resource_id "
                         +"where 1=0 ";
                 for(int i=0;i<facilityIdList.size();i++){
-                    sqlSelect += "or resource_characteristic_id = params.facility_id_"+i+" ";
+                    sqlSelect += "or resource_characteristic_id = params.P_facility_id_"+i+" ";
                 }
-                sqlSelect += "group by resource_features.resource_id having count(*) >= params.facility_checked_num) ";
+                sqlSelect += "group by resource_features.resource_id having count(*) >= params.P_facility_checked_num) ";
 
             }
             //SQL文作成
@@ -579,10 +579,10 @@ public class ResourceDao {
 
             //定員
             pstmt.setInt(pCount++, capacity);
-
           //実行
-            rs=pstmt.executeQuery(sql);
-            if(rs.next()){
+            rs=pstmt.executeQuery();
+
+            while(rs.next()){
                 String resourceIdResult = rs.getString("resource_id");
                 String resourceNameResult = rs.getString("resource_name");
                 String officeNameResult = rs.getString("office_name");

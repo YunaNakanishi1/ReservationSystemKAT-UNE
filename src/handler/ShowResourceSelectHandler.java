@@ -79,9 +79,6 @@ public class ShowResourceSelectHandler implements Handler{
 			    _log.error("SQLException2");
 				return ERROR_PAGE;
 			}
-
-
-
 		}else{
 			 _log.error("validateError");
 			return ERROR_PAGE;
