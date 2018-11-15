@@ -25,13 +25,12 @@ public class ContainSelectedUserService implements Service{
 
 
 	public ContainSelectedUserService(String userId,List<User> userList){
+		_userId = userId;
+		_userList = userList;
 		if(_userList == null){
 			_log.error("_userList == null");
             throw new MyException();   //エラー処理はハンドラーに任せる
 		}
-
-		_userId = userId;
-		_userList = userList;
 	}
 
 
@@ -39,9 +38,16 @@ public class ContainSelectedUserService implements Service{
 	public boolean validate() {
 		if(_userId == null){
 			return true;
-
+		}else{
+			boolean userIdIsTheSame = false;
+			for(int i=0; i<_userList.size(); i++){
+				User user = _userList.get(i);
+				if(user.getUserId().equals(_userId)){
+					userIdIsTheSame = true;
+				}
+			}
+			return userIdIsTheSame;
 		}
-		return true;
 	}
 
 

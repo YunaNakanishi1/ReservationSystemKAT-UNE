@@ -123,15 +123,16 @@ public class ServiceValidator {
     public boolean checkQuickReservationValidate(String date, TimeDto usageStartTime, TimeDto usageEndTime, TimeDto usageTime, String capacity, String resourceName) {
     	SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/M/d");
         Date useDate;
-        Date today;
+        Date today = new Date();
+        Date today_first;
 		try {
 			useDate = sdFormat.parse(date);
-			today = sdFormat.parse( sdFormat.format(new Date()) );
+			today_first = sdFormat.parse( sdFormat.format(today) );
 		} catch (ParseException e) {
 			throw new MyException();
 		}
     	//利用日が本日以降の場合エラー
-    	if (useDate.before(today)) {
+    	if (useDate.before(today_first)) {
     		_validationMessage = EM09;
     		return true;
     	}
@@ -167,13 +168,13 @@ public class ServiceValidator {
     	}
 
     	//利用時間が15分以下の場合エラー
-    	if (endTime - startTime < FIFTEEN_MINUTES) {
+    	if (usageTime.getTimeMinutesValue() < FIFTEEN_MINUTES) {
     		_validationMessage = EM49;
     		return true;
     	}
 
-    	//利用開始時間または終了時間が24時15分以上が選択されている場合エラー
-    	if ((startTime > TWENTY_FOUR_HOUR * SIXTY_MINUTES) || (endTime > TWENTY_FOUR_HOUR * SIXTY_MINUTES)) {
+    	//利用開始時間または終了時間または実利用時間が24時15分以上が選択されている場合エラー
+    	if ((startTime > TWENTY_FOUR_HOUR * SIXTY_MINUTES) || (endTime > TWENTY_FOUR_HOUR * SIXTY_MINUTES) || (usageTime.getTimeMinutesValue() > TWENTY_FOUR_HOUR * SIXTY_MINUTES)) {
     		_validationMessage = EM51;
     		return true;
     	}

@@ -32,20 +32,28 @@ public class ContainSelectedResourceCharacteristicService implements Service{
 
 	@Override
 	public void execute(){
-		if (_facilityIdList.isEmpty()) {
+		int count = 0;
+
+		if (_facilityIdList.size()==0) {
 			_result = true;
 		} else {
-			_result = true;
-			for (FacilityDto facility : _facilityList) {
-				for (String facilityId : _facilityIdList) {
-					if (!(facilityId.equals(facility.getFacilityId()))) {
-					_result = false;
-				}
+			_result = false;
+
+			for (String facilityId : _facilityIdList) {
+				for (FacilityDto facility : _facilityList) {
+					System.out.println(facilityId);
+					if (facilityId.equals(facility.getFacilityId())) {
+						count++;
+						break;
 					}
+				}
 			}
+
+			if (_facilityIdList.size() == count) {
+				_result = true;
+			}
+
 		}
-
-
 	}
 
 	//結果をboolean型で取得し_resultを返す

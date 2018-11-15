@@ -487,13 +487,6 @@ public class ResourceDao {
         PreparedStatement pstmt=null;
         ResultSet rs=null;
 
-
-        System.out.println("capacity:"+capacity);
-        System.out.println("resourceName:"+resourceName);
-        System.out.println("categoryId:"+categoryId);
-        System.out.println("officeId:"+officeId);
-        System.out.println("facilityIdList:"+facilityIdList);
-
         try{
             _con = dbHelper.connectDb(); // データベースに接続
 
@@ -505,8 +498,10 @@ public class ResourceDao {
         //SQL文生成
             //リソース特性のパラメータ（facility_id_[n])
             String facilityIdParams = "";
-            for (int i=0;i < facilityIdList.size();i++) {
-                facilityIdParams += "?::text as P_facility_id_"+i+", ";
+            if(facilityIdList != null){
+                for (int i=0;i < facilityIdList.size();i++) {
+                    facilityIdParams += "?::text as P_facility_id_"+i+", ";
+                }
             }
             //SQL文(With句)
             String sqlWith = "with params as ( "
@@ -539,33 +534,41 @@ public class ResourceDao {
             //定員
             sqlSelect += "and capacity >= params.P_capacity ";
 
-            if(facilityIdList.size() > 0){
-                //リソース特性IDが指定されている
-                sqlSelect += "and resources.resource_id in ( "
-                        +"select resource_features.resource_id "
-                        +"from resources "
-                        +"inner join resource_features "
-                        +"on resources.resource_id = resource_features.resource_id "
-                        +"where 1=0 ";
-                for(int i=0;i<facilityIdList.size();i++){
-                    sqlSelect += "or resource_characteristic_id = params.P_facility_id_"+i+" ";
-                }
-                sqlSelect += "group by resource_features.resource_id having count(*) >= params.P_facility_checked_num) ";
+            if(facilityIdList != null){
+                if(facilityIdList.size() > 0){
+                    //リソース特性IDが指定されている
+                    sqlSelect += "and resources.resource_id in ( "
+                            +"select resource_features.resource_id "
+                            +"from resources "
+                            +"inner join resource_features "
+                            +"on resources.resource_id = resource_features.resource_id "
+                            +"where 1=0 ";
+                    for(int i=0;i<facilityIdList.size();i++){
+                        sqlSelect += "or resource_characteristic_id = params.P_facility_id_"+i+" ";
+                    }
+                    sqlSelect += "group by resource_features.resource_id having count(*) >= params.P_facility_checked_num) ";
 
+                }
             }
             //SQL文作成
             String sql = sqlWith + sqlSelect;
-            System.out.println(sql);
+
         //パラメータセット
             //preparedStatement用カウント変数
             int pCount = 1;
             pstmt = _con.prepareStatement(sql);
             //リソース特性の?セット
-            for (int i=0;i < facilityIdList.size();i++) {
-                pstmt.setString(pCount++, facilityIdList.get(i));
+            if(facilityIdList != null){
+                for (int i=0;i < facilityIdList.size();i++) {
+                    pstmt.setString(pCount++, facilityIdList.get(i));
+                }
             }
             //リソース特性の検索数をセット
-            pstmt.setInt(pCount++, facilityIdList.size());
+            if(facilityIdList == null){
+                pstmt.setInt(pCount++, 0);
+            }else{
+                pstmt.setInt(pCount++, facilityIdList.size());
+            }
 
             //リソース名
             pstmt.setString(pCount++, "%"+resourceName+"%");
