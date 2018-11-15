@@ -28,6 +28,9 @@ public class PushCopyReservationButtonHandler implements Handler{
 	public String handleService(HttpServletRequest request) {
 
 		HttpSession session =request.getSession(true);
+		//コピー元からの予約情報（reservationDto）をsessionから取得
+		ReservationDto reservationDto = (ReservationDto) session.getAttribute("reservationDTOForReservationDetails");
+
 
 		//各値を初期化し、セッションに保存する
 		HandlerHelper handlerHelper=new HandlerHelper();
@@ -52,8 +55,6 @@ public class PushCopyReservationButtonHandler implements Handler{
 			session.setAttribute("returnPageForResourceSelect", SHOW_RESERVATION_DETAILS_SERVLET);
 			session.setAttribute("reservationIdForReservationDetails", reservationIdForReservationDetails);
 
-		//コピー元からの予約情報（reservationDto）をsessionから取得
-			ReservationDto reservationDto = (ReservationDto) session.getAttribute("reservationForReservatiionDetails");
 			session.setAttribute("usageDateForReservationRegist",reservationDto.getUsageDate());
 			session.setAttribute("usageStartTimeForResourceSelect",reservationDto.getUsageStartTime());
 			session.setAttribute("usageEndTimeForResourceSelect",reservationDto.getUsageEndTime());
