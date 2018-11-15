@@ -506,7 +506,7 @@ public class ResourceDao {
             //リソース特性のパラメータ（facility_id_[n])
             String facilityIdParams = "";
             for (int i=0;i < facilityIdList.size();i++) {
-                facilityIdParams += "? as P_facility_id_"+i+"::text, ";
+                facilityIdParams += "?::text as P_facility_id_"+i+", ";
             }
             //SQL文(With句)
             String sqlWith = "with params as ( "
