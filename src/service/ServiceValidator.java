@@ -123,15 +123,15 @@ public class ServiceValidator {
     public boolean checkQuickReservationValidate(String date, TimeDto usageStartTime, TimeDto usageEndTime, TimeDto usageTime, String capacity, String resourceName) {
     	SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/M/d");
         Date useDate;
+        Date today;
 		try {
 			useDate = sdFormat.parse(date);
+			today = sdFormat.parse( sdFormat.format(new Date()) );
 		} catch (ParseException e) {
 			throw new MyException();
 		}
-    	Date today = new Date();
-
     	//利用日が本日以降の場合エラー
-    	if (useDate.compareTo(today) > 0) {
+    	if (useDate.before(today)) {
     		_validationMessage = EM09;
     		return true;
     	}
