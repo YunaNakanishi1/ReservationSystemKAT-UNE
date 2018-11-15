@@ -359,7 +359,12 @@ checked
 					<c:forEach var="obj" items="${availableListForResourceSelect}" varStatus="status">
 					</c:forEach>
 						<tr>
-							<td><input class="nuime" type = "submit" value = "予約"></td>
+							<td>
+								<form action="/ReservationSystemKAT-UNE/reservesystem/showreserveregist" method="post">
+									<input type="hidden" name="resourceId" value="${obj.resource.resourceId}">
+									<input class="nuime" type = "submit" value = "予約">
+								</form>
+							</td>
 							<td>
 								<c:out value="${obj.startResource.hour}" />:<c:out value="${obj.startResource.minutes}" />～<c:out value="${obj.endResource.hour}" />:<c:out value="${obj.endResource.minutes}" />
 							</td>
