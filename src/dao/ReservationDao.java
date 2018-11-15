@@ -667,6 +667,71 @@ public class ReservationDao {
 
 		return reservationList;
 	}
+
+	public int insertReservation(ReservationDto reservation) throws SQLException{
+		int reserveId = -1;
+
+		DBHelper dbHelper = new DBHelper();
+		_con = dbHelper.connectDb(); //dbに接続
+
+		if (_con == null) {
+			_log.error("DatabaseConnectError");
+			throw new SQLException();	//エラー処理はハンドラーに任せる
+            }
+
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		try{
+			_con.setAutoCommit(false);
+			StringBuilder sqlBuilder=new StringBuilder("INSERT INTO reservations (resource_id,usage_start_date,usage_end_date,reservation_name,reserved_person_id,co_reserved_person_id,number_of_participants,attendance_type_id,reserve_supplement,deleted)");
+			sqlBuilder.append("VALUES (?,?,?,?,?,?,?,?,?,?)");
+			sqlBuilder.append("RETURNING reserve_id");
+
+			preparedStatement=_con.prepareStatement(sqlBuilder.toString());
+
+			preparedStatement.setString(1, reservation.getResource().getResourceId());
+			String usageDate=reservation.getUsageDate();
+			preparedStatement.setTimestamp(2, reservation.getUsageStartTime().getTimeStamp(usageDate));
+			preparedStatement.setTimestamp(3, reservation.getUsageEndTime().getTimeStamp(usageDate));
+			preparedStatement.setString(4, reservation.getReservationName());
+			preparedStatement.setString(5, reservation.getReservedPerson().getUserId());
+			preparedStatement.setString(6, reservation.getCoReservedPerson().getUserId());
+			preparedStatement.setInt(7, reservation.getNumberOfParticipants());
+			preparedStatement.setInt(8, reservation.getAttendanceTypeDto().getAttendanceTypeId());
+			preparedStatement.setString(9, reservation.getSupplement());
+			preparedStatement.setInt(10, reservation.getDeleted());
+
+			rs=preparedStatement.executeQuery();
+
+			if(rs.next()){
+				reserveId=rs.getInt(1);
+				_con.commit();
+			}else{
+				_con.rollback();
+			}
+
+		}catch(SQLException e){
+			_con.rollback();
+			throw e;
+		}finally{
+			try {
+                dbHelper.closeResource(rs);
+            } catch (Exception e) {
+                e.printStackTrace();
+                _log.error("Exception");
+            }
+
+            try {
+                dbHelper.closeResource(preparedStatement);
+            } catch (Exception e) {
+                e.printStackTrace();
+                _log.error("Exception");
+            }
+            dbHelper.closeDb();
+		}
+
+		return reserveId;
+	}
 }
 
 
