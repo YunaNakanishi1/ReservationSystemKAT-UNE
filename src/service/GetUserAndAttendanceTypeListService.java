@@ -24,8 +24,7 @@ public class GetUserAndAttendanceTypeListService implements Service{
 
 	@Override
 	public boolean validate() {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		return true;
 	}
 	@Override
 	public void execute() throws SQLException {
