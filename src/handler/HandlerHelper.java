@@ -30,6 +30,7 @@ import service.GetOfficeAndCategoryListService;
  */
 public class HandlerHelper {
 
+
 	private static Logger _log = LogManager.getLogger();
 	private List<User> _userList;
 	private List<AttendanceTypeDto> _attendanceTypeList;
@@ -242,4 +243,6 @@ public class HandlerHelper {
 		return _attendanceTypeList;
 
 	}
+
+
 }
