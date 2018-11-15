@@ -7,6 +7,7 @@ package dto;
  */
 public class AvailableDto {
     private String resourceId;
+    private String resourceName;
     private TimeDto startResource;
     private TimeDto endResource;
     private int capacity;
@@ -14,9 +15,10 @@ public class AvailableDto {
     private String categoryName;
     private boolean hasSupplement;
 
-    public AvailableDto(String resourceId, TimeDto startResource, TimeDto endResource, int capacity, String officeName, String categoryName,
+    public AvailableDto(String resourceId,String resourceName, TimeDto startResource, TimeDto endResource, int capacity, String officeName, String categoryName,
             boolean hasSupplement) {
         this.resourceId = resourceId;
+        this.resourceName = resourceName;
         this.startResource = startResource;
         this.endResource = endResource;
         this.capacity = capacity;
@@ -45,6 +47,9 @@ public class AvailableDto {
         return resourceId;
     }
 
+    public String getResourceName() {
+        return resourceName;
+    }
     public int getCapacity() {
         return capacity;
     }

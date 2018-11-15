@@ -376,12 +376,13 @@ public class ReservationDao {
         ResultSet rs = null;
 
         //SQLの前半部分　NOTMUCHRESOURCEIDはリソースIDの文字をつなげやすくするためのダミー要素
-        String sql = "select * from reserve_id reserveid,reservations.resource_id resourceid,resource_name resourcename,office_name officename,category_name categoryname,usage_start_date starttime,usage_end_date endtime,reservation_name reservename,family_name familyname,first_name firstname,reservations.deleted reservedeleted,resources.capacity capacity,resources.supplement supplement,usage_stop_start_date ,usage_stop_end_date "
+        String sql = "select reserve_id reserveid,reservations.resource_id resourceid,resource_name resourcename,office_name officename,category_name categoryname,usage_start_date starttime,usage_end_date endtime,reservation_name reservename,family_name familyname,first_name firstname,reservations.deleted reservedeleted,resources.capacity capacity,resources.supplement supplement,usage_stop_start_date ,usage_stop_end_date "
+                    +"from reservations,resources,offices,categories,users "
                     +"where reservations.resource_id=resources.resource_id AND resources.office_id=offices.office_id AND resources.category_id=categories.category_id AND reserved_person_id=user_id "
-                    +"and deleted=0 "
+                    +"and reservations.deleted=0 "
                     +"and usage_start_date >= ? "
                     +"and usage_end_date <= ? "
-                    +"and resource_id in ('NOTMUCHRESOURCEID' ";
+                    +"and reservations.resource_id in ('NOTMUCHRESOURCEID' ";
 
         //リソースIDの要素
         for(int i=0;i<resourceIdList.size();i++){
@@ -403,7 +404,7 @@ public class ReservationDao {
             rs = preparedStatement.executeQuery();  //実行
             while(rs.next()){
 
-                Resource resource = new Resource(rs.getString("resource_id"), rs.getString("resourcename"), rs.getString("officename"), rs.getString("categoryname"), rs.getInt("capacity"), rs.getString("supplement"), 0, null, rs.getTimestamp("usage_stop_start_date"), rs.getTimestamp("usage_stop_end_date"));
+                Resource resource = new Resource(rs.getString("resourceid"), rs.getString("resourcename"), rs.getString("officename"), rs.getString("categoryname"), rs.getInt("capacity"), rs.getString("supplement"), 0, null, rs.getTimestamp("usage_stop_start_date"), rs.getTimestamp("usage_stop_end_date"));
                 String resultUsageDate=new SimpleDateFormat("yyyy/MM/dd").format(rs.getTimestamp("starttime"));
                 TimeDto resultUsageStartTime=new TimeDto(rs.getTimestamp("starttime"));
                 TimeDto resultUsageEndTime=new TimeDto(rs.getTimestamp("endtime"));
