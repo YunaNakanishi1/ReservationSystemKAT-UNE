@@ -251,7 +251,7 @@ public class HandlerHelper {
 				return false;
 			}
 		}else{
-			_log.error("getUserAndAttendanceType()_validate == false");
+			_log.error("getUserAndAttendanceType()_validate1 == false");
 			return false;
 		}
 
@@ -260,6 +260,7 @@ public class HandlerHelper {
 					new ContainSelectedUserService(userId ,userList);
 
 			if(containSelectedUserService.validate() == false){
+				_log.error("containSelectedUserService.validate2 == false");
 				return false;
 			}
 		}catch(MyException e){
@@ -271,6 +272,7 @@ public class HandlerHelper {
 			ContainSelectedAttendanceTypeService containSelectedAttendanceTypeService =
 					new ContainSelectedAttendanceTypeService(attendanceTypeId, attendanceTypeList);
 			if(containSelectedAttendanceTypeService.validate() == false){
+				_log.error("containSelectedAttendanceTypeService.validate()3 == false");
 				return false;
 			}
 		}catch(MyException e2){
@@ -280,11 +282,12 @@ public class HandlerHelper {
 
 		_userList = userList;
 		_attendanceTypeList = attendanceTypeList;
-
-
 		return true;
 
 	}
+
+
+
 
 	public List<User> getUserList(){
 		return _userList;
