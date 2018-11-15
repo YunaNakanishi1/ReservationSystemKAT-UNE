@@ -17,6 +17,7 @@ import org.apache.logging.log4j.Logger;
 import dto.AttendanceTypeDto;
 import dto.CategoryDto;
 import dto.OfficeDto;
+import dto.ReservationDto;
 import dto.TimeDto;
 import dto.User;
 import exception.MyException;
@@ -29,6 +30,8 @@ import service.GetOfficeAndCategoryListService;
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 public class HandlerHelper {
+
+	private static final int HOUR24=24;
 
 	private static Logger _log = LogManager.getLogger();
 	private List<User> _userList;
@@ -241,5 +244,33 @@ public class HandlerHelper {
 	public List<AttendanceTypeDto> getAttendanceTypeList(){
 		return _attendanceTypeList;
 
+	}
+
+	public TimeDto getSliderLeftValue(TimeDto usageStartTime,List<ReservationDto> reservationList){
+		TimeDto leftValue=new TimeDto(0, 0);
+		for(ReservationDto reservation:reservationList){
+			if(usageStartTime.getTimeMinutesValue()<=reservation.getUsageStartTime().getTimeMinutesValue()){
+				if(leftValue.getTimeMinutesValue()<reservation.getUsageStartTime().getTimeMinutesValue()){
+					leftValue=reservation.getUsageStartTime();
+				}
+
+			}
+		}
+
+		return leftValue;
+	}
+
+	public TimeDto getSliderRightValue(TimeDto usageEndTime,List<ReservationDto> reservationList){
+		TimeDto rightValue=new TimeDto(HOUR24, 0);
+		for(ReservationDto reservation:reservationList){
+			if(usageEndTime.getTimeMinutesValue()>=reservation.getUsageEndTime().getTimeMinutesValue()){
+				if(rightValue.getTimeMinutesValue()<reservation.getUsageEndTime().getTimeMinutesValue()){
+					rightValue=reservation.getUsageEndTime();
+				}
+
+			}
+		}
+
+		return rightValue;
 	}
 }
