@@ -506,16 +506,16 @@ public class ResourceDao {
             //リソース特性のパラメータ（facility_id_[n])
             String facilityIdParams = "";
             for (int i=0;i < facilityIdList.size();i++) {
-                facilityIdParams += "? as facility_id_"+i+", ";
+                facilityIdParams += "? as facility_id_"+i+"::text, ";
             }
             //SQL文(With句)
             String sqlWith = "with params as( "
                     +"select "
                     + facilityIdParams
                     +"? as facility_checked_num, "
-                    +"? as resource_name, "
-                    +"? as category_id, "
-                    +"? as office_id, "
+                    +"?::text as resource_name, "
+                    +"?::text as category_id, "
+                    +"?::text as office_id, "
                     +"? as capacity "
                     +") ";
 
