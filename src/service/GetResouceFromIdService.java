@@ -42,11 +42,11 @@ public class GetResouceFromIdService implements Service{
 	@Override
 	public void execute() throws SQLException {
 		ResourceDao resourceDao = new ResourceDao();
-		resourceDao.displayDetails(_resourceId);	//ここまでできた！
+		_resource = resourceDao.displayDetails(_resourceId);
 	}
 
 	public Resource getResource(){
-		return null;
+		return _resource;
 
 	}
 
