@@ -9,6 +9,9 @@ package dto;
 public class AttendanceTypeDto {
 	private int _attendanceTypeId;
 	private String _attendanceTypeName;
+	
+	
+	
 	public AttendanceTypeDto(int attendanceTypeId, String attendanceTypeName) {
 		super();
 		this._attendanceTypeId = attendanceTypeId;

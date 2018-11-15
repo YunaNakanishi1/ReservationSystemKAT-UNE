@@ -16,6 +16,7 @@ import dto.CategoryDto;
 import dto.FacilityDto;
 import dto.OfficeDto;
 import dto.ReservationDto;
+import dto.TimeDto;
 import service.GetOfficeAndCategoryListService;
 import service.GetResourceCharacteristicListService;
 
@@ -65,6 +66,22 @@ public class PushCopyReservationButtonHandler implements Handler{
 			session.setAttribute("reserveSupplementForReservationRegist",reservationDto.getSupplement());
 
 		//終了時間ー開始時間で実利用時間を計算する
+			//①予約情報から終了時間、開始時間をTimedto型で取得する
+			TimeDto usageEndTime=reservationDto.getUsageEndTime();
+			TimeDto usageStartTime=reservationDto.getUsageStartTime();
+
+			//②終了時間、開始時間を分に変換する
+			int usageEndTimeMinutes=usageEndTime.getTimeMinutesValue();
+			int usageStartTimeMinutes=usageStartTime.getTimeMinutesValue();
+
+			//③予約の実利用時間を計算する
+			int usageTimeMinutes=usageEndTimeMinutes-usageStartTimeMinutes;
+
+			//④分をTimedto型に変換する
+			TimeDto usageTime =new TimeDto(usageTimeMinutes);
+
+		//実利用時間をsessionにセット
+			session.setAttribute("usageTimeForReservationSelect",usageTime);
 
 
 
@@ -111,40 +128,55 @@ public class PushCopyReservationButtonHandler implements Handler{
 
 
 			//全件取得したCategoryDtoのリストから予約したカテゴリの名前が一致するcategorydtoを作成する
-			CategoryDto containCategory;
+			CategoryDto containCategory = null;
 			for(CategoryDto category:categoryList){
 				if(category.getCategoryName().equals(reservationDto.getResource().getCategory())){
 					containCategory=new CategoryDto(category.getCategoryId(),category.getCategoryName());
 				}
 			}
 
+			//取得できなかった場合はエラーページに飛ばす
+			if(containCategory==null){
+				 _log.error("containCategoryIsNull");
+				return ERROR_PAGE;
+			}
+
 			//全件取得したOfficeDtoのリストから予約した事業所の名前が一致するOfficedtoを作成する
-			OfficeDto containOffice;
+			OfficeDto containOffice=null;
 			for(OfficeDto office:officeList){
 				if(office.getOfficeName().equals(reservationDto.getResource().getOfficeName())){
 					containOffice=new OfficeDto(office.getOfficeId(),office.getOfficeName());
 				}
 			}
 
+			//取得できなかった場合はエラーページに飛ばす
+			if(containOffice==null){
+				 _log.error("containContailIsNull");
+				return ERROR_PAGE;
+			}
+
 			//全件取得したFacilityDtoのリストから予約した設備の名前が一致するfacilitydtoのリストを作成する
-			List<FacilityDto> containFacilityList = null;
+			List<String> containFacilityIdList = new ArrayList<String>();
 			for(FacilityDto facility:facilityList){
 				for(String facilityName:reservationDto.getResource().getFacility()){
 					if(facility.getFacilityName().equals(facilityName)){
-						containFacilityList.add(new FacilityDto(facility.getFacilityId(),facility.getFacilityName()));
+						containFacilityIdList.add(facility.getFacilityId());
 					}
 				}
 
 			}
 
-			//セッションにカテゴリID
-			session.setAttribute("",reservationDto.getUsageDate());
+			//セッションにカテゴリID,事業所ID,設備IDのリストをセット
+			session.setAttribute("categoryIdForResourceSelect",containCategory.getCategoryId());
+			session.setAttribute("officeIdForResourceSelect",containOffice.getOfficeId());
+			session.setAttribute("facilityIdListForResourceSelect",containFacilityIdList);
+
+			return SEARCH_RESOURCE_LIST_SERVLET;
 
 
 
 
 
-		return null;
 	}
 
 }
