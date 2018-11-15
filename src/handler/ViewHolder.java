@@ -28,8 +28,10 @@ public class ViewHolder {
     public static final String SEARCH_RESOURCE_LIST_SERVLET = "/reservesystem/searchResourceList";
     public static final String SHOW_RESERVATION_DETAILS_SERVLET = "/reservesystem/showReservationDetails";
     public static final String LOGIN_FIRST_RESERVATION_LIST_SERVLET="/reservesystem/showfirstreservationlist";
+    public static final String SHOW_RESERVATION_CHANGE_SERVLET = "showreservechange";
+    public static final String PUSH_CHANGE_BUTTON_ON_RESERVATION_DETAILS_SERVLET = "pushChangeButtonOnReservationDetails";
     public static final String RESERVE_CHANGE="WEB-INF/reserve/ReservationChange.jsp";
     public static final String SHOW_RESERVATION_CHANGE_SERVLET="showreservechange";
-
+    
 
 }

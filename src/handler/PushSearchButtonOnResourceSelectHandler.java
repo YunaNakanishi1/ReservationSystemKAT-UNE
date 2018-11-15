@@ -118,6 +118,7 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         	}
         } catch (MyException e) {
         	_log.error("validateion error");
+        	e.printStackTrace();
         	return ERROR_PAGE;
         }
 

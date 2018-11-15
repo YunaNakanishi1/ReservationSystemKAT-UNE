@@ -67,7 +67,7 @@ public class MakeAvailableListService implements Service{
                     if(resource.getSupplement().length() > 0){
                         hasSupplement = true;
                     }
-                    AvailableDto available = new AvailableDto(resource.getResourceId(), reservableTimeList.get(i), reservableTimeList.get(i+1), resource.getCapacity(), resource.getOfficeName(), resource.getCategory(), hasSupplement);
+                    AvailableDto available = new AvailableDto(resource.getResourceId(),resource.getResourceName(), reservableTimeList.get(i), reservableTimeList.get(i+1), resource.getCapacity(), resource.getOfficeName(), resource.getCategory(), hasSupplement);
                     _availableList.add(available);
                 }
             }
