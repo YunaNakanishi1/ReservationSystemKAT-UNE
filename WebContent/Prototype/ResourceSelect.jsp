@@ -118,7 +118,7 @@ value = "<c:out value="${usageDateForReservationRegist}" />"
 <select name = "startHour" id = "usageStartHour" onchange="hourChange('usageStartHour','usageStartMinute')">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
-<c:if test="${usageStartTimeForResourceSelect.hour == 0 + status.index }">
+<c:if test="${usageStartHourForResourceSelect.hour == 0 + status.index }">
 selected
 </c:if>
 >

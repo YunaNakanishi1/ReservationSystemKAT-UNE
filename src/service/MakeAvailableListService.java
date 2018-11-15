@@ -59,15 +59,44 @@ public class MakeAvailableListService implements Service{
             List<TimeDto> reservableTimeList = sHelper.getAvailableListForResource(resource, reservationList, _usageDate);
             //結果の2つ毎に予約可能な時間が得られる
             for(int i=0;i<reservableTimeList.size();i+=2){
-                int startMinutes = reservableTimeList.get(i).getTimeMinutesValue();
-                int endMinutes = reservableTimeList.get(i+1).getTimeMinutesValue();
-                //利用可能時間が実利用時間を超えていたらリストに追加
+
+                TimeDto sTime = reservableTimeList.get(i);
+                TimeDto eTime = reservableTimeList.get(i+1);
+                int startMinutes = sTime.getTimeMinutesValue();
+                int endMinutes = eTime.getTimeMinutesValue();
+
+                System.out.println("SM:"+startMinutes);
+                System.out.println("EM:"+endMinutes);
+                System.out.println("USM:"+_usageStartTime.getTimeMinutesValue());
+                System.out.println("UEM:"+_usageEndTime.getTimeMinutesValue());
+
+                System.out.println();
+
+                //予約可能な時間が予約したい時間よりも前
+                if(endMinutes < _usageStartTime.getTimeMinutesValue()){
+                    //追加しない
+                    continue;
+                }
+                //予約可能な時間が予約したい時間よりも後
+                if(startMinutes > _usageEndTime.getTimeMinutesValue()){
+                  //追加しない
+                    continue;
+                }
+                //予約可能な時間内に予約したい時間の開始時間があれば、予約可能な時間の開始を予約したい時間の開始時間にする
+                if(startMinutes < _usageStartTime.getTimeMinutesValue() && _usageStartTime.getTimeMinutesValue() < endMinutes){
+                    sTime = _usageStartTime;
+                }
+                //予約可能な時間内に予約したい時間の終了時間があれば、予約可能な時間の終了を予約したい時間の終了時間にする
+                if(startMinutes < _usageEndTime.getTimeMinutesValue() && _usageEndTime.getTimeMinutesValue() < endMinutes){
+                    eTime = _usageEndTime;
+                }
+                //利用可能時間が実利用時間を超えていたら
                 if((endMinutes - startMinutes) >= _usageTime.getTimeMinutesValue()){
                     boolean hasSupplement = false;
                     if(resource.getSupplement().length() > 0){
                         hasSupplement = true;
                     }
-                    AvailableDto available = new AvailableDto(resource.getResourceId(),resource.getResourceName(), reservableTimeList.get(i), reservableTimeList.get(i+1), resource.getCapacity(), resource.getOfficeName(), resource.getCategory(), hasSupplement);
+                    AvailableDto available = new AvailableDto(resource.getResourceId(),resource.getResourceName(), sTime, eTime, resource.getCapacity(), resource.getOfficeName(), resource.getCategory(), hasSupplement);
                     _availableList.add(available);
                 }
             }

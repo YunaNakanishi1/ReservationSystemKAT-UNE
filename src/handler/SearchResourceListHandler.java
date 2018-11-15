@@ -33,10 +33,7 @@ public class SearchResourceListHandler implements Handler {
         try{
             //リソースの検索処理
             resourceList = searchResource();
-            System.out.println("resNum:"+resourceList.size());
-            for (Resource resource : resourceList) {
-                System.out.println(resource.getResourceName());
-            }
+
             if(resourceList.size() == 0){
                 //一件もヒットしなかった
                 _session.setAttribute("messageForResourceSelectLower", MessageHolder.EM08);
@@ -51,10 +48,7 @@ public class SearchResourceListHandler implements Handler {
         try{
             //リソースの予約可能時間の計算
             avList = getAvailableList(resourceList);
-            System.out.println("avNum:"+avList.size());
-            for (AvailableDto   aDto : avList) {
-                System.out.println(aDto.getResourceId());
-            }
+
             if(resourceList.size() == 0){
                 //一件もヒットしなかった
                 _session.setAttribute("messageForResourceSelectLower", MessageHolder.EM08);

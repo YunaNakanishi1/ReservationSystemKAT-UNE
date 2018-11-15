@@ -487,13 +487,6 @@ public class ResourceDao {
         PreparedStatement pstmt=null;
         ResultSet rs=null;
 
-
-        System.out.println("capacity:"+capacity);
-        System.out.println("resourceName:"+resourceName);
-        System.out.println("categoryId:"+categoryId);
-        System.out.println("officeId:"+officeId);
-        System.out.println("facilityIdList:"+facilityIdList);
-
         try{
             _con = dbHelper.connectDb(); // データベースに接続
 
@@ -555,7 +548,7 @@ public class ResourceDao {
             }
             //SQL文作成
             String sql = sqlWith + sqlSelect;
-            System.out.println(sql);
+
         //パラメータセット
             //preparedStatement用カウント変数
             int pCount = 1;
