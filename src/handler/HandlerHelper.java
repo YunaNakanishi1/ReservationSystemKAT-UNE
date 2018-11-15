@@ -247,7 +247,7 @@ public class HandlerHelper {
 		}
 
 
-		return false;
+		return true;
 
 	}
 
