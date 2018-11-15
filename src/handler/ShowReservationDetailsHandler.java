@@ -33,7 +33,7 @@ public class ShowReservationDetailsHandler implements Handler{
 
 		HttpSession session = request.getSession(false);
 
-		int reserveId = (int) session.getAttribute("reservedId");
+		int reserveId = (int) session.getAttribute("reservationIdForReservationDetails");
 		String currentUserId = (String) session.getAttribute("userIdOfLoggedIn");
 
 		if(currentUserId == null){

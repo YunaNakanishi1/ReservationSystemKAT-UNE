@@ -17,13 +17,13 @@ import org.apache.logging.log4j.Logger;
 import dto.AttendanceTypeDto;
 import dto.CategoryDto;
 import dto.OfficeDto;
-import dto.ReservationDto;
 import dto.TimeDto;
 import dto.User;
 import exception.MyException;
 import service.ContainSelectedCategoryService;
 import service.ContainSelectedOfficeService;
 import service.GetOfficeAndCategoryListService;
+import service.GetUserAndAttendanceTypeListService;
 
 /**
  *
@@ -31,7 +31,6 @@ import service.GetOfficeAndCategoryListService;
  */
 public class HandlerHelper {
 
-	private static final int HOUR24=24;
 
 	private static Logger _log = LogManager.getLogger();
 	private List<User> _userList;
@@ -232,6 +231,22 @@ public class HandlerHelper {
 	 * @return
 	 */
 	public boolean getUserAndAttendanceType(String userIs,String attendanceTypeId){
+		GetUserAndAttendanceTypeListService getUserAndAttendanceTypeListService =
+				new GetUserAndAttendanceTypeListService();
+
+		if(getUserAndAttendanceTypeListService.validate()){
+			try {
+				getUserAndAttendanceTypeListService.execute();
+				_userList = getUserAndAttendanceTypeListService.getUserList();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}else{
+			return false;
+		}
+
+
 		return false;
 
 	}
@@ -246,31 +261,5 @@ public class HandlerHelper {
 
 	}
 
-	public TimeDto getSliderLeftValue(TimeDto usageStartTime,List<ReservationDto> reservationList){
-		TimeDto leftValue=new TimeDto(0, 0);
-		for(ReservationDto reservation:reservationList){
-			if(usageStartTime.getTimeMinutesValue()<=reservation.getUsageStartTime().getTimeMinutesValue()){
-				if(leftValue.getTimeMinutesValue()<reservation.getUsageStartTime().getTimeMinutesValue()){
-					leftValue=reservation.getUsageStartTime();
-				}
 
-			}
-		}
-
-		return leftValue;
-	}
-
-	public TimeDto getSliderRightValue(TimeDto usageEndTime,List<ReservationDto> reservationList){
-		TimeDto rightValue=new TimeDto(HOUR24, 0);
-		for(ReservationDto reservation:reservationList){
-			if(usageEndTime.getTimeMinutesValue()>=reservation.getUsageEndTime().getTimeMinutesValue()){
-				if(rightValue.getTimeMinutesValue()<reservation.getUsageEndTime().getTimeMinutesValue()){
-					rightValue=reservation.getUsageEndTime();
-				}
-
-			}
-		}
-
-		return rightValue;
-	}
 }

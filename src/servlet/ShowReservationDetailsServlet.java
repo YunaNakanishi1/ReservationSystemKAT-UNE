@@ -34,7 +34,7 @@ public class ShowReservationDetailsServlet extends HttpServlet {
 		int reservedId = Integer.parseInt(reservedIdStr);
 
 		HttpSession session = request.getSession(true);
-		session.setAttribute("reservedId", reservedId);
+		session.setAttribute("reservationIdForReservationDetails", reservedId);
 
 		doPost(request, response);
 	}

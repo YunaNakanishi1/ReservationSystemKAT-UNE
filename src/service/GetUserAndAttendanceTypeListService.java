@@ -7,6 +7,8 @@ package service;
 import java.sql.SQLException;
 import java.util.List;
 
+import dao.AttendanceTypeDao;
+import dao.UserDao;
 import dto.AttendanceTypeDto;
 import dto.User;
 
@@ -27,8 +29,11 @@ public class GetUserAndAttendanceTypeListService implements Service{
 	}
 	@Override
 	public void execute() throws SQLException {
-		// TODO 自動生成されたメソッド・スタブ
+		UserDao userDao = new UserDao();
+		_userList = userDao.queryAll();
 
+		AttendanceTypeDao attendanceTypeDao = new AttendanceTypeDao();
+		_attendanceTypeList = attendanceTypeDao.queryAll();
 	}
 
 	public List<User> getUserList(){

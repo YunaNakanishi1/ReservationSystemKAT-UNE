@@ -266,14 +266,14 @@ selected
 <input class="more-details" class="dialog2" type="button" value="もっと詳しく" onclick="hyoji1()">
 <!--
 </form> -->
-
+<br>
 <div id="disp" style="display:block;">
 <table class="table4">
 <tbody>
 <tr>
 <td class="one" class="dialog"><b>定員</b></td>
 <td class="right2">
-(※定員がないものは0人で登録されています)<br><br>
+(※定員がないものは0人で登録されています)
 
 <div class="dialog2">
 <input type="text" name="capacity"
@@ -358,7 +358,12 @@ checked
 					<tbody>
 					<c:forEach var="obj" items="${availableListForResourceSelect}" varStatus="status">
 						<tr>
-							<td><input class="nuime" type = "submit" value = "予約"></td>
+							<td>
+								<form action="/ReservationSystemKAT-UNE/reservesystem/showreserveregist" method="post">
+									<input type="hidden" name="resourceId" value=""${obj.resource.resourceId}">
+									<input class="nuime" type = "submit" value = "予約">
+								</form>
+							</td>
 							<td>
 								<c:out value="${obj.startResource.hour}" />:<c:out value="${obj.startResource.minutes}" />～<c:out value="${obj.endResource.hour}" />:<c:out value="${obj.endResource.minutes}" />
 							</td>
