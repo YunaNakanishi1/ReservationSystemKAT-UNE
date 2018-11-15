@@ -135,6 +135,8 @@ public class PushCopyReservationButtonHandler implements Handler{
 			}
 
 
+			//↑シーケンス図ここまでかいた↑
+
 			//全件取得したCategoryDtoのリストから予約したカテゴリの名前が一致するcategorydtoを作成する
 			CategoryDto containCategory = null;
 			for(CategoryDto category:categoryList){
