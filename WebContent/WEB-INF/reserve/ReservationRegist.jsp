@@ -53,7 +53,7 @@ Javascriptを有効にしてください
 
 <tr>
 <td class="dialog"><b>　　　　　　利用日</b></td>
-<td class="right2">2020年1月1日</td>
+<td class="right2"><c:out value="${usageDateForReservationRegist}"></c:out></td>
 
 </tr>
 
