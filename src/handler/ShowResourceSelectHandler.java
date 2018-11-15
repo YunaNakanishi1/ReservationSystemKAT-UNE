@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 import dto.CategoryDto;
 import dto.FacilityDto;
 import dto.OfficeDto;
+import exception.MyException;
 import service.ContainSelectedCategoryService;
 import service.ContainSelectedOfficeService;
 import service.ContainSelectedResourceCharacteristicService;
@@ -126,8 +127,14 @@ public class ShowResourceSelectHandler implements Handler{
 			}
 
 		//選択したリソース特性がデータベースから削除されてないか確認する
-		ContainSelectedResourceCharacteristicService containSelectedResourceCharacteristicService = new ContainSelectedResourceCharacteristicService(facilityIdListForResourceSelect,facilityList);
-		//boolean型の変数を用意
+		ContainSelectedResourceCharacteristicService containSelectedResourceCharacteristicService = null;
+		try {
+			containSelectedResourceCharacteristicService = new ContainSelectedResourceCharacteristicService(facilityIdListForResourceSelect,facilityList);
+		} catch (MyException e) {
+			_log.error("CharacteristicError");
+			return ERROR_PAGE;
+		}
+			//boolean型の変数を用意
 
 		boolean selectedResourceCharacteristic;
 			if(containSelectedResourceCharacteristicService.validate()){

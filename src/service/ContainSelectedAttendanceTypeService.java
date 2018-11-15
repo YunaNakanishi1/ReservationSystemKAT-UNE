@@ -26,21 +26,25 @@ public class ContainSelectedAttendanceTypeService implements Service{
 
 
 	public ContainSelectedAttendanceTypeService(int attendanceTypeId, List<AttendanceTypeDto> attendanceTypeList) {
+		_attendanceTypeId = attendanceTypeId;
+		_attendanceTypeList = attendanceTypeList;
 		if(attendanceTypeList == null){
 			_log.error("_userList == null");
             throw new MyException();   //エラー処理はハンドラーに任せる
 		}
-		_attendanceTypeId = attendanceTypeId;
-		_attendanceTypeList = attendanceTypeList;
 	}
 
 	@Override
 	public boolean validate() {
 		boolean attendanceTypeIdIsTheSame = false;
-		for(int i=0; i<_attendanceTypeList.size(); i++){
-			AttendanceTypeDto attendanceTypeDto = _attendanceTypeList.get(i);
-			if(attendanceTypeDto.getAttendanceTypeId()==(_attendanceTypeId)){
-				attendanceTypeIdIsTheSame = true;
+		if(_attendanceTypeId==-1){
+			attendanceTypeIdIsTheSame = true;
+		}else{
+			for(int i=0; i<_attendanceTypeList.size(); i++){
+				AttendanceTypeDto attendanceTypeDto = _attendanceTypeList.get(i);
+				if(attendanceTypeDto.getAttendanceTypeId()==(_attendanceTypeId)){
+					attendanceTypeIdIsTheSame = true;
+				}
 			}
 		}
 		return attendanceTypeIdIsTheSame;

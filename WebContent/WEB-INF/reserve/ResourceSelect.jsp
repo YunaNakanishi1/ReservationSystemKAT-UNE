@@ -297,8 +297,8 @@ value = "<c:out value="${resourceNameForResourceSelect}" />"
 <td class="dialog"><b>リソース特性</b></td>
 <td><div class="scroll4">
 <c:forEach var="obj" items="${facilityListForResourceSelect}" varStatus="status">
-<input type="checkbox" name = "resourceCharacteristics" value = <c:out value="${obj.facilityName}" />
-
+<input type="checkbox" name = "resourceCharacteristics" value = <c:out value="${obj.facilityId}" />
+<c:out value = "${obj.facilityName}" />
 <c:forEach var="selectObj" items="${facilityIdListForResourceSelect}" varStatus="status">
 <c:if test ="${obj.facilityId==selectObj}">
 checked
