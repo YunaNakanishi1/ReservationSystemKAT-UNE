@@ -78,9 +78,9 @@ public class ChangeReservationHandler implements Handler {
 
 		//変更処理
 		try {
-			boolean succeed = changeReservation(_reservation);
+			boolean changeSucceed = changeReservation(_reservation);
 
-			if (succeed) {
+			if (changeSucceed) {
 				HandlerHelper.initializeAttributeForReservationRegist(session);
 				session.setAttribute("reservationIdForReservationDetails", _reservation.getReservationId());
 				return SHOW_RESERVATION_DETAILS_SERVLET;
@@ -110,7 +110,10 @@ public class ChangeReservationHandler implements Handler {
 
 		String reservationNameForReservationChange = request.getParameter("reservationName");
 		String numberOfParticipantsForReservationChange = request.getParameter("numberOfParticipants");
+
+		//どうやって持ってくるの？
 		String coReservedPersonIdForReservationChange = request.getParameter("coReservedPersonId");
+
 		String attendanceTypeIdForReservationChange = request.getParameter("attendanceTypeId");
 		String reserveSupplementForReservationChange = request.getParameter("reserveSupplement");
 

@@ -171,14 +171,19 @@ public class PushCopyReservationButtonHandler implements Handler{
 						containFacilityIdList.add(facility.getFacilityId());
 					}
 				}
+			
 
+			}
+			
+			System.out.println(containFacilityIdList.size());
+			for(:containFacilityIdList){
+				
 			}
 
 			//セッションにカテゴリID,事業所ID,設備IDのリストをセット
 			session.setAttribute("categoryIdForResourceSelect",containCategory.getCategoryId());
 			session.setAttribute("officeIdForResourceSelect",containOffice.getOfficeId());
 			session.setAttribute("facilityIdListForResourceSelect",containFacilityIdList);
-
 			return SEARCH_RESOURCE_LIST_SERVLET;
 
 

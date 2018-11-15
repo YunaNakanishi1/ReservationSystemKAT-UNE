@@ -39,9 +39,16 @@ public class ContainSelectedUserService implements Service{
 	public boolean validate() {
 		if(_userId == null){
 			return true;
-
+		}else{
+			boolean userIdIsTheSame = false;
+			for(int i=0; i<_userList.size(); i++){
+				User user = _userList.get(i);
+				if(user.getUserId().equals(_userId)){
+					userIdIsTheSame = true;
+				}
+			}
+			return userIdIsTheSame;
 		}
-		return true;
 	}
 
 

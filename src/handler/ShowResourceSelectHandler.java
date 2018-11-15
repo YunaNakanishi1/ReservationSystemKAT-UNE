@@ -98,7 +98,7 @@ public class ShowResourceSelectHandler implements Handler{
 				selectedCategory=containSelectedCategoryService.getResult();
 
 			if(selectedCategory==false){
-				_log.error("Noselected");
+				_log.error("NoselectedCategory");
 				return ERROR_PAGE;
 			}
 		}else{
@@ -115,7 +115,7 @@ public class ShowResourceSelectHandler implements Handler{
 				selectedOffice=containSelectedOfficeService.getResult();
 
 				if(selectedOffice==false){
-					_log.error("Noselected");
+					_log.error("NoselectedOffice");
 					return ERROR_PAGE;
 				}
 
@@ -136,7 +136,7 @@ public class ShowResourceSelectHandler implements Handler{
 					selectedResourceCharacteristic=containSelectedResourceCharacteristicService.getResult();
 
 					if(selectedResourceCharacteristic==false){
-						_log.error("Noselected");
+						_log.error("NoselectedCharacteristic");
 						return ERROR_PAGE;
 					}
 
