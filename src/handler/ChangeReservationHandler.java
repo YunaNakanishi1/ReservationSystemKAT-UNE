@@ -8,8 +8,6 @@ import static handler.ViewHolder.*;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,13 +21,15 @@ import dto.ReservationDto;
 import dto.TimeDto;
 import dto.User;
 import exception.MyException;
+import service.ChangeReservationService;
 import service.CheckReservationInputService;
 import service.GetReservationListBetweenDateService;
 import service.IsNotOverlapInReservationListService;
+import service.IsNotOverlapUsageTimeService;
 
 /**
  * サーブレット番号：1
- * 予約変更可・不可チェック
+ * 予約変更可・不可チェック, 変更処理まで行う
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */
@@ -37,18 +37,26 @@ public class ChangeReservationHandler implements Handler {
 	private static Logger _log = LogManager.getLogger();
 	private HttpSession session;
 	private ReservationDto _reservation;
+	private Timestamp _usageStartTimestamp;
+	private Timestamp _usageEndTimestamp;
+	private List<ReservationDto> _reservationList;
 
-	/* (非 Javadoc)
-	 * @see handler.Handler#handleService(javax.servlet.http.HttpServletRequest)
+
+
+	/*
+	 *
+	 * 予約変更可・不可チェック, 変更処理まで行う
 	 */
 	@Override
 	public String handleService(HttpServletRequest request) {
 		session =request.getSession(true);
 
+		//入力チェック
 		if (!validate(request)) {
 			return SHOW_RESERVATION_CHANGE_SERVLET;
 		}
 
+		//予約被りチェック
 		try {
 			if(!reservableCheck()) {
 				request.setAttribute("messageForReservationChange", EM24);
@@ -58,7 +66,32 @@ public class ChangeReservationHandler implements Handler {
 			return ERROR_PAGE;
 		}
 
-		return null;
+		//利用停止期間チェック
+		try {
+			if(!usageStopDateCheck()) {
+				request.setAttribute("messageForReservationChange", EM24);
+				return PUSH_CHANGE_BUTTON_ON_RESERVATION_DETAILS_SERVLET;
+			}
+		} catch (MyException e) {
+			return ERROR_PAGE;
+		}
+
+		//変更処理
+		try {
+			boolean succeed = changeReservation(_reservation);
+
+			if (succeed) {
+				HandlerHelper.initializeAttributeForReservationRegist(session);
+				session.setAttribute("reservationIdForReservationDetails", _reservation.getReservationId());
+				return SHOW_RESERVATION_DETAILS_SERVLET;
+
+			} else {
+				return ERROR_PAGE;
+			}
+
+		} catch (MyException e) {
+			return ERROR_PAGE;
+		}
 	}
 
 	/**
@@ -82,8 +115,8 @@ public class ChangeReservationHandler implements Handler {
 		String reserveSupplementForReservationChange = request.getParameter("reserveSupplement");
 
 		//取得した時間をTimeDto型に変換
-		int usageStartMinutes = Integer.parseInt("usageStartMinutesStr");
-		int usageEndMinutes = Integer.parseInt("usageEndMinutesStr");
+		int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
+		int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
 		TimeDto usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
 		TimeDto usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
 
@@ -97,6 +130,8 @@ public class ChangeReservationHandler implements Handler {
 		session.setAttribute("reserveSupplementForReservationChange", reserveSupplementForReservationChange);
 
 		CommonValidator commonValidator = new CommonValidator();
+
+		//人数チェック
 		int numberOfParticipants = 0;
 		try {
 			numberOfParticipants = commonValidator.getCapacityValue(numberOfParticipantsForReservationChange);
@@ -132,37 +167,20 @@ public class ChangeReservationHandler implements Handler {
 	private boolean reservableCheck() {
 		String usageDate = _reservation.getUsageDate();
 
+		//TimeStamp作成
 		TimeDto startTime = _reservation.getUsageStartTime();
-		String startHour = String.valueOf(startTime.getHour());
-		String startMinute = String.valueOf(startTime.getMinutes());
+		_usageStartTimestamp = startTime.getTimeStamp(usageDate);
 
 		TimeDto endTime = _reservation.getUsageEndTime();
-		String endHour = String.valueOf(endTime.getHour());
-		String endMinute = String.valueOf(endTime.getMinutes());
-
-		String usageStartTime = usageDate + " " + startHour + ":" + startMinute;
-		String usageEndTime = usageDate + " " + endHour + ":" + endMinute;
-
-		Timestamp usageStartTimestamp  = null;
-		Timestamp usageEndTimestamp  = null;
-
-		try {
-			usageStartTimestamp = new Timestamp(new SimpleDateFormat("yyyy/MM/dd hh:mm").parse(usageStartTime).getTime());
-			usageEndTimestamp = new Timestamp(new SimpleDateFormat("yyyy/MM/dd hh:mm").parse(usageEndTime).getTime());
-			System.out.println(usageStartTimestamp);
-			System.out.println(usageEndTimestamp);
-			//これ出力してみる
-		} catch (ParseException e) {
-			throw new MyException();
-		}
+		_usageEndTimestamp = endTime.getTimeStamp(usageDate);
 
 		//予約があったらリストで返却
-		GetReservationListBetweenDateService getReservationListBetweenDateService = new GetReservationListBetweenDateService(_reservation.getResource().getResourceId(), usageStartTimestamp, usageEndTimestamp);
-		List<ReservationDto> reservationList = null;
+		GetReservationListBetweenDateService getReservationListBetweenDateService = new GetReservationListBetweenDateService(_reservation.getResource().getResourceId(), _usageStartTimestamp, _usageEndTimestamp);
+
 		if (getReservationListBetweenDateService.validate()) {
 			try {
 				getReservationListBetweenDateService.execute();
-				reservationList = getReservationListBetweenDateService.getReservationList();
+				_reservationList = getReservationListBetweenDateService.getReservationList();
 
 			} catch(SQLException e) {
 				_log.error("SQLException");
@@ -173,10 +191,56 @@ public class ChangeReservationHandler implements Handler {
 		}
 
 		//自分以外に予約が無ければtrue
-		IsNotOverlapInReservationListService isNotOverlapInReservationListService = new IsNotOverlapInReservationListService(reservationList, _reservation);
+		IsNotOverlapInReservationListService isNotOverlapInReservationListService = new IsNotOverlapInReservationListService(_reservationList, _reservation);
 		boolean result = isNotOverlapInReservationListService.validate();
 
 		return result;
 	}
 
+	/**
+	 * 利用停止期間に入っていないかチェック
+	 * @return 利用停止期間に入っている又は削除済みの場合falseを返却
+	 */
+	private boolean usageStopDateCheck() {
+		IsNotOverlapUsageTimeService isNotOverlapUsageTimeService = new IsNotOverlapUsageTimeService(_reservation.getResource(), _usageStartTimestamp, _usageEndTimestamp);
+		if (!isNotOverlapUsageTimeService.validate()) {
+			return false;
+		}
+
+		if (_reservation.getResource().getDeleted() == 1) {
+			return false;
+		}
+
+		return true;
+
+	}
+
+	/**
+	 * 変更処理を行う
+	 * @param reservation 変更する予約
+	 * @return 変更件数
+	 */
+	private boolean changeReservation(ReservationDto reservation) {
+		ChangeReservationService changeReservationService = new ChangeReservationService(reservation);
+
+		if (changeReservationService.validate()) {
+
+			try {
+				changeReservationService.execute();
+			} catch (SQLException e) {
+				_log.error("SQLException");
+				throw new MyException();
+			}
+
+			int result = changeReservationService.getResult();
+			if (result == 1) {
+				return true;
+			}
+			return false;
+
+		} else {
+			throw new MyException();
+		}
+
+	}
 }
