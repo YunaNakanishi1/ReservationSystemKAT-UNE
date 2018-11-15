@@ -32,7 +32,7 @@ public class ContainSelectedResourceCharacteristicService implements Service{
 
 	@Override
 	public void execute(){
-		if (_facilityIdList.isEmpty()) {
+		if (_facilityIdList.size()==0) {
 			_result = true;
 		} else {
 			_result = true;
