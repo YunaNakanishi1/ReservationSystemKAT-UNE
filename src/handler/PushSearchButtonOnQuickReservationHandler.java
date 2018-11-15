@@ -6,6 +6,9 @@ package handler;
 import static handler.MessageHolder.*;
 import static handler.ViewHolder.*;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -70,7 +73,13 @@ public class PushSearchButtonOnQuickReservationHandler implements Handler {
 			 //入力内容をsessionにセット
 			 session.setAttribute("usageEndTimeForResourceSelect", usageEndTimeForResourceSelect);
 			 session.setAttribute("usageTimeForReservationSelect", usageTimeForReservationSelect);
-			 session.setAttribute("capacityForResourceSelect", capacityForResourceSelect);
+			 session.setAttribute("capacityForResourceSelect", capacityInt);
+
+			 //利用日
+		     SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/M/d");
+		     String usageDate = sdFormat.format(new Date() );
+             session.setAttribute("usageDateForReservationRegist", usageDate);
+
 		 } else {
 			 String message = pushSearchButtonOnQuickReservationService.getValidationMessage();
 			 request.setAttribute("messageForQuickReservation", message);
