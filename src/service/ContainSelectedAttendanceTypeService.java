@@ -7,7 +7,11 @@ package service;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import dto.AttendanceTypeDto;
+import exception.MyException;
 
 /**
 /**
@@ -16,20 +20,31 @@ import dto.AttendanceTypeDto;
  */
 public class ContainSelectedAttendanceTypeService implements Service{
 
-	private String _attendanceTypeId;
+	private int _attendanceTypeId;
 	private List<AttendanceTypeDto> _attendanceTypeList;
+	private static Logger _log = LogManager.getLogger();
 
-	/**
-	 *
-	 */
-	public ContainSelectedAttendanceTypeService(String attendanceTypeId, List<AttendanceTypeDto> attendanceTypeList) {
-		// TODO 自動生成されたコンストラクター・スタブ
+
+	public ContainSelectedAttendanceTypeService(int attendanceTypeId, List<AttendanceTypeDto> attendanceTypeList) {
+		if(attendanceTypeList == null){
+			_log.error("_userList == null");
+            throw new MyException();   //エラー処理はハンドラーに任せる
+		}
+		_attendanceTypeId = attendanceTypeId;
+		_attendanceTypeList = attendanceTypeList;
 	}
 
 	@Override
 	public boolean validate() {
-		// TODO 自動生成されたメソッド・スタブ
-		return false;
+		boolean attendanceTypeIdIsTheSame = false;
+		for(int i=0; i<_attendanceTypeList.size(); i++){
+			AttendanceTypeDto attendanceTypeDto = _attendanceTypeList.get(i);
+			if(attendanceTypeDto.getAttendanceTypeId()==(_attendanceTypeId)){
+				attendanceTypeIdIsTheSame = true;
+			}
+		}
+		return attendanceTypeIdIsTheSame;
+
 	}
 
 	@Override
