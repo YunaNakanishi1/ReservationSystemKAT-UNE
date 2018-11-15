@@ -361,6 +361,8 @@ checked
 							<td>
 								<form action="/ReservationSystemKAT-UNE/reservesystem/showreserveregist" method="post">
 									<input type="hidden" name="resourceId" value="${obj.resourceId}">
+									<input type="hidden" name="usageStartTimeForResourceSelect" value="${obj.startResource.timeMinutesValue}">
+									<input type="hidden" name="usageEndTimeForResourceSelect" value="${obj.endResource.timeMinutesValue}">
 									<input class="nuime" type = "submit" value = "予約">
 								</form>
 							</td>

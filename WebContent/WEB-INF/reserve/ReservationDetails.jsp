@@ -149,6 +149,8 @@ Javascriptを有効にしてください
  <td>
  	<c:if test="${flagForShowingDeleteAndChangeButton == true}">
 		 <form action="/ReservationSystemKAT-UNE/reservesystem/pushChangeReservationButton" method="get">
+		 <input type="hidden" name="reservationIdForReservationDetails" value="${reservationDTOForReservationDetails.reservationId}">
+
 		 <input class="submit" class="dialog" type = "submit" value ="変更">
 		 </form>
 	</c:if>
@@ -156,6 +158,8 @@ Javascriptを有効にしてください
  <td>　</td>
 
  <td><form action = "/ReservationSystemKAT-UNE/reservesystem/pushCopyReservationButton" method = "post">
+<input type="hidden" name="reservationIdForReservationDetails" value="${reservationDTOForReservationDetails.reservationId}">
+
 <input class="submit" type = "submit" value = "コピーして予約"></form>
  </td>
 
