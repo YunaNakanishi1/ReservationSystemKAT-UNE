@@ -7,6 +7,7 @@ import static handler.ViewHolder.*;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dto.FacilityDto;
 import dto.TimeDto;
 import exception.MyException;
 
@@ -47,6 +49,8 @@ public class PushQuickReservationButtonHandler implements Handler {
 		String usageDateForReservationList = usageDate.format(formatter);
 		session.setAttribute("usageDateForReservationList", usageDateForReservationList);
 
+		//リスト初期化
+	    session.setAttribute("facilityIdListForResourceSelect", new ArrayList<FacilityDto>());
 		HandlerHelper handlerHelper = new HandlerHelper();
 		TimeDto usageStartTimeForResourceSelect = null;
 
