@@ -50,8 +50,15 @@ public class ShowReservationRegistHandler {
 		String attendanceTypeId
 		= (String) _session.getAttribute("attendanceTypeIdForReservationRegist");//参加者種別ID
 
+		int attendanceTypeIdInt;
+		if(attendanceTypeId == null){	//参加者種別が-1になることはあり得ないので、-1を使う
+			attendanceTypeIdInt = -1;
+		}else{
+			attendanceTypeIdInt = Integer.parseInt(attendanceTypeId);
+		}
+
 		HandlerHelper handlerHelper = new HandlerHelper();
-		if(handlerHelper.getUserAndAttendanceType(coReservedPersonId, attendanceTypeId)){
+		if(handlerHelper.getUserAndAttendanceType(coReservedPersonId, attendanceTypeIdInt)){
 			List<User> userList = handlerHelper.getUserList();
 			List<AttendanceTypeDto> attendanceTypeList = handlerHelper.getAttendanceTypeList();
 

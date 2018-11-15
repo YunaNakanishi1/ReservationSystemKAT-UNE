@@ -5,7 +5,6 @@ import java.util.List;
 
 import dao.ResourceDao;
 import dto.Resource;
-import exception.MyException;
 
 /**
  * 引数で渡された条件から合致するリソースのリストを返す
@@ -26,9 +25,9 @@ public class GetResourceListOnSearchService implements Service{
 
     public GetResourceListOnSearchService(String _resourceName, int _capacity, String _categoryId, String _officeId,
             List<String> _facilityIdList) {
-        if(_resourceName == null || _categoryId == null || _officeId == null || _facilityIdList == null){
-            throw new MyException();
-        }
+       // if(_resourceName == null || _categoryId == null || _officeId == null || _facilityIdList == null){
+        //    throw new MyException();
+        //}
         this._resourceName = _resourceName;
         this._capacity = _capacity;
         this._categoryId = _categoryId;
