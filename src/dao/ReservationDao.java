@@ -698,7 +698,11 @@ public class ReservationDao {
 			preparedStatement.setString(5, reservation.getReservedPerson().getUserId());
 			preparedStatement.setString(6, reservation.getCoReservedPerson().getUserId());
 			preparedStatement.setInt(7, reservation.getNumberOfParticipants());
+			if(reservation.getAttendanceTypeDto()!=null){
 			preparedStatement.setInt(8, reservation.getAttendanceTypeDto().getAttendanceTypeId());
+			}else{
+				preparedStatement.setNull(8, java.sql.Types.INTEGER);
+			}
 			preparedStatement.setString(9, reservation.getSupplement());
 			preparedStatement.setInt(10, reservation.getDeleted());
 
