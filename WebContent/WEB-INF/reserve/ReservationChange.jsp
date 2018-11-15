@@ -1,4 +1,3 @@
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -141,7 +140,6 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 <select name ="attendanceTypeId">
 <option value = "">なし
 </option>
-<!--
 <c:forEach var="obj" items="${attendanceTypeListForReservationRegist}" varStatus="status">
 <option value="${obj.attendanceTypeId}"
 <c:if test="${obj.attendanceTypeId==attendanceTypeIdForReservationChange}">
@@ -149,7 +147,6 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 </c:if>>
 <c:out value="${obj.attendanceTypeName}"/></option>
 </c:forEach>
- -->
 </select> </td>
 </tr>
 
@@ -192,4 +189,3 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 
     </body>
 </html>
- -->

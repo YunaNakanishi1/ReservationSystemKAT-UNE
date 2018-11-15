@@ -193,9 +193,14 @@ public class ReservationDao {
 				capacity, supplement, resourceDeleted, facility, usageStopStartDate,usageStopEndDate);
 
 
-			//「利用日」を作る
-			SimpleDateFormat usageDateFormat = new SimpleDateFormat("yyyy年M月d日");
+			//「利用日」を作る(年月日)
+			//SimpleDateFormat usageDateFormat = new SimpleDateFormat("yyyy年M月d日");
+			//String usageDate = usageDateFormat.format(usageStartDate);
+
+			//「利用日」を作る(yyyy/MM/mm)
+			SimpleDateFormat usageDateFormat = new SimpleDateFormat("yyyy/M/d");
 			String usageDate = usageDateFormat.format(usageStartDate);
+
 
 			//「利用開始時間」「利用終了時間」のDTOを作る
 			TimeDto usageStartTime = new TimeDto(usageStartDate);

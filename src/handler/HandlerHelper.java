@@ -20,8 +20,10 @@ import dto.OfficeDto;
 import dto.TimeDto;
 import dto.User;
 import exception.MyException;
+import service.ContainSelectedAttendanceTypeService;
 import service.ContainSelectedCategoryService;
 import service.ContainSelectedOfficeService;
+import service.ContainSelectedUserService;
 import service.GetOfficeAndCategoryListService;
 import service.GetUserAndAttendanceTypeListService;
 
@@ -230,21 +232,54 @@ public class HandlerHelper {
 	 * @param attendanceTypeId
 	 * @return
 	 */
-	public boolean getUserAndAttendanceType(String userIs,String attendanceTypeId){
+	public boolean getUserAndAttendanceType(String userId,String attendanceTypeId){
 		GetUserAndAttendanceTypeListService getUserAndAttendanceTypeListService =
 				new GetUserAndAttendanceTypeListService();
+
+		List<User> userList;
+		List<AttendanceTypeDto> attendanceTypeList;
 
 		if(getUserAndAttendanceTypeListService.validate()){
 			try {
 				getUserAndAttendanceTypeListService.execute();
-				_userList = getUserAndAttendanceTypeListService.getUserList();
+				userList = getUserAndAttendanceTypeListService.getUserList();
+				attendanceTypeList= getUserAndAttendanceTypeListService.getAttendanceTypeList();
+
 			} catch (SQLException e) {
 				e.printStackTrace();
+				_log.error("getUserAndAttendanceType()_SQLException");
 				return false;
 			}
 		}else{
+			_log.error("getUserAndAttendanceType()_validate == false");
 			return false;
 		}
+
+		try{
+			ContainSelectedUserService containSelectedUserService =
+					new ContainSelectedUserService(userId ,userList);
+
+			if(containSelectedUserService.validate() == false){
+				return false;
+			}
+		}catch(MyException e){
+			e.printStackTrace();
+			return false;
+		}
+
+		try{
+			ContainSelectedAttendanceTypeService containSelectedAttendanceTypeService =
+					new ContainSelectedAttendanceTypeService(attendanceTypeId, attendanceTypeList);
+			if(containSelectedAttendanceTypeService.validate() == false){
+				return false;
+			}
+		}catch(MyException e2){
+			e2.printStackTrace();
+			return false;
+		}
+
+		_userList = userList;
+		_attendanceTypeList = attendanceTypeList;
 
 
 		return true;
