@@ -28,6 +28,9 @@ public class PushCopyReservationButtonHandler implements Handler{
 	public String handleService(HttpServletRequest request) {
 
 		HttpSession session =request.getSession(true);
+		//コピー元からの予約情報（reservationDto）をsessionから取得
+		ReservationDto reservationDto = (ReservationDto) session.getAttribute("reservationDTOForReservationDetails");
+
 
 		//各値を初期化し、セッションに保存する
 		HandlerHelper handlerHelper=new HandlerHelper();
@@ -52,9 +55,8 @@ public class PushCopyReservationButtonHandler implements Handler{
 			session.setAttribute("returnPageForResourceSelect", SHOW_RESERVATION_DETAILS_SERVLET);
 			session.setAttribute("reservationIdForReservationDetails", reservationIdForReservationDetails);
 
-		//コピー元からの予約情報（reservationDto）をsessionから取得
-			ReservationDto reservationDto = (ReservationDto) session.getAttribute("reservationForReservatiionDetails");
 			session.setAttribute("usageDateForReservationRegist",reservationDto.getUsageDate());
+			System.out.println(reservationDto.getUsageDate());
 			session.setAttribute("usageStartTimeForResourceSelect",reservationDto.getUsageStartTime());
 			session.setAttribute("usageEndTimeForResourceSelect",reservationDto.getUsageEndTime());
 			session.setAttribute("resourceNameForResourceSelect",reservationDto.getResource().getResourceName());
@@ -62,7 +64,13 @@ public class PushCopyReservationButtonHandler implements Handler{
 			session.setAttribute("reservationNameForReservationRegist",reservationDto.getReservationName());
 			session.setAttribute("numberOfParticipantsForReservationRegist",reservationDto.getNumberOfParticipants());
 			session.setAttribute("coReservedPersonIdForReservationRegist",reservationDto.getCoReservedPerson().getUserId());
-			session.setAttribute("attendanceTypeIdForReservationRegist",reservationDto.getAttendanceTypeDto().getAttendanceTypeId());
+
+			//参加者種別がnullかnullでないかでセットする値をかえる
+			if(reservationDto.getAttendanceTypeDto() != null){
+				session.setAttribute("attendanceTypeIdForReservationRegist",reservationDto.getAttendanceTypeDto().getAttendanceTypeId());
+			}else{
+				session.setAttribute("attendanceTypeIdForReservationRegist",null);
+			}
 			session.setAttribute("reserveSupplementForReservationRegist",reservationDto.getSupplement());
 
 		//終了時間ー開始時間で実利用時間を計算する

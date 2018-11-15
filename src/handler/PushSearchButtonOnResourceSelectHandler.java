@@ -86,8 +86,8 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         TimeDto usageStartTimeForResourceSelect = new TimeDto(startHourInt, startMinutesInt);
         TimeDto usageEndTimeForResourceSelect = new TimeDto(endHourInt, endMinutesInt);
         TimeDto usageTimeForResourceSelect = new TimeDto(actualUseTimeHourInt, actualUseTimeMinutesInt);
-        session.setAttribute("usageStartHourForResourceSelect", usageStartTimeForResourceSelect);
-        session.setAttribute("usageEndHourForResourceSelect", usageEndTimeForResourceSelect);
+        session.setAttribute("usageStartTimeForResourceSelect", usageStartTimeForResourceSelect);
+        session.setAttribute("usageEndTimeForResourceSelect", usageEndTimeForResourceSelect);
         session.setAttribute("usageTimeForResourceSelect", usageTimeForResourceSelect);
 
 

@@ -34,7 +34,7 @@
 Javascriptを有効にしてください
 </div>
 </div>
-<script type="text/javascript" src="JavascriptErrorLabel.js">	</script>
+<script type="text/javascript" src="/ReservationSystemKAT-UNE/JavascriptErrorLabel.js">	</script>
 <!-- javascript警告ラベル終わり -->
 
 <div class="contents">
@@ -46,16 +46,15 @@ Javascriptを有効にしてください
 
 <tr>
 <td class="one" class="dialog"><b>　　　　　　リソース名</b></td>
-<td class="right2"><a href="..." >晴海412S</a></td>
+<td class="right2">
+<a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?reservationIdForReservationDetails=${resourceIdForReservationRegist}">
+<c:out value="${resourceNameForReservationRegist}"></c:out></a></td>
 </tr>
 
 <tr>
 <td class="dialog"><b>　　　　　　利用日</b></td>
-<<<<<<< HEAD
 <td class="right2">2020年1月1日</td>
-=======
-<td class="right2">2020年1月11日</td>
->>>>>>> refs/remotes/origin/develop
+
 </tr>
 
 <tr>

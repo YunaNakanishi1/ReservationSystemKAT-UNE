@@ -193,9 +193,14 @@ public class ReservationDao {
 				capacity, supplement, resourceDeleted, facility, usageStopStartDate,usageStopEndDate);
 
 
-			//「利用日」を作る
-			SimpleDateFormat usageDateFormat = new SimpleDateFormat("yyyy年M月d日");
+			//「利用日」を作る(年月日)
+			//SimpleDateFormat usageDateFormat = new SimpleDateFormat("yyyy年M月d日");
+			//String usageDate = usageDateFormat.format(usageStartDate);
+
+			//「利用日」を作る(yyyy/MM/mm)
+			SimpleDateFormat usageDateFormat = new SimpleDateFormat("yyyy/M/d");
 			String usageDate = usageDateFormat.format(usageStartDate);
+
 
 			//「利用開始時間」「利用終了時間」のDTOを作る
 			TimeDto usageStartTime = new TimeDto(usageStartDate);
@@ -617,7 +622,7 @@ public class ReservationDao {
 
 
 				//「利用日」を作る
-				SimpleDateFormat usageDateFormat = new SimpleDateFormat("yyyy年M月d日");
+				SimpleDateFormat usageDateFormat = new SimpleDateFormat("yyyy/M/d");
 				String usageDate = usageDateFormat.format(usageStartDate);
 
 				//「利用開始時間」「利用終了時間」のDTOを作る
@@ -698,7 +703,11 @@ public class ReservationDao {
 			preparedStatement.setString(5, reservation.getReservedPerson().getUserId());
 			preparedStatement.setString(6, reservation.getCoReservedPerson().getUserId());
 			preparedStatement.setInt(7, reservation.getNumberOfParticipants());
+			if(reservation.getAttendanceTypeDto()!=null){
 			preparedStatement.setInt(8, reservation.getAttendanceTypeDto().getAttendanceTypeId());
+			}else{
+				preparedStatement.setNull(8, java.sql.Types.INTEGER);
+			}
 			preparedStatement.setString(9, reservation.getSupplement());
 			preparedStatement.setInt(10, reservation.getDeleted());
 
