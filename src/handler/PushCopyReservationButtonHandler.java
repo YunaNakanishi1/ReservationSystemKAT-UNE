@@ -5,7 +5,14 @@ import static handler.ViewHolder.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import dto.ReservationDto;
+
 public class PushCopyReservationButtonHandler implements Handler{
+
+    private Logger _log = LogManager.getLogger();
 
 	@Override
 	public String handleService(HttpServletRequest request) {
@@ -35,22 +42,26 @@ public class PushCopyReservationButtonHandler implements Handler{
 			session.setAttribute("returnPageForResourceSelect", SHOW_RESERVATION_DETAILS_SERVLET);
 			session.setAttribute("reservationIdForReservationDetails", reservationIdForReservationDetails);
 
-		//コピー元からの予約情報（reservationdto）をsessionから取得
-			String usageDateForReservationRegist=request.getParameter("usageDateForReservationRegist");
-			String usageStartTimeForResourceSelect=request.getParameter("usageStartTimeForResourceSelect");
-			String usageEndTimeForResourceSelect=request.getParameter("usageEndTimeForResourceSelect");
-			String resourceNameForResourceSelect=request.getParameter("resourceNameForResourceSelect");
-			String categoryIdForResourceSelect=request.getParameter("categoryIdForResourceSelect");
-			String officeIdForResourceSelect=request.getParameter("officeIdForResourceSelect");
-			String facilityIdListForResourceSelect=request.getParameter("facilityIdListForResourceSelect");
-			String capacityForResourceSelect=request.getParameter("capacityForResourceSelect");
-			String reservationNameForReservationRegist=request.getParameter("reservationNameForReservationRegist");
-			String numberOfParticipantsForReservationRegist=request.getParameter("numberOfParticipantsForReservationRegist");
-			String coReservedPersonIdForReservationRegist=request.getParameter("coReservedPersonIdForReservationRegist");
-			String attendanceTypeIdForReservationRegist=request.getParameter("attendanceTypeIdForReservationRegist");
-			String reserveSupplementForReservationRegist=request.getParameter("reserveSupplementForReservationRegist");
+		//コピー元からの予約情報（reservationDto）をsessionから取得
+			ReservationDto reservationDto = (ReservationDto) session.getAttribute("reservationForReservatiionDetails");
+			session.setAttribute("usageDateForReservationRegist",reservationDto.getUsageDate());
+			session.setAttribute("usageStartTimeForResourceSelect",reservationDto.getUsageStartTime());
+			session.setAttribute("usageEndTimeForResourceSelect",reservationDto.getUsageEndTime());
+			session.setAttribute("resourceNameForResourceSelect",reservationDto.getResource().getResourceName());
+			session.setAttribute("categoryIdForResourceSelect",reservationDto.getResource().getCategory()./*カテゴリIDの取り出し方わかんない*/);
+			session.setAttribute("officeIdForResourceSelect",reservationDto.getResource()./*事業所IDの取り出し方わかんない*/);
+			session.setAttribute("facilityIdListForResourceSelect",reservationDto.getResource()./*ファシリティIDの取り出し方わかんない*/);
+			session.setAttribute("capacityForResourceSelect",reservationDto.getResource().getCapacity());
+			session.setAttribute("reservationNameForReservationRegist",reservationDto.getReservationName());
+			session.setAttribute("numberOfParticipantsForReservationRegist",reservationDto.getNumberOfParticipants());
+			session.setAttribute("coReservedPersonIdForReservationRegist",reservationDto.getCoReservedPerson().getUserId());
+			session.setAttribute("attendanceTypeIdForReservationRegist",reservationDto.getAttendanceTypeDto().getAttendanceTypeId());
+			session.setAttribute("reserveSupplementForReservationRegist",reservationDto.getSupplement());
 
-		//
+		//終了時間ー開始時間で実利用時間を計算する
+
+
+
 		return null;
 	}
 
