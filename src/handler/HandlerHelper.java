@@ -232,7 +232,7 @@ public class HandlerHelper {
 	 * @param attendanceTypeId
 	 * @return
 	 */
-	public boolean getUserAndAttendanceType(String userId,String attendanceTypeId){
+	public boolean getUserAndAttendanceType(String userId,int attendanceTypeId){
 		GetUserAndAttendanceTypeListService getUserAndAttendanceTypeListService =
 				new GetUserAndAttendanceTypeListService();
 
