@@ -18,6 +18,7 @@ import dto.TimeDto;
 import exception.MyException;
 import service.GetReservationFromIdService;
 import service.GetReservationListBetweenDateService;
+import service.GetSliderWidthService;
 import service.IsNotOverlapUsageTimeService;
 
 public class PushChangeButtonOnReservationDetailsHandler implements Handler {
@@ -43,6 +44,23 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		}catch (MyException e) {
 			return ERROR_PAGE;
 		}
+
+		session.setAttribute("reservationDTOForReservationChange", reservation);
+		session.setAttribute("usageStartTimeForReservationChange", reservation.getUsageStartTime());
+		session.setAttribute("usageEndTimeForReservationChange", reservation.getUsageEndTime());
+		session.setAttribute("reservationNameForReservationChange", reservation.getReservationName());
+		session.setAttribute("numberOfParticipantsForReservationChange", reservation.getNumberOfParticipants());
+		session.setAttribute("coReservedPersonIdForReservationChange", reservation.getCoReservedPerson().getUserId());
+		session.setAttribute("attendanceTypeIdForReservationChange", reservation.getAttendanceTypeDto().getAttendanceTypeId());
+		session.setAttribute("reserveSupplementForReservationChange", reservation.getSupplement());
+		try{
+			getSliderWidth(reservation);
+		}catch (MyException e) {
+			return ERROR_PAGE;
+		}
+
+		session.setAttribute("usableStartTimeForReservationChange", _startTimeSliderValue);
+		session.setAttribute("usableEndTimeForReservationChange", _endTimeSliderValue);
 
 
 
@@ -123,6 +141,7 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		if(getReservationListBetweenDateService.validate()){
 			getReservationListBetweenDateService.execute();
 			reservationList=getReservationListBetweenDateService.getReservationList();
+
 		}
 		}catch (MyException e) {
 			_log.error("GetReservationListBetweenDateService input error");
@@ -131,6 +150,18 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 			_log.error("database error");
 			e.printStackTrace();
 			throw new MyException();
+		}
+		try{
+		GetSliderWidthService getSliderWidthService = new GetSliderWidthService(reservationList, reservation);
+		if(getSliderWidthService.validate()){
+			getSliderWidthService.execute();
+			_startTimeSliderValue=getSliderWidthService.getStartTimeSliderValue();
+			_endTimeSliderValue=getSliderWidthService.getEndTimeSliderValue();
+		}
+
+		}catch (MyException e) {
+			_log.error("GetSliderWidthService input error");
+			throw e;
 		}
 	}
 
