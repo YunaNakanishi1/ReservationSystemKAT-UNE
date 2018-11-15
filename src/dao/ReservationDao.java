@@ -622,7 +622,7 @@ public class ReservationDao {
 
 
 				//「利用日」を作る
-				SimpleDateFormat usageDateFormat = new SimpleDateFormat("yyyy年M月d日");
+				SimpleDateFormat usageDateFormat = new SimpleDateFormat("yyyy/M/d");
 				String usageDate = usageDateFormat.format(usageStartDate);
 
 				//「利用開始時間」「利用終了時間」のDTOを作る
@@ -703,7 +703,11 @@ public class ReservationDao {
 			preparedStatement.setString(5, reservation.getReservedPerson().getUserId());
 			preparedStatement.setString(6, reservation.getCoReservedPerson().getUserId());
 			preparedStatement.setInt(7, reservation.getNumberOfParticipants());
+			if(reservation.getAttendanceTypeDto()!=null){
 			preparedStatement.setInt(8, reservation.getAttendanceTypeDto().getAttendanceTypeId());
+			}else{
+				preparedStatement.setNull(8, java.sql.Types.INTEGER);
+			}
 			preparedStatement.setString(9, reservation.getSupplement());
 			preparedStatement.setInt(10, reservation.getDeleted());
 
@@ -738,6 +742,61 @@ public class ReservationDao {
 
 		return reserveId;
 	}
+
+	/**
+	 * 予約の変更処理
+	 * @param reservation 予約情報
+	 * @return
+	 */
+	public int updateReservation(ReservationDto reservation) throws SQLException {
+		int result = -1;
+        PreparedStatement stmt = null;
+
+		DBHelper dbHelper = new DBHelper();
+		_con = dbHelper.connectDb(); //dbに接続
+
+		if (_con == null) {
+			_log.error("DatabaseConnectError");
+			throw new SQLException();	//エラー処理はハンドラーに任せる
+        }
+
+		try{
+			_con.setAutoCommit(false);
+			String usageDate = reservation.getUsageDate();
+			String sql = "UPDATE public.reservations SET usage_start_date=?, usage_end_date=?, reservation_name=?, co_reserved_person_id=?, number_of_participants=?, attendance_type_id=?, reserve_supplement=? WHERE reserve_id=?;";
+
+			stmt=_con.prepareStatement(sql);
+			stmt.setTimestamp(1, reservation.getUsageStartTime().getTimeStamp(usageDate));
+			stmt.setTimestamp(2, reservation.getUsageEndTime().getTimeStamp(usageDate));
+			stmt.setString(3, reservation.getReservationName());
+			stmt.setString(4, reservation.getCoReservedPerson().getUserId());
+			stmt.setInt(5, reservation.getNumberOfParticipants());
+			stmt.setInt(6, reservation.getAttendanceTypeDto().getAttendanceTypeId());
+			stmt.setString(7, reservation.getSupplement());
+			stmt.setInt(8, reservation.getReservationId());
+            result = stmt.executeUpdate();
+
+            _con.commit();
+
+		} catch (SQLException e) {
+			_con.rollback();
+			throw e;
+
+		} finally {
+			try {
+	            dbHelper.closeResource(stmt);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            _log.error("Exception");
+	        }
+	        dbHelper.closeDb();
+		}
+
+		return result;
+	}
+
+
+
 }
 
 

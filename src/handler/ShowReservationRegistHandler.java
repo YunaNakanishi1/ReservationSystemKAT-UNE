@@ -65,7 +65,7 @@ public class ShowReservationRegistHandler {
 
 		setSlider();
 
-		return null;
+		return RESERVATION_REGIST;
 
 	}
 
@@ -106,14 +106,12 @@ public class ShowReservationRegistHandler {
 
 	public boolean setSlider(){
 		//利用可能開始時間
-		String usableStartTimeStr = (String) _request.getAttribute("usableStartTimeForReservationRegist");
+		String usableStartTimeStr = (String) _request.getParameter("usageStartTimeForResourceSelect");
 		//利用可能終了時間
-		String usableEndTimeStr = (String) _request.getAttribute("usableEndTimeForReservationRegist");
+		String usableEndTimeStr = (String) _request.getParameter("usageEndTimeForResourceSelect");
 
 		CommonValidator commonValidator = new CommonValidator();
 		int usableStartTime;
-
-
 
 		//引数valの内容が半角整数値かどうかチェック. 数値であればフィールドintValにその数値を保存
 		if(commonValidator.notNumericOn(usableStartTimeStr) == false){
@@ -143,6 +141,7 @@ public class ShowReservationRegistHandler {
 		//実利用時間のDTO
 		TimeDto usageTimeDto = (TimeDto) _session.getAttribute("usageTimeForReservationSelect");
 
+		//利用可能開始時間をセッションに保存
 		_session.setAttribute("usableStartTimeForReservationRegist", timeDtoForUsableStartTime);
 		_session.setAttribute("usageStartTimeForReservationRegist", timeDtoForUsableStartTime);
 
@@ -150,10 +149,10 @@ public class ShowReservationRegistHandler {
 		int usableStartTimeForGetTimeMinutesValue = timeDtoForUsableStartTime.getTimeMinutesValue();
 
 		TimeDto timeDtoForUsageEndTime = new TimeDto(usageTimeForGetTimeMinutesValue + usableStartTimeForGetTimeMinutesValue);
+
+		//利用可能終了時間をセッションに保存
 		_session.setAttribute("usageEndTimeForReservationRegist", timeDtoForUsageEndTime);
 		_session.setAttribute("usableEndTimeForReservationRegist", timeDtoForUsageEndTime);
-
-
 
 		return true;
 

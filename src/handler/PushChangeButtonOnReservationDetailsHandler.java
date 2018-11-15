@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dto.AttendanceTypeDto;
 import dto.ReservationDto;
 import dto.Resource;
 import dto.TimeDto;
@@ -51,7 +52,12 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		session.setAttribute("reservationNameForReservationChange", reservation.getReservationName());
 		session.setAttribute("numberOfParticipantsForReservationChange", reservation.getNumberOfParticipants());
 		session.setAttribute("coReservedPersonIdForReservationChange", reservation.getCoReservedPerson().getUserId());
+		AttendanceTypeDto attendanceType=reservation.getAttendanceTypeDto();
+		if(attendanceType!=null){
 		session.setAttribute("attendanceTypeIdForReservationChange", reservation.getAttendanceTypeDto().getAttendanceTypeId());
+		}else{
+			session.setAttribute("attendanceTypeIdForReservationChange", null);
+		}
 		session.setAttribute("reserveSupplementForReservationChange", reservation.getSupplement());
 		try{
 			getSliderWidth(reservation);
