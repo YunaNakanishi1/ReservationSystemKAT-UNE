@@ -25,13 +25,12 @@ public class ContainSelectedUserService implements Service{
 
 
 	public ContainSelectedUserService(String userId,List<User> userList){
+		_userId = userId;
+		_userList = userList;
 		if(_userList == null){
 			_log.error("_userList == null");
             throw new MyException();   //エラー処理はハンドラーに任せる
 		}
-
-		_userId = userId;
-		_userList = userList;
 	}
 
 

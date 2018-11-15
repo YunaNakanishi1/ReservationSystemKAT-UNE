@@ -1,6 +1,7 @@
 package handler;
 
 import static handler.MessageHolder.*;
+import static handler.ViewHolder.*;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -22,6 +23,7 @@ import service.CheckReservationInputService;
 import service.GetReservationListBetweenDateService;
 import service.GetResouceFromIdService;
 import service.IsNotOverlapUsageTimeService;
+import service.RegistReservationService;
 
 public class RegistReservationHandler implements Handler {
 	private static Logger _log = LogManager.getLogger();
@@ -31,8 +33,29 @@ public class RegistReservationHandler implements Handler {
 
 	@Override
 	public String handleService(HttpServletRequest request) {
+		_session = request.getSession(false);
+		_request=request;
+		try {
+			if(!validate()){
+				return SHOW_RESERVATION_REGIST_SERVLET;
+			}
+		} catch (MyException e) {
+			return ERROR_PAGE;
+		}
 
-		return null;
+		try {
+			if(!reservable()){
+				_session.setAttribute("messageForResourceSelectUpper", EM24);
+				return SEARCH_RESOURCE_LIST_SERVLET;
+			}
+		} catch (Exception e) {
+			return ERROR_PAGE;
+		}
+		if(!regist()){
+			return ERROR_PAGE;
+		}
+
+		return SHOW_RESERVATION_DETAILS_SERVLET;
 	}
 
 	private boolean validate() {
@@ -171,6 +194,31 @@ public class RegistReservationHandler implements Handler {
 			throw e;
 		}
 		if (resource.getDeleted() == 1) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean regist(){
+		try{
+		RegistReservationService registReservationService = new RegistReservationService(_reservation);
+		if(registReservationService.validate()){
+			registReservationService.execute();
+			int reserveId = registReservationService.getReserveId();
+			if(reserveId==-1){
+				_log.error("illegal reserveId");
+				return false;
+			}else{
+				_session.setAttribute("reservationIdForReservationDetails", reserveId);
+			}
+		}
+		}catch (MyException e) {
+			_log.error("RegistReservationService input error");
+			return false;
+		} catch (SQLException e) {
+			_log.error("database error");
+			e.printStackTrace();
 			return false;
 		}
 

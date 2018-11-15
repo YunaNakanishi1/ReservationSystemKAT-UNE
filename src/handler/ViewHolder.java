@@ -32,5 +32,6 @@ public class ViewHolder {
     public static final String PUSH_CHANGE_BUTTON_ON_RESERVATION_DETAILS_SERVLET = "pushChangeButtonOnReservationDetails";
     public static final String RESERVE_CHANGE="WEB-INF/reserve/ReservationChange.jsp";
     public static final String RESERVATION_REGIST="/WEB-INF/reserve/ReservationRegist.jsp";
+    public static final String SHOW_RESERVATION_REGIST_SERVLET="showreserveregist";
 
 }
