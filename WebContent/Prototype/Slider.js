@@ -12,6 +12,9 @@ $(function() {
                       step: 15,
                       slide: function( event, ui ) {
                       $( "#slider-timelabel" ).val( getSliderTimeStr( ui.value) );
+                      $( "#usageStartTime" ).val( start + ui.value );
+                      $( "#usageEndTime" ).val( start + ui.value + duration );
+
                       }
   });
   $( "#slider-timelabel" ).val( getSliderTimeStr( $( "#slider" ).slider( "value" )) );

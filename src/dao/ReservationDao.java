@@ -376,12 +376,13 @@ public class ReservationDao {
         ResultSet rs = null;
 
         //SQLの前半部分　NOTMUCHRESOURCEIDはリソースIDの文字をつなげやすくするためのダミー要素
-        String sql = "select * from reserve_id reserveid,reservations.resource_id resourceid,resource_name resourcename,office_name officename,category_name categoryname,usage_start_date starttime,usage_end_date endtime,reservation_name reservename,family_name familyname,first_name firstname,reservations.deleted reservedeleted,resources.capacity capacity,resources.supplement supplement,usage_stop_start_date ,usage_stop_end_date "
+        String sql = "select reserve_id reserveid,reservations.resource_id resourceid,resource_name resourcename,office_name officename,category_name categoryname,usage_start_date starttime,usage_end_date endtime,reservation_name reservename,family_name familyname,first_name firstname,reservations.deleted reservedeleted,resources.capacity capacity,resources.supplement supplement,usage_stop_start_date ,usage_stop_end_date "
+                    +"from reservations,resources,offices,categories,users "
                     +"where reservations.resource_id=resources.resource_id AND resources.office_id=offices.office_id AND resources.category_id=categories.category_id AND reserved_person_id=user_id "
-                    +"and deleted=0 "
+                    +"and reservations.deleted=0 "
                     +"and usage_start_date >= ? "
                     +"and usage_end_date <= ? "
-                    +"and resource_id in ('NOTMUCHRESOURCEID' ";
+                    +"and reservations.resource_id in ('NOTMUCHRESOURCEID' ";
 
         //リソースIDの要素
         for(int i=0;i<resourceIdList.size();i++){
@@ -403,7 +404,7 @@ public class ReservationDao {
             rs = preparedStatement.executeQuery();  //実行
             while(rs.next()){
 
-                Resource resource = new Resource(rs.getString("resource_id"), rs.getString("resourcename"), rs.getString("officename"), rs.getString("categoryname"), rs.getInt("capacity"), rs.getString("supplement"), 0, null, rs.getTimestamp("usage_stop_start_date"), rs.getTimestamp("usage_stop_end_date"));
+                Resource resource = new Resource(rs.getString("resourceid"), rs.getString("resourcename"), rs.getString("officename"), rs.getString("categoryname"), rs.getInt("capacity"), rs.getString("supplement"), 0, null, rs.getTimestamp("usage_stop_start_date"), rs.getTimestamp("usage_stop_end_date"));
                 String resultUsageDate=new SimpleDateFormat("yyyy/MM/dd").format(rs.getTimestamp("starttime"));
                 TimeDto resultUsageStartTime=new TimeDto(rs.getTimestamp("starttime"));
                 TimeDto resultUsageEndTime=new TimeDto(rs.getTimestamp("endtime"));
@@ -666,6 +667,71 @@ public class ReservationDao {
 		}
 
 		return reservationList;
+	}
+
+	public int insertReservation(ReservationDto reservation) throws SQLException{
+		int reserveId = -1;
+
+		DBHelper dbHelper = new DBHelper();
+		_con = dbHelper.connectDb(); //dbに接続
+
+		if (_con == null) {
+			_log.error("DatabaseConnectError");
+			throw new SQLException();	//エラー処理はハンドラーに任せる
+            }
+
+		PreparedStatement preparedStatement = null;
+		ResultSet rs = null;
+		try{
+			_con.setAutoCommit(false);
+			StringBuilder sqlBuilder=new StringBuilder("INSERT INTO reservations (resource_id,usage_start_date,usage_end_date,reservation_name,reserved_person_id,co_reserved_person_id,number_of_participants,attendance_type_id,reserve_supplement,deleted)");
+			sqlBuilder.append("VALUES (?,?,?,?,?,?,?,?,?,?)");
+			sqlBuilder.append("RETURNING reserve_id");
+
+			preparedStatement=_con.prepareStatement(sqlBuilder.toString());
+
+			preparedStatement.setString(1, reservation.getResource().getResourceId());
+			String usageDate=reservation.getUsageDate();
+			preparedStatement.setTimestamp(2, reservation.getUsageStartTime().getTimeStamp(usageDate));
+			preparedStatement.setTimestamp(3, reservation.getUsageEndTime().getTimeStamp(usageDate));
+			preparedStatement.setString(4, reservation.getReservationName());
+			preparedStatement.setString(5, reservation.getReservedPerson().getUserId());
+			preparedStatement.setString(6, reservation.getCoReservedPerson().getUserId());
+			preparedStatement.setInt(7, reservation.getNumberOfParticipants());
+			preparedStatement.setInt(8, reservation.getAttendanceTypeDto().getAttendanceTypeId());
+			preparedStatement.setString(9, reservation.getSupplement());
+			preparedStatement.setInt(10, reservation.getDeleted());
+
+			rs=preparedStatement.executeQuery();
+
+			if(rs.next()){
+				reserveId=rs.getInt(1);
+				_con.commit();
+			}else{
+				_con.rollback();
+			}
+
+		}catch(SQLException e){
+			_con.rollback();
+			throw e;
+		}finally{
+			try {
+                dbHelper.closeResource(rs);
+            } catch (Exception e) {
+                e.printStackTrace();
+                _log.error("Exception");
+            }
+
+            try {
+                dbHelper.closeResource(preparedStatement);
+            } catch (Exception e) {
+                e.printStackTrace();
+                _log.error("Exception");
+            }
+            dbHelper.closeDb();
+		}
+
+		return reserveId;
 	}
 }
 

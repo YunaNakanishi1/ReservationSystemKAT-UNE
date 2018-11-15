@@ -357,18 +357,18 @@ checked
 					</thead>
 					<tbody>
 					<c:forEach var="obj" items="${availableListForResourceSelect}" varStatus="status">
-					</c:forEach>
 						<tr>
 							<td>
 								<form action="/ReservationSystemKAT-UNE/reservesystem/showreserveregist" method="post">
-									<input type="hidden" name="resourceId" value="${obj.resource.resourceId}">
+									<input type="hidden" name="resourceId" value=""${obj.resource.resourceId}">
 									<input class="nuime" type = "submit" value = "予約">
 								</form>
 							</td>
 							<td>
 								<c:out value="${obj.startResource.hour}" />:<c:out value="${obj.startResource.minutes}" />～<c:out value="${obj.endResource.hour}" />:<c:out value="${obj.endResource.minutes}" />
 							</td>
-							<td><a href="showresourcedetailstab?resourceId=${obj.resource.resourceId}" target="_blank"><c:out value="${obj.resource.resourceName}" /></a></td>
+							<td><a href="showresourcedetailstab?resourceId=${obj.resourceId}" target="_blank">
+							<c:out value="${obj.resourceName}" /></a></td>
 
 							<c:choose>
 								<c:when test="${obj.capacity!=0}">
@@ -392,6 +392,7 @@ checked
 							</c:choose>
 
 						</tr>
+					</c:forEach>
 
 					</tbody>
 				</table>

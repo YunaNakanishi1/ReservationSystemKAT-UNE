@@ -23,6 +23,7 @@ import exception.MyException;
 import service.ContainSelectedCategoryService;
 import service.ContainSelectedOfficeService;
 import service.GetOfficeAndCategoryListService;
+import service.GetUserAndAttendanceTypeListService;
 
 /**
  *
@@ -230,6 +231,22 @@ public class HandlerHelper {
 	 * @return
 	 */
 	public boolean getUserAndAttendanceType(String userIs,String attendanceTypeId){
+		GetUserAndAttendanceTypeListService getUserAndAttendanceTypeListService =
+				new GetUserAndAttendanceTypeListService();
+
+		if(getUserAndAttendanceTypeListService.validate()){
+			try {
+				getUserAndAttendanceTypeListService.execute();
+				_userList = getUserAndAttendanceTypeListService.getUserList();
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return false;
+			}
+		}else{
+			return false;
+		}
+
+
 		return false;
 
 	}
