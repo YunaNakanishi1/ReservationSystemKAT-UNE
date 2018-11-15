@@ -1,16 +1,20 @@
 package handler;
 
+import static handler.ViewHolder.*;
+
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import dto.ReservationDto;
 import dto.Resource;
+import dto.TimeDto;
 import exception.MyException;
 import service.GetReservationFromIdService;
 import service.GetReservationListBetweenDateService;
@@ -19,11 +23,31 @@ import service.IsNotOverlapUsageTimeService;
 public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 	private Logger _log = LogManager.getLogger();
+	private TimeDto _startTimeSliderValue;
+	private TimeDto _endTimeSliderValue;
 
 	@Override
 	public String handleService(HttpServletRequest request) {
+		HttpSession session = request.getSession(false);
+		ReservationDto reservation=null;
+		String reserveIdStr=request.getParameter("reserveId");
+		int reserveId=0;
+		try{
+		reserveId=Integer.parseInt(reserveIdStr);
+		}catch (NumberFormatException e) {
+			_log.error("reserveId is not number");
+		}
 
-		return null;
+		try{
+			reservation=getAndCheckReservation(reserveId);
+		}catch (MyException e) {
+			return ERROR_PAGE;
+		}
+
+
+
+
+		return SHOW_RESERVATION_CHANGE_SERVLET;
 	}
 
 	private ReservationDto getAndCheckReservation(int reserveId){
@@ -87,5 +111,29 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 		return reservation;
 	}
+
+	private void getSliderWidth(ReservationDto reservation){
+		TimeDto minTimeDto=new TimeDto(0,0);
+		TimeDto maxTimeDto=new TimeDto(24,0);
+		String usageDate=reservation.getUsageDate();
+		Resource resource=reservation.getResource();
+		List<ReservationDto> reservationList = null;
+		try{
+		GetReservationListBetweenDateService getReservationListBetweenDateService = new GetReservationListBetweenDateService(resource.getResourceId(), minTimeDto.getTimeStamp(usageDate), maxTimeDto.getTimeStamp(usageDate));
+		if(getReservationListBetweenDateService.validate()){
+			getReservationListBetweenDateService.execute();
+			reservationList=getReservationListBetweenDateService.getReservationList();
+		}
+		}catch (MyException e) {
+			_log.error("GetReservationListBetweenDateService input error");
+			throw e;
+		} catch (SQLException e) {
+			_log.error("database error");
+			e.printStackTrace();
+			throw new MyException();
+		}
+	}
+
+
 
 }
