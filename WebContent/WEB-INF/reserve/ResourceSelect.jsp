@@ -360,7 +360,7 @@ checked
 						<tr>
 							<td>
 								<form action="/ReservationSystemKAT-UNE/reservesystem/showreserveregist" method="post">
-									<input type="hidden" name="resourceId" value=""${obj.resource.resourceId}">
+									<input type="hidden" name="resourceId" value="${obj.resourceId}">
 									<input class="nuime" type = "submit" value = "予約">
 								</form>
 							</td>
