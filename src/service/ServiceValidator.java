@@ -178,21 +178,19 @@ public class ServiceValidator {
     		return true;
     	}
 
+    	//capacityに入力がない場合、0を入れる
+    	if(capacity.length() == 0){
+    	    capacity = "0";
+    	}
+
         //capacityが半角の整数でなかったらエラー
-
-
-    	//if (!capacity.matches("^[0-9]+")) {
-//    	if (!capacity.matches("^-?[0-9]+$")) {
-//    		_validationMessage = EM31;
-//    		return true;
-//    	}
-
     	int capacityInt = 0;
     	try {
     		capacityInt = Integer.parseInt(capacity);
     	} catch(NumberFormatException e) {
-    		throw new MyException();
-    	}
+    	    _validationMessage = EM31;
+    	    return true;
+          }
 
     	//定員が0-999人でない場合エラー
     	if ((capacityInt < 0) || (capacityInt > 999)) {
