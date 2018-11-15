@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -149,11 +150,66 @@ public class UserDao {
 
 	/**
 	 * @return
+	 * @throws SQLException
 	 */
-	public List<User> queryAll(){
+	public List<User> queryAll() throws SQLException{
 		List<User> userList = new ArrayList<User>();
 		DBHelper dbHelper = new DBHelper();
-		return null;
+
+		// ヘルパーに接続を依頼
+        _con = dbHelper.connectDb();
+
+        if(_con == null){//追記
+            _log.error("DataBaseAcessError");
+            throw new SQLException();
+        }
+
+        Statement stmt = null;
+        ResultSet rs = null;
+
+        try{
+            String sql = "select user_id, password, family_name, first_name, "
+            		+ "authority, tel, mail_address from users;";
+
+        	stmt = _con.createStatement();
+        	rs = stmt.executeQuery(sql);
+
+        	if(rs.next()){
+        		String userId = rs.getString("user_id");
+        		String password = rs.getString("password");
+        		int authority = rs.getInt("authority");
+        		String familyName = rs.getString("family_name");
+        		String firstName = rs.getString("first_name");
+        		String phoneNumber = rs.getString("tel");
+        		String mailAddress = rs.getString("mail_address");
+
+        		userList.add(new User(userId, password, authority, familyName,
+        				firstName, phoneNumber, mailAddress));
+        	}
+        }finally{
+        	// Statementのクローズ
+            try {
+                dbHelper.closeResource(stmt);
+            } catch (Exception e) {
+                // SQLException以外の例外が発生
+                e.printStackTrace();
+                // LOGへ記録
+                _log.error("queryAll() Exception on close");
+            }
+            // ResultSetのクローズ
+            try {
+                dbHelper.closeResource(rs);
+            } catch (Exception e) {
+                // SQLException以外の例外が発生
+                e.printStackTrace();
+                // LOGへ記録
+                _log.error("queryAll() Exception2 on close");
+            }
+            dbHelper.closeDb();
+        }
+
+
+		return userList;
 
 	}
 
