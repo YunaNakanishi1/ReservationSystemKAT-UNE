@@ -4,7 +4,10 @@
  */
 package handler;
 
+import static handler.ViewHolder.*;
+
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,12 +15,15 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dto.AttendanceTypeDto;
 import dto.Resource;
+import dto.TimeDto;
+import dto.User;
 import service.GetResouceFromIdService;
 
 
 /**
- * (26).
+ * (8).
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 public class ShowReservationRegistHandler {
@@ -34,15 +40,40 @@ public class ShowReservationRegistHandler {
 
 		_request = request;
 
-		setResource();
+		if(setResource() == false){
+			_log.error("handleService_setResource()==false");
+			return ERROR_PAGE;
+		}
 
+		String coReservedPersonId
+		= (String) _session.getAttribute("coReservedPersonIdForReservationRegist");//共同予約者ID
+		String attendanceTypeId
+		= (String) _session.getAttribute("attendanceTypeIdForReservationRegist");//参加者種別ID
 
+		HandlerHelper handlerHelper = new HandlerHelper();
+		if(handlerHelper.getUserAndAttendanceType(coReservedPersonId, attendanceTypeId)){
+			List<User> userList = handlerHelper.getUserList();
+			List<AttendanceTypeDto> attendanceTypeList = handlerHelper.getAttendanceTypeList();
+
+			request.setAttribute("userListForReservationRegist", userList);
+			request.setAttribute("attendanceTypeListForReservationRegist", attendanceTypeList);
+
+		}else{
+			_log.error("getUserAndAttendanceType()==false");
+			return ERROR_PAGE;
+		}
+
+		setSlider();
 
 		return null;
 
 	}
 
 
+	/**
+	 * リソースIDとリソース名をセッションに保存する.
+	 * @return
+	 */
 	public boolean setResource(){
 
 		String resourceId = _request.getParameter("resourceId");
@@ -74,7 +105,57 @@ public class ShowReservationRegistHandler {
 
 
 	public boolean setSlider(){
-		return false;
+		//利用可能開始時間
+		String usableStartTimeStr = (String) _request.getAttribute("usableStartTimeForReservationRegist");
+		//利用可能終了時間
+		String usableEndTimeStr = (String) _request.getAttribute("usableEndTimeForReservationRegist");
+
+		CommonValidator commonValidator = new CommonValidator();
+		int usableStartTime;
+
+
+
+		//引数valの内容が半角整数値かどうかチェック. 数値であればフィールドintValにその数値を保存
+		if(commonValidator.notNumericOn(usableStartTimeStr) == false){
+			usableStartTime = commonValidator.getNumber();
+		}else{
+			_log.error("setSlider()_notNumericOn == false");
+			return false;
+		}
+
+		//分を渡して時分をセット
+		TimeDto timeDtoForUsableStartTime = new TimeDto(usableStartTime);
+
+
+
+		//引数valの内容が半角整数値かどうかチェック. 数値であればフィールドintValにその数値を保存
+		int usableEndTime;
+		if(commonValidator.notNumericOn(usableEndTimeStr) == false){
+			usableEndTime = commonValidator.getNumber();
+		}else{
+			_log.error("setSlider()_notNumericOn2 == false");
+			return false;
+		}
+
+		//分を渡して時分をセット
+		TimeDto timeDtoForUsableEndTime = new TimeDto(usableEndTime);
+
+		//実利用時間のDTO
+		TimeDto usageTimeDto = (TimeDto) _session.getAttribute("usageTimeForReservationSelect");
+
+		_session.setAttribute("usableStartTimeForReservationRegist", timeDtoForUsableStartTime);
+		_session.setAttribute("usageStartTimeForReservationRegist", timeDtoForUsableStartTime);
+
+		int usageTimeForGetTimeMinutesValue = usageTimeDto.getTimeMinutesValue();
+		int usableStartTimeForGetTimeMinutesValue = timeDtoForUsableStartTime.getTimeMinutesValue();
+
+		TimeDto timeDtoForUsageEndTime = new TimeDto(usageTimeForGetTimeMinutesValue + usableStartTimeForGetTimeMinutesValue);
+		_session.setAttribute("usageEndTimeForReservationRegist", timeDtoForUsageEndTime);
+		_session.setAttribute("usableEndTimeForReservationRegist", timeDtoForUsageEndTime);
+
+
+
+		return true;
 
 	}
 }

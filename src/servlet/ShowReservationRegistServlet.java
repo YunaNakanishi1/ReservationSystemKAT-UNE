@@ -19,7 +19,7 @@ import handler.ShowReservationRegistHandler;
  * リソース選択画面から予約登録画面に遷移させる(8).
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
-@WebServlet("/reservesystem/ShowReservationRegistServlet")
+@WebServlet("/reservesystem/showreserveregist")
 public class ShowReservationRegistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

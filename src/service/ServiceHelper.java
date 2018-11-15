@@ -84,9 +84,9 @@ public class ServiceHelper {
     public TimeDto getSliderLeftValue(TimeDto usageStartTime,List<ReservationDto> reservationList){
 		TimeDto leftValue=new TimeDto(0, 0);
 		for(ReservationDto reservation:reservationList){
-			if(usageStartTime.getTimeMinutesValue()<=reservation.getUsageStartTime().getTimeMinutesValue()){
-				if(leftValue.getTimeMinutesValue()<reservation.getUsageStartTime().getTimeMinutesValue()){
-					leftValue=reservation.getUsageStartTime();
+			if(usageStartTime.getTimeMinutesValue()<=reservation.getUsageEndTime().getTimeMinutesValue()){
+				if(leftValue.getTimeMinutesValue()<reservation.getUsageEndTime().getTimeMinutesValue()){
+					leftValue=reservation.getUsageEndTime();
 				}
 
 			}
@@ -98,8 +98,8 @@ public class ServiceHelper {
 	public TimeDto getSliderRightValue(TimeDto usageEndTime,List<ReservationDto> reservationList){
 		TimeDto rightValue=new TimeDto(HOUR24, 0);
 		for(ReservationDto reservation:reservationList){
-			if(usageEndTime.getTimeMinutesValue()>=reservation.getUsageEndTime().getTimeMinutesValue()){
-				if(rightValue.getTimeMinutesValue()<reservation.getUsageEndTime().getTimeMinutesValue()){
+			if(usageEndTime.getTimeMinutesValue()>=reservation.getUsageStartTime().getTimeMinutesValue()){
+				if(rightValue.getTimeMinutesValue()<reservation.getUsageStartTime().getTimeMinutesValue()){
 					rightValue=reservation.getUsageEndTime();
 				}
 
