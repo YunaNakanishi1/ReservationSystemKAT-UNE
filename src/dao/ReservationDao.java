@@ -205,6 +205,10 @@ public class ReservationDao {
 			//「利用開始時間」「利用終了時間」のDTOを作る
 			TimeDto usageStartTime = new TimeDto(usageStartDate);
 			TimeDto usageEndTime = new TimeDto(usageEndDate);
+			//利用終了が00:00だったら24:00に直す
+			if(usageEndTime.getTimeMinutesValue()==0){
+				usageEndTime=new TimeDto(24, 0);
+			}
 
 			//「予約者」のDTOを作る
 			User reservedPerson = new User(userId, password, authority, familyName,
@@ -338,6 +342,10 @@ public class ReservationDao {
 				String resultUsageDate=new SimpleDateFormat("yyyy/MM/dd").format(rs.getTimestamp("starttime"));
 				TimeDto resultUsageStartTime=new TimeDto(rs.getTimestamp("starttime"));
 				TimeDto resultUsageEndTime=new TimeDto(rs.getTimestamp("endtime"));
+				//利用終了が00:00だったら24:00に直す
+				if(resultUsageEndTime.getTimeMinutesValue()==0){
+					resultUsageEndTime=new TimeDto(24, 0);
+				}
 
 				ReservationDto reservation = new ReservationDto(rs.getInt("reserveid"), resource, resultUsageDate, resultUsageStartTime, resultUsageEndTime, rs.getString("reservename"), user, null, 0, null, null, rs.getInt("reservedeleted"));
 				reservationList.add(reservation);
@@ -413,6 +421,10 @@ public class ReservationDao {
                 String resultUsageDate=new SimpleDateFormat("yyyy/MM/dd").format(rs.getTimestamp("starttime"));
                 TimeDto resultUsageStartTime=new TimeDto(rs.getTimestamp("starttime"));
                 TimeDto resultUsageEndTime=new TimeDto(rs.getTimestamp("endtime"));
+              //利用終了が00:00だったら24:00に直す
+				if(resultUsageEndTime.getTimeMinutesValue()==0){
+					resultUsageEndTime=new TimeDto(24, 0);
+				}
 
                 ReservationDto reservation = new ReservationDto(rs.getInt("reserveid"), resource, resultUsageDate, resultUsageStartTime, resultUsageEndTime, rs.getString("reservename"), null, null, 0, null, null, rs.getInt("reservedeleted"));
                 reservationList.add(reservation);            }
@@ -628,6 +640,10 @@ public class ReservationDao {
 				//「利用開始時間」「利用終了時間」のDTOを作る
 				TimeDto usageStartTime = new TimeDto(usageStartDate);
 				TimeDto usageEndTime = new TimeDto(usageEndDate);
+				//利用終了が00:00だったら24:00に直す
+				if(usageEndTime.getTimeMinutesValue()==0){
+					usageEndTime=new TimeDto(24, 0);
+				}
 
 				//「予約者」のDTOを作る
 				User reservedPerson = new User(userId, password, authority, familyName,
