@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
      pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -46,13 +47,16 @@ Javascriptを有効にしてください
 <tr>
 <td class="one" class="dialog"><b>　　　　　　リソース名</b></td>
 <td class="right2">
-<a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?reservationIdForReservationDetails=${resourceIdForReservationRegist}">
+<a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?resourceId=${resourceIdForReservationRegist}" target="_blank">
 <c:out value="${resourceNameForReservationRegist}"></c:out></a></td>
 </tr>
 
 <tr>
 <td class="dialog"><b>　　　　　　利用日</b></td>
-<td class="right2"><c:out value="${usageDateForReservationRegist}"></c:out></td>
+<td class="right2">
+<fmt:parseDate var="date" value="${usageDateForReservationRegist }" type="DATE" dateStyle="LONG" />
+<fmt:formatDate value="${date}" type="DATE" dateStyle="FULL" />
+</td>
 
 </tr>
 
@@ -143,7 +147,8 @@ Javascriptを有効にしてください
 selected
 </c:if>
 >
-</option><c:out value="${obj.attendanceTypeName }"/>
+<c:out value="${obj.attendanceTypeName }"/>
+</option>
 </c:forEach>
 </select> </td>
 </tr>
@@ -170,7 +175,7 @@ selected
 <td>　</td>
 
 <td>
-<form action = "" method = "get">
+<form action = "/ReservationSystemKAT-UNE/reservesystem/searchResourceList" method = "post">
 <input class="submit" type = "submit" value = "リソース選択画面へ">
 </form>
 </td>
@@ -178,7 +183,10 @@ selected
 </tr>
 </table>
 <br>
-<a href="..">予約一覧へ</a>
+<form method="post" name="form1" action="/ReservationSystemKAT-UNE/reservesystem/showfirstreservationlist">
+    <a href="javascript:form1.submit()">予約一覧へ</a>
+</form>
+<a href=".."></a>
 <br>
 <br>
 <br>
