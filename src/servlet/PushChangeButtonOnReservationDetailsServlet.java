@@ -15,7 +15,7 @@ import handler.PushChangeButtonOnReservationDetailsHandler;
 /**
  * Servlet implementation class PushChangeButtonOnReservationDetailsServlet
  */
-@WebServlet("/pushChangeButtonOnReservationDetails")
+@WebServlet("/reservesystem/pushChangeButtonOnReservationDetails")
 public class PushChangeButtonOnReservationDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
