@@ -47,7 +47,7 @@ Javascriptを有効にしてください
 <tr>
 <td class="one" class="dialog"><b>　　　　　　リソース名</b></td>
 <td class="right2">
-<a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?reservationIdForReservationDetails=${resourceIdForReservationRegist}">
+<a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?resourceId=${resourceIdForReservationRegist}" target="_blank">
 <c:out value="${resourceNameForReservationRegist}"></c:out></a></td>
 </tr>
 
@@ -147,7 +147,8 @@ Javascriptを有効にしてください
 selected
 </c:if>
 >
-</option><c:out value="${obj.attendanceTypeName }"/>
+<c:out value="${obj.attendanceTypeName }"/>
+</option>
 </c:forEach>
 </select> </td>
 </tr>
@@ -174,7 +175,7 @@ selected
 <td>　</td>
 
 <td>
-<form action = "" method = "get">
+<form action = "/ReservationSystemKAT-UNE/reservesystem/searchResourceList" method = "post">
 <input class="submit" type = "submit" value = "リソース選択画面へ">
 </form>
 </td>
@@ -182,7 +183,10 @@ selected
 </tr>
 </table>
 <br>
-<a href="..">予約一覧へ</a>
+<form method="post" name="form1" action="/ReservationSystemKAT-UNE/reservesystem/showfirstreservationlist">
+    <a href="javascript:form1.submit()">予約一覧へ</a>
+</form>
+<a href=".."></a>
 <br>
 <br>
 <br>

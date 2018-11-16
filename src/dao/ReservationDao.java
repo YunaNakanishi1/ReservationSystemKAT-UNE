@@ -61,33 +61,16 @@ public class ReservationDao {
 		try {
 			//実行するSQL文
 			String sql
-			="select resources.resource_id, usage_start_date, usage_end_date, "
-					+ " reservation_name ,reserved_person_id, co_reserved_person_id, "
-					+ "number_of_participants, attendance_types.attendance_type_id, "
-					+ "reserve_supplement, reservations.deleted as reservation_deleted, "
-					+ "resource_name, office_name, category_name, capacity, supplement, "
-					+ "usage_stop_start_date, usage_stop_end_date, "
-					+ "resources.deleted as resource_deleted, "
-					+ "	attendance_type, "
-					+ "resource_characteristic_name, "
-					+ "users.user_id, users.password, users.family_name, users.first_name, "
-					+ "users.authority, users.tel, users.mail_address, "
-					+ "cousers.user_id as co_user_id, cousers.password as co_password, "
-					+ "cousers.family_name as co_family_name, cousers.first_name as co_first_name, "
-					+ " cousers.authority as co_authority, cousers.tel as co_tel, "
-					+ "cousers.mail_address as co_mail_address "
+			="select reserve_id,resources.resource_id, usage_start_date, usage_end_date,  reservation_name ,reserved_person_id, co_reserved_person_id, number_of_participants, attendance_types.attendance_type_id, reserve_supplement, reservations.deleted as reservation_deleted, resource_name, office_name, category_name, capacity, supplement, usage_stop_start_date, usage_stop_end_date, resources.deleted as resource_deleted,  attendance_type,  users.user_id, users.password, users.family_name, users.first_name, users.authority, users.tel, users.mail_address, cousers.user_id as co_user_id, cousers.password as co_password, cousers.family_name as co_family_name, cousers.first_name as co_first_name,  cousers.authority as co_authority, cousers.tel as co_tel, cousers.mail_address as co_mail_address "
+			        +"from reservations, resources, attendance_types, users , users as cousers , offices , categories  "
+			        +"where resources.resource_id = reservations.resource_id "
+			        +"and resources.office_id = offices.office_id "
+			        +"and resources.category_id = categories.category_id "
+			        +"and users.user_id = reservations.reserved_person_id "
+			        +"and (cousers.user_id = reservations.co_reserved_person_id or reservations.co_reserved_person_id is NULL) "
+			        +"and (attendance_types.attendance_type_id = reservations.attendance_type_id or reservations.attendance_type_id is NULL) "
+			        +"and reserve_id = ?; ";
 
-			+ "from reservations, resources, attendance_types, users , users as cousers ,"
-					+ " resource_features,resource_characteristics , offices , categories "
-			+ "where resources.resource_id = reservations.resource_id "
-				+ "and resource_features.resource_characteristic_id = resource_characteristics.resource_characteristic_id "
-				+ "and attendance_types.attendance_type_id = reservations.attendance_type_id "
-				+ "and users.user_id = reservations.reserved_person_id "
-				+ "and cousers.user_id = reservations.co_reserved_person_id "
-				+ "and resources.resource_id = resource_features.resource_id "
-				+ "and resources.office_id = offices.office_id "
-				+ "and resources.category_id = categories.category_id "
-				+ "and reserve_id = ?;";
 
 
 			preparedStatement = _con.prepareStatement(sql);
@@ -115,7 +98,7 @@ public class ReservationDao {
 			String category = null;	//カテゴリ
 			int capacity = 0;	//定員
 			String supplement = null; //補足
-			List<String> facility;	//設備リスト
+			List<String> facility = new ArrayList<>();	//設備リスト
 			Timestamp usageStopStartDate = null;	//利用停止開始日時
 			Timestamp usageStopEndDate = null;	//利用停止終了日時
 			int resourceDeleted = 0; //リソース削除済み
@@ -167,9 +150,6 @@ public class ReservationDao {
 				resourceDeleted = rs.getInt("resource_deleted");
 
 				attendanceType = rs.getString("attendance_type");
-
-				facility.add(rs.getString("resource_characteristic_name"));
-
 
 				userId = rs.getString("user_id");
 				password = rs.getString("password");

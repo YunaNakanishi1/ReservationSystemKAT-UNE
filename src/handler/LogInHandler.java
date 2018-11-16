@@ -70,7 +70,7 @@ public class LogInHandler implements Handler {
 					session.setAttribute("userIdOfLoggedIn", resultUser.getUserId());
 					session.setAttribute("authorityOfLoggedIn", resultUser.getAuthority());
 					session.setAttribute("familyNameOfLoggedIn", resultUser.getFamilyName());
-					session.setAttribute("lastNameOfLoggedIn", resultUser.getFirstName());
+					session.setAttribute("firstNameOfLoggedIn", resultUser.getFirstName());
 					session.setMaxInactiveInterval(SESSION_INTERVAL);
 					return LOGIN_FIRST_RESERVATION_LIST_SERVLET;
 
