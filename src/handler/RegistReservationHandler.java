@@ -55,6 +55,8 @@ public class RegistReservationHandler implements Handler {
 			return ERROR_PAGE;
 		}
 
+		_session.setAttribute("messageForReservationRegist", PM02);
+
 		return SHOW_RESERVATION_DETAILS_SERVLET;
 	}
 
