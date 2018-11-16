@@ -12,7 +12,7 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css" />
-<link rel="stylesheet" href="Slider.css">
+<link rel="stylesheet" href="/ReservationSystemKAT-UNE/Slider.css">
 
 	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="/ReservationSystemKAT-UNE/Slider.js">	</script>
