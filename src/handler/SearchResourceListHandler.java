@@ -103,7 +103,7 @@ public class SearchResourceListHandler implements Handler {
     private List<AvailableDto> getAvailableList(List<Resource> resourceList){
         TimeDto startTime = (TimeDto) _session.getAttribute("usageStartTimeForResourceSelect");
         TimeDto endTime = (TimeDto) _session.getAttribute("usageEndTimeForResourceSelect");
-        TimeDto usageTime = (TimeDto) _session.getAttribute("usageTimeForReservationSelect");
+        TimeDto usageTime = (TimeDto) _session.getAttribute("usageTimeForResourceSelect");
         String usageDate = (String) _session.getAttribute("usageDateForReservationRegist");
 
         //返す結果の初期化

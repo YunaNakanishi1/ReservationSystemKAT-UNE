@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
      pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
  <html lang="ja">
@@ -62,7 +63,8 @@ Javascriptを有効にしてください
  <tr>
  <td class="one" class="dialog"><b>利用日</b></td>
  <td class="right2">
- <c:out value="${reservationDTOForReservationDetails.usageDate}"/></td>
+<fmt:parseDate var="date" value="${reservationDTOForReservationDetails.usageDate}" type="DATE" dateStyle="LONG" />
+<fmt:formatDate value="${date}" type="DATE" dateStyle="FULL" />
  </tr>
  <tr>
  <td class="dialog"><b>利用時間</b></td> <!-- ●●：●●～●●：●● -->
@@ -150,6 +152,8 @@ Javascriptを有効にしてください
  	<c:if test="${flagForShowingDeleteAndChangeButton == true}">
 		 <form action="/ReservationSystemKAT-UNE/reservesystem/pushChangeButtonOnReservationDetails" method="post">
 		 <input type="hidden" name="reserveId" value="${reservationDTOForReservationDetails.reservationId}">
+		 <input type="hidden" name="usageStartTime" value="${reservationDTOForReservationDetails.usageStartTime.timeMinutesValue}"/>
+		 <input type="hidden" name="usageEndTime" value="${reservationDTOForReservationDetails.usageEndTime.timeMinutesValue}"/>
 
 		 <input class="submit" class="dialog" type = "submit" value ="変更">
 		 </form>

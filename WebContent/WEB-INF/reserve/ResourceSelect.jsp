@@ -190,7 +190,7 @@ selected
 <select name = "actualUseTimeHour"  id = "usageHour" onchange="hourChange('usageHour','usageMinute')">
 <c:forEach begin="0" end="9"  varStatus="status">
 <option value= "0<c:out value="${status.index}"/>"
-<c:if test="${usageTimeForReservationSelect.hour == 0 + status.index }">
+<c:if test="${usageTimeForResourceSelect.hour == 0 + status.index }">
 selected
 </c:if>
 >
@@ -199,7 +199,7 @@ selected
 </c:forEach>
 <c:forEach begin="10" end="24"  varStatus="status">
 <option value= "<c:out value="${status.index}"/>"
-<c:if test="${usageTimeForReservationSelect.hour == status.index }">
+<c:if test="${usageTimeForResourceSelect.hour == status.index }">
 selected
 </c:if>
 >
@@ -213,7 +213,7 @@ selected
 		>00</option>
 		<c:forEach begin="1" end="3" varStatus="status">
 		<option value="<c:out value="${status.index * 15 }"/>"
-		<c:if test="${status.index * 15 == usageTimeForReservationSelect.minutes }">
+		<c:if test="${status.index * 15 == usageTimeForResourceSelect.minutes }">
 		selected
 		</c:if>
 		><c:out value="${status.index * 15 }"/>

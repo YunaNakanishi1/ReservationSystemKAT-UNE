@@ -19,7 +19,7 @@
 	<script type="text/javascript" src="/ReservationSystemKAT-UNE/UserSearch.js">	</script>
 
 </head>
-<body class="body" onload ="">
+<body class="body">
 <div class="div">
 
 <header class="header"><p>会議室・備品予約システム</p>
@@ -66,7 +66,7 @@ Javascriptを有効にしてください
 
 <input type="hidden" id ="usageStartTimeForReservationRegist" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
 <input type="hidden" id ="usableEndTimeForReservationRegist" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
-<input type="hidden" id ="usageTimeForReservationSelect" value="${usageTimeForReservationSelect.timeMinutesValue}"/>
+<input type="hidden" id ="usageTimeForReservationSelect" value="${usageTimeForResourceSelect.timeMinutesValue}"/>
 
 
 <div id="slider-area">
@@ -108,7 +108,7 @@ Javascriptを有効にしてください
 <tr>
 <td class="dialog"><b>　　　　　　利用人数</b></td>
 <td class="right2">
-<input type="text" name="numberOfParticipants" placeholder="半角数字のみ" value="<c:out value="${numberOfParticipantsForReservationRegist }"/>" > 名
+<input type="text" name="numberOfParticipants" placeholder="半角数字のみ" value="<c:out value="${displayNumberOfParticipantsForReservationRegist }"/>" > 名
 
  </td>
 </tr>
@@ -186,7 +186,6 @@ selected
 <form method="post" name="form1" action="/ReservationSystemKAT-UNE/reservesystem/showfirstreservationlist">
     <a href="javascript:form1.submit()">予約一覧へ</a>
 </form>
-<a href=".."></a>
 <br>
 <br>
 <br>
