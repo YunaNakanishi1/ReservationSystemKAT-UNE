@@ -39,7 +39,6 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		}catch (NumberFormatException e) {
 			_log.error("reserveId is not number");
 		}
-
 		try{
 			reservation=getAndCheckReservation(reserveId);
 		}catch (MyException e) {
@@ -76,22 +75,23 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 	private ReservationDto getAndCheckReservation(int reserveId){
 		ReservationDto reservation=null;
+
 		try{
-		GetReservationFromIdService getReservationFromIdService=new GetReservationFromIdService(reserveId);
-		if(getReservationFromIdService.validate()){
-			getReservationFromIdService.execute();
-			reservation=getReservationFromIdService.getReservation();
-			if(reservation==null){
-				_log.error("reservation not found");
-				throw new MyException();
-			}else if(reservation.getDeleted()==1){
-				_log.error("reservation is deleted");
-				throw new MyException();
+			GetReservationFromIdService getReservationFromIdService=new GetReservationFromIdService(reserveId);
+			if(getReservationFromIdService.validate()){
+				getReservationFromIdService.execute();
+				reservation=getReservationFromIdService.getReservation();
+				if(reservation==null){
+					_log.error("reservation not found");
+					throw new MyException();
+				}else if(reservation.getDeleted()==1){
+					_log.error("reservation is deleted");
+					throw new MyException();
+				}
 			}
-		}
 		}catch (SQLException e) {
 			e.printStackTrace();
-			_log.error("database error");
+			_log.error("database error check");
 			throw new MyException();
 		}
 
@@ -110,27 +110,30 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 			throw e;
 		}
 		try{
-		GetReservationListBetweenDateService getReservationListBetweenDateService=new GetReservationListBetweenDateService(resource.getResourceId(), usageStartTimestamp, usageEndTimestamp);
-		if(getReservationListBetweenDateService.validate()){
-			getReservationListBetweenDateService.execute();
-			List<ReservationDto> reservationList=getReservationListBetweenDateService.getReservationList();
-			if(reservationList.size()==1){
-				if(reservationList.get(0).getReservationId()!=reservation.getReservationId()){
+			GetReservationListBetweenDateService getReservationListBetweenDateService=new GetReservationListBetweenDateService(resource.getResourceId(), usageStartTimestamp, usageEndTimestamp);
+
+			if(getReservationListBetweenDateService.validate()){
+				getReservationListBetweenDateService.execute();
+
+				List<ReservationDto> reservationList=getReservationListBetweenDateService.getReservationList();
+
+				if(reservationList.size()==1){
+					if(reservationList.get(0).getReservationId()!=reservation.getReservationId()){
+						_log.error("anothr reservation exist");
+						throw new MyException();
+					}
+
+				}else{
 					_log.error("anothr reservation exist");
 					throw new MyException();
 				}
-
-			}else{
-				_log.error("anothr reservation exist");
-				throw new MyException();
 			}
-		}
-		}catch (MyException e) {
-			_log.error("GetReservationListBetweenDateService input error");
-			throw e;
-		}catch (SQLException e){
-			_log.error("database error");
-			throw new MyException();
+		} catch (MyException e) {
+				_log.error("GetReservationListBetweenDateService input error");
+				throw e;
+		} catch (SQLException e){
+				_log.error("database error listbetween");
+				throw new MyException();
 		}
 
 		return reservation;
@@ -153,7 +156,7 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 			_log.error("GetReservationListBetweenDateService input error");
 			throw e;
 		} catch (SQLException e) {
-			_log.error("database error");
+			_log.error("database error slider");
 			e.printStackTrace();
 			throw new MyException();
 		}
