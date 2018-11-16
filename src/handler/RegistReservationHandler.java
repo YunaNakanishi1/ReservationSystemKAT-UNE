@@ -48,7 +48,7 @@ public class RegistReservationHandler implements Handler {
 				_session.setAttribute("messageForResourceSelectUpper", EM24);
 				return SEARCH_RESOURCE_LIST_SERVLET;
 			}
-		} catch (Exception e) {
+		} catch (MyException e) {
 			return ERROR_PAGE;
 		}
 		if(!regist()){
