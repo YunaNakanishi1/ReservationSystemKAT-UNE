@@ -65,20 +65,13 @@ public class MakeAvailableListService implements Service{
                 int startMinutes = sTime.getTimeMinutesValue();
                 int endMinutes = eTime.getTimeMinutesValue();
 
-                System.out.println("SM:"+startMinutes);
-                System.out.println("EM:"+endMinutes);
-                System.out.println("USM:"+_usageStartTime.getTimeMinutesValue());
-                System.out.println("UEM:"+_usageEndTime.getTimeMinutesValue());
-
-                System.out.println();
-
                 //予約可能な時間が予約したい時間よりも前
-                if(endMinutes < _usageStartTime.getTimeMinutesValue()){
+                if(endMinutes <= _usageStartTime.getTimeMinutesValue()){
                     //追加しない
                     continue;
                 }
                 //予約可能な時間が予約したい時間よりも後
-                if(startMinutes > _usageEndTime.getTimeMinutesValue()){
+                if(startMinutes >= _usageEndTime.getTimeMinutesValue()){
                   //追加しない
                     continue;
                 }

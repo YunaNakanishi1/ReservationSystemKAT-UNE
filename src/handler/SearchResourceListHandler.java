@@ -36,7 +36,7 @@ public class SearchResourceListHandler implements Handler {
 
             if(resourceList.size() == 0){
                 //一件もヒットしなかった
-                _session.setAttribute("messageForResourceSelectLower", MessageHolder.EM08);
+                request.setAttribute("messageForResourceSelectLower", MessageHolder.EM08);
             }
         }catch (MyException e) {
             _log.error("Search Error");
@@ -51,7 +51,7 @@ public class SearchResourceListHandler implements Handler {
 
             if(resourceList.size() == 0){
                 //一件もヒットしなかった
-                _session.setAttribute("messageForResourceSelectLower", MessageHolder.EM08);
+                request.setAttribute("messageForResourceSelectLower", MessageHolder.EM08);
             }
 
         }catch (MyException e) {
