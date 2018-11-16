@@ -2,7 +2,7 @@
  * Copyright© Ricoh IT Solutions Co.,Ltd.
  * All Rights Reserved.
  */
-package service;
+package servlet;
 
 import java.io.IOException;
 
