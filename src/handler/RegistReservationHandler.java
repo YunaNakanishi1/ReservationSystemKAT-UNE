@@ -111,11 +111,13 @@ public class RegistReservationHandler implements Handler {
 		String reservedPersonId = (String) _session.getAttribute("userIdOfLoggedIn");
 
 		AttendanceTypeDto attendanceType = null;
+		if(!commonValidator.notSetOn(attendanceTypeIdStr)){
 		try {
 			attendanceType = new AttendanceTypeDto(Integer.parseInt(attendanceTypeIdStr), null);
 		} catch (NumberFormatException e) {
 			_log.error("attendanceType not number");
 			throw new MyException();
+		}
 		}
 
 		_reservation = new ReservationDto(-1, new Resource(resourceId, null, null, null, 0, null, 0, null, null, null),

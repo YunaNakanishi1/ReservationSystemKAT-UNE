@@ -16,7 +16,7 @@ import handler.Handler;
  * サーブレット番号：1
  * 予約変更可・不可チェック
  */
-@WebServlet("/changereservation")
+@WebServlet("/reservesystem/changereservation")
 public class ChangeReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

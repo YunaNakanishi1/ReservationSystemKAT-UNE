@@ -688,8 +688,8 @@ public class ReservationDao {
 		ResultSet rs = null;
 		try{
 			_con.setAutoCommit(false);
-			StringBuilder sqlBuilder=new StringBuilder("INSERT INTO reservations (resource_id,usage_start_date,usage_end_date,reservation_name,reserved_person_id,co_reserved_person_id,number_of_participants,attendance_type_id,reserve_supplement,deleted)");
-			sqlBuilder.append("VALUES (?,?,?,?,?,?,?,?,?,?)");
+			StringBuilder sqlBuilder=new StringBuilder("INSERT INTO reservations (reserve_id,resource_id,usage_start_date,usage_end_date,reservation_name,reserved_person_id,co_reserved_person_id,number_of_participants,attendance_type_id,reserve_supplement,deleted)");
+			sqlBuilder.append("VALUES (nextval('reserve_id_seq'),?,?,?,?,?,?,?,?,?,?)");
 			sqlBuilder.append("RETURNING reserve_id");
 
 			preparedStatement=_con.prepareStatement(sqlBuilder.toString());
