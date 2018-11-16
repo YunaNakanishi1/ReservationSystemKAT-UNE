@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dto.AvailableDto;
 import dto.TimeDto;
 
 public class PushNewReservationButtonHandler implements Handler {
@@ -45,6 +46,7 @@ public class PushNewReservationButtonHandler implements Handler {
 		session.setAttribute("usageEndTimeForResourceSelect", new TimeDto(TWENTY_FOUR,ZERO));
 		session.setAttribute("usageTimeForResourceSelect", new TimeDto(ZERO,FIFTEEN));
 		session.setAttribute("facilityIdListForResourceSelect",new ArrayList<String>());
+		session.setAttribute("availableListForResourceSelect", new ArrayList<AvailableDto>());
 
 		//戻るボタンの行き先をセットする
 		session.setAttribute("returnPageForResourceSelect",SHOW_FIRST_RESERVATION_LIST_SERVLET);

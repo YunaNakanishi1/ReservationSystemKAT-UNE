@@ -108,7 +108,7 @@ Javascriptを有効にしてください
 <tr>
 <td class="dialog"><b>　　　　　　利用人数</b></td>
 <td class="right2">
-<input type="text" name="numberOfParticipants" placeholder="半角数字のみ" value="<c:out value="${numberOfParticipantsForReservationRegist }"/>" > 名
+<input type="text" name="numberOfParticipants" placeholder="半角数字のみ" value="<c:out value="${displayNumberOfParticipantsForReservationRegist }"/>" > 名
 
  </td>
 </tr>
