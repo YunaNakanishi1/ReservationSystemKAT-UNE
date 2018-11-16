@@ -20,6 +20,12 @@ import dto.TimeDto;
 import service.GetOfficeAndCategoryListService;
 import service.GetResourceCharacteristicListService;
 
+/**
+ * サーブレット番号：4
+ * 予約詳細画面からコピーして予約をするハンドラー
+ * @author リコーITソリューションズ株式会社 KAT-UNE
+ *
+ */
 public class PushCopyReservationButtonHandler implements Handler{
 
     private Logger _log = LogManager.getLogger();
