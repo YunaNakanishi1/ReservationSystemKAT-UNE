@@ -15,7 +15,6 @@
 <link rel="stylesheet" href="/ReservationSystemKAT-UNE/Slider.css">
 
 	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="/ReservationSystemKAT-UNE/Slider.js">	</script>
 	<script type="text/javascript" src="/ReservationSystemKAT-UNE/UserSearch.js">	</script>
 
 </head>
@@ -61,8 +60,8 @@ Javascriptを有効にしてください
 <td class="dialog"><b>　　　　　　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
 
-<input type="hidden" id ="usageStartTimeForReservationRegist" value="${usageStartTimeForReservationRegist.timeMinutesValue}">
-<input type="hidden" id ="usageEndTimeForReservationRegist" value="${usageEndTimeForReservationRegist.timeMinutesValue}">
+<input type="hidden" id ="usageStartTimeForReservationRegist" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usableEndTimeForReservationRegist" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
 
 
 <div id="slider-area">
@@ -178,6 +177,7 @@ Javascriptを有効にしてください
 </div>
 <div class="footer1" class=><footer class="fotter2">copyright🄫KAT-UNE</footer></div>
 </div>
+<script type="text/javascript" src="/ReservationSystemKAT-UNE/Slider.js">	</script>
 
     </body>
 </html>
