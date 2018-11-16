@@ -42,7 +42,7 @@ Javascriptを有効にしてください
 
 <table class="table5">
 <tbody>
-
+<form action="/ReservationSystemKAT-UNE/reservesystem/registreserve" method="post">
 <tr>
 <td class="one" class="dialog"><b>　　　　　　リソース名</b></td>
 <td class="right2">
@@ -90,20 +90,22 @@ Javascriptを有効にしてください
 			<input class="btn" type = "submit" value = "+15分">
         </div>
 </div>
-
+	<input type = "hidden" name = "usageStartTime" id = "usageStartTime" value = "">
+    <input type = "hidden" name = "usageEndTime" id = "usageEndTime" value = "">
 </td>
 </tr>
 <tr>
 <td class="dialog"><b>　　　　　　予約名称</b></td>
 <td class="right2">
-<input type="text" name="meetingName" placeholder="名称なし"> (30文字以内)
+<input type="text" name="reservationName" placeholder="名称なし" value="<c:out value="${reservationNameForReservationRegist }" />"> (30文字以内)
  </td>
 </tr>
 
 <tr>
 <td class="dialog"><b>　　　　　　利用人数</b></td>
 <td class="right2">
-<input type="text" name="usagePeople" placeholder="半角数字のみ"> 名
+<input type="text" name="numberOfParticipants" placeholder="半角数字のみ" value="<c:out value="${numberOfParticipantsForReservationRegist }"/>" > 名
+
  </td>
 </tr>
 
@@ -111,7 +113,7 @@ Javascriptを有効にしてください
 <td class="dialog"><b>　　　　　　予約者</b></td>
 
 <td class="right2">
-<span class="reserve_name">理工 太郎</span>
+<span class="reserve_name"><c:out value="${familyNameOfLoggedIn }"/> <c:out value="${firstNameOfLoggedIn }"/></span>
  </td>
 </tr>
 
@@ -133,12 +135,16 @@ Javascriptを有効にしてください
 <td class="dialog"><b>　　　　　　参加者種別</b></td>
 
 <td class="right2">
-<select name ="sankasyasyubetu">
-<option>なし</option>
-<option value="1">社内会議</option>
-<option value="2">RG内会議</option>
-<option value="3">RG外会議</option>
-
+<select name ="attendanceTypeId">
+<option value="">なし</option>
+<c:forEach var="obj" items="${attendanceTypeListForReservationRegist}" varStatus="status">
+<option value="<c:out value="${obj.attendanceTypeId }"/>"
+<c:if test="${obj.attendanceTypeId == attendanceTypeIdForReservationRegist }">
+selected
+</c:if>
+>
+</option><c:out value="${obj.attendanceTypeName }"/>
+</c:forEach>
 </select> </td>
 </tr>
 
@@ -146,7 +152,7 @@ Javascriptを有効にしてください
 <td class="dialog"><b>　　　　　　補足</b></td>
 
 <td class="right2">
-<textarea class="scroll2" name="supplement"></textarea>0/500
+<textarea class="scroll2" name="supplement" <c:out value="${reserveSupplementForReservationRegist }"/> ><c:out value="${reserveSupplementForReservationRegist }"/></textarea>0/500
 </td>
 </tr>
 
@@ -160,6 +166,7 @@ Javascriptを有効にしてください
 <td>
 <input class="submit" class="dialog" type = "submit" value = "登録">
 </td>
+</form>
 <td>　</td>
 
 <td>
