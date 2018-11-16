@@ -186,7 +186,6 @@ selected
 <form method="post" name="form1" action="/ReservationSystemKAT-UNE/reservesystem/showfirstreservationlist">
     <a href="javascript:form1.submit()">予約一覧へ</a>
 </form>
-<a href=".."></a>
 <br>
 <br>
 <br>
