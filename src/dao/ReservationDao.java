@@ -538,8 +538,8 @@ public class ReservationDao {
 			preparedStatement=_con.prepareStatement(sqlBuilder.toString());
 
 			preparedStatement.setString(1, resourceId);
-			preparedStatement.setTimestamp(2, endTime);
-			preparedStatement.setTimestamp(3, startTime);
+			preparedStatement.setTimestamp(2, startTime);
+			preparedStatement.setTimestamp(3, endTime);
 
 			rs=preparedStatement.executeQuery();
 

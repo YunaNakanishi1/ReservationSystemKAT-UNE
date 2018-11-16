@@ -119,7 +119,7 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 				if(reservationList.size()==1){
 					if(reservationList.get(0).getReservationId()!=reservation.getReservationId()){
-						_log.error("anothr reservation exist");
+						_log.error("anothr reservation exist id");
 						throw new MyException();
 					}
 
