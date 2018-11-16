@@ -1,6 +1,6 @@
 var duration =1*60;//1時間
-var start = 3*60;//parseInt(document.getElementById("slider-left-timelabel").value,10);//午前６時
-var end = 8*60;//parseInt(document.getElementById("slider-right-timelabel").value,10); //午前9時
+var start = parseInt(document.getElementById("slider-left-timelabel").value,10);//午前６時
+var end = parseInt(document.getElementById("slider-right-timelabel").value,10); //午前9時
 var handleWidthMin = 15;//つまみの最小幅
 
 //スライダーを生成
