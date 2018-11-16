@@ -66,7 +66,7 @@ Javascriptを有効にしてください
 
 <input type="hidden" id ="usageStartTimeForReservationRegist" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
 <input type="hidden" id ="usableEndTimeForReservationRegist" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
-<input type="hidden" id ="usageTimeForReservationSelect" value="${usageTimeForReservationSelect.timeMinutesValue}"/>
+<input type="hidden" id ="usageTimeForReservationSelect" value="${usageTimeForResourceSelect.timeMinutesValue}"/>
 
 
 <div id="slider-area">
@@ -83,15 +83,15 @@ Javascriptを有効にしてください
         <div id="slider-box">
         <div id="slider"></div>
         </div>
-        <div style="float:left;width:100px;margin-left:0px;">
-        <input class="btn" type = "submit" value = "-15分">
+        <div id="minus15" style="float:left;width:100px;margin-left:0px;">
+        <input class="btn" type = "button" value = "-15分">
 		</div>
 
         <div style="width:270px;float:left;text-align:center;">
         <input type="text" id="slider-timelabel" class="timelabel" readonly="readonly" />
         </div>
-        <div style="float:right;width:100px;margin-right:25px;">
-			<input class="btn" type = "submit" value = "+15分">
+        <div id="plus15" style="float:right;width:100px;margin-right:25px;">
+			<input class="btn" type = "button" value = "+15分">
         </div>
 </div>
 	<input type = "hidden" name = "usageStartTime" id = "usageStartTime" value = "">
@@ -108,7 +108,7 @@ Javascriptを有効にしてください
 <tr>
 <td class="dialog"><b>　　　　　　利用人数</b></td>
 <td class="right2">
-<input type="text" name="numberOfParticipants" placeholder="半角数字のみ" value="<c:out value="${numberOfParticipantsForReservationRegist }"/>" > 名
+<input type="text" name="numberOfParticipants" placeholder="半角数字のみ" value="<c:out value="${displayNumberOfParticipantsForReservationRegist }"/>" > 名
 
  </td>
 </tr>
@@ -157,7 +157,7 @@ selected
 <td class="dialog"><b>　　　　　　補足</b></td>
 
 <td class="right2">
-<textarea class="scroll2" name="supplement" <c:out value="${reserveSupplementForReservationRegist }"/> ><c:out value="${reserveSupplementForReservationRegist }"/></textarea>0/500
+<textarea id="supplementArea" class="scroll2" name="supplement"onkeyup="ShowLength();" <c:out value="${reserveSupplementForReservationRegist }"/> ><c:out value="${reserveSupplementForReservationRegist }"/></textarea><span id="inputlength">0/500</span>
 </td>
 </tr>
 
@@ -193,6 +193,13 @@ selected
 <div class="footer1" class=><footer class="fotter2">copyright🄫KAT-UNE</footer></div>
 </div>
 <script type="text/javascript" src="/ReservationSystemKAT-UNE/Slider.js">	</script>
-
+<script>
+window.onload = function() {
+	ShowLength();
+}
+function ShowLength() {
+	   document.getElementById("inputlength").innerHTML = document.getElementById("supplementArea").value.length+"/500";
+	}
+</script>
     </body>
 </html>

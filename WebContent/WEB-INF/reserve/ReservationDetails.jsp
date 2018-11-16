@@ -152,6 +152,8 @@ Javascriptを有効にしてください
  	<c:if test="${flagForShowingDeleteAndChangeButton == true}">
 		 <form action="/ReservationSystemKAT-UNE/reservesystem/pushChangeButtonOnReservationDetails" method="post">
 		 <input type="hidden" name="reserveId" value="${reservationDTOForReservationDetails.reservationId}">
+		 <input type="hidden" name="usageStartTime" value="${reservationDTOForReservationDetails.usageStartTime.timeMinutesValue}"/>
+		 <input type="hidden" name="usageEndTime" value="${reservationDTOForReservationDetails.usageEndTime.timeMinutesValue}"/>
 
 		 <input class="submit" class="dialog" type = "submit" value ="変更">
 		 </form>
