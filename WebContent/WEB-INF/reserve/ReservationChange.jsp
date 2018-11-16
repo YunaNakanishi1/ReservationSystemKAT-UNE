@@ -40,7 +40,6 @@ Javascriptを有効にしてください
 <h2>予約変更</h2>
 
 
-
 <form action = "/ReservationSystemKAT-UNE/reservesystem/changereservation" method = "post">
 
 
