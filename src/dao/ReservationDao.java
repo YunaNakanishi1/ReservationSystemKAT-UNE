@@ -507,7 +507,7 @@ public class ReservationDao {
 
 		try{
 
-			StringBuilder sqlBuilder = new StringBuilder("select reserve_id resources.resource_id, usage_start_date, usage_end_date, "
+			StringBuilder sqlBuilder = new StringBuilder("select reserve_id, resources.resource_id, usage_start_date, usage_end_date, "
 					+ " reservation_name ,reserved_person_id, co_reserved_person_id, "
 					+ "number_of_participants, attendance_types.attendance_type_id, "
 					+ "reserve_supplement, reservations.deleted as reservation_deleted, "
