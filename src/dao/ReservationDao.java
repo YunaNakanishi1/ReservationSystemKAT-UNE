@@ -532,7 +532,7 @@ public class ReservationDao {
 				+ "and resources.resource_id = resource_features.resource_id "
 				+ "and resources.office_id = offices.office_id "
 				+ "and resources.category_id = categories.category_id ");
-			sqlBuilder.append("and reservations.resourceId=? and usage_end_date > ? and usage_start_date < ? ");
+			sqlBuilder.append("and reservations.resource_id=? and usage_end_date > ? and usage_start_date < ? ");
 			sqlBuilder.append("order by reserve_id");
 
 			preparedStatement=_con.prepareStatement(sqlBuilder.toString());
