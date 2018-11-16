@@ -12,10 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import handler.PushSearchButtonOnReservationListHandler;
 
 /**
- * Servlet implementation class PushSearchButtonOnReservationListServlet
- */
-/**
- * 12番　予約一覧画面の検索項目から検索するサーブレット
+ * サーブレット番号：12
+ * 予約一覧画面の検索項目から検索するサーブレット
  * @author リコーITソリューションズ株式会社 z00s600124
  *
  */

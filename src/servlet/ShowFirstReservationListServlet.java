@@ -16,8 +16,8 @@ import handler.ShowFirstReservationListHandler;
  * Servlet implementation class ShowFirstReservationListServlet
  */
 /**
- * 予約一覧を最初に表示するときに呼び出される. 18
- *
+ * サーブレット番号：18
+ * 予約一覧を最初に表示するときに呼び出される
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */

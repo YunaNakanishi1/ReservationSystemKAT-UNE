@@ -14,8 +14,8 @@ import handler.PushNewReservationButtonHandler;
 
 /**
  * サーブレット番号：7
- *
- * Servlet implementation class PushQuickReservationButtonServlet
+ * 予約一覧画面から新規予約ボタンを押下したときに呼び出されるサーブレット
+ *@author リコーITソリューションズ株式会社 KAT-UNE
  */
 @WebServlet("/reservesystem/pushNewReservationButton")
 public class PushNewReservationButtonServlet extends HttpServlet {

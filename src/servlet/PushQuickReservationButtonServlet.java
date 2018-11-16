@@ -15,6 +15,7 @@ import handler.PushQuickReservationButtonHandler;
 /**
  * サーブレット番号：9
  * 今すぐ予約画面を表示するためのサーブレット
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 @WebServlet("/reservesystem/pushQuickReservationButton")
 public class PushQuickReservationButtonServlet extends HttpServlet {

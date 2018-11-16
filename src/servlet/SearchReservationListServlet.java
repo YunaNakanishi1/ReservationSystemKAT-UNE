@@ -13,11 +13,8 @@ import handler.Handler;
 import handler.SearchReservationListHandler;
 
 /**
- * Servlet implementation class SearchReservationListServlet
- */
-/**
- * 予約一覧を表示するときに最後に呼ばれるサーブレット 29
- *
+ * サーブレット番号：29
+ * 予約一覧を表示するときに最後に呼ばれるサーブレット
  * @author リコーITソリューションズ株式会社 KAT-UNE
  *
  */

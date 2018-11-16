@@ -15,6 +15,7 @@ import handler.SearchResourceListHandler;
  * Servlet implementation class SearchResourceListServlet
  */
 /**
+ * サーブレット番号：16
  * 予約可能なリソースを検索するサーブレット
  * @author リコーITソリューションズ株式会社 z00s600124
  *

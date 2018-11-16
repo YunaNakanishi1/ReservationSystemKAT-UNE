@@ -17,7 +17,8 @@ import javax.servlet.http.HttpSession;
 import handler.ShowReservationDetailsHandler;
 
 /**
- * 予約名称リンクからのフォワード先を決める(26).
+ * サーブレット番号：26
+ * 予約名称リンクからのフォワード先を決める.
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 @WebServlet("/reservesystem/showReservationDetails")

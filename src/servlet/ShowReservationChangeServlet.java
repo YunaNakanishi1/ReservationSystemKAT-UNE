@@ -16,10 +16,11 @@ import javax.servlet.http.HttpServletResponse;
 import handler.ShowReservationChangeHandler;
 
 /**
- * PushChangeButtonOnReservationDetailsサーブレットから、予約変更画面に遷移させる(25).
+ * サーブレット番号：25
+ * PushChangeButtonOnReservationDetailsサーブレットから、予約変更画面に遷移させる.
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
-@WebServlet("/reservesystem//ShowReservationChangeServlet")
+@WebServlet("/reservesystem/showreservechange")
 public class ShowReservationChangeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
