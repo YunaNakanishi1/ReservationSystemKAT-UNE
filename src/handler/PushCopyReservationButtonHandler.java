@@ -95,7 +95,7 @@ public class PushCopyReservationButtonHandler implements Handler{
 			TimeDto usageTime =new TimeDto(usageTimeMinutes);
 
 		//実利用時間をsessionにセット
-			session.setAttribute("usageTimeForReservationSelect",usageTime);
+			session.setAttribute("usageTimeForResourceSelect",usageTime);
 
 
 

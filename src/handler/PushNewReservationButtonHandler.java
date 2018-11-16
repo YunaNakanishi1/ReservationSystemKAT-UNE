@@ -43,7 +43,7 @@ public class PushNewReservationButtonHandler implements Handler {
 		session.setAttribute("usageDateForReservationRegist", usageDateForReservationRegist);
 		session.setAttribute("usageStartTimeForResourceSelect",new TimeDto(ZERO,ZERO));
 		session.setAttribute("usageEndTimeForResourceSelect", new TimeDto(TWENTY_FOUR,ZERO));
-		session.setAttribute("usageTimeForReservationSelect", new TimeDto(ZERO,FIFTEEN));
+		session.setAttribute("usageTimeForResourceSelect", new TimeDto(ZERO,FIFTEEN));
 		session.setAttribute("facilityIdListForResourceSelect",new ArrayList<String>());
 
 		//戻るボタンの行き先をセットする
