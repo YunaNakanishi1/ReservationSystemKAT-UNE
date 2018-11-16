@@ -7,9 +7,6 @@ package handler;
 import static handler.ViewHolder.*;
 
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -42,7 +39,7 @@ public class ShowReservationRegistHandler {
 		_session = request.getSession(false);
 
 
-
+/*
 		//日付を表示するために変換
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/d");
 		String date = (String) _session.getAttribute("usageDateForReservationRegist");
@@ -55,7 +52,7 @@ public class ShowReservationRegistHandler {
 			_log.error("ParseException");
 			return ERROR_PAGE;
 		}
-
+*/
 
 		_request = request;
 

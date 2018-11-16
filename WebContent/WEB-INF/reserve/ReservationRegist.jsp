@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
      pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -52,7 +53,10 @@ Javascriptを有効にしてください
 
 <tr>
 <td class="dialog"><b>　　　　　　利用日</b></td>
-<td class="right2"><c:out value="${usageDateForReservationRegist}"></c:out></td>
+<td class="right2">
+<fmt:parseDate var="date" value="${usageDateForReservationRegist }" type="DATE" dateStyle="LONG" />
+<fmt:formatDate value="${date}" type="DATE" dateStyle="FULL" />
+</td>
 
 </tr>
 
