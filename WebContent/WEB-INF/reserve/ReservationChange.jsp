@@ -65,7 +65,7 @@ Javascriptを有効にしてください
 <td class="right2">
 <div id="slider-area">
         <div style="float:left;width:100px;margin-left:0px;">
-            <input type="text" id="slider-left-timelabel" class="timelabel" readonly="readonly" style="text-align: left;width:100%"/>
+            <input type="text" id="slider-left-timelabel" class="timelabel"  readonly="readonly" style="text-align: left;width:100%"/>
         </div>
         <div style="width:270px;float:left;text-align:center;">
             <input type="text" id="slider-center-timelabel"  class="timelabel" readonly="readonly" style="text-align: center;width:100%"/>
@@ -78,15 +78,16 @@ Javascriptを有効にしてください
         <div id="slider"></div>
         </div>
         <div style="float:left;width:100px;margin-left:0px;">
-			<input class="btn" type = "submit" value = "-15分">
+        <input class="btn" type = "submit" value = "-15分">
 		</div>
+
         <div style="width:270px;float:left;text-align:center;">
         <input type="text" id="slider-timelabel" class="timelabel" readonly="readonly" />
         </div>
         <div style="float:right;width:100px;margin-right:25px;">
 			<input class="btn" type = "submit" value = "+15分">
         </div>
-    </div>
+</div>
     <input type = "hidden" name = "usageStartTime" id = "usageStartTime" value = "">
     <input type = "hidden" name = "usageEndTime" id = "usageEndTime" value = "">
 
@@ -142,7 +143,7 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 <select name ="attendanceTypeId">
 <option value = "">なし
 </option>
-<c:forEach var="obj" items="${attendanceTypeListForReservationRegist}" varStatus="status">
+<c:forEach var="obj" items="${attendanceTypeListForReservationChange}" varStatus="status">
 <option value="${obj.attendanceTypeId}"
 <c:if test="${obj.attendanceTypeId==attendanceTypeIdForReservationChange}">
  selected
