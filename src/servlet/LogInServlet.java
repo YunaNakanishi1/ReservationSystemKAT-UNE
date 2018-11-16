@@ -16,6 +16,7 @@ import handler.LogInHandler;
  * Servlet implementation class LogInServlet
  */
 /**
+ * サーブレット番号：3
  * ログイン画面でログインボタンを押下された際に呼び出されるサーブレット.
  * @author リコーITソリューションズ株式会社 z00s600124
  *
