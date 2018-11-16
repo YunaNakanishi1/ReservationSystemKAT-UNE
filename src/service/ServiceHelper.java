@@ -29,7 +29,7 @@ public class ServiceHelper {
 
         for (ReservationDto reservation : reservationList) {
             //リソースが一致
-            if(reservation.getResource().getResourceId() == resource.getResourceId()){
+            if(reservation.getResource().getResourceId().equals(resource.getResourceId())){
                 //予約状況をリストにセット
                 timeList.add(reservation.getUsageStartTime());
                 timeList.add(reservation.getUsageEndTime());
