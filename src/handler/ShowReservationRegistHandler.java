@@ -166,7 +166,7 @@ public class ShowReservationRegistHandler {
 
 		//実利用時間のDTO
 		TimeDto usageTimeDto = (TimeDto) _session.getAttribute("usageTimeForReservationSelect");
-		_session.setAttribute("usageTimeForReservationSelect", usageTimeDto.getTimeMinutesValue());
+		_session.setAttribute("usageTimeForReservationSelect", usageTimeDto);
 
 
 		//利用可能開始時間をセッションに保存
