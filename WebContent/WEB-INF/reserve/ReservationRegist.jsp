@@ -16,6 +16,9 @@
 
 	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="Slider.js">	</script>
+
+	<imput type="hidden" id="usableStartTimeForReservationRegist" 	value="${usableStartTimeForReservationRegist.hour}"/>
+
 	<script type="text/javascript" src="UserSearch.js">	</script>
 
 </head>
@@ -106,11 +109,7 @@ Javascriptを有効にしてください
 <td class="dialog"><b>　　　　　　予約者</b></td>
 
 <td class="right2">
-<<<<<<< HEAD
 <span class="reserve_name">理工 太郎</span>
-=======
-<span class="reserve_name">理工太郎</span>
->>>>>>> refs/remotes/origin/develop
  </td>
 </tr>
 
@@ -121,12 +120,8 @@ Javascriptを有効にしてください
 <td class="dialog"><b>　　　　　　共同予約者</b></td>
 
 <td class="right2">
-<<<<<<< HEAD
 <span class="reserve_name">----<!-- ---- --></span> <input class="button" type = "submit" onclick="addSearch('reserve_pare')" value = "変更"> <input class="button" type = "submit" value = "クリア">
-=======
-<span class="reserve_name">理工五郎</span> <input class="button" type = "submit" onclick="addSearch('reserve_pare')" value = "変更"> <input class="button" type = "submit" value = "クリア">
->>>>>>> refs/remotes/origin/develop
- </td>
+</td>
 </tr>
 
 <tr id="reserve_pare">
