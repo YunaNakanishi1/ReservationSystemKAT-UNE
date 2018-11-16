@@ -15,7 +15,7 @@ import handler.RegistReservationHandler;
 /**
  * Servlet implementation class RegistReservationServlet
  */
-@WebServlet("/registreserve")
+@WebServlet("/reservesystem/registreserve")
 public class RegistReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

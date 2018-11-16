@@ -1,7 +1,6 @@
-
-var duration = 2*60	;//1時間
-var start = document.getElementById("usableStartTimeForReservationRegist") * 60;//利用可能開始時間
-var end = 24*60;//午前9時
+var duration =1	;//1時間
+var start = document.getElementById("usableStartTimeForReservationRegist");//午前６時
+var end = document.getElementById("usableEndTimeForReservationRegist");;//午前9時
 var handleWidthMin = 15;//つまみの最小幅
 
 //スライダーを生成

@@ -49,7 +49,7 @@ Javascriptを有効にしてください
  <tr>
  <td class="dialog"><b>リソース</b></td>
  <td class="right2">
-	 <a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?reservationIdForReservationDetails=${reservationDTOForReservationDetails.reservationId}">
+	 <a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?resourceId=${reservationDTOForReservationDetails.resource.resourceId}" target="_blank">
 	 <c:out value="${reservationDTOForReservationDetails.resource.resourceName}" /></a>
 
 
