@@ -6,7 +6,7 @@ var handleWidthMin = 15;//つまみの最小幅
 
 //スライダーを生成
 $(function() {
-  $('#slider').slider({
+	var slider = $('#slider').slider({
                       value:0,
                       min: 0,
                       max: (end - start - duration),
@@ -18,12 +18,16 @@ $(function() {
 
                       }
   });
-  $( "#slider-timelabel" ).val( getSliderTimeStr( $( "#slider" ).slider( "value" )) );
-  $( "#slider-left-timelabel" ).val( getTimeFormatHHMM( start ));
-  $( "#slider-right-timelabel" ).val( getTimeFormatHHMM( end ));
-  $( "#slider-center-timelabel" ).val( getTimeFormatHM( duration ));
-
-
+	initLabel();
+//引数の分だけスライダーを増減する（範囲外は超えない
+  $('#minus15').click( function (){
+  	slider.slider( "value",  $( "#slider" ).slider( "value" ) - 15);
+  	initLabel();
+  });
+  $('#plus15').click( function (){
+	  	slider.slider( "value",  $( "#slider" ).slider( "value" ) + 15);
+	  	initLabel();
+	  });
 
 setHandleLength();
 });
@@ -80,7 +84,14 @@ function getTimeFormatHHMM(minits){
 
     return h0 + ":" + m0;
 }
-
+function initLabel(){
+	 $( "#slider-timelabel" ).val( getSliderTimeStr( $( "#slider" ).slider( "value" )) );
+	  $( "#usageStartTime" ).val( start + $( "#slider" ).slider( "value" ).value );
+	  $( "#usageEndTime" ).val( start + $( "#slider" ).slider( "value" ).value + duration );
+	  $( "#slider-left-timelabel" ).val( getTimeFormatHHMM( start ));
+	  $( "#slider-right-timelabel" ).val( getTimeFormatHHMM( end ));
+	  $( "#slider-center-timelabel" ).val( getTimeFormatHM( duration ));
+}
 //受け取った時間をh時間m分フォーマットに即して返す。引数は時間を分に換算したものを渡す
 //390 → 6時間30分
 function getTimeFormatHM(minits){
@@ -90,3 +101,4 @@ function getTimeFormatHM(minits){
 
   return h + "時間" + m +"分";
 }
+
