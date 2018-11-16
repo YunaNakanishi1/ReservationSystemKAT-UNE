@@ -6,10 +6,10 @@ package handler;
 
 import static handler.ViewHolder.*;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,9 +47,8 @@ public class ShowReservationRegistHandler {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/d");
 		String date = (String) _session.getAttribute("usageDateForReservationRegist");
 		try {
-			Date day = (Date) sdf.parse(date);
+			Date day = sdf.parse(date);
 			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy年M月d日");
-
 			_session.setAttribute("usageDateForReservationRegist", sdf2.format(day));
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -167,6 +166,8 @@ public class ShowReservationRegistHandler {
 
 		//実利用時間のDTO
 		TimeDto usageTimeDto = (TimeDto) _session.getAttribute("usageTimeForReservationSelect");
+		_session.setAttribute("usageTimeForReservationSelect", usageTimeDto);
+
 
 		//利用可能開始時間をセッションに保存
 		_session.setAttribute("usableStartTimeForReservationRegist", timeDtoForUsableStartTime);
@@ -179,7 +180,9 @@ public class ShowReservationRegistHandler {
 
 		//利用可能終了時間をセッションに保存
 		_session.setAttribute("usageEndTimeForReservationRegist", timeDtoForUsageEndTime);
-		_session.setAttribute("usableEndTimeForReservationRegist", timeDtoForUsageEndTime);
+		_session.setAttribute("usableEndTimeForReservationRegist", timeDtoForUsableEndTime);
+
+
 
 		return true;
 

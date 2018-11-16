@@ -17,6 +17,7 @@ import handler.DeleteResourceHandler;
 import handler.Handler;
 
 /**
+ * サーブレット番号：37
 * リソース詳細画面で削除ボタンが押された時にリソース一覧画面に飛ばすサーブレット.
 * @author リコーITソリューションズ株式会社 KAT-UNE
 */

@@ -77,6 +77,7 @@ public class PushQuickReservationButtonHandler implements Handler {
 			usageEndHour = hour + ONE_HOUR;
 		}
 
+
 		//24時を超えた場合24時00分にセット
 		if (usageEndHour > 24) {
 			usageEndMinutes = ZERO;

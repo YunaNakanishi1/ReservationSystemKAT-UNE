@@ -17,6 +17,7 @@ import handler.Handler;
 import handler.SetResourceDetailsHandler;
 
 /**
+ * サーブレット番号：38
 * 登録ボタンが押された時にリソース詳細に飛ばすサーブレット.
 * @author リコーITソリューションズ株式会社 KAT-UNE
 */

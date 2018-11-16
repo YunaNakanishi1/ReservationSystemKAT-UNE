@@ -13,9 +13,11 @@ import handler.Handler;
 import handler.PushChangeButtonOnReservationDetailsHandler;
 
 /**
- * Servlet implementation class PushChangeButtonOnReservationDetailsServlet
+ * サーブレット番号：39
+ * 予約詳細画面から変更ボタンを押下したときに呼び出されるサーブレット
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  */
-@WebServlet("/pushChangeButtonOnReservationDetails")
+@WebServlet("/reservesystem/pushChangeButtonOnReservationDetails")
 public class PushChangeButtonOnReservationDetailsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -367,7 +367,7 @@ checked
 								</form>
 							</td>
 							<td>
-								<c:out value="${obj.startResource.hour}" />:<c:out value="${obj.startResource.minutes}" />～<c:out value="${obj.endResource.hour}" />:<c:out value="${obj.endResource.minutes}" />
+								<c:out value="${obj.startResource}" />～<c:out value="${obj.endResource}" />
 							</td>
 							<td><a href="showresourcedetailstab?resourceId=${obj.resourceId}" target="_blank">
 							<c:out value="${obj.resourceName}" /></a></td>

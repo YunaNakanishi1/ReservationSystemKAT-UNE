@@ -49,7 +49,7 @@ Javascriptを有効にしてください
  <tr>
  <td class="dialog"><b>リソース</b></td>
  <td class="right2">
-	 <a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?reservationIdForReservationDetails=${reservationDTOForReservationDetails.reservationId}">
+	 <a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?resourceId=${reservationDTOForReservationDetails.resource.resourceId}" target="_blank">
 	 <c:out value="${reservationDTOForReservationDetails.resource.resourceName}" /></a>
 
 
@@ -148,8 +148,8 @@ Javascriptを有効にしてください
  <tr>
  <td>
  	<c:if test="${flagForShowingDeleteAndChangeButton == true}">
-		 <form action="/ReservationSystemKAT-UNE/reservesystem/pushChangeReservationButton" method="get">
-		 <input type="hidden" name="reservationIdForReservationDetails" value="${reservationDTOForReservationDetails.reservationId}">
+		 <form action="/ReservationSystemKAT-UNE/reservesystem/pushChangeButtonOnReservationDetails" method="post">
+		 <input type="hidden" name="reserveId" value="${reservationDTOForReservationDetails.reservationId}">
 
 		 <input class="submit" class="dialog" type = "submit" value ="変更">
 		 </form>

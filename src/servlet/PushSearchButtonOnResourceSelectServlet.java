@@ -14,7 +14,7 @@ import handler.PushSearchButtonOnResourceSelectHandler;
 /**
  * サーブレット番号：14
  * リソース選択のバリデーションチェック
- *
+ *@author リコーITソリューションズ株式会社 KAT-UNE
  */
 @WebServlet("/reservesystem/pushSearchButtonOnResourceSelect")
 public class PushSearchButtonOnResourceSelectServlet extends HttpServlet {
