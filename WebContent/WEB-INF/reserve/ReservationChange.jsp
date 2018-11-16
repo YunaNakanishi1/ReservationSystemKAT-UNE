@@ -66,8 +66,8 @@ Javascriptを有効にしてください
 
 
 <input type="hidden" id ="usageStartTimeForReservationRegist" value="${usageStartTimeForReservationChange.timeMinutesValue}"/>
-<input type="hidden" id ="usableEndTimeForReservationRegist" value="${usableEndTimeForReservationChange.timeMinutesValue}"/>
-<input type="hidden" id ="usageTimeForReservationSelect" value="${usageTimeForReservationChange.timeMinutesValue}"/>
+<input type="hidden" id ="usableEndTimeForReservationRegist" value="${usageEndTimeForReservationChange.timeMinutesValue}"/>
+<input type="hidden" id ="usageTimeForReservationSelect" value="${usageEndTimeForReservationChange}"/>
 
 
 <div id="slider-area">
