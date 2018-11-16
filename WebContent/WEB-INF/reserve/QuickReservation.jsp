@@ -12,7 +12,7 @@
 	href="/ReservationSystemKAT-UNE/header_footer.css">
 <script type="text/javascript" charset="utf8"
 	src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
-<script type="text/javascript" src="pulldownControll.js">
+<script type="text/javascript" src="/ReservationSystemKAT-UNE/script/pulldownControll.js">
 
 </script>
 
@@ -91,23 +91,27 @@ Javascriptを有効にしてください
 					<tr>
 						<td class="dialog"><b>　　　利用時間</b></td>
 						<td class="right2">
-						<c:out value = "${usageStartTimeForResourceSelect.hour}"/>:
-							<c:if test="${usageStartTimeForResourceSelect.minutes < 10}">
-								0<c:out value = "${usageStartTimeForResourceSelect.minutes}"/>
-							</c:if>
-							<c:if test="${usageStartTimeForResourceSelect.minutes >= 10}">
-								<c:out value = "${usageStartTimeForResourceSelect.minutes}"/>
-							</c:if>
+						<c:if test="${usageStartTimeForResourceSelect.hour < 10}">
+							0<c:out value = "${usageStartTimeForResourceSelect.hour}"/>
+						</c:if>
+						<c:if test="${usageStartTimeForResourceSelect.hour >= 10}">
+							<c:out value = "${usageStartTimeForResourceSelect.hour}"/>
+						</c:if>:
+						<c:if test="${usageStartTimeForResourceSelect.minutes < 10}">
+							0<c:out value = "${usageStartTimeForResourceSelect.minutes}"/>
+						</c:if>
+						<c:if test="${usageStartTimeForResourceSelect.minutes >= 10}">
+						<c:out value = "${usageStartTimeForResourceSelect.minutes}"/>
+						</c:if>
 
 						 ～
 
 
-						<select name = "usageEndHourForResourceSelect" id = "usageEndHour"  onchange="hourChange('usageEndHour','usageEndMinute')">
-
+						<select name = "usageEndHourForResourceSelect" id = "QuickStartHour"  onchange="hourChange('QuickStartHour','QuickStartMinute')">
 
 								<c:forEach begin="0" end="9" varStatus="status">
 									<option value="0<c:out value="${status.index}"/>"
-										<c:if test="${usageEndHourForResourceSelect == 0 + status.index }">
+										<c:if test="${usageEndTimeForResourceSelect.hour == 0 + status.index }">
 selected
 </c:if>>
 
@@ -119,14 +123,14 @@ selected
 									<option value="<c:out value="${status.index}"/>"
 										<c:if test="${usageEndTimeForResourceSelect.hour == status.index }">
 selected
-</c:if><c:if test = "${status.index==10 }">selected</c:if>>
+</c:if>>
 
 										<c:out value="${status.index}" />
 									</option>
 								</c:forEach>
 						</select> :
 
-	<select name = "usageEndMinuteForResourceSelect" id = "usageEndMinute"  onchange="hourChange('usageEndHour','usageEndMinute')">
+	<select name = "usageEndMinuteForResourceSelect" id = "QuickStartMinute"  onchange="hourChange('QuickStartHour','QuickStartMinute')">
 						<!-- <select name="usageEndMinutesForResourceSelect" id="QuickEndMinute"> -->
 
 				<option value="00"
