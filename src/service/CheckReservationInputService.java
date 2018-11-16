@@ -46,6 +46,7 @@ public class CheckReservationInputService implements Service {
 			return false;
 		}
 
+
 		return true;
 	}
 
