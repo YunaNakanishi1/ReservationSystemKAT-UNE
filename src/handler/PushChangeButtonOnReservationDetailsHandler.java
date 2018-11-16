@@ -80,6 +80,8 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		}
 
 		session.setAttribute("usableStartTimeForReservationChange", _startTimeSliderValue);
+
+		//利用可能修了時間
 		session.setAttribute("usableEndTimeForReservationChange", _endTimeSliderValue);
 
 
@@ -181,6 +183,7 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 			getSliderWidthService.execute();
 			_startTimeSliderValue=getSliderWidthService.getStartTimeSliderValue();
 			_endTimeSliderValue=getSliderWidthService.getEndTimeSliderValue();
+			//System.out.println(_endTimeSliderValue);
 		}
 
 		}catch (MyException e) {
