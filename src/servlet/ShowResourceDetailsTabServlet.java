@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 * @author リコーITソリューションズ株式会社 KAT-UNE
 *
 */
-@WebServlet("/showresourcedetailstab")
+@WebServlet("/reservesystem/showresourcedetailstab")
 public class ShowResourceDetailsTabServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
