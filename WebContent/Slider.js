@@ -1,6 +1,7 @@
-var duration =parseInt(document.getElementById("usageTimeForReservationSelect"),10);//1時間
-var start = parseInt(document.getElementById("usageStartTimeForReservationRegist").value,10);//午前６時
-var end = parseInt(document.getElementById("usableEndTimeForReservationRegist").value,10); //午前9時
+var duration = parseInt(document.getElementById("usageTimeForReservationSelect").value,10);//利用時間
+//alert(document.getElementById("usageTimeForReservationSelect"));
+var start = parseInt(document.getElementById("usageStartTimeForReservationRegist").value,10);//利用可能開始時間
+var end = parseInt(document.getElementById("usableEndTimeForReservationRegist").value,10); //利用可能終了時間
 var handleWidthMin = 15;//つまみの最小幅
 
 //スライダーを生成
