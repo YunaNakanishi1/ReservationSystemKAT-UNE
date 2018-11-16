@@ -61,19 +61,15 @@ Javascriptを有効にしてください
 <td class="dialog"><b>　　　　　　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
 
-<input type="hidden" id="usableStartTimeForReservationRegist" value="${usableStartTimeForReservationRegist.timeMinutesValue}"/>
-<input type="hidden" id="usableStartTimeForReservationRegist" value="${usageEndTimeForReservationRegist.timeMinutesValue}"/>
-
-
 <div id="slider-area">
         <div style="float:left;width:100px;margin-left:0px;">
-            <input type="text" id="slider-left-timelabel" class="timelabel" readonly="readonly" style="text-align: left;width:100%"/>
+            <input type="text" id="slider-left-timelabel" class="timelabel" value="${usageStartTimeForReservationRegist.timeMinutesValue}" readonly="readonly" style="text-align: left;width:100%"/>
         </div>
         <div style="width:270px;float:left;text-align:center;">
-            <input type="text" id="slider-center-timelabel"  class="timelabel" readonly="readonly" style="text-align: center;width:100%"/>
+            <input type="text" id="slider-center-timelabel"  class="timelabel"  readonly="readonly" style="text-align: center;width:100%"/>
         </div>
         <div style="float:right;width:100px;margin-right:25px;">
-            <input type="text" id="slider-right-timelabel"  class="timelabel"  readonly="readonly" style="text-align: right;width:100%"/>
+            <input type="text" id="slider-right-timelabel"  class="timelabel"  value="${usageEndTimeForReservationRegist.timeMinutesValue}" readonly="readonly" style="text-align: right;width:100%"/>
         </div>
         <br>
         <div id="slider-box">
