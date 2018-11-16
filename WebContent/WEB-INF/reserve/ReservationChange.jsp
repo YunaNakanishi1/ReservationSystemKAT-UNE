@@ -1,5 +1,9 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+     pageEncoding="UTF-8"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<!DOCTYPE html>
+<html lang="ja">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>予約変更</title>
@@ -11,8 +15,8 @@
 <link rel="stylesheet" href="Slider.css">
 
 	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
-	<script type="text/javascript" src="Slider.js">	</script>
-	<script type="text/javascript" src="UserSearch.js">	</script>
+	<script type="text/javascript" src="/ReservationSystemKAT-UNE/Slider.js">	</script>
+	<script type="text/javascript" src="/ReservationSystemKAT-UNE/UserSearch.js">	</script>
 
 </head>
 <body class="body">
@@ -26,15 +30,14 @@
 <!-- javascript警告ラベル始まり -->
 <div id="JavascriptLabelBox">
 <div id = "JavascriptErrorLabel">
-Javascriptを有効にしてください。
+Javascriptを有効にしてください
 </div>
 </div>
-<script type="text/javascript" src="JavascriptErrorLabel.js">	</script>
+<script type="text/javascript" src="/ReservationSystemKAT-UNE/script/JavascriptErrorLabel.js">	</script>
 <!-- javascript警告ラベル終わり -->
 
 <div class="contents">
-<h2><!-- 予約変更 --></h2>
-<p><font color = "red">Javascriptを有効にしてください。<!-- メッセージ --></p></font>
+<h2>予約変更</h2>
 
 
 

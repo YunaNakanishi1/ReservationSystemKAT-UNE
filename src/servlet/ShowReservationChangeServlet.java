@@ -19,7 +19,7 @@ import handler.ShowReservationChangeHandler;
  * PushChangeButtonOnReservationDetailsサーブレットから、予約変更画面に遷移させる(25).
  * @author リコーITソリューションズ株式会社 KAT-UNE
  */
-@WebServlet("/reservesystem//ShowReservationChangeServlet")
+@WebServlet("/reservesystem/showreservechange")
 public class ShowReservationChangeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

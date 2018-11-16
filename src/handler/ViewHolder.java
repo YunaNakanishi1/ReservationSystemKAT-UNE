@@ -30,7 +30,7 @@ public class ViewHolder {
     public static final String LOGIN_FIRST_RESERVATION_LIST_SERVLET="/reservesystem/showfirstreservationlist";
     public static final String SHOW_RESERVATION_CHANGE_SERVLET = "showreservechange";
     public static final String PUSH_CHANGE_BUTTON_ON_RESERVATION_DETAILS_SERVLET = "pushChangeButtonOnReservationDetails";
-    public static final String RESERVE_CHANGE="WEB-INF/reserve/ReservationChange.jsp";
+    public static final String RESERVE_CHANGE="/WEB-INF/reserve/ReservationChange.jsp";
     public static final String RESERVATION_REGIST="/WEB-INF/reserve/ReservationRegist.jsp";
     public static final String SHOW_RESERVATION_REGIST_SERVLET="showreserveregist";
     public static final String RESOURCE_DETAILS_TAB="/WEB-INF/resource/ResourceDetailsTab.jsp";

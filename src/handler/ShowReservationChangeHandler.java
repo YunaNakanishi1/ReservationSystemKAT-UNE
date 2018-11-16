@@ -21,7 +21,11 @@ public class ShowReservationChangeHandler implements Handler{
 	public String handleService(HttpServletRequest request) {
 
 		String coReservedPersonId = (String) request.getAttribute("coReservedPersonIdForReservationChange");
-		String attendanceTypeId = (String) request.getAttribute("attendanceTypeIdForReservationChange");
+		String attendanceTypeIdStr = (String) request.getAttribute("attendanceTypeIdForReservationChange");
+		int attendanceTypeId = -1;
+		if (attendanceTypeIdStr != null) {
+			attendanceTypeId = Integer.parseInt(attendanceTypeIdStr);
+		}
 
 		HandlerHelper handlerHelper = new HandlerHelper();
 
