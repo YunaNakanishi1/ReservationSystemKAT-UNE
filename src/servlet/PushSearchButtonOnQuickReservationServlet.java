@@ -12,16 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import handler.PushSearchButtonOnQuickReservationHandler;
 
 /**
- * Servlet implementation class PushSearchButtonOnReservationServlet
+ * サーブレット番号：13
+ * 今すぐ予約で検索ボタンを押下した際の処理
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 @WebServlet("/reservesystem/pushSearchButtonOnQuickReservation")
 public class PushSearchButtonOnQuickReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	/**
-	 * サーブレット番号：13
-	 * 今すぐ予約で検索ボタンを押下した際の処理s
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		PushSearchButtonOnQuickReservationHandler pHandler = new PushSearchButtonOnQuickReservationHandler();
 

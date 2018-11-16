@@ -13,7 +13,9 @@ import handler.DeleteReservationHandler;
 import handler.Handler;
 
 /**
- * Servlet implementation class DeleteReservationServlet
+ * サーブレット番号：2
+ * 予約詳細画面で削除ボタンが押下され時に呼び出されるサーブレット
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 @WebServlet("/reservesystem/deleteReservation")
 public class DeleteReservationServlet extends HttpServlet {

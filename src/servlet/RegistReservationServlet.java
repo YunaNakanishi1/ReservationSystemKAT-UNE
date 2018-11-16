@@ -13,7 +13,9 @@ import handler.Handler;
 import handler.RegistReservationHandler;
 
 /**
- * Servlet implementation class RegistReservationServlet
+ * サーブレット番号：15
+ * 予約登録画面で登録ボタンを押下した際に呼ばれるサーブレット
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 @WebServlet("/reservesystem/registreserve")
 public class RegistReservationServlet extends HttpServlet {
