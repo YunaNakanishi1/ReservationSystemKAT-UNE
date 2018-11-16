@@ -67,6 +67,11 @@ Javascriptを有効にしてください
  <tr>
  <td class="dialog"><b>利用時間</b></td> <!-- ●●：●●～●●：●● -->
  <td class="right2">
+
+ <input type="hidden" name="usageStartTime" value="${reservationDTOForReservationDetails.usageStartTime}.getTimeMinutesValue"/>
+<input type="hidden" name="usageEndTime" value="${reservationDTOForReservationDetails.usageEndTime}.getTimeMinutesValue"/>
+
+
  <c:if test="${reservationDTOForReservationDetails.usageStartTime.hour < 10}">
  0<c:out value="${reservationDTOForReservationDetails.usageStartTime.hour}"/>
  </c:if>

@@ -48,6 +48,15 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		session.setAttribute("reservationDTOForReservationChange", reservation);
 		session.setAttribute("usageStartTimeForReservationChange", reservation.getUsageStartTime());
 		session.setAttribute("usageEndTimeForReservationChange", reservation.getUsageEndTime());
+
+		String usageStartTimeStr = request.getParameter("usageStartTime");
+		String usageEndTimeStr = request.getParameter("usageEndTime");
+
+		int usageStartTime = Integer.parseInt(usageStartTimeStr);
+		int usageEndTime = Integer.parseInt(usageEndTimeStr);
+
+
+
 		session.setAttribute("reservationNameForReservationChange", reservation.getReservationName());
 		session.setAttribute("numberOfParticipantsForReservationChange", reservation.getNumberOfParticipants());
 		session.setAttribute("coReservedPersonIdForReservationChange", reservation.getCoReservedPerson().getUserId());

@@ -185,7 +185,7 @@ selected
 </div>
 <div class="footer1" class=><footer class="fotter2">copyright🄫KAT-UNE</footer></div>
 </div>
-<script type="text/javascript" src="/ReservationSystemKAT-UNE/Slider.js">	</script>
+<script type="text/javascript" src="/ReservationSystemKAT-UNE/Slider.js"></script>
 
-    </body>
+</body>
 </html>
