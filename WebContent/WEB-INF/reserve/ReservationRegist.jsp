@@ -12,13 +12,10 @@
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link type="text/css" rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.min.css" />
-<link rel="stylesheet" href="Slider.css">
+<link rel="stylesheet" href="/ReservationSystemKAT-UNE/Slider.css">
 
 	<script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.min.js"></script>
 	<script type="text/javascript" src="Slider.js">	</script>
-
-	<imput type="hidden" id="usableStartTimeForReservationRegist" 	value="${usableStartTimeForReservationRegist.hour}"/>
-
 	<script type="text/javascript" src="UserSearch.js">	</script>
 
 </head>
@@ -63,6 +60,10 @@ Javascriptを有効にしてください
 <tr>
 <td class="dialog"><b>　　　　　　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
+
+<input type="hidden" id="usableStartTimeForReservationRegist"  value="${usableStartTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id="usableStartTimeForReservationRegist"  value="${usageEndTimeForReservationRegist.timeMinutesValue}"/>
+
 <div id="slider-area">
         <div style="float:left;width:100px;margin-left:0px;">
             <input type="text" id="slider-left-timelabel" class="timelabel" readonly="readonly" style="text-align: left;width:100%"/>
