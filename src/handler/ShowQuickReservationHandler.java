@@ -62,6 +62,8 @@ public class ShowQuickReservationHandler implements Handler {
 			return ERROR_PAGE;
 		}
 
+		TimeDto sss = (TimeDto)session.getAttribute("usageEndTimeForResourceSelect");
+		System.out.println(sss.getHour());
 		session.setAttribute("usageStartTimeForResourceSelect", usageStartTimeForResourceSelect);
 
 		return QUIICK_RESERVATION;
