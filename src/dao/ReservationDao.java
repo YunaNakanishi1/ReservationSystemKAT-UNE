@@ -666,6 +666,9 @@ public class ReservationDao {
 				reservationList.add(reservationDto);
 			}
 
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw new SQLException();
 
 
 		}finally{
