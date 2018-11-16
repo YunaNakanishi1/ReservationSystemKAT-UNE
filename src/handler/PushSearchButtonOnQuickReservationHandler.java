@@ -69,10 +69,10 @@ public class PushSearchButtonOnQuickReservationHandler implements Handler {
 			 int usageEndMinutes = usageEndTimeForResourceSelect.getTimeMinutesValue();
 
 			 //実利用時間
-			 TimeDto usageTimeForReservationSelect = new TimeDto(usageEndMinutes - usageStartMinutes);
+			 TimeDto usageTimeForResourceSelect = new TimeDto(usageEndMinutes - usageStartMinutes);
 			 //入力内容をsessionにセット
 			 session.setAttribute("usageEndTimeForResourceSelect", usageEndTimeForResourceSelect);
-			 session.setAttribute("usageTimeForReservationSelect", usageTimeForReservationSelect);
+			 session.setAttribute("usageTimeForResourceSelect", usageTimeForResourceSelect);
 			 session.setAttribute("capacityForResourceSelect", capacityInt);
 
 			 //利用日

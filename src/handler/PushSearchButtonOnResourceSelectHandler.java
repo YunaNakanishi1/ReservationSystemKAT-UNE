@@ -127,13 +127,14 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         int endTime = usageEndTimeForResourceSelect.getTimeMinutesValue();
         int actualUseTime = usageTimeForResourceSelect.getTimeMinutesValue();
 
+
         //利用開始時間, 利用終了時間の時間幅よりも実利用時間の方が長い場合
         if ((endTime - startTime) < actualUseTime) {
         	request.setAttribute("MessageForReservationListUpper",PM10);
         	TimeDto updateUsageTime = new TimeDto(endTime - startTime);
 
         	//新たに実利用時間をセットしなおす
-        	session.setAttribute("usageTimeForReservationSelect", updateUsageTime);
+        	session.setAttribute("usageTimeForResourceSelect", updateUsageTime);
         }
 
 		return SEARCH_RESOURCE_LIST_SERVLET;

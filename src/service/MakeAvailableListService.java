@@ -86,8 +86,10 @@ public class MakeAvailableListService implements Service{
                 //利用可能時間が実利用時間を超えていたら
                 if((endMinutes - startMinutes) >= _usageTime.getTimeMinutesValue()){
                     boolean hasSupplement = false;
-                    if(resource.getSupplement().length() > 0){
-                        hasSupplement = true;
+                    if(resource.getSupplement() != null){
+                    	if(resource.getSupplement().length() > 0){
+                        	hasSupplement = true;
+                    	}
                     }
                     AvailableDto available = new AvailableDto(resource.getResourceId(),resource.getResourceName(), sTime, eTime, resource.getCapacity(), resource.getOfficeName(), resource.getCategory(), hasSupplement);
                     _availableList.add(available);

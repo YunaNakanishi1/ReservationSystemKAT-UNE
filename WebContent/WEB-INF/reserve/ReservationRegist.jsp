@@ -66,7 +66,7 @@ Javascriptを有効にしてください
 
 <input type="hidden" id ="usageStartTimeForReservationRegist" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
 <input type="hidden" id ="usableEndTimeForReservationRegist" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
-<input type="hidden" id ="usageTimeForReservationSelect" value="${usageTimeForReservationSelect.timeMinutesValue}"/>
+<input type="hidden" id ="usageTimeForReservationSelect" value="${usageTimeForResourceSelect.timeMinutesValue}"/>
 
 
 <div id="slider-area">
@@ -108,7 +108,7 @@ Javascriptを有効にしてください
 <tr>
 <td class="dialog"><b>　　　　　　利用人数</b></td>
 <td class="right2">
-<input type="text" name="numberOfParticipants" placeholder="半角数字のみ" value="<c:out value="${numberOfParticipantsForReservationRegist }"/>" > 名
+<input type="text" name="numberOfParticipants" placeholder="半角数字のみ" value="<c:out value="${displayNumberOfParticipantsForReservationRegist }"/>" > 名
 
  </td>
 </tr>
