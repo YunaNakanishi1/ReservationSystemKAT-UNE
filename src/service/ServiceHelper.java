@@ -73,7 +73,7 @@ public class ServiceHelper {
         if(convertTime.before(minTimeStamp)){
             return minTimeDto;
         }
-        else if(convertTime.after(maxTimeStamp)){
+        else if(convertTime.equals(maxTimeStamp)||convertTime.after(maxTimeStamp)){
             return maxTimeDto;
         }
         else{

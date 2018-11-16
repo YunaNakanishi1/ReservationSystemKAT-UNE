@@ -37,7 +37,9 @@ public class GetReservationListBetweenDateService implements Service{
 
 	@Override
 	public void execute() throws SQLException{
+
 		ReservationDao reservationDao = new ReservationDao();
+
 		_reservationList=reservationDao.queryBetweenDate(_resourceId, _startTime, _endTime);
 	}
 

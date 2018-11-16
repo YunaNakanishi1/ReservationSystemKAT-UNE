@@ -205,6 +205,10 @@ public class ReservationDao {
 			//「利用開始時間」「利用終了時間」のDTOを作る
 			TimeDto usageStartTime = new TimeDto(usageStartDate);
 			TimeDto usageEndTime = new TimeDto(usageEndDate);
+			//利用終了が00:00だったら24:00に直す
+			if(usageEndTime.getTimeMinutesValue()==0){
+				usageEndTime=new TimeDto(24, 0);
+			}
 
 			//「予約者」のDTOを作る
 			User reservedPerson = new User(userId, password, authority, familyName,
@@ -338,6 +342,10 @@ public class ReservationDao {
 				String resultUsageDate=new SimpleDateFormat("yyyy/MM/dd").format(rs.getTimestamp("starttime"));
 				TimeDto resultUsageStartTime=new TimeDto(rs.getTimestamp("starttime"));
 				TimeDto resultUsageEndTime=new TimeDto(rs.getTimestamp("endtime"));
+				//利用終了が00:00だったら24:00に直す
+				if(resultUsageEndTime.getTimeMinutesValue()==0){
+					resultUsageEndTime=new TimeDto(24, 0);
+				}
 
 				ReservationDto reservation = new ReservationDto(rs.getInt("reserveid"), resource, resultUsageDate, resultUsageStartTime, resultUsageEndTime, rs.getString("reservename"), user, null, 0, null, null, rs.getInt("reservedeleted"));
 				reservationList.add(reservation);
@@ -413,6 +421,10 @@ public class ReservationDao {
                 String resultUsageDate=new SimpleDateFormat("yyyy/MM/dd").format(rs.getTimestamp("starttime"));
                 TimeDto resultUsageStartTime=new TimeDto(rs.getTimestamp("starttime"));
                 TimeDto resultUsageEndTime=new TimeDto(rs.getTimestamp("endtime"));
+              //利用終了が00:00だったら24:00に直す
+				if(resultUsageEndTime.getTimeMinutesValue()==0){
+					resultUsageEndTime=new TimeDto(24, 0);
+				}
 
                 ReservationDto reservation = new ReservationDto(rs.getInt("reserveid"), resource, resultUsageDate, resultUsageStartTime, resultUsageEndTime, rs.getString("reservename"), null, null, 0, null, null, rs.getInt("reservedeleted"));
                 reservationList.add(reservation);            }
@@ -495,7 +507,7 @@ public class ReservationDao {
 
 		try{
 
-			StringBuilder sqlBuilder = new StringBuilder("select reserve_id resources.resource_id, usage_start_date, usage_end_date, "
+			StringBuilder sqlBuilder = new StringBuilder("select reserve_id, resources.resource_id, usage_start_date, usage_end_date, "
 					+ " reservation_name ,reserved_person_id, co_reserved_person_id, "
 					+ "number_of_participants, attendance_types.attendance_type_id, "
 					+ "reserve_supplement, reservations.deleted as reservation_deleted, "
@@ -520,7 +532,7 @@ public class ReservationDao {
 				+ "and resources.resource_id = resource_features.resource_id "
 				+ "and resources.office_id = offices.office_id "
 				+ "and resources.category_id = categories.category_id ");
-			sqlBuilder.append("and reservations.resourceId=? and usage_end_date > ? and usage_start_date < ? ");
+			sqlBuilder.append("and reservations.resource_id=? and usage_end_date > ? and usage_start_date < ? ");
 			sqlBuilder.append("order by reserve_id");
 
 			preparedStatement=_con.prepareStatement(sqlBuilder.toString());
@@ -628,6 +640,10 @@ public class ReservationDao {
 				//「利用開始時間」「利用終了時間」のDTOを作る
 				TimeDto usageStartTime = new TimeDto(usageStartDate);
 				TimeDto usageEndTime = new TimeDto(usageEndDate);
+				//利用終了が00:00だったら24:00に直す
+				if(usageEndTime.getTimeMinutesValue()==0){
+					usageEndTime=new TimeDto(24, 0);
+				}
 
 				//「予約者」のDTOを作る
 				User reservedPerson = new User(userId, password, authority, familyName,
@@ -650,6 +666,9 @@ public class ReservationDao {
 				reservationList.add(reservationDto);
 			}
 
+		} catch(SQLException e) {
+			e.printStackTrace();
+			throw new SQLException();
 
 
 		}finally{

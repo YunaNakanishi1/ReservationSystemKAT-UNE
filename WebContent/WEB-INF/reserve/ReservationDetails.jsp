@@ -148,8 +148,8 @@ Javascriptを有効にしてください
  <tr>
  <td>
  	<c:if test="${flagForShowingDeleteAndChangeButton == true}">
-		 <form action="/ReservationSystemKAT-UNE/reservesystem/pushChangeReservationButton" method="get">
-		 <input type="hidden" name="reservationIdForReservationDetails" value="${reservationDTOForReservationDetails.reservationId}">
+		 <form action="/ReservationSystemKAT-UNE/reservesystem/pushChangeButtonOnReservationDetails" method="post">
+		 <input type="hidden" name="reserveId" value="${reservationDTOForReservationDetails.reservationId}">
 
 		 <input class="submit" class="dialog" type = "submit" value ="変更">
 		 </form>
