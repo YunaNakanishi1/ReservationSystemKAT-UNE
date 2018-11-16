@@ -6,10 +6,10 @@ package handler;
 
 import static handler.ViewHolder.*;
 
-import java.sql.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,9 +47,8 @@ public class ShowReservationRegistHandler {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/M/d");
 		String date = (String) _session.getAttribute("usageDateForReservationRegist");
 		try {
-			Date day = (Date) sdf.parse(date);
+			Date day = sdf.parse(date);
 			SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy年M月d日");
-
 			_session.setAttribute("usageDateForReservationRegist", sdf2.format(day));
 		} catch (ParseException e) {
 			e.printStackTrace();
