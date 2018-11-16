@@ -117,6 +117,9 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 				List<ReservationDto> reservationList=getReservationListBetweenDateService.getReservationList();
 
+				System.out.println(reservationList.get(0).getReservationName());
+
+				System.out.println(reservationList.get(1).getReservationName());
 				if(reservationList.size()==1){
 					if(reservationList.get(0).getReservationId()!=reservation.getReservationId()){
 						_log.error("anothr reservation exist id");
