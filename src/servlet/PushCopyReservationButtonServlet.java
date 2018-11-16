@@ -13,7 +13,9 @@ import handler.Handler;
 import handler.PushCopyReservationButtonHandler;
 
 /**
- * Servlet implementation class PushCopyReservationButtonServlet
+ * サーブレット番号：4
+ * 予約詳細画面からコピーして予約をするサーブレット
+ * @author リコーITソリューションズ株式会社 KAT-UNE
  */
 @WebServlet("/reservesystem/pushCopyReservationButton")
 public class PushCopyReservationButtonServlet extends HttpServlet {
