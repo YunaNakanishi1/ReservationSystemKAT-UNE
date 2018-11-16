@@ -122,20 +122,15 @@ public class ServiceValidator {
   */
     public boolean checkQuickReservationValidate(String date, TimeDto usageStartTime, TimeDto usageEndTime, TimeDto usageTime, String capacity, String resourceName) {
     	SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/M/d");
-        Date useDate;
+        Date useDate, today_first;
         Date today = new Date();
-        Date today_first;
 		try {
 			useDate = sdFormat.parse(date);
 			today_first = sdFormat.parse( sdFormat.format(today) );
 		} catch (ParseException e) {
 			throw new MyException();
 		}
-    	//利用日が本日以降の場合エラー
-    	if (useDate.before(today_first)) {
-    		_validationMessage = EM09;
-    		return true;
-    	}
+
 
     	SimpleDateFormat sdfHour = new SimpleDateFormat("H");
     	SimpleDateFormat sdfMinutes = new SimpleDateFormat("m");
@@ -152,16 +147,28 @@ public class ServiceValidator {
     		throw new MyException();
     	}
 
-    	//現在時刻よりも利用終了時間が前だとエラー
-    	int nowTimeMinutesValue = hourInt * SIXTY_MINUTES + minutesInt;
-    	int endTime = usageEndTime.getTimeMinutesValue();
-    	if (nowTimeMinutesValue >= endTime) {
-    		_validationMessage = EM40;
+
+    	//利用日が本日以前の場合エラー
+    	if (useDate.before(today_first)) {
+    		_validationMessage = EM09;
     		return true;
     	}
 
-    	//利用開始時間より利用終了時間が先の場合エラー
+
+    	int nowTimeMinutesValue = hourInt * SIXTY_MINUTES + minutesInt;
     	int startTime = usageStartTime.getTimeMinutesValue();
+    	int endTime = usageEndTime.getTimeMinutesValue();
+    	if (useDate.compareTo(today_first) == 0) {
+
+    		//現在時刻よりも利用終了時間が前だとエラー
+        	if (nowTimeMinutesValue >= endTime) {
+        		_validationMessage = EM40;
+        		return true;
+        	}
+    	}
+
+
+    	//利用開始時間より利用終了時間が先の場合エラー
     	if (endTime <= startTime) {
     		_validationMessage = EM10;
     		return true;
