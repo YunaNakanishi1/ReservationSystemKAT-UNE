@@ -121,7 +121,7 @@ public class ShowReservationDetailsHandler implements Handler{
 
 				}else if((resource.getDeleted())==1){	//リソースは削除されている
 
-					int authority = (int) session.getAttribute("authority");
+					int authority = (int) session.getAttribute("authorityOfLoggedIn");
 
 					if(authority == 0){ //リソース管理者
 						//予約が削除されている、かつリソースが削除されている、
