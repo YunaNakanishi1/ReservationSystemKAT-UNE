@@ -1,6 +1,7 @@
 package service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import dao.ReservationDao;
 import dto.ReservationDto;
@@ -31,10 +32,10 @@ public class GetReservationListFromResourceIdService implements Service{
 	@Override
 	public void execute() throws SQLException {
 		ReservationDao reservationDao = new ReservationDao();
-		reservationDao.queryByResourceId(_resourceId);
+		resultList = reservationDao.queryByResourceId(_resourceId);
 	}
 
-	public Resou getList(){
+	public List<ReservationDto> getList(){
 		return resultList;
 	}
 
