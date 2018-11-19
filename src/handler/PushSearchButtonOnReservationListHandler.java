@@ -103,7 +103,7 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
             //バリデーションNG時の処理
             boolean setComplete = setCategoryAndOffice(request, categoryIdStr, officeIdStr);
             if(setComplete){
-                request.setAttribute("messageForReservationListUpper", MessageHolder.EM42);
+                request.setAttribute("messageForReservationListUpper", cService.getMessage());
                 return RESERVE_LIST;
             }
             else{

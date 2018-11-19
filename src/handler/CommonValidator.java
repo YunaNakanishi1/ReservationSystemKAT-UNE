@@ -179,14 +179,14 @@ public class CommonValidator {
         Pattern datePattern;
 
         //フォーマット確認「yyyy/M/d」か？
-        datePattern = Pattern.compile("^[0-9]{4}/[0-9]{2}/[0-9]{2}$");
+        datePattern = Pattern.compile("^[0-9]{4}/[0-9]{1,2}/[0-9]{1,2}$");
         Matcher m = datePattern.matcher(dateStr);
         notDate = !m.find();
 
         /* 「yyyy/M/d」形式でない */
         if(notDate){
             /*「M/d形式か？」*/
-            datePattern = Pattern.compile("^[0-9]{2}/[0-9]{2}$");
+            datePattern = Pattern.compile("^[0-9]{1,2}/[0-9]{1,2}$");
             m = datePattern.matcher(dateStr);
             notDate = !m.find();
             if(!notDate){
