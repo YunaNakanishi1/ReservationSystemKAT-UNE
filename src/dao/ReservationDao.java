@@ -850,6 +850,62 @@ public class ReservationDao {
 		return result;
 	}
 
+	public List<ReservationDto> queryByResourceId(String resourceId) throws SQLException{
+		List<ReservationDto> reservationList=new ArrayList<ReservationDto>();
+		DBHelper dbHelper=new DBHelper();
+		_con=dbHelper.connectDb();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		if(_con==null){
+			_log.error("DatabaseConnectError");
+			throw new SQLException();
+		}
+
+		try{
+			String sql ="select reserve_id,resources.resource_id, usage_start_date, usage_end_date,reserved_person_id,reservations.deleted,usage_stop_start_date, usage_stop_end_date, resources.deleted as resource_deleted, users.user_id,users.family_name,users.first_name,users.tel, users.mail_address from reservations, resources,users where resources.resource_id = reservations.resource_id and users.user_id = reservations.reserved_person_id and reservations.deleted=0 and  usage_start_date>CURRENT_TIMESTAMP and reservations.resource_id = '?';";
+			stmt=_con.prepareStatement(sql);
+			stmt.setString(1, resourceId);
+			rs=stmt.executeQuery();
+
+			//結果の取得
+			while(rs.next()){
+				Resource resource = new Resource(rs.getString("resource_id"),null,null,null, 0, null,rs.getInt("resource_deleted"), null, null,null);
+				User user=new User(rs.getString("users.user_id"), null, 0, rs.getString("familyname"), rs.getString("firstname"), rs.getString("users.tel"),rs.getString("users.mail_address"));
+				//String resultUsageDate=new SimpleDateFormat("yyyy/MM/dd").format(rs.getTimestamp("usage_start_date"));
+				TimeDto resultUsageStartTime=new TimeDto(rs.getTimestamp("usage_start_date"));
+				TimeDto resultUsageEndTime=new TimeDto(rs.getTimestamp("usage_end_date"));
+				//利用終了が00:00だったら24:00に直す
+				if(resultUsageEndTime.getTimeMinutesValue()==0){
+					resultUsageEndTime=new TimeDto(24, 0);
+				}
+
+				ReservationDto reservation = new ReservationDto(rs.getInt("reserve_id"), resource,null, resultUsageStartTime, resultUsageEndTime,null, user, null, 0, null, null, rs.getInt("reservations.deleted"));
+				reservationList.add(reservation);
+
+			}
+
+
+		}catch (SQLException e) {
+			_con.rollback();
+			throw e;
+
+		} finally {
+			try {
+	            dbHelper.closeResource(stmt);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            _log.error("Exception");
+	        }
+	        dbHelper.closeDb();
+		}
+
+		return reservationList;
+	}
+
+
+
+
 
 
 }
