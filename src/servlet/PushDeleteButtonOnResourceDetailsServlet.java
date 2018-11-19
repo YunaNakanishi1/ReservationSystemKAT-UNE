@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import handler.Handler;
+import handler.PushDeleteButtonOnResourceDetailsHandler;
 
 /**
  * サーブレット番号：6
