@@ -40,7 +40,7 @@ Javascriptを有効にしてください
 <div class="contents">
 <h2>予約登録</h2>
 <p><font color = "red"><!-- メッセージ --></font></p>
-
+<p><font color="red"><c:out value = "${messageForReservationRegist}"/></font></p>
 <table class="table5">
 <tbody>
 <form action="/ReservationSystemKAT-UNE/reservesystem/registreserve" method="post">
@@ -98,6 +98,8 @@ Javascriptを有効にしてください
 </div>
 	<input type = "hidden" name = "usageStartTime" id = "usageStartTime" value = "">
     <input type = "hidden" name = "usageEndTime" id = "usageEndTime" value = "">
+    <input type = "hidden" name = "usableStartTime" value="${usableStartTimeForReservationRegist.timeMinutesValue }">
+    <input type = "hidden" name = "usableEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue }">
 </td>
 </tr>
 <tr>
