@@ -84,7 +84,7 @@ public class ServiceHelper {
     public TimeDto getSliderLeftValue(TimeDto usageStartTime,List<ReservationDto> reservationList){
 		TimeDto leftValue=new TimeDto(0, 0);
 		for(ReservationDto reservation:reservationList){
-			if(usageStartTime.getTimeMinutesValue()<=reservation.getUsageEndTime().getTimeMinutesValue()){
+			if(usageStartTime.getTimeMinutesValue()>=reservation.getUsageEndTime().getTimeMinutesValue()){
 				if(leftValue.getTimeMinutesValue()<reservation.getUsageEndTime().getTimeMinutesValue()){
 					leftValue=reservation.getUsageEndTime();
 				}

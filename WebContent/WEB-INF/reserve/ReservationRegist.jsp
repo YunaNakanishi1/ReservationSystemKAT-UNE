@@ -70,6 +70,7 @@ Javascriptを有効にしてください
 <input type="hidden" id ="usageTimeForReservationSelect" value="${usageTimeForResourceSelect.timeMinutesValue}"/>
 
 
+
 <div id="slider-area">
         <div style="float:left;width:100px;margin-left:0px;">
             <input type="text" id="slider-left-timelabel" class="timelabel"  readonly="readonly" style="text-align: left;width:100%"/>
