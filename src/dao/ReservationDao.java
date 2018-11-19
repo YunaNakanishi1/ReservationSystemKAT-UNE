@@ -232,6 +232,8 @@ public class ReservationDao {
 					reservedPerson, coReservedPerson, numberOfParticipants,
 					attendanceTypeDto, reserveSupplement, reservationDeleted);
 
+		} catch(NullPointerException e) {
+			return null;
 		}finally{
 			try {
 				dbHelper.closeResource(rs);
