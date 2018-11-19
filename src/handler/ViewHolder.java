@@ -34,5 +34,6 @@ public class ViewHolder {
     public static final String RESERVATION_REGIST="/WEB-INF/reserve/ReservationRegist.jsp";
     public static final String SHOW_RESERVATION_REGIST_SERVLET="showreserveregist";
     public static final String RESOURCE_DETAILS_TAB="/WEB-INF/resource/ResourceDetailsTab.jsp";
+    public static final String RESOURCE_DELETE_CONFIRM="/WEB-INF/resource/ResourceDeleteConfirm.jsp";
 
 }
