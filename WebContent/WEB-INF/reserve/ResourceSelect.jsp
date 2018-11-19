@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -342,6 +343,7 @@ checked
 <p><font color = "red"><c:out value = "${messageForResourceSelectLower}"/></font></p>
 
 <form action = "/ReservationSystemKAT-UNE/reservesystem/showreserveregist" method = "post">
+<c:if test="${fn:length(availableListForResourceSelect) >0 }">
 <table id="design-table" class="table table-striped table-bordered" style="width: 90%;">
 					<thead>
 						<tr>
@@ -397,7 +399,7 @@ checked
 
 					</tbody>
 				</table>
-
+</c:if>
 				</form>
 </div>
 

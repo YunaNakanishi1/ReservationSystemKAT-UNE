@@ -82,7 +82,7 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
             //バリデーションNG時の処理
             boolean setComplete = setCategoryAndOffice(request, categoryIdStr, officeIdStr);
             if(setComplete){
-                session.setAttribute("messageForReservationListUpper", MessageHolder.EM42);
+                request.setAttribute("messageForReservationListUpper", MessageHolder.EM42);
                 return RESERVE_LIST;
             }
             else{
@@ -103,7 +103,7 @@ public class PushSearchButtonOnReservationListHandler implements Handler{
             //バリデーションNG時の処理
             boolean setComplete = setCategoryAndOffice(request, categoryIdStr, officeIdStr);
             if(setComplete){
-                session.setAttribute("messageForReservationListUpper", MessageHolder.EM42);
+                request.setAttribute("messageForReservationListUpper", cService.getMessage());
                 return RESERVE_LIST;
             }
             else{
