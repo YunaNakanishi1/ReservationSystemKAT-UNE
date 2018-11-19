@@ -80,7 +80,10 @@ public class ShowReservationDetailsHandler implements Handler{
 
 			if(user != null){
 				String userId = user.getUserId();
-				String coUserId = coUser.getUserId();
+				String coUserId =null;
+				if(coUser!=null){
+				coUserId = coUser.getUserId();
+				}
 
 
 				//予約者と共同予約者にのみ削除・変更ボタンを表示する。

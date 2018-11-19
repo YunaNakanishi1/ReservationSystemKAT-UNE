@@ -3,11 +3,12 @@ var duration = parseInt(document.getElementById("usageTimeForReservationSelect")
 var start = parseInt(document.getElementById("usageStartTimeForReservationRegist").value,10);//利用可能開始時間
 var end = parseInt(document.getElementById("usableEndTimeForReservationRegist").value,10); //利用可能終了時間
 var handleWidthMin = 15;//つまみの最小幅
+var sliderStartPoint = parseInt(document.getElementById("usableStartTime").value,10);	//スライダー初期位置
 
 //スライダーを生成
 $(function() {
 	var slider = $('#slider').slider({
-                      value:0,
+                      value: sliderStartPoint,
                       min: 0,
                       max: (end - start - duration),
                       step: 15,
