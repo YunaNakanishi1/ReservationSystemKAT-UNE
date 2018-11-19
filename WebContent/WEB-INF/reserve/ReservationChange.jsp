@@ -222,6 +222,7 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 
 <br>
 <td>
+
 <input class="submit" class="dialog" type = "submit" value = "変更">
 </td>
 <td>
