@@ -295,7 +295,7 @@ public class ReservationDao {
 			}
 
 			if(deletedReservation){
-				sqlBuilder.append("AND (reservations.deleted = 0 OR (reserved_person_id=p7_user_id OR co_reserved_person_id=p7_user_id)) ");
+				sqlBuilder.append("AND (reservations.deleted = 1 OR (reserved_person_id=p7_user_id OR co_reserved_person_id=p7_user_id)) ");
 			}else{
 				sqlBuilder.append("AND reservations.deleted = 0 ");
 			}
