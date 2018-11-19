@@ -128,7 +128,7 @@ public class ReservationDao {
 
 
 
-			while (rs.next()) {
+			if (rs.next()) {
 				resourceId = rs.getString("resource_id");
 				usageStartDate = rs.getTimestamp("usage_start_date");
 				usageEndDate = rs.getTimestamp("usage_end_date");
@@ -195,12 +195,22 @@ public class ReservationDao {
 					firstName, phoneNumber, mailAddress);
 
 			//「共同予約者」のDTOを作る
-			User coReservedPerson = new User(coUserId, coPassword, coAuthority,
+			User coReservedPerson;
+
+			if(coUserId != null){
+			coReservedPerson = new User(coUserId, coPassword, coAuthority,
 					coFamilyName, coFirstName, coFhoneNumber, coMailAddress);
+			}else{
+			    coReservedPerson = null;
+			}
 
 			//「参加者種別」のDTO
-			AttendanceTypeDto attendanceTypeDto =
-					new AttendanceTypeDto(attendanceTypeId, attendanceType);
+			AttendanceTypeDto attendanceTypeDto;
+			if(attendanceTypeId != 0){
+			    attendanceTypeDto = new AttendanceTypeDto(attendanceTypeId, attendanceType);
+			}else{
+			    attendanceTypeDto = null;
+			}
 
 
 			reservationDto = new ReservationDto(reserveId, resource,
