@@ -109,14 +109,13 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         	dateStr = validator.getDateStr();
         }
 
-        if(commonValidator.notSetOn(capacityStr)){
         try {
 			capacity=commonValidator.getCapacityValue(capacityStr);
 		} catch (MyException e1) {
 			session.setAttribute("messageForResourceSelectUpper", EM31);
 			return SHOW_RESOURCE_SELECT_SERVLET;
 		}
-        }
+
         session.setAttribute("capacityForResourceSelect",capacity);
 
         //入力バリデーションチェック
