@@ -35,6 +35,11 @@ public class CheckSearchReservationListService implements Service {
             return false;
         }
 
+        if (_endTime.getTimeMinutesValue() == _startTime.getTimeMinutesValue()) {
+        	_message = MessageHolder.EM49;
+        	return false;
+        }
+
         if(_startTime.getTimeMinutesValue() > HOUR24_MINUTES){
             _message = MessageHolder.EM51;
             return false;
