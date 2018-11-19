@@ -794,21 +794,6 @@ public class ReservationDao {
 		return result;
 	}
 
-	public List<ReservationDto> (String resourceId) throws SQLException{
-
-		//結果を入れる予約Dtoのリストを作成
-		List<ReservationDto> DeteleReservationList = new ArrayList<ReservationDto>();
-
-		DBHelper dbHelper = new DBHelper();
-		_con = dbHelper.connectDb(); //dbに接続
-
-		if(_con == null){
-			_log.error("DatabaseConnectError");
-			throw new SQLException();	//エラー処理はハンドラーに任せる
-
-			StringBuilder sqlBuilder=new StringBuilder("");
-		}
-	}
 
 
 }
