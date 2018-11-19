@@ -33,9 +33,13 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		HttpSession session = request.getSession(false);
 		ReservationDto reservation=null;
 		String reserveIdStr=request.getParameter("reserveId");
+
+		//System.out.println(reserveIdStr);
+
 		int reserveId=0;
 		try{
 		reserveId=Integer.parseInt(reserveIdStr);
+
 		}catch (NumberFormatException e) {
 			_log.error("reserveId is not number");
 		}

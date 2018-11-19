@@ -55,6 +55,7 @@ public class ShowReservationDetailsHandler implements Handler{
 
 				if(reservation != null){
 					session.setAttribute("reservationDTOForReservationDetails", reservation);
+
 				}else{
 					_log.error("reservationDTO is null");
 					return ERROR_PAGE;
