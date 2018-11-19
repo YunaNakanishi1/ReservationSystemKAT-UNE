@@ -343,7 +343,7 @@ checked
 <p><font color = "red"><c:out value = "${messageForResourceSelectLower}"/></font></p>
 
 <form action = "/ReservationSystemKAT-UNE/reservesystem/showreserveregist" method = "post">
-<c:if test="${fn:length(avalilableListForResourceSelect) >0 }">
+<c:if test="${fn:length(availableListForResourceSelect) >0 }">
 <table id="design-table" class="table table-striped table-bordered" style="width: 90%;">
 					<thead>
 						<tr>

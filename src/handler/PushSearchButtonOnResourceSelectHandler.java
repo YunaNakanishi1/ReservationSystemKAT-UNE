@@ -115,6 +115,7 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
 			session.setAttribute("messageForResourceSelectUpper", EM31);
 			return SHOW_RESOURCE_SELECT_SERVLET;
 		}
+
         session.setAttribute("capacityForResourceSelect",capacity);
 
         //入力バリデーションチェック
