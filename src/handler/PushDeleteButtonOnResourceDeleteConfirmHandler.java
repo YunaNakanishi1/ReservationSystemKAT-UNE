@@ -31,7 +31,32 @@ public class PushDeleteButtonOnResourceDeleteConfirmHandler implements Handler{
 	String checkBox =request.getParameter("checkedConfirm");
 
 	if(checkBox != null){
+		//sessionからreservationDtoを取得
+		List<ReservationDto> previousReservationList = (List<ReservationDto>)session.getAttribute("reservationListForResourceDeleteConfirm");
+		int count =0;
 
+		List<ReservationDto> currentReservationList =new ArrayList<ReservationDto>();
+		GetReservationListFromResourceIdService getReservationListFromResourceIdService=new GetReservationListFromResourceIdService(resourceId);
+		currentReservationList=getReservationListFromResourceIdService.getList();
+
+		//結果のリストの各要素について
+		for(ReservationDto current : currentReservationList){
+			//sessionから取得したリストの各要素について
+			for(ReservationDto previous :previousReservationList){
+				if(current.equals(previous)){
+					count++;
+				}
+
+			}
+		}
+
+		if(currentReservationList.size()==count){
+			session.setAttribute("reservationListForResourceDeleteConfirm",currentReservationList);
+			return DELETE_RESOURCE;
+		}
+		session.setAttribute("reservationListForResourceDeleteConfirm",currentReservationList);
+		request.setAttribute("messageForResourceDeleteConfirm",EM43);
+		return RESOURCE_DELETE_CONFIRM;
 
 
 
@@ -39,22 +64,7 @@ public class PushDeleteButtonOnResourceDeleteConfirmHandler implements Handler{
 		request.setAttribute("messageForResourceDeleteConfirm",EM43);
 		return RESOURCE_DELETE_CONFIRM;
 	}
-	//sessionからreservationDtoを取得
-	List<ReservationDto> reservationList = (List<ReservationDto>)session.getAttribute("reservationListForResourceDeleteConfirm");
-	int count = 1;
 
-	List<ReservationDto> resultList =new ArrayList<ReservationDto>();
-	GetReservationListFromResourceIdService getReservationListFromResourceIdService=new GetReservationListFromResourceIdService(resourceId);
-	resultList=getReservationListFromResourceIdService.getList();
-
-	//結果のリストの各要素について
-	for(ReservationDto result : resultList){
-		//sessionから取得したリストの各要素について
-		for(ReservationDto reservationDto : reservationList){
-			if() //ここから
-
-		}
-	}
 
 
 	}
