@@ -128,7 +128,7 @@ Javascriptを有効にしてください
 <td class="dialog"><b>　　　　　　共同予約者</b></td>
 
 <td class="right2">
-<span class="reserve_name">----<!-- ---- --></span> <input class="button" type = "submit" onclick="addSearch('reserve_pare')" value = "変更"> <input class="button" type = "submit" value = "クリア">
+<span class="reserve_name">----</span> <input class="button" type = "submit" onclick="addSearch('reserve_pare')" value = "変更"> <input class="button" type = "submit" value = "クリア">
 </td>
 </tr>
 

@@ -50,13 +50,21 @@ public class GetSliderWidthService implements Service {
 		}
 
 		TimeDto usageEndTime=_reservation.getUsageEndTime();
-		TimeDto sliderRightValue=serviceHelper.getSliderLeftValue(usageEndTime, _reservationList);
+
+		//System.out.println(usageEndTime.getHour() + "です");
+		//System.out.println(_reservationList.size());
+
+		TimeDto sliderRightValue=serviceHelper.getSliderRightValue(usageEndTime, _reservationList);
 
 		TimeDto usageStopEndValue=serviceHelper.convertUsageStopTimeToOneDay(resource.getUsageStopEndDate(), usageDate);
+
+//		System.out.println(sliderRightValue.getTimeMinutesValue());
+//		System.out.println(sliderRightValue.getTimeMinutesValue());
+
 		if(sliderRightValue.getTimeMinutesValue()<usageStopEndValue.getTimeMinutesValue()){
-			_endTimeSliderValue=sliderRightValue;
+			_endTimeSliderValue= usageStopEndValue;
 		}else{
-			_endTimeSliderValue=usageStopEndValue;
+			_endTimeSliderValue= sliderRightValue;
 		}
 
 
