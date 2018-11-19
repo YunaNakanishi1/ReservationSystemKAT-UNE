@@ -128,7 +128,7 @@ public class ReservationDao {
 
 
 
-			while (rs.next()) {
+			if (rs.next()) {
 				resourceId = rs.getString("resource_id");
 				usageStartDate = rs.getTimestamp("usage_start_date");
 				usageEndDate = rs.getTimestamp("usage_end_date");
@@ -195,12 +195,22 @@ public class ReservationDao {
 					firstName, phoneNumber, mailAddress);
 
 			//「共同予約者」のDTOを作る
-			User coReservedPerson = new User(coUserId, coPassword, coAuthority,
+			User coReservedPerson;
+
+			if(coUserId != null){
+			coReservedPerson = new User(coUserId, coPassword, coAuthority,
 					coFamilyName, coFirstName, coFhoneNumber, coMailAddress);
+			}else{
+			    coReservedPerson = null;
+			}
 
 			//「参加者種別」のDTO
-			AttendanceTypeDto attendanceTypeDto =
-					new AttendanceTypeDto(attendanceTypeId, attendanceType);
+			AttendanceTypeDto attendanceTypeDto;
+			if(attendanceTypeId != 0){
+			    attendanceTypeDto = new AttendanceTypeDto(attendanceTypeId, attendanceType);
+			}else{
+			    attendanceTypeDto = null;
+			}
 
 
 			reservationDto = new ReservationDto(reserveId, resource,
@@ -506,9 +516,9 @@ public class ReservationDao {
 					+ " resource_features,resource_characteristics , offices , categories ");
 			sqlBuilder.append("where resources.resource_id = reservations.resource_id "
 				+ "and resource_features.resource_characteristic_id = resource_characteristics.resource_characteristic_id "
-				+ "and attendance_types.attendance_type_id = reservations.attendance_type_id "
+				+ "and (attendance_types.attendance_type_id = reservations.attendance_type_id or reservations.attendance_type_id is NULL) "
 				+ "and users.user_id = reservations.reserved_person_id "
-				+ "and cousers.user_id = reservations.co_reserved_person_id "
+				+ "and (cousers.user_id = reservations.co_reserved_person_id or reservations.co_reserved_person_id is NULL) "
 				+ "and resources.resource_id = resource_features.resource_id "
 				+ "and resources.office_id = offices.office_id "
 				+ "and resources.category_id = categories.category_id ");
@@ -522,6 +532,7 @@ public class ReservationDao {
 			preparedStatement.setTimestamp(3, endTime);
 
 			rs=preparedStatement.executeQuery();
+
 
 			//reservationsテーブルのカラムをセットするために用意
 			int reserveId=0;

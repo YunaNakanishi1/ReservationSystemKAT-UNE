@@ -321,9 +321,8 @@ checked
 
 <td>
 
-<form action = "${returnPageForResourceSelect}" method = "post">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
-<input class="submit dialog2" type = "submit" value = "戻る"></form>
+<input class="submit dialog2" type = "submit" value = "戻る" formaction="${returnPageForResourceSelect}">
 
 </td>
 <td>　</td>
