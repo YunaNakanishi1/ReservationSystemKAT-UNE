@@ -107,6 +107,7 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         	return SHOW_RESOURCE_SELECT_SERVLET;
         } else {
         	dateStr = validator.getDateStr();
+        	session.setAttribute("usageDateForReservationRegist", dateStr);
         }
 
         try {

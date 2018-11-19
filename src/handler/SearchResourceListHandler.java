@@ -55,7 +55,7 @@ public class SearchResourceListHandler implements Handler {
             }
 
         }catch (MyException e) {
-            _log.error("Avaivable Error");
+            _log.error("Available Error");
             e.printStackTrace();
             return ViewHolder.ERROR_PAGE;
         }
