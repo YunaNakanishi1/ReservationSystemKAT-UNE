@@ -14,14 +14,14 @@ function addSearch(id)
     <hr>\
     <input type="text" name=""> <input class="button" type = "submit" value = "検索">\
     <br>\
-    <select name="userList" size="5" style="width:200px">\
-    <option value="u0000003">理工三郎 (u0000003)</option>\
-    <option value="u0000004">理工四郎 (u0000004)</option>\
-    <option value="u0000005">理工五郎 (u0000005)</option>\
-    <option value="u0000006">理工六郎 (u0000006)</option>\
-    <option value="u0000022">山田二郎 (u0000022)</option>\
-    <option value="u0000033">理工三郎 (u0000033)</option>\
-    </select>\
+    <select name="userList" size="5" style="width:200px">';
+
+    var test = '<%=request.getAttribute("userListForReservationChange") %>';
+    alert(test);
+    for(var i=0;i<'<%=request.getAttribute("userListForReservationChange").size() %>';i++){
+    	tr_object.innerHTML += '<option value="">'+'<%=request.getAttribute("userListForReservationChange").get(i).getFirstName") %>'+"</option>";
+    }
+    tr_object.innerHTML += '</select>\
     <br>\
     <input class="button" type = "submit" onclick="closeSearch(\''+id+'\');" value = "選択"> <input class="button" type = "submit" onclick="closeSearch(\''+id+'\');" value = "閉じる">\
     <hr>\

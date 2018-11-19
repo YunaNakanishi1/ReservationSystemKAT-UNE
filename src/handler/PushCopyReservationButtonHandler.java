@@ -58,7 +58,7 @@ public class PushCopyReservationButtonHandler implements Handler{
 
 		//sessionに戻るボタンを押下した際の行き先（予約詳細画面）を保存
 		//コピー元の予約IDも保存
-			session.setAttribute("returnPageForResourceSelect", SHOW_RESERVATION_DETAILS_SERVLET);
+			session.setAttribute("returnPageForResourceSelect", "/ReservationSystemKAT-UNE"+SHOW_RESERVATION_DETAILS_SERVLET);
 			session.setAttribute("reservationIdForReservationDetails", reservationIdForReservationDetails);
 
 			session.setAttribute("usageDateForReservationRegist",reservationDto.getUsageDate());
@@ -69,7 +69,11 @@ public class PushCopyReservationButtonHandler implements Handler{
 			session.setAttribute("capacityForResourceSelect",reservationDto.getResource().getCapacity());
 			session.setAttribute("reservationNameForReservationRegist",reservationDto.getReservationName());
 			session.setAttribute("numberOfParticipantsForReservationRegist",reservationDto.getNumberOfParticipants());
+			if(reservationDto.getCoReservedPerson()!=null){
 			session.setAttribute("coReservedPersonIdForReservationRegist",reservationDto.getCoReservedPerson().getUserId());
+			}else{
+				session.setAttribute("coReservedPersonIdForReservationRegist",null);
+			}
 
 			//参加者種別がnullかnullでないかでセットする値をかえる
 			if(reservationDto.getAttendanceTypeDto() != null){

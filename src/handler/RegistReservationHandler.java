@@ -76,8 +76,22 @@ public class RegistReservationHandler implements Handler {
 		_session.setAttribute("reservationNameForReservationRegist", reservationName);
 		_session.setAttribute("displayNumberOfParticipantsForReservationRegist", displayNumberOfParticipants);
 		_session.setAttribute("coReservedPersonIdForReservationRegist", coReservedPersonId);
-		_session.setAttribute("attendanceTypeIdForReservationRegist", attendanceTypeIdStr);
 		_session.setAttribute("reserveSupplementForReservationRegist", supplement);
+
+		AttendanceTypeDto attendanceType = null;
+		int attendanceTypeId=-1;
+		if(!commonValidator.notSetOn(attendanceTypeIdStr)){
+		try {
+			attendanceTypeId=Integer.parseInt(attendanceTypeIdStr);
+			attendanceType = new AttendanceTypeDto(attendanceTypeId, null);
+			_session.setAttribute("attendanceTypeIdForReservationRegist",attendanceTypeId );
+		} catch (NumberFormatException e) {
+			_log.error("attendanceType not number");
+			throw new MyException();
+		}
+		}else{
+			_session.setAttribute("attendanceTypeIdForReservationRegist", null);
+		}
 
 		int usageStartTimeInt = 0;
 
@@ -112,20 +126,11 @@ public class RegistReservationHandler implements Handler {
 		String resourceId = (String) _session.getAttribute("resourceIdForReservationRegist");
 		String reservedPersonId = (String) _session.getAttribute("userIdOfLoggedIn");
 
-		AttendanceTypeDto attendanceType = null;
-		int attendanceTypeId=-1;
-		if(!commonValidator.notSetOn(attendanceTypeIdStr)){
-		try {
-			attendanceTypeId=Integer.parseInt(attendanceTypeIdStr);
-			attendanceType = new AttendanceTypeDto(attendanceTypeId, null);
-			_session.setAttribute("attendanceTypeIdForReservationRegist",attendanceTypeId );
-		} catch (NumberFormatException e) {
-			_log.error("attendanceType not number");
-			throw new MyException();
+		if(commonValidator.notSetOn(reservationName)){
+			reservationName="名称なし";
 		}
-		}else{
-			_session.setAttribute("attendanceTypeIdForReservationRegist", null);
-		}
+
+
 
 		_reservation = new ReservationDto(-1, new Resource(resourceId, null, null, null, 0, null, 0, null, null, null),
 				usageDate, usageStartTime, usageEndTime, reservationName,

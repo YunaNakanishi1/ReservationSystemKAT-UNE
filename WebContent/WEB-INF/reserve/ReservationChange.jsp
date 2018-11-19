@@ -1,3 +1,5 @@
+<%@page import="dto.User"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
      pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -37,6 +39,24 @@ Javascriptを有効にしてください
 <script type="text/javascript" src="/ReservationSystemKAT-UNE/script/JavascriptErrorLabel.js">	</script>
 <!-- javascript警告ラベル終わり -->
 
+<script>
+
+flag=true;
+function hyoji1()
+{
+  if (flag)
+  {
+    document.getElementById("disp").style.display="none";
+  }
+  else
+  {
+    document.getElementById("disp").style.display="block";
+  }
+  flag = !flag;
+}
+
+</script>
+
 <div class="contents">
 <h2>予約変更</h2>
 
@@ -68,9 +88,10 @@ Javascriptを有効にしてください
 <td class="right2">
 
 
-<input type="hidden" id ="usageStartTimeForReservationRegist" value="${usageStartTimeForReservationChange.timeMinutesValue}"/>
+<input type="hidden" id ="usageStartTimeForReservationRegist" value="${usableStartTimeForReservationChange.timeMinutesValue}"/>
 <input type="hidden" id ="usableEndTimeForReservationRegist" value="${usableEndTimeForReservationChange.timeMinutesValue}"/>
 <input type="hidden" id ="usageTimeForReservationSelect" value="${usageEndTimeForReservationChange}"/>
+<input type="hidden" id ="usableStartTime" value="${usageStartTimeForReservationChange.timeMinutesValue}"/>
 
 
 <div id="slider-area">
@@ -144,6 +165,27 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 </tr>
 
 <tr id="reserve_pare">
+<td class="one" class="dialog"></td>
+    <td class="right2">
+    <hr>
+    <input type="text" name=""> <input class="button" type = "submit" value = "検索">
+    <br>
+    <select name="userList" size="5" style="width:200px">
+		<script type="text/javascript">
+
+		var length = '<%=((List<User>)request.getAttribute("userListForReservationChange")).size() %>';
+		alert(length);
+
+		//var firstName = <%=request.getAttribute("userListForReservationChange") %>;
+    //for(var i=0;i<$length;i++){
+    	//<option value="">$firstName</option>
+    //}
+		</script>
+    </select>
+    <br>
+    <input class="button" type = "submit" onclick="closeSearch(\''+id+'\');" value = "選択"> <input class="button" type = "submit" onclick="closeSearch(\''+id+'\');" value = "閉じる">
+    <hr>
+     </td>
 </tr>
 
 <tr>
@@ -180,6 +222,7 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 
 <br>
 <td>
+
 <input class="submit" class="dialog" type = "submit" value = "変更">
 </td>
 <td>
