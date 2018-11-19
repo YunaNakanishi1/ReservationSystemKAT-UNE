@@ -107,6 +107,7 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         	return SHOW_RESOURCE_SELECT_SERVLET;
         } else {
         	dateStr = validator.getDateStr();
+        	session.setAttribute("usageDateForReservationRegist", dateStr);
         }
 
         try {
@@ -115,6 +116,7 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
 			session.setAttribute("messageForResourceSelectUpper", EM31);
 			return SHOW_RESOURCE_SELECT_SERVLET;
 		}
+
         session.setAttribute("capacityForResourceSelect",capacity);
 
         //入力バリデーションチェック

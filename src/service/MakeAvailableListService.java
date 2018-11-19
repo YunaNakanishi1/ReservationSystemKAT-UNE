@@ -78,10 +78,12 @@ public class MakeAvailableListService implements Service{
                 //予約可能な時間内に予約したい時間の開始時間があれば、予約可能な時間の開始を予約したい時間の開始時間にする
                 if(startMinutes < _usageStartTime.getTimeMinutesValue() && _usageStartTime.getTimeMinutesValue() < endMinutes){
                     sTime = _usageStartTime;
+                    startMinutes = sTime.getTimeMinutesValue();
                 }
                 //予約可能な時間内に予約したい時間の終了時間があれば、予約可能な時間の終了を予約したい時間の終了時間にする
                 if(startMinutes < _usageEndTime.getTimeMinutesValue() && _usageEndTime.getTimeMinutesValue() < endMinutes){
                     eTime = _usageEndTime;
+                    endMinutes = eTime.getTimeMinutesValue();
                 }
                 //利用可能時間が実利用時間を超えていたら
                 if((endMinutes - startMinutes) >= _usageTime.getTimeMinutesValue()){
