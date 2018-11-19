@@ -75,7 +75,7 @@ public class PushCopyReservationButtonHandler implements Handler{
 			if(reservationDto.getAttendanceTypeDto() != null){
 				session.setAttribute("attendanceTypeIdForReservationRegist",reservationDto.getAttendanceTypeDto().getAttendanceTypeId());
 			}else{
-				session.setAttribute("attendanceTypeIdForReservationRegist",null);
+				session.setAttribute("attendanceTypeIdForReservationRegist",-1);
 			}
 			session.setAttribute("reserveSupplementForReservationRegist",reservationDto.getSupplement());
 
