@@ -134,15 +134,6 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 				List<ReservationDto> reservationList=getReservationListBetweenDateService.getReservationList();
 
-				System.out.println(reservationList.size());
-				for(int i = 0 ; i<reservationList.size(); i++){
-					System.out.println(reservationList.get(i).getReservationName());
-					System.out.println(reservationList.get(i).getReservationId());
-					System.out.println(reservationList.get(i).getReservationName());
-					System.out.println(reservationList.get(i).getNumberOfParticipants());
-					System.out.println(reservationList.get(i).getAttendanceTypeDto());
-					System.out.println();
-				}
 
 				if(reservationList.size()==1){
 					if(reservationList.get(0).getReservationId()!=reservation.getReservationId()){

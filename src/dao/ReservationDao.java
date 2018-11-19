@@ -497,33 +497,64 @@ public class ReservationDao {
 
 		try{
 
+//			StringBuilder sqlBuilder = new StringBuilder("select reserve_id, resources.resource_id, usage_start_date, usage_end_date, "
+//					+ " reservation_name ,reserved_person_id, co_reserved_person_id, "
+//					+ "number_of_participants, attendance_types.attendance_type_id, "
+//					+ "reserve_supplement, reservations.deleted as reservation_deleted, "
+//					+ "resource_name, office_name, category_name, capacity, supplement, "
+//					+ "usage_stop_start_date, usage_stop_end_date, "
+//					+ "resources.deleted as resource_deleted, "
+//					+ "	attendance_type, "
+//					+ "resource_characteristic_name, "
+//					+ "users.user_id, users.password, users.family_name, users.first_name, "
+//					+ "users.authority, users.tel, users.mail_address, "
+//					+ "cousers.user_id as co_user_id, cousers.password as co_password, "
+//					+ "cousers.family_name as co_family_name, cousers.first_name as co_first_name, "
+//					+ " cousers.authority as co_authority, cousers.tel as co_tel, "
+//					+ "cousers.mail_address as co_mail_address ");
+
+
 			StringBuilder sqlBuilder = new StringBuilder("select reserve_id, resources.resource_id, usage_start_date, usage_end_date, "
 					+ " reservation_name ,reserved_person_id, co_reserved_person_id, "
-					+ "number_of_participants, attendance_types.attendance_type_id, "
+					+ " number_of_participants, attendance_types.attendance_type_id, "
 					+ "reserve_supplement, reservations.deleted as reservation_deleted, "
 					+ "resource_name, office_name, category_name, capacity, supplement, "
 					+ "usage_stop_start_date, usage_stop_end_date, "
 					+ "resources.deleted as resource_deleted, "
-					+ "	attendance_type, "
-					+ "resource_characteristic_name, "
-					+ "users.user_id, users.password, users.family_name, users.first_name, "
+					+ "attendance_type, users.user_id, users.password, users.family_name, users.first_name, "
 					+ "users.authority, users.tel, users.mail_address, "
-					+ "cousers.user_id as co_user_id, cousers.password as co_password, "
+					+ " cousers.user_id as co_user_id, cousers.password as co_password, "
 					+ "cousers.family_name as co_family_name, cousers.first_name as co_first_name, "
-					+ " cousers.authority as co_authority, cousers.tel as co_tel, "
-					+ "cousers.mail_address as co_mail_address ");
-			sqlBuilder.append("from reservations, resources, attendance_types, users , users as cousers ,"
-					+ " resource_features,resource_characteristics , offices , categories ");
+					+ "cousers.authority as co_authority, cousers.tel as co_tel, cousers.mail_address as co_mail_address ");
+
+
+
+//			sqlBuilder.append("from reservations, resources, attendance_types, users , users as cousers ,"
+//					+ " resource_features,resource_characteristics , offices , categories ");
+
+			sqlBuilder.append("from reservations "
+					+ "left outer join users as cousers on reservations.co_reserved_person_id = cousers.user_id "
+					+ "left outer join attendance_types on attendance_types.attendance_type_id = reservations.attendance_type_id, "
+					+ "resources, users , offices , categories ");
+
+
+
+//			sqlBuilder.append("where resources.resource_id = reservations.resource_id "
+//				+ "and resource_features.resource_characteristic_id = resource_characteristics.resource_characteristic_id "
+//				+ "and (attendance_types.attendance_type_id = reservations.attendance_type_id or reservations.attendance_type_id is NULL) "
+//				+ "and users.user_id = reservations.reserved_person_id "
+//				+ "and (cousers.user_id = reservations.co_reserved_person_id or reservations.co_reserved_person_id is NULL) "
+//				+ "and resources.resource_id = resource_features.resource_id "
+//				+ "and resources.office_id = offices.office_id "
+//				+ "and resources.category_id = categories.category_id ");
+
 			sqlBuilder.append("where resources.resource_id = reservations.resource_id "
-				+ "and resource_features.resource_characteristic_id = resource_characteristics.resource_characteristic_id "
-				+ "and (attendance_types.attendance_type_id = reservations.attendance_type_id or reservations.attendance_type_id is NULL) "
-				+ "and users.user_id = reservations.reserved_person_id "
-				+ "and (cousers.user_id = reservations.co_reserved_person_id or reservations.co_reserved_person_id is NULL) "
-				+ "and resources.resource_id = resource_features.resource_id "
-				+ "and resources.office_id = offices.office_id "
-				+ "and resources.category_id = categories.category_id ");
+					+ "and users.user_id = reservations.reserved_person_id "
+					+ "and resources.office_id = offices.office_id "
+					+ "and resources.category_id = categories.category_id ");
+
 			sqlBuilder.append("and reservations.resource_id=? and usage_end_date > ? and usage_start_date < ? ");
-			sqlBuilder.append("order by reserve_id");
+			sqlBuilder.append("order by reserve_id ;");
 
 			preparedStatement=_con.prepareStatement(sqlBuilder.toString());
 
@@ -600,7 +631,7 @@ public class ReservationDao {
 
 				attendanceType = rs.getString("attendance_type");
 
-				facility.add(rs.getString("resource_characteristic_name"));
+				//facility.add(rs.getString("resource_characteristic_name"));
 
 
 				userId = rs.getString("user_id");
