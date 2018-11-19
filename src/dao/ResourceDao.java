@@ -517,7 +517,7 @@ public class ResourceDao {
 
 
             //SQL文（Select句）
-            String sqlSelect = "select * from resources,offices,categories,params where offices.office_id = resources.office_id and categories.category_id=resources.category_id ";
+            String sqlSelect = "select * from resources,offices,categories,params where offices.office_id = resources.office_id and categories.category_id=resources.category_id and resources.deleted=0 ";
             if(resourceName != null && resourceName != ""){
                 //リソース名が指定されている
                 sqlSelect += "and resource_name like (params.P_resource_name) ";
