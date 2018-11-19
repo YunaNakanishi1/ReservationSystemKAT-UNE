@@ -79,12 +79,6 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
 	        actualUseTimeHourInt = Integer.parseInt(actualUseTimeHourStr);
 	        actualUseTimeMinutesInt = Integer.parseInt(actualUseTimeMinutesStr);
 
-	        if(!commonValidator.notSetOn(capacityStr)) {
-	        	 capacity = Integer.parseInt(capacityStr);
-	        }
-
-
-
         } catch(NumberFormatException e) {
         	_log.error("NumberFormatException");
         	return ERROR_PAGE;
@@ -97,7 +91,7 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         session.setAttribute("usageStartTimeForResourceSelect", usageStartTimeForResourceSelect);
         session.setAttribute("usageEndTimeForResourceSelect", usageEndTimeForResourceSelect);
         session.setAttribute("usageTimeForResourceSelect", usageTimeForResourceSelect);
-        session.setAttribute("capacityForResourceSelect",capacity);
+
 
         //入力チェック
         CommonValidator validator = new CommonValidator();
@@ -114,6 +108,15 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         } else {
         	dateStr = validator.getDateStr();
         }
+
+        try {
+			capacity=commonValidator.getCapacityValue(capacityStr);
+		} catch (MyException e1) {
+			session.setAttribute("messageForResourceSelectUpper", EM31);
+			return SHOW_RESOURCE_SELECT_SERVLET;
+		}
+
+        session.setAttribute("capacityForResourceSelect",capacity);
 
         //入力バリデーションチェック
         CheckResourceSelectInputService checkResourceSelectInputService = new CheckResourceSelectInputService(dateStr, usageStartTimeForResourceSelect, usageEndTimeForResourceSelect, usageTimeForResourceSelect, capacityStr, resourceNameStr);

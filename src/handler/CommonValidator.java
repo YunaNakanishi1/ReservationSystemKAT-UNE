@@ -221,7 +221,6 @@ public class CommonValidator {
      * @return 定員（数値）
      */
     protected int getCapacityValue(String capacity) {
-    	System.out.println(capacity);
     	if(!notSetOn(capacity)) {
     		if(!notNumericOn(capacity)) {
     			int capacityInt = Integer.parseInt(capacity);
