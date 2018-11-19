@@ -49,7 +49,7 @@ public class SearchResourceListHandler implements Handler {
             //リソースの予約可能時間の計算
             avList = getAvailableList(resourceList);
 
-            if(resourceList.size() == 0){
+            if(avList.size() == 0){
                 //一件もヒットしなかった
                 request.setAttribute("messageForResourceSelectLower", MessageHolder.EM08);
             }
