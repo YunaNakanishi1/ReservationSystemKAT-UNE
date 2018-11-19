@@ -126,6 +126,10 @@ public class RegistReservationHandler implements Handler {
 		String resourceId = (String) _session.getAttribute("resourceIdForReservationRegist");
 		String reservedPersonId = (String) _session.getAttribute("userIdOfLoggedIn");
 
+		if(commonValidator.notSetOn(reservationName)){
+			reservationName="名称なし";
+		}
+
 
 
 		_reservation = new ReservationDto(-1, new Resource(resourceId, null, null, null, 0, null, 0, null, null, null),
