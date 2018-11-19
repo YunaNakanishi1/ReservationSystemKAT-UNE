@@ -97,6 +97,8 @@ Javascriptを有効にしてください
 </div>
 	<input type = "hidden" name = "usageStartTime" id = "usageStartTime" value = "">
     <input type = "hidden" name = "usageEndTime" id = "usageEndTime" value = "">
+    <input type = "hidden" name = "usableStartTime" value="${usableStartTimeForReservationRegist }">
+    <input type = "hidden" name = "usableEndTime" value="${usableEndTimeForReservationRegist }">
 </td>
 </tr>
 <tr>

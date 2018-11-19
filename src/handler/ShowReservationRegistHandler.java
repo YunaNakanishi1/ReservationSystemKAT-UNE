@@ -161,9 +161,15 @@ public class ShowReservationRegistHandler {
 		_session.setAttribute("usageTimeForResourceSelect", usageTimeDto);
 
 
+
+
 		//利用可能開始時間をセッションに保存
 		_session.setAttribute("usableStartTimeForReservationRegist", timeDtoForUsableStartTime);
-		_session.setAttribute("usageStartTimeForReservationRegist", timeDtoForUsableStartTime);
+
+		if(_session.getAttribute("usageStartTimeForResourceSelect")!=null){
+		TimeDto usageStartTime=(TimeDto) _session.getAttribute("usageStartTimeForResourceSelect");
+		_session.setAttribute("usageStartTimeForReservationRegist", usageStartTime);
+		}
 
 		int usageTimeForGetTimeMinutesValue = usageTimeDto.getTimeMinutesValue();
 		int usableStartTimeForGetTimeMinutesValue = timeDtoForUsableStartTime.getTimeMinutesValue();
