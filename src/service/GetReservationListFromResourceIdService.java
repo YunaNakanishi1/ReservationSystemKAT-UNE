@@ -13,7 +13,7 @@ import exception.MyException;
  */
 public class GetReservationListFromResourceIdService implements Service{
 
-	private ReservationDto resultList;
+	private List<ReservationDto> resultList;
 	private String _resourceId;
 
 
@@ -21,7 +21,7 @@ public class GetReservationListFromResourceIdService implements Service{
 		if(resourceId == null){
 			throw new MyException();
 		}
-		this._resourceId = resourceId;
+		_resourceId = resourceId;
 	}
 
 	@Override
