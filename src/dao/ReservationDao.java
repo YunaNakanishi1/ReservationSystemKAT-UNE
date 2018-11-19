@@ -61,14 +61,12 @@ public class ReservationDao {
 		try {
 			//実行するSQL文
 			String sql
-			="select reserve_id,resources.resource_id, usage_start_date, usage_end_date,  reservation_name ,reserved_person_id, co_reserved_person_id, number_of_participants, attendance_types.attendance_type_id, reserve_supplement, reservations.deleted as reservation_deleted, resource_name, office_name, category_name, capacity, supplement, usage_stop_start_date, usage_stop_end_date, resources.deleted as resource_deleted,  attendance_type,  users.user_id, users.password, users.family_name, users.first_name, users.authority, users.tel, users.mail_address, cousers.user_id as co_user_id, cousers.password as co_password, cousers.family_name as co_family_name, cousers.first_name as co_first_name,  cousers.authority as co_authority, cousers.tel as co_tel, cousers.mail_address as co_mail_address "
-			        +"from reservations, resources, attendance_types, users , users as cousers , offices , categories  "
+			="select distinct reserve_id,resources.resource_id, usage_start_date, usage_end_date, reservation_name ,reserved_person_id, co_reserved_person_id, number_of_participants, reservations.attendance_type_id, reserve_supplement, reservations.deleted as reservation_deleted, resource_name, office_name, category_name, capacity, supplement, usage_stop_start_date, usage_stop_end_date, resources.deleted as resource_deleted, attendance_type, users.user_id, users.password, users.family_name, users.first_name, users.authority, users.tel, users.mail_address, cousers.user_id as co_user_id, cousers.password as co_password, cousers.family_name as co_family_name, cousers.first_name as co_first_name, cousers.authority as co_authority, cousers.tel as co_tel, cousers.mail_address as co_mail_address "
+			        +"from reservations, resources, attendance_types, users , users as cousers , offices , categories "
 			        +"where resources.resource_id = reservations.resource_id "
 			        +"and resources.office_id = offices.office_id "
 			        +"and resources.category_id = categories.category_id "
 			        +"and users.user_id = reservations.reserved_person_id "
-			        +"and (cousers.user_id = reservations.co_reserved_person_id or reservations.co_reserved_person_id is NULL) "
-			        +"and (attendance_types.attendance_type_id = reservations.attendance_type_id or reservations.attendance_type_id is NULL) "
 			        +"and reserve_id = ?; ";
 
 
@@ -167,6 +165,22 @@ public class ReservationDao {
 				coFhoneNumber = rs.getString("co_tel");
 				coMailAddress = rs.getString("co_mail_address");
 			}
+
+			//リソース特性取得
+			final String featuresSql = "select resource_features.resource_characteristic_id,resource_characteristic_name "
+                    + "from resource_features,resource_characteristics " + "where resource_id=? and "
+                    + "resource_features.resource_characteristic_id "
+                    + "= resource_characteristics.resource_characteristic_id ";
+
+			PreparedStatement featuresPstmt = _con.prepareStatement(featuresSql);
+			featuresPstmt.setString(1, resourceId);
+
+            ResultSet featuresRs = featuresPstmt.executeQuery(); // 実行
+
+            while (featuresRs.next()) {
+                String facilityName = featuresRs.getString("resource_characteristic_name");
+                facility.add(facilityName);
+            }
 
 			//ResourceDtoを作成
 			Resource resource = new Resource(resourceId, resourceName, officeName, category,
@@ -497,33 +511,64 @@ public class ReservationDao {
 
 		try{
 
+//			StringBuilder sqlBuilder = new StringBuilder("select reserve_id, resources.resource_id, usage_start_date, usage_end_date, "
+//					+ " reservation_name ,reserved_person_id, co_reserved_person_id, "
+//					+ "number_of_participants, attendance_types.attendance_type_id, "
+//					+ "reserve_supplement, reservations.deleted as reservation_deleted, "
+//					+ "resource_name, office_name, category_name, capacity, supplement, "
+//					+ "usage_stop_start_date, usage_stop_end_date, "
+//					+ "resources.deleted as resource_deleted, "
+//					+ "	attendance_type, "
+//					+ "resource_characteristic_name, "
+//					+ "users.user_id, users.password, users.family_name, users.first_name, "
+//					+ "users.authority, users.tel, users.mail_address, "
+//					+ "cousers.user_id as co_user_id, cousers.password as co_password, "
+//					+ "cousers.family_name as co_family_name, cousers.first_name as co_first_name, "
+//					+ " cousers.authority as co_authority, cousers.tel as co_tel, "
+//					+ "cousers.mail_address as co_mail_address ");
+
+
 			StringBuilder sqlBuilder = new StringBuilder("select reserve_id, resources.resource_id, usage_start_date, usage_end_date, "
 					+ " reservation_name ,reserved_person_id, co_reserved_person_id, "
-					+ "number_of_participants, attendance_types.attendance_type_id, "
+					+ " number_of_participants, attendance_types.attendance_type_id, "
 					+ "reserve_supplement, reservations.deleted as reservation_deleted, "
 					+ "resource_name, office_name, category_name, capacity, supplement, "
 					+ "usage_stop_start_date, usage_stop_end_date, "
 					+ "resources.deleted as resource_deleted, "
-					+ "	attendance_type, "
-					+ "resource_characteristic_name, "
-					+ "users.user_id, users.password, users.family_name, users.first_name, "
+					+ "attendance_type, users.user_id, users.password, users.family_name, users.first_name, "
 					+ "users.authority, users.tel, users.mail_address, "
-					+ "cousers.user_id as co_user_id, cousers.password as co_password, "
+					+ " cousers.user_id as co_user_id, cousers.password as co_password, "
 					+ "cousers.family_name as co_family_name, cousers.first_name as co_first_name, "
-					+ " cousers.authority as co_authority, cousers.tel as co_tel, "
-					+ "cousers.mail_address as co_mail_address ");
-			sqlBuilder.append("from reservations, resources, attendance_types, users , users as cousers ,"
-					+ " resource_features,resource_characteristics , offices , categories ");
+					+ "cousers.authority as co_authority, cousers.tel as co_tel, cousers.mail_address as co_mail_address ");
+
+
+
+//			sqlBuilder.append("from reservations, resources, attendance_types, users , users as cousers ,"
+//					+ " resource_features,resource_characteristics , offices , categories ");
+
+			sqlBuilder.append("from reservations "
+					+ "left outer join users as cousers on reservations.co_reserved_person_id = cousers.user_id "
+					+ "left outer join attendance_types on attendance_types.attendance_type_id = reservations.attendance_type_id, "
+					+ "resources, users , offices , categories ");
+
+
+
+//			sqlBuilder.append("where resources.resource_id = reservations.resource_id "
+//				+ "and resource_features.resource_characteristic_id = resource_characteristics.resource_characteristic_id "
+//				+ "and (attendance_types.attendance_type_id = reservations.attendance_type_id or reservations.attendance_type_id is NULL) "
+//				+ "and users.user_id = reservations.reserved_person_id "
+//				+ "and (cousers.user_id = reservations.co_reserved_person_id or reservations.co_reserved_person_id is NULL) "
+//				+ "and resources.resource_id = resource_features.resource_id "
+//				+ "and resources.office_id = offices.office_id "
+//				+ "and resources.category_id = categories.category_id ");
+
 			sqlBuilder.append("where resources.resource_id = reservations.resource_id "
-				+ "and resource_features.resource_characteristic_id = resource_characteristics.resource_characteristic_id "
-				+ "and (attendance_types.attendance_type_id = reservations.attendance_type_id or reservations.attendance_type_id is NULL) "
-				+ "and users.user_id = reservations.reserved_person_id "
-				+ "and (cousers.user_id = reservations.co_reserved_person_id or reservations.co_reserved_person_id is NULL) "
-				+ "and resources.resource_id = resource_features.resource_id "
-				+ "and resources.office_id = offices.office_id "
-				+ "and resources.category_id = categories.category_id ");
+					+ "and users.user_id = reservations.reserved_person_id "
+					+ "and resources.office_id = offices.office_id "
+					+ "and resources.category_id = categories.category_id ");
+
 			sqlBuilder.append("and reservations.resource_id=? and usage_end_date > ? and usage_start_date < ? ");
-			sqlBuilder.append("order by reserve_id");
+			sqlBuilder.append("order by reserve_id ;");
 
 			preparedStatement=_con.prepareStatement(sqlBuilder.toString());
 
@@ -600,7 +645,7 @@ public class ReservationDao {
 
 				attendanceType = rs.getString("attendance_type");
 
-				facility.add(rs.getString("resource_characteristic_name"));
+				//facility.add(rs.getString("resource_characteristic_name"));
 
 
 				userId = rs.getString("user_id");
@@ -804,6 +849,62 @@ public class ReservationDao {
 
 		return result;
 	}
+
+	public List<ReservationDto> queryByResourceId(String resourceId) throws SQLException{
+		List<ReservationDto> reservationList=new ArrayList<ReservationDto>();
+		DBHelper dbHelper=new DBHelper();
+		_con=dbHelper.connectDb();
+		PreparedStatement stmt = null;
+		ResultSet rs = null;
+
+		if(_con==null){
+			_log.error("DatabaseConnectError");
+			throw new SQLException();
+		}
+
+		try{
+			String sql ="select reserve_id,resources.resource_id, usage_start_date, usage_end_date,reserved_person_id,reservations.deleted,usage_stop_start_date, usage_stop_end_date, resources.deleted as resource_deleted, users.user_id,users.family_name,users.first_name,users.tel, users.mail_address from reservations, resources,users where resources.resource_id = reservations.resource_id and users.user_id = reservations.reserved_person_id and reservations.deleted=0 and  usage_start_date>CURRENT_TIMESTAMP and reservations.resource_id = '?';";
+			stmt=_con.prepareStatement(sql);
+			stmt.setString(1, resourceId);
+			rs=stmt.executeQuery();
+
+			//結果の取得
+			while(rs.next()){
+				Resource resource = new Resource(rs.getString("resource_id"),null,null,null, 0, null,rs.getInt("resource_deleted"), null, null,null);
+				User user=new User(rs.getString("users.user_id"), null, 0, rs.getString("familyname"), rs.getString("firstname"), rs.getString("users.tel"),rs.getString("users.mail_address"));
+				//String resultUsageDate=new SimpleDateFormat("yyyy/MM/dd").format(rs.getTimestamp("usage_start_date"));
+				TimeDto resultUsageStartTime=new TimeDto(rs.getTimestamp("usage_start_date"));
+				TimeDto resultUsageEndTime=new TimeDto(rs.getTimestamp("usage_end_date"));
+				//利用終了が00:00だったら24:00に直す
+				if(resultUsageEndTime.getTimeMinutesValue()==0){
+					resultUsageEndTime=new TimeDto(24, 0);
+				}
+
+				ReservationDto reservation = new ReservationDto(rs.getInt("reserve_id"), resource,null, resultUsageStartTime, resultUsageEndTime,null, user, null, 0, null, null, rs.getInt("reservations.deleted"));
+				reservationList.add(reservation);
+
+			}
+
+
+		}catch (SQLException e) {
+			_con.rollback();
+			throw e;
+
+		} finally {
+			try {
+	            dbHelper.closeResource(stmt);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            _log.error("Exception");
+	        }
+	        dbHelper.closeDb();
+		}
+
+		return reservationList;
+	}
+
+
+
 
 
 
