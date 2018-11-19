@@ -90,7 +90,7 @@
 </form>
 </td>
 <td>　</td>
-<td><form action = "deleteresource" method = "post">
+<td><form action = "/ReservationSystemKAT-UNE/reservesystem/pushDeleteButtonOnResourceDetails" method = "post">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resource.resourceId}"/>" >
 <input class="submit" type = "submit" value = "削除"></form>
 </td>

@@ -28,7 +28,7 @@ public class PushDeleteButtonOnResourceDetailsHandler implements Handler{
 	@Override
 	public String handleService(HttpServletRequest request) {
 
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession(true);
 
 		//リクエストからリソースIDを取得
 		String resourceId = request.getParameter("resourceId");
@@ -37,11 +37,11 @@ public class PushDeleteButtonOnResourceDetailsHandler implements Handler{
 
 		//sessionからユーザーIDと権限を取得
 		String userIdOfLoggedIn = (String)session.getAttribute("userIdOfLoggedIn");
-		int authorOfLoggedIn = (int)session.getAttribute("authorOfLoggedIn");
+		int authorityOfLoggedIn = (int)session.getAttribute("authorityOfLoggedIn");
 
 		//userIdがない場合またはリソース管理者でない場合はシステムエラー画面に遷移
 		CommonValidator commonValidator=new CommonValidator();
-		if(commonValidator.notSetOn("userIdOfLoggedIn")||authorOfLoggedIn!=0){
+		if(commonValidator.notSetOn("userIdOfLoggedIn")||authorityOfLoggedIn!=0){
 			_log.error("NoUserid");
 			return ERROR_PAGE;
 
@@ -54,6 +54,7 @@ public class PushDeleteButtonOnResourceDetailsHandler implements Handler{
 				getReservationListFromResourceIdService.execute();
 				reservationList=getReservationListFromResourceIdService.getList();
 			}catch(SQLException e){
+
 				_log.error("SQLException");
 				return ERROR_PAGE;
 			}
@@ -62,6 +63,7 @@ public class PushDeleteButtonOnResourceDetailsHandler implements Handler{
 			return ERROR_PAGE;
 		}
 
+		System.out.println(reservationList.size());
 		if(reservationList.size()==0){
 			return DELETE_RESOURCE;
 
