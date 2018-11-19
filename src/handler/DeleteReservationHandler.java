@@ -96,6 +96,7 @@ public class DeleteReservationHandler implements Handler{
 
 		if(reservedPerson!=null){
 			String reservedPersonId = reservedPerson.getUserId();
+
 			String coReservedPersonId = null;
 			if (coReservedPerson != null) {
 				coReservedPersonId = coReservedPerson.getUserId();

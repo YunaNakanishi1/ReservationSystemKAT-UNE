@@ -120,7 +120,6 @@ public class ShowReservationDetailsHandler implements Handler{
 					request.setAttribute("linkToResourceDetails", true);
 
 				}else if((resource.getDeleted())==1){	//リソースは削除されている
-
 					int authority = (int) session.getAttribute("authorityOfLoggedIn");
 
 					if(authority == 0){ //リソース管理者
