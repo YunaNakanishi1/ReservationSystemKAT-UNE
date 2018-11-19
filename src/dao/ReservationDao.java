@@ -61,7 +61,21 @@ public class ReservationDao {
 		try {
 			//実行するSQL文
 			String sql
-			="select distinct reserve_id,resources.resource_id, usage_start_date, usage_end_date, reservation_name ,reserved_person_id, co_reserved_person_id, number_of_participants, reservations.attendance_type_id, reserve_supplement, reservations.deleted as reservation_deleted, resource_name, office_name, category_name, capacity, supplement, usage_stop_start_date, usage_stop_end_date, resources.deleted as resource_deleted, attendance_type, users.user_id, users.password, users.family_name, users.first_name, users.authority, users.tel, users.mail_address, cousers.user_id as co_user_id, cousers.password as co_password, cousers.family_name as co_family_name, cousers.first_name as co_first_name, cousers.authority as co_authority, cousers.tel as co_tel, cousers.mail_address as co_mail_address "
+			="select distinct reserve_id,resources.resource_id, "
+					+ "usage_start_date, usage_end_date, reservation_name ,"
+					+ "reserved_person_id, co_reserved_person_id, number_of_participants, "
+					+ "reservations.attendance_type_id, reserve_supplement, "
+					+ "reservations.deleted as reservation_deleted, resource_name, "
+					+ "office_name, category_name, capacity, supplement, "
+					+ "usage_stop_start_date, usage_stop_end_date, "
+					+ "resources.deleted as resource_deleted, attendance_type, "
+					+ "users.user_id, users.password, users.family_name, users.first_name, "
+					+ "users.authority, users.tel, users.mail_address, "
+					+ "cousers.user_id as co_user_id, cousers.password as co_password,"
+					+ " cousers.family_name as co_family_name, "
+					+ "cousers.first_name as co_first_name, cousers.authority as co_authority, "
+					+ "cousers.tel as co_tel, cousers.mail_address as co_mail_address "
+
 			        +"from reservations, resources, attendance_types, users , users as cousers , offices , categories "
 			        +"where resources.resource_id = reservations.resource_id "
 			        +"and resources.office_id = offices.office_id "
