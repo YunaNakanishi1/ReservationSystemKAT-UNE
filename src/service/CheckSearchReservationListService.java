@@ -30,7 +30,7 @@ public class CheckSearchReservationListService implements Service {
 
     @Override
     public boolean validate() {
-        if(_endTime.getTimeMinutesValue() <= _startTime.getTimeMinutesValue()){
+        if(_endTime.getTimeMinutesValue() < _startTime.getTimeMinutesValue()){
             _message = MessageHolder.EM10;
             return false;
         }
