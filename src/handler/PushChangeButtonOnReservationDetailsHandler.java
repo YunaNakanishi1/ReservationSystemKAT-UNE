@@ -50,7 +50,7 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		//利用可能開始時間
 		session.setAttribute("usageStartTimeForReservationChange", reservation.getUsageStartTime());
 		//利用可能終了時間
-		session.setAttribute("usageEndTimeForReservationChange", reservation.getUsageEndTime());
+		//session.setAttribute("usageEndTimeForReservationChange", reservation.getUsageEndTime());
 
 		//実利用時間を求める
 		String usageStartTimeStr = request.getParameter("usageStartTime");
@@ -59,13 +59,17 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		int usageStartTime = Integer.parseInt(usageStartTimeStr);
 		int usageEndTime = Integer.parseInt(usageEndTimeStr);
 
-
 		//実利用時間
 		session.setAttribute("usageEndTimeForReservationChange", usageEndTime-usageStartTime);
+
+
 
 		session.setAttribute("reservationNameForReservationChange", reservation.getReservationName());
 		session.setAttribute("numberOfParticipantsForReservationChange", reservation.getNumberOfParticipants());
 		session.setAttribute("coReservedPersonIdForReservationChange", reservation.getCoReservedPerson().getUserId());
+		session.setAttribute("coReservedPersonNameForReservationChange", reservation.getCoReservedPerson().getFamilyName() + "　" + reservation.getCoReservedPerson().getFirstName() );
+
+
 		AttendanceTypeDto attendanceType=reservation.getAttendanceTypeDto();
 		if(attendanceType!=null){
 		session.setAttribute("attendanceTypeIdForReservationChange", reservation.getAttendanceTypeDto().getAttendanceTypeId());
@@ -81,7 +85,12 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 		session.setAttribute("usableStartTimeForReservationChange", _startTimeSliderValue);
 
-		//利用可能修了時間
+
+//		System.out.println(_endTimeSliderValue.getHour());
+//		System.out.println(_endTimeSliderValue.getMinutes());
+
+
+		//利用可能終了時間
 		session.setAttribute("usableEndTimeForReservationChange", _endTimeSliderValue);
 
 
@@ -134,15 +143,6 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 				List<ReservationDto> reservationList=getReservationListBetweenDateService.getReservationList();
 
-				System.out.println(reservationList.size());
-				for(int i = 0 ; i<reservationList.size(); i++){
-					System.out.println(reservationList.get(i).getReservationName());
-					System.out.println(reservationList.get(i).getReservationId());
-					System.out.println(reservationList.get(i).getReservationName());
-					System.out.println(reservationList.get(i).getNumberOfParticipants());
-					System.out.println(reservationList.get(i).getAttendanceTypeDto());
-					System.out.println();
-				}
 
 				if(reservationList.size()==1){
 					if(reservationList.get(0).getReservationId()!=reservation.getReservationId()){
@@ -193,7 +193,7 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 			getSliderWidthService.execute();
 			_startTimeSliderValue=getSliderWidthService.getStartTimeSliderValue();
 			_endTimeSliderValue=getSliderWidthService.getEndTimeSliderValue();
-			//System.out.println(_endTimeSliderValue);
+
 		}
 
 		}catch (MyException e) {

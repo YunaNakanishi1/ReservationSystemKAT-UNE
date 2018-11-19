@@ -34,7 +34,7 @@
 Javascriptを有効にしてください
 </div>
 </div>
-<script type="text/javascript" src="/ReservationSystemKAT-UNE/JavascriptErrorLabel.js">	</script>
+<script type="text/javascript" src="/ReservationSystemKAT-UNE/script/JavascriptErrorLabel.js">	</script>
 <!-- javascript警告ラベル終わり -->
 
 <div class="contents">
@@ -49,6 +49,7 @@ Javascriptを有効にしてください
 <td class="right2">
 <a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?resourceId=${resourceIdForReservationRegist}" target="_blank">
 <c:out value="${resourceNameForReservationRegist}"></c:out></a></td>
+<input type = "hidden"  name = "resourceId" value="${resourceIdForReservationRegist }">
 </tr>
 
 <tr>
@@ -96,6 +97,8 @@ Javascriptを有効にしてください
 </div>
 	<input type = "hidden" name = "usageStartTime" id = "usageStartTime" value = "">
     <input type = "hidden" name = "usageEndTime" id = "usageEndTime" value = "">
+    <input type = "hidden" name = "usableStartTime" value="${usableStartTimeForReservationRegist }">
+    <input type = "hidden" name = "usableEndTime" value="${usableEndTimeForReservationRegist }">
 </td>
 </tr>
 <tr>
@@ -128,7 +131,7 @@ Javascriptを有効にしてください
 <td class="dialog"><b>　　　　　　共同予約者</b></td>
 
 <td class="right2">
-<span class="reserve_name">----<!-- ---- --></span> <input class="button" type = "submit" onclick="addSearch('reserve_pare')" value = "変更"> <input class="button" type = "submit" value = "クリア">
+<span class="reserve_name">----</span> <input class="button" type = "submit" onclick="addSearch('reserve_pare')" value = "変更"> <input class="button" type = "submit" value = "クリア">
 </td>
 </tr>
 
