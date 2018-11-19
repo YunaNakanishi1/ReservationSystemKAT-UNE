@@ -55,6 +55,7 @@ public class ShowReservationDetailsHandler implements Handler{
 
 				if(reservation != null){
 					session.setAttribute("reservationDTOForReservationDetails", reservation);
+
 				}else{
 					_log.error("reservationDTO is null");
 					return ERROR_PAGE;
@@ -80,7 +81,10 @@ public class ShowReservationDetailsHandler implements Handler{
 
 			if(user != null){
 				String userId = user.getUserId();
-				String coUserId = coUser.getUserId();
+				String coUserId =null;
+				if(coUser!=null){
+				coUserId = coUser.getUserId();
+				}
 
 
 				//予約者と共同予約者にのみ削除・変更ボタンを表示する。
@@ -117,8 +121,7 @@ public class ShowReservationDetailsHandler implements Handler{
 					request.setAttribute("linkToResourceDetails", true);
 
 				}else if((resource.getDeleted())==1){	//リソースは削除されている
-
-					int authority = (int) session.getAttribute("authority");
+					int authority = (int) session.getAttribute("authorityOfLoggedIn");
 
 					if(authority == 0){ //リソース管理者
 						//予約が削除されている、かつリソースが削除されている、
