@@ -50,10 +50,13 @@ Javascriptを有効にしてください
  <tr>
  <td class="dialog"><b>リソース</b></td>
  <td class="right2">
+ <c:if test="${flagForShowingDeleteAndChangeButton == true}">
 	 <a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?resourceId=${reservationDTOForReservationDetails.resource.resourceId}" target="_blank">
 	 <c:out value="${reservationDTOForReservationDetails.resource.resourceName}" /></a>
-
-
+</c:if>
+ <c:if test="${flagForShowingDeleteAndChangeButton == false}">
+	 <a><c:out value="${reservationDTOForReservationDetails.resource.resourceName}" /></a>
+</c:if>
 
  </tr>
 
