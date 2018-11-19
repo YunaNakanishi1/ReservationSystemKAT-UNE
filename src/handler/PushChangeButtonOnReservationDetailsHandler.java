@@ -47,7 +47,7 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 		session.setAttribute("reservationDTOForReservationChange", reservation);
 
-		//利用可能開始時間
+		//スライダー初期位置
 		session.setAttribute("usageStartTimeForReservationChange", reservation.getUsageStartTime());
 		//利用可能終了時間
 		//session.setAttribute("usageEndTimeForReservationChange", reservation.getUsageEndTime());
@@ -83,6 +83,7 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 			return ERROR_PAGE;
 		}
 
+		//利用可能開始時間
 		session.setAttribute("usableStartTimeForReservationChange", _startTimeSliderValue);
 
 

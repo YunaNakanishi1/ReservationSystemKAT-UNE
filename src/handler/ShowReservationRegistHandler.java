@@ -124,9 +124,9 @@ public class ShowReservationRegistHandler {
 
 	public boolean setSlider(){
 		//利用可能開始時間
-		String usableStartTimeStr = (String) _request.getParameter("usageStartTimeForResourceSelect");
+		String usableStartTimeStr = (String) _request.getParameter("usableStartTime");
 		//利用可能終了時間
-		String usableEndTimeStr = (String) _request.getParameter("usageEndTimeForResourceSelect");
+		String usableEndTimeStr = (String) _request.getParameter("usableEndTime");
 
 		CommonValidator commonValidator = new CommonValidator();
 		int usableStartTime;
@@ -161,9 +161,15 @@ public class ShowReservationRegistHandler {
 		_session.setAttribute("usageTimeForResourceSelect", usageTimeDto);
 
 
+
+
 		//利用可能開始時間をセッションに保存
 		_session.setAttribute("usableStartTimeForReservationRegist", timeDtoForUsableStartTime);
-		_session.setAttribute("usageStartTimeForReservationRegist", timeDtoForUsableStartTime);
+
+		if(_session.getAttribute("usageStartTimeForResourceSelect")!=null){
+		TimeDto usageStartTime=(TimeDto) _session.getAttribute("usageStartTimeForResourceSelect");
+		_session.setAttribute("usageStartTimeForReservationRegist", usageStartTime);
+		}
 
 		int usageTimeForGetTimeMinutesValue = usageTimeDto.getTimeMinutesValue();
 		int usableStartTimeForGetTimeMinutesValue = timeDtoForUsableStartTime.getTimeMinutesValue();

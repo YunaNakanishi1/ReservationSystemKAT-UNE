@@ -106,7 +106,8 @@ public class ChangeReservationHandler implements Handler {
 		String usageStartMinutesStr = request.getParameter("usageStartTime");
 		//利用開始時間の分
 		String usageEndMinutesStr = request.getParameter("usageEndTime");
-		//利用終了時間の分
+
+
 
 		String reservationNameForReservationChange = request.getParameter("reservationName");
 		String numberOfParticipantsForReservationChange = request.getParameter("numberOfParticipants");
