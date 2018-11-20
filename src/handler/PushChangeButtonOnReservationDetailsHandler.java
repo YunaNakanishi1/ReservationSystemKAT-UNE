@@ -34,15 +34,14 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		ReservationDto reservation=null;
 		String reserveIdStr=request.getParameter("reserveId");
 
-		//System.out.println(reserveIdStr);
-
-		int reserveId=0;
-		try{
-		reserveId=Integer.parseInt(reserveIdStr);
-
-		}catch (NumberFormatException e) {
-			_log.error("reserveId is not number");
-		}
+		//int reserveId=0;
+		int reserveId = (int)session.getAttribute("reservationIdForReservationDetails");
+//		try{
+//		reserveId=Integer.parseInt(reserveIdStr);
+//
+//		}catch (NumberFormatException e) {
+//			_log.error("reserveId is not number");
+//		}
 		try{
 			reservation=getAndCheckReservation(reserveId);
 		}catch (MyException e) {
@@ -56,12 +55,29 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		//利用可能終了時間
 		//session.setAttribute("usageEndTimeForReservationChange", reservation.getUsageEndTime());
 
+
 		//実利用時間を求める
 		String usageStartTimeStr = request.getParameter("usageStartTime");
 		String usageEndTimeStr = request.getParameter("usageEndTime");
 
-		int usageStartTime = Integer.parseInt(usageStartTimeStr);
-		int usageEndTime = Integer.parseInt(usageEndTimeStr);
+		//追加した
+		int usageStartTime = 0;
+		int usageEndTime = 0;
+		if (("NaN").equals(usageStartTimeStr)) {
+			TimeDto usageStartTimeForReservationChange = (TimeDto)session.getAttribute("usageStartTimeForReservationChange");
+			ReservationDto test =  (ReservationDto)session.getAttribute("reservationDTOForReservationDetails");
+			int testEnd = test.getUsageEndTime().getTimeMinutesValue();
+			usageStartTime = usageStartTimeForReservationChange.getTimeMinutesValue();
+			usageEndTime = testEnd;
+			System.out.println(usageStartTime + " " + usageEndTime);
+		} else {
+			usageStartTime = Integer.parseInt(usageStartTimeStr);
+			usageEndTime = Integer.parseInt(usageEndTimeStr);
+		}
+		//
+//
+//		int usageStartTime = Integer.parseInt(usageStartTimeStr);
+//		int usageEndTime = Integer.parseInt(usageEndTimeStr);
 
 		//実利用時間
 		session.setAttribute("usageEndTimeForReservationChange", usageEndTime-usageStartTime);
@@ -84,6 +100,7 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		try{
 			getSliderWidth(reservation);
 		}catch (MyException e) {
+			_log.error("push change");
 			return ERROR_PAGE;
 		}
 
@@ -97,8 +114,6 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 		//利用可能終了時間
 		session.setAttribute("usableEndTimeForReservationChange", _endTimeSliderValue);
-
-
 
 
 		return SHOW_RESERVATION_CHANGE_SERVLET;

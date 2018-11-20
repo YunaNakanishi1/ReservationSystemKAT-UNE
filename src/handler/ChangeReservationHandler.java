@@ -63,6 +63,7 @@ public class ChangeReservationHandler implements Handler {
 				return PUSH_CHANGE_BUTTON_ON_RESERVATION_DETAILS_SERVLET;
 			}
 		} catch (MyException e) {
+			_log.error("change resable");
 			return ERROR_PAGE;
 		}
 
@@ -73,6 +74,7 @@ public class ChangeReservationHandler implements Handler {
 				return PUSH_CHANGE_BUTTON_ON_RESERVATION_DETAILS_SERVLET;
 			}
 		} catch (MyException e) {
+			_log.error("change usagestop");
 			return ERROR_PAGE;
 		}
 
@@ -86,10 +88,12 @@ public class ChangeReservationHandler implements Handler {
 				return SHOW_RESERVATION_DETAILS_SERVLET;
 
 			} else {
+				_log.error("change suc");
 				return ERROR_PAGE;
 			}
 
 		} catch (MyException e) {
+			_log.error("change");
 			return ERROR_PAGE;
 		}
 	}
@@ -113,6 +117,7 @@ public class ChangeReservationHandler implements Handler {
 		if (("NaN").equals(usageStartMinutesStr)) {
 			usageStartTimeForReservationChange = (TimeDto)session.getAttribute("usageStartTimeForReservationChange");
 			int usageEndTime = usageStartTimeForReservationChange.getTimeMinutesValue() + (int)session.getAttribute("usageEndTimeForReservationChange");
+
 			usageEndTimeForReservationChange = new TimeDto(usageEndTime);
 		} else {
 			//取得した時間をTimeDto型に変換
@@ -136,7 +141,7 @@ public class ChangeReservationHandler implements Handler {
 //		int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
 //		TimeDto usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
 //		TimeDto usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
-		System.out.println(usageStartTimeForReservationChange + " " + usageEndTimeForReservationChange);
+
 		//セッションに再セット
 		session.setAttribute("usageStartTimeForReservationChange", usageStartTimeForReservationChange);
 		session.setAttribute("usageEndTimeForReservationChange", usageEndTimeForReservationChange);
@@ -189,6 +194,7 @@ public class ChangeReservationHandler implements Handler {
 	 * @return 予約の可否
 	 */
 	private boolean reservableCheck() {
+
 		String usageDate = _reservation.getUsageDate();
 
 		//TimeStamp作成
@@ -202,6 +208,7 @@ public class ChangeReservationHandler implements Handler {
 		GetReservationListBetweenDateService getReservationListBetweenDateService = new GetReservationListBetweenDateService(_reservation.getResource().getResourceId(), _usageStartTimestamp, _usageEndTimestamp);
 
 		if (getReservationListBetweenDateService.validate()) {
+
 			try {
 				getReservationListBetweenDateService.execute();
 				_reservationList = getReservationListBetweenDateService.getReservationList();
@@ -211,6 +218,7 @@ public class ChangeReservationHandler implements Handler {
 				throw new MyException();
 			}
 		} else {
+
 			throw new MyException();
 		}
 
