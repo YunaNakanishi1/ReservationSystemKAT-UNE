@@ -41,20 +41,20 @@ Javascriptを有効にしてください
 
 <script>
 
-flag=true;
-function hyoji1()
+function hyoji(notView)
 {
-  if (flag)
+  if (notView)
   {
-    document.getElementById("disp").style.display="none";
+    document.getElementById("reserve_pare").style.display="none";
   }
   else
   {
-    document.getElementById("disp").style.display="block";
+    document.getElementById("reserve_pare").style.display="";
   }
-  flag = !flag;
 }
-
+window.onload= function() {
+	  hyoji(true);
+}
 </script>
 
 <div class="contents">
@@ -157,9 +157,13 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 
 <td class="right2">
 <!-- IDしか持ってこれないよー -->
-<span class="reserve_name"><c:out value =  "${coReservedPersonNameForReservationChange}"/></span>
-<input class="button" type = "button" onclick="addSearch('reserve_pare')" value = "変更">
-<input class="button" type = "button" value = "クリア">
+<span class="reserve_name">
+<input type="text" value="${coReservedPersonNameForReservationChange}" id="co-reserved-person-name" readonly="readonly"/>
+</span>
+<input class="button" type = "button" onclick="hyoji(false)" value = "変更">
+<input class="button" type = "button" onclick="selectClearButton()" value = "クリア">
+<input type="hidden" id ="coReservedPersonId" value="${coReservedPersonNameForReservationChange}"/>
+
  </td>
 </tr>
 
@@ -167,25 +171,57 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 <td class="one" class="dialog"></td>
     <td class="right2">
     <hr>
-    <input type="text" name=""> <input class="button" type = "submit" value = "検索">
+    <input type="text" name=""> <input class="button" type = "button" value = "検索">
     <br>
-    <select name="userList" size="5" style="width:200px">
-		<script type="text/javascript">
-
-		var length = '<%=((List<User>)request.getAttribute("userListForReservationChange")).size() %>';
-		alert(length);
-
-		//var firstName = <%=request.getAttribute("userListForReservationChange") %>;
-    //for(var i=0;i<$length;i++){
-    	//<option value="">$firstName</option>
-    //}
-		</script>
+    <select id="userList" size="5" style="width:200px">
     </select>
+
     <br>
-    <input class="button" type = "submit" onclick="closeSearch(\''+id+'\');" value = "選択"> <input class="button" type = "submit" onclick="closeSearch(\''+id+'\');" value = "閉じる">
+    <input class="button" type = "button" onclick="selectUserButton();hyoji(true)" value = "選択">
+    <input class="button" type = "button" onclick="hyoji(true)" value = "閉じる">
     <hr>
      </td>
 </tr>
+
+<script type="text/javascript">
+		var selectColumn = document.getElementById('userList');
+
+		<%
+		List<User> userList = (List<User>)request.getAttribute("userListForReservationChange");
+		int userListLength = userList.size();
+		String output = "";
+
+
+		for(int i=0;i<userListLength;i++){
+		    User user = userList.get(i);
+		    output += "<option value='"+user.getUserId()+"'>"+user.getFamilyName()+"　"+user.getFirstName()+"("+user.getUserId()+")</option>";
+		    }
+		%>
+    	selectColumn.innerHTML ="<%=output%>";
+
+    	function selectUserButton(){
+    		var coUserName = document.getElementById('co-reserved-person-name');
+    		var coUserId = document.getElementById('coReservedPersonId');
+
+    		var selectedUser = document.getElementById('userList');
+
+    		var idx = selectedUser.selectedIndex;       //インデックス番号を取得
+    		var val = selectedUser.options[idx].value;  //value値を取得
+    		var txt  = selectedUser.options[idx].text;  //ラベルを取得
+
+			coUserName.value =txt.split("(")[0];
+			coUserId.value = val;
+    	}
+
+    	function selectClearButton(){
+    		var coUserName = document.getElementById('co-reserved-person-name');
+    		var coUserId = document.getElementById('coReservedPersonId');
+
+			coUserName.value ="-----";
+			coUserId.value = "";
+    	}
+
+</script>
 
 <tr>
 <td class="dialog"><b>　　　　　　参加者種別</b></td>
