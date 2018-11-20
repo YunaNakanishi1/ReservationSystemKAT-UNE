@@ -65,10 +65,10 @@ Javascriptを有効にしてください
 <td class="dialog"><b>　　　　　　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
 
-<input type="hidden" id ="usageStartTimeForReservationRegist" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
-<input type="hidden" id ="usableEndTimeForReservationRegist" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
-<input type="hidden" id ="usageTimeForReservationSelect" value="${usageTimeForResourceSelect.timeMinutesValue}"/>
-
+<input type="hidden" id ="usageStartTime" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usableEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usageTime" value="${usageTimeForResourceRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usableStartTime" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
 
 
 <div id="slider-area">
@@ -96,10 +96,6 @@ Javascriptを有効にしてください
 			<input class="btn" type = "button" value = "+15分">
         </div>
 </div>
-	<input type = "hidden" name = "usageStartTime" id = "usageStartTime" value = "">
-    <input type = "hidden" name = "usageEndTime" id = "usageEndTime" value = "">
-    <input type = "hidden" name = "usableStartTime" value="${usableStartTimeForReservationRegist.timeMinutesValue }">
-    <input type = "hidden" name = "usableEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue }">
 </td>
 </tr>
 <tr>
