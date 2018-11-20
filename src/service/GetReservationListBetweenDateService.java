@@ -40,7 +40,7 @@ public class GetReservationListBetweenDateService implements Service{
 	public void execute() throws SQLException{
 
 		ReservationDao reservationDao = new ReservationDao();
-
+		//System.out.println(_resourceId + " " + _startTime + " " + _endTime);
 		_reservationList=reservationDao.queryBetweenDate(_resourceId, _startTime, _endTime);
 		//System.out.println("getReservationListBetween " + _reservationList.size());
 	}

@@ -579,7 +579,6 @@ public class ReservationDao {
 			preparedStatement.setTimestamp(2, startTime);
 			preparedStatement.setTimestamp(3, endTime);
 
-
 			rs=preparedStatement.executeQuery();
 
 
@@ -705,7 +704,7 @@ public class ReservationDao {
 						attendanceTypeDto, reserveSupplement, reservationDeleted);
 
 				reservationList.add(reservationDto);
-				//System.out.println(reservationList.size());
+
 			}
 
 		} catch(SQLException e) {
