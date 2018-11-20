@@ -5,6 +5,7 @@ import static java.util.Comparator.*;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import dao.ReservationDao;
@@ -55,6 +56,21 @@ public class MakeAvailableListService implements Service{
         ServiceHelper sHelper = new ServiceHelper();
 
         //リソース毎に予約可能な時間を計算
+        TimeDto reserveStartTimeDto = _usageStartTime;//予約可能な時間帯の左端
+        int reserveStartMinutes = reserveStartTimeDto.getTimeMinutesValue();//予約可能な時間帯の左端
+
+        //現在時刻が利用停止期間より後なら、そっちを優先する
+        //現在時刻TimeDto取得
+        TimeDto nowTimeDto = new TimeDto(new Date());
+        //15分刻みで、現在時刻からひとつ前のものを取得
+        TimeDto nowTimeDtoDevided = new TimeDto(nowTimeDto.getTimeMinutesValue() - (nowTimeDto.getTimeMinutesValue()%15));
+
+        if(reserveStartMinutes < nowTimeDtoDevided.getTimeMinutesValue()){
+            reserveStartMinutes = nowTimeDtoDevided.getTimeMinutesValue();
+            reserveStartTimeDto = nowTimeDtoDevided;
+        }
+        int reserveEndMinutes = _usageEndTime.getTimeMinutesValue();//予約可能な時間帯の右端
+
         for (Resource resource : _resourceList) {
             List<TimeDto> reservableTimeList = sHelper.getAvailableListForResource(resource, reservationList, _usageDate);
             //結果の2つ毎に予約可能な時間が得られる
@@ -62,26 +78,27 @@ public class MakeAvailableListService implements Service{
 
                 TimeDto sTime = reservableTimeList.get(i);
                 TimeDto eTime = reservableTimeList.get(i+1);
+
                 int startMinutes = sTime.getTimeMinutesValue();
                 int endMinutes = eTime.getTimeMinutesValue();
 
                 //予約可能な時間が予約したい時間よりも前
-                if(endMinutes <= _usageStartTime.getTimeMinutesValue()){
+                if(endMinutes <= reserveStartMinutes){
                     //追加しない
                     continue;
                 }
                 //予約可能な時間が予約したい時間よりも後
-                if(startMinutes >= _usageEndTime.getTimeMinutesValue()){
+                if(startMinutes >= reserveEndMinutes){
                   //追加しない
                     continue;
                 }
                 //予約可能な時間内に予約したい時間の開始時間があれば、予約可能な時間の開始を予約したい時間の開始時間にする
-                if(startMinutes < _usageStartTime.getTimeMinutesValue() && _usageStartTime.getTimeMinutesValue() < endMinutes){
-                    sTime = _usageStartTime;
+                if(startMinutes < reserveStartMinutes && reserveStartMinutes < endMinutes){
+                    sTime = reserveStartTimeDto;
                     startMinutes = sTime.getTimeMinutesValue();
                 }
                 //予約可能な時間内に予約したい時間の終了時間があれば、予約可能な時間の終了を予約したい時間の終了時間にする
-                if(startMinutes < _usageEndTime.getTimeMinutesValue() && _usageEndTime.getTimeMinutesValue() < endMinutes){
+                if(startMinutes < reserveEndMinutes && reserveEndMinutes < endMinutes){
                     eTime = _usageEndTime;
                     endMinutes = eTime.getTimeMinutesValue();
                 }
