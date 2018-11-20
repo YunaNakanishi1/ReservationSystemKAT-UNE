@@ -107,15 +107,15 @@ window.onload= function() {
         <div id="slider-box">
         <div id="slider"></div>
         </div>
-        <div style="float:left;width:100px;margin-left:0px;">
-        <input class="btn" type = "submit" value = "-15分">
+        <div id="minus15" style="float:left;width:100px;margin-left:0px;">
+        <input class="btn" type = "button" value = "-15分">
 		</div>
 
         <div style="width:270px;float:left;text-align:center;">
         <input type="text" id="slider-timelabel" class="timelabel" readonly="readonly" />
         </div>
-        <div style="float:right;width:100px;margin-right:25px;">
-			<input class="btn" type = "submit" value = "+15分">
+        <div id="plus15" style="float:right;width:100px;margin-right:25px;">
+			<input class="btn" type = "button" value = "+15分">
         </div>
 </div>
     <input type = "hidden" name = "usageStartTimeIn" id = "usageStartTimeIn" value = "">
@@ -244,7 +244,7 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 <td class="dialog"><b>　　　　　　補足</b></td>
 
 <td class="right2">
-<textarea class="scroll2" name="reserveSupplement"><c:out value="${reserveSupplementForReservationChange}"/></textarea>
+<textarea id="supplementArea" class="scroll2" name="supplement"onkeyup="ShowLength();" <c:out value="${reserveSupplementForReservationRegist }"/> ><c:out value="${reserveSupplementForReservationRegist }"/></textarea><span id="inputlength">0/500</span>
 </td>
 </tr>
 
