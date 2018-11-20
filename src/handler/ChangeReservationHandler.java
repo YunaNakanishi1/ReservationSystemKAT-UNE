@@ -111,9 +111,9 @@ public class ChangeReservationHandler implements Handler {
 		ReservationDto reservationDTOForReservationChange = (ReservationDto)session.getAttribute("reservationDTOForReservationChange");
 
 		//入力されたセッション情報を取得
-		String usageStartMinutesStr = request.getParameter("usageStartTime");
+		String usageStartMinutesStr = request.getParameter("usageStartTimeIn");
 		//利用開始時間の分
-		String usageEndMinutesStr = request.getParameter("usageEndTime");
+		String usageEndMinutesStr = request.getParameter("usageEndTimeIn");
 
 		///////追加
 //		TimeDto usageStartTimeForReservationChange = null;

@@ -118,8 +118,8 @@ window.onload= function() {
 			<input class="btn" type = "submit" value = "+15分">
         </div>
 </div>
-    <input type = "hidden" name = "usageStartTime" id = "usageStartTime" value = "">
-    <input type = "hidden" name = "usageEndTime" id = "usageEndTime" value = "">
+    <input type = "hidden" name = "usageStartTimeIn" id = "usageStartTimeIn" value = "">
+    <input type = "hidden" name = "usageEndTimeIn" id = "usageEndTimeIn" value = "">
 
 </td>
 </tr>
