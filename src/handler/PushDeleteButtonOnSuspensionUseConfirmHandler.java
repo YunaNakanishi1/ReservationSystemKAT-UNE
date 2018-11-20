@@ -41,7 +41,7 @@ public class PushDeleteButtonOnSuspensionUseConfirmHandler implements Handler{
 
 		if(checkBox != null){
 			//sessionからreservationDtoを取得
-			List<ReservationDto> previousReservationList = (List<ReservationDto>)session.getAttribute("reservationListForResourceDeleteConfirm");
+			List<ReservationDto> previousReservationList = (List<ReservationDto>)session.getAttribute("reservationListForSuspensionUseConfirm");
 			int count =0;
 
 			List<ReservationDto> currentReservationList =new ArrayList<ReservationDto>();
