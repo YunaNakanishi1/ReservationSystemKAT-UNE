@@ -59,7 +59,7 @@ Javascriptを有効にしてください
 <br>
 <br>
 
- <td><form action = "/deleteresource" method = "post">
+ <td><form action = "pushDeleteButton" method = "post">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit" type = "submit" value = "削除する"></form>
 </td>
