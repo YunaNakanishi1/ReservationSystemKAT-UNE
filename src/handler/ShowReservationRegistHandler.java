@@ -128,12 +128,17 @@ public class ShowReservationRegistHandler {
 		//利用可能終了時間
 		String usableEndTimeStr = (String) _request.getParameter("usableEndTime");
 
+
+//		System.out.println(usableStartTimeStr);
+//		System.out.println(usableEndTimeStr);
+
 		CommonValidator commonValidator = new CommonValidator();
 		int usableStartTime;
 
 		//引数valの内容が半角整数値かどうかチェック. 数値であればフィールドintValにその数値を保存
 		if(commonValidator.notNumericOn(usableStartTimeStr) == false){
 			usableStartTime = commonValidator.getNumber();
+			//System.out.println(usableStartTime);
 		}else{
 			_log.error("setSlider()_notNumericOn == false");
 			return false;
