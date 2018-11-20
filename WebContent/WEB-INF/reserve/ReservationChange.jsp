@@ -119,18 +119,12 @@ window.onload= function() {
 			<input class="btn" type = "button" value = "+15分">
         </div>
 </div>
-<<<<<<< HEAD
+
 <!--
     <input type = "hidden" name = "usageStartTime" id = "usageStartTime" value = "">
     <input type = "hidden" name = "usageEndTime" id = "usageEndTime" value = "">
  -->
-=======
 
-    <input type = "hidden" name = "usageStartTimeIn" id = "usageStartTimeIn" value = "">
-    <input type = "hidden" name = "usageEndTimeIn" id = "usageEndTimeIn" value = "">
-
-
->>>>>>> refs/remotes/origin/develop
 </td>
 </tr>
 <tr>
