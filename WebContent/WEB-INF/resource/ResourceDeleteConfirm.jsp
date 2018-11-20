@@ -60,9 +60,12 @@ Javascriptを有効にしてください
 <br>
 
  <td><form action = "/deleteresource" method = "post">
-<input type="hidden" name="resourceId" value = "<c:out value = "${obj.resourceId}"/>" >
+<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit" type = "submit" value = "削除する"></form>
 </td>
+<td><form action = "resourcedetails" method = "get">
+<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
+<input class="submit" type = "submit" value = "戻る"></form></td>
 
 
 </div>
