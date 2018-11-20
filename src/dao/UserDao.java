@@ -174,7 +174,7 @@ public class UserDao {
         	stmt = _con.createStatement();
         	rs = stmt.executeQuery(sql);
 
-        	if(rs.next()){
+        	while(rs.next()){
         		String userId = rs.getString("user_id");
         		String password = rs.getString("password");
         		int authority = rs.getInt("authority");
