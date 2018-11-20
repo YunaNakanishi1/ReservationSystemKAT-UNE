@@ -60,7 +60,7 @@ function hyoji1()
 <div class="contents">
 <h2>予約変更</h2>
 
-
+<p><font color="red"><c:out value = "${messageForReservationChange}"/></font></p>
 <form action = "/ReservationSystemKAT-UNE/reservesystem/changereservation" method = "post">
 
 
