@@ -89,6 +89,7 @@ public class PushRegistButtonOnResourceRegistHandler implements Handler{
 							return ERROR_PAGE;
 						}
 					}else{
+						session.setAttribute("reservationListForSuspensionUseConfirm", new ArrayList<ReservationDto>());
 						return SET_RESOURCE_DETAILS_SERVLET;
 					}
 				}else{
