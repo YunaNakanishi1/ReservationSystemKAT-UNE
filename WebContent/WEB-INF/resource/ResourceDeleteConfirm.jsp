@@ -56,9 +56,13 @@ Javascriptを有効にしてください
 
 <br>
 <br>
+<br>
+<form action = "pushDeleteButton" method = "post">
+<input type="checkbox" name="checkedConfirm" value="checkedConfirm"/>確認しました
+<br>
+<br>
+ <td>
 
- <td><form action = "/deleteresource" method = "post">
-<input type="checkbox" name = "checkedConfirm" value = "checkedConfirm" />確認しました
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit" type = "submit" value = "削除する"></form>
 </td>
