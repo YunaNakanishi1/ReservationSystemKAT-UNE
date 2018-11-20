@@ -39,4 +39,6 @@ public class ViewHolder {
     public static final String  PUSH_DELETE_BUTTON_ON_RESOURCE_DELETE_CONFIRM_SERVLET  = "/reservesystem/pushDeleteButtonOnResourcedeleteConfirm";
     public static final String SET_RESOURCE_DETAILS_SERVLET = "/reservesystem/setresource";
     public static final String SUSPENSION_USE_CONFIRM = "/WEB-INF/resource/SuspensionUseConfirm.jsp";
+    public static final String SHOW_RESOURCE_REGIST = "resourceregist";
+
 }

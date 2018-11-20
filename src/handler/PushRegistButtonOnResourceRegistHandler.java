@@ -81,6 +81,7 @@ public class PushRegistButtonOnResourceRegistHandler implements Handler{
 
 							} catch (SQLException e) {
 								_log.error("SQLException");
+								e.printStackTrace();
 								return ERROR_PAGE;
 							}
 						}else{
