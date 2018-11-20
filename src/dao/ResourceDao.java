@@ -16,6 +16,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dto.ReservationDto;
 import dto.Resource;
 
 /**
@@ -267,23 +268,44 @@ public class ResourceDao {
      * @return 削除結果（1だと成功）
      * @throws SQLException 変更に失敗した場合
      */
-    public int delete(String resourceId) throws SQLException {
+    public int delete(String resourceId,List<ReservationDto> reservationList) throws SQLException {
         int result = 0;
+        int result2 = 0;
         DBHelper dbHelper = new DBHelper();
         _con = dbHelper.connectDb(); // データベースに接続
         PreparedStatement stmt = null;
+        PreparedStatement stmt2 = null;
+
         String sql = "UPDATE resources SET deleted = 1 WHERE resource_id = ?";
+        String sql2 = "UPDATE reservations SET deleted = 1 WHERE reserve_id = ?";
 
         try {
             if (_con == null) {
                 _log.error("DatabaseConnectError");
                 throw new SQLException();
             }
+            _con.setAutoCommit(false);
+
+            int reserveId;
+            for(ReservationDto reservation:reservationList){
+            	reserveId=reservation.getReservationId();
+                stmt2 = _con.prepareStatement(sql2);
+                stmt2.setInt(1,reserveId);
+                result2 = stmt2.executeUpdate();
+                if(result2!=1){
+                	throw new SQLException();
+                }
+            }
             stmt = _con.prepareStatement(sql);
             stmt.setString(1, resourceId);
             result = stmt.executeUpdate();
+            _con.commit();
 
-        } finally {
+
+        } catch(SQLException e){
+        	_con.rollback();
+        	throw e;
+        }finally{
             // Statementのクローズ
             try {
                 dbHelper.closeResource(stmt);

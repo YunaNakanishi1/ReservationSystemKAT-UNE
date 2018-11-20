@@ -9,6 +9,7 @@ import static handler.MessageHolder.*;
 import static handler.ViewHolder.*;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dto.ReservationDto;
 import service.DeleteResourceService;
 
 /**
@@ -31,7 +33,11 @@ public class DeleteResourceHandler implements Handler {
       HttpSession httpSession = request.getSession(false);
       //セッションは存在する
       int authority = (int) httpSession.getAttribute("authorityOfLoggedIn");
-      String deleteId = request.getParameter("resourceId");
+      String deleteId = (String) request.getAttribute("resourceId");
+
+      //セッションからList<ReservationDto>取得
+      List<ReservationDto> reservationList=(List<ReservationDto>) httpSession.getAttribute("reservationListForResourceDeleteConfirm");
+
 
       CommonValidator commonValidator = new CommonValidator();
 
@@ -43,7 +49,7 @@ public class DeleteResourceHandler implements Handler {
 
       //権限がある場合
       if (authority == 0) {
-    	  DeleteResourceService deleteResourceService = new DeleteResourceService(deleteId);
+    	  DeleteResourceService deleteResourceService = new DeleteResourceService(deleteId,reservationList);
 
         	if (deleteResourceService.validate()) {
         		try {

@@ -34,7 +34,11 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		ReservationDto reservation=null;
 		String reserveIdStr=request.getParameter("reserveId");
 
-		//System.out.println(reserveIdStr);
+		if(reserveIdStr == null){
+			reserveIdStr = (String) request.getAttribute("reserveIdStr");
+		}
+
+		//System.out.println("PushChangeButtonOnResistHandler　" + reserveIdStr);
 
 		int reserveId=0;
 		try{
@@ -59,6 +63,22 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		//実利用時間を求める
 		String usageStartTimeStr = request.getParameter("usageStartTime");
 		String usageEndTimeStr = request.getParameter("usageEndTime");
+
+		//追加した
+//		int usageStartTime = 0;
+//		int usageEndTime = 0;
+//		if (("NaN").equals(usageStartTimeStr)) {
+//			TimeDto usageStartTimeForReservationChange = (TimeDto)session.getAttribute("usageStartTimeForReservationChange");
+//			ReservationDto test =  (ReservationDto)session.getAttribute("reservationDTOForReservationDetails");
+//			int testEnd = test.getUsageEndTime().getTimeMinutesValue();
+//			usageStartTime = usageStartTimeForReservationChange.getTimeMinutesValue();
+//			usageEndTime = testEnd;
+//			System.out.println(usageStartTime + " " + usageEndTime);
+//		} else {
+//			usageStartTime = Integer.parseInt(usageStartTimeStr);
+//			usageEndTime = Integer.parseInt(usageEndTimeStr);
+//		}
+//		//
 
 		int usageStartTime = Integer.parseInt(usageStartTimeStr);
 		int usageEndTime = Integer.parseInt(usageEndTimeStr);

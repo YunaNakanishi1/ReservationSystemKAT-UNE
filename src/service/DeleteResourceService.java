@@ -5,8 +5,10 @@
 package service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import dao.ResourceDao;
+import dto.ReservationDto;
 
 
 /**
@@ -19,9 +21,11 @@ public class DeleteResourceService implements Service{
 
 	private String _resourceId;    //削除したいリソースId
 	private int  _result;          //削除結果
+	private List<ReservationDto> _reservationList;
 
-	public DeleteResourceService(String resourceId){
+	public DeleteResourceService(String resourceId,List<ReservationDto> reservationList){
 		_resourceId = resourceId;
+		_reservationList=reservationList;
 	}
 
 	@Override
@@ -31,7 +35,7 @@ public class DeleteResourceService implements Service{
 
 	public void execute() throws SQLException {
 		ResourceDao resourceDao = new ResourceDao();
-		_result = resourceDao.delete(_resourceId);
+		_result = resourceDao.delete(_resourceId,_reservationList);
 	}
 
 	public int getResult(){
