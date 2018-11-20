@@ -29,7 +29,9 @@ public class IsNotOverlapInReservationListService implements Service {
 	@Override
 	public boolean validate() {
 
+		if(_reservationList.size() == 0){ return true;}
 		if (_reservationList.size() == 1) {
+			//System.out.println("IsNotOverlaplnReservationList　" );
 			if (_reservationList.get(0).getReservationId() == _reservation.getReservationId()) {
 				return true;
 			}

@@ -191,6 +191,8 @@ public class ReservationDao {
 			//SimpleDateFormat usageDateFormat = new SimpleDateFormat("yyyy年M月d日");
 			//String usageDate = usageDateFormat.format(usageStartDate);
 
+			//System.out.println(usageStartDate);
+
 			//「利用日」を作る(yyyy/MM/mm)
 			SimpleDateFormat usageDateFormat = new SimpleDateFormat("yyyy/M/d");
 			String usageDate = usageDateFormat.format(usageStartDate);
@@ -577,6 +579,7 @@ public class ReservationDao {
 			preparedStatement.setTimestamp(2, startTime);
 			preparedStatement.setTimestamp(3, endTime);
 
+
 			rs=preparedStatement.executeQuery();
 
 
@@ -626,8 +629,12 @@ public class ReservationDao {
 			String coMailAddress = null;
 
 			while (rs.next()) {
+				//System.out.println("ReservationDao rs.next()");
 				reserveId = rs.getInt("reserve_id");
 				usageStartDate = rs.getTimestamp("usage_start_date");
+
+				//System.out.println(usageStartDate);
+
 				usageEndDate = rs.getTimestamp("usage_end_date");
 				reservationName = rs.getString("reservation_name");
 				numberOfParticipants = rs.getInt("number_of_participants");
@@ -645,10 +652,7 @@ public class ReservationDao {
 				resourceDeleted = rs.getInt("resource_deleted");
 
 				attendanceType = rs.getString("attendance_type");
-
 				//facility.add(rs.getString("resource_characteristic_name"));
-
-
 				userId = rs.getString("user_id");
 				password = rs.getString("password");
 				familyName = rs.getString("family_name");
@@ -701,6 +705,7 @@ public class ReservationDao {
 						attendanceTypeDto, reserveSupplement, reservationDeleted);
 
 				reservationList.add(reservationDto);
+				//System.out.println(reservationList.size());
 			}
 
 		} catch(SQLException e) {

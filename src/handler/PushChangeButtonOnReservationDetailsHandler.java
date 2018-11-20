@@ -34,7 +34,11 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		ReservationDto reservation=null;
 		String reserveIdStr=request.getParameter("reserveId");
 
-		//System.out.println(reserveIdStr);
+		if(reserveIdStr == null){
+			reserveIdStr = (String) request.getAttribute("reserveIdStr");
+		}
+
+		//System.out.println("PushChangeButtonOnResistHandler　" + reserveIdStr);
 
 		int reserveId=0;
 		try{

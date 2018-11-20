@@ -60,6 +60,13 @@ public class ChangeReservationHandler implements Handler {
 		try {
 			if(!reservableCheck()) {
 				request.setAttribute("messageForReservationChange", EM24);
+
+				//PushChangeButtonReservationDetailsHandler用
+				String reserveIdStr = request.getParameter("reserveId");
+				request.setAttribute("reserveId", reserveIdStr);
+
+				System.out.println("ChangeReservationHandler2");
+
 				return PUSH_CHANGE_BUTTON_ON_RESERVATION_DETAILS_SERVLET;
 			}
 		} catch (MyException e) {
@@ -83,6 +90,7 @@ public class ChangeReservationHandler implements Handler {
 			if (changeSucceed) {
 				HandlerHelper.initializeAttributeForReservationRegist(session);
 				session.setAttribute("reservationIdForReservationDetails", _reservation.getReservationId());
+				request.setAttribute("messageForReservationChange", PM02);
 				return SHOW_RESERVATION_DETAILS_SERVLET;
 
 			} else {
@@ -117,6 +125,8 @@ public class ChangeReservationHandler implements Handler {
 
 		String attendanceTypeIdForReservationChange = request.getParameter("attendanceTypeId");
 		String reserveSupplementForReservationChange = request.getParameter("reserveSupplement");
+
+		//System.out.println(usageStartMinutesStr);
 
 		//取得した時間をTimeDto型に変換
 		int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
@@ -178,13 +188,18 @@ public class ChangeReservationHandler implements Handler {
 		TimeDto endTime = _reservation.getUsageEndTime();
 		_usageEndTimestamp = endTime.getTimeStamp(usageDate);
 
+
+
 		//予約があったらリストで返却
 		GetReservationListBetweenDateService getReservationListBetweenDateService = new GetReservationListBetweenDateService(_reservation.getResource().getResourceId(), _usageStartTimestamp, _usageEndTimestamp);
 
 		if (getReservationListBetweenDateService.validate()) {
+			//System.out.println("到達");
 			try {
 				getReservationListBetweenDateService.execute();
 				_reservationList = getReservationListBetweenDateService.getReservationList();
+
+				//System.out.println(_reservationList.size());
 
 			} catch(SQLException e) {
 				_log.error("SQLException");
@@ -193,6 +208,8 @@ public class ChangeReservationHandler implements Handler {
 		} else {
 			throw new MyException();
 		}
+
+		//System.out.println(_reservationList.size() + "ChangeReservationHandler");
 
 		//自分以外に予約が無ければtrue
 		IsNotOverlapInReservationListService isNotOverlapInReservationListService = new IsNotOverlapInReservationListService(_reservationList, _reservation);
