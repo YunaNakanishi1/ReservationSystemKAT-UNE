@@ -3,7 +3,7 @@ var duration = parseInt(document.getElementById("usageTime").value,10);//利用�
 var start = parseInt(document.getElementById("usageStartTime").value,10);//利用可能開始時間
 var end = parseInt(document.getElementById("usableEndTime").value,10); //利用可能終了時間
 var handleWidthMin = 15;//つまみの最小幅
-var sliderStartPoint = parseInt(document.getElementById("usableStartTime").value,10);	//スライダー初期位置
+var sliderStartPoint = parseInt(document.getElementById("usableStartTime").value,10)-start;	//スライダー初期位置
 
 //スライダーを生成
 $(function() {
