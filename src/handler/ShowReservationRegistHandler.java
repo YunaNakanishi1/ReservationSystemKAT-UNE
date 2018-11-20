@@ -182,7 +182,6 @@ public class ShowReservationRegistHandler {
 		if(_session.getAttribute("usageStartTimeForResourceSelect")!=null){
 		TimeDto usageStartTime=(TimeDto) _session.getAttribute("usageStartTimeForResourceSelect");
 		_session.setAttribute("usageStartTimeForReservationRegist", usageStartTime);
-		System.out.println("usageStartTimeForResourceSelect" + usageStartTime);
 		}
 
 		int usageTimeForGetTimeMinutesValue = usageTimeDto.getTimeMinutesValue();
@@ -194,9 +193,6 @@ public class ShowReservationRegistHandler {
 		_session.setAttribute("usageEndTimeForReservationRegist", timeDtoForUsageEndTime);
 		_session.setAttribute("usableEndTimeForReservationRegist", timeDtoForUsableEndTime);
 
-		System.out.println("usableStartTimeForReservationRegist" + timeDtoForUsableStartTime);
-		System.out.println("usageEndTimeForReservationRegist"+ timeDtoForUsageEndTime);
-		System.out.println("usableEndTimeForReservationRegist"+ timeDtoForUsableEndTime);
 		return true;
 
 	}
