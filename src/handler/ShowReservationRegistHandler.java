@@ -63,8 +63,9 @@ public class ShowReservationRegistHandler {
 
 		String coReservedPersonId
 		= (String) _session.getAttribute("coReservedPersonIdForReservationRegist");//共同予約者ID
-		request.setAttribute("coReservedPersonNameForReservationRegist", "-----");
-
+		if(coReservedPersonId == null){
+			_session.setAttribute("coReservedPersonNameForReservationRegistForNull", "-----");
+		}
 		int attendanceTypeIdInt=-1;
 		if(_session.getAttribute("attendanceTypeIdForReservationRegist")!=null){
 		attendanceTypeIdInt= (int) _session.getAttribute("attendanceTypeIdForReservationRegist");//参加者種別ID
@@ -176,7 +177,7 @@ public class ShowReservationRegistHandler {
 		if(_session.getAttribute("usageStartTimeForResourceSelect")!=null){
 		TimeDto usageStartTime=(TimeDto) _session.getAttribute("usageStartTimeForResourceSelect");
 		_session.setAttribute("usageStartTimeForReservationRegist", usageStartTime);
-
+		System.out.println("usageStartTimeForResourceSelect" + usageStartTime);
 		}
 
 		int usageTimeForGetTimeMinutesValue = usageTimeDto.getTimeMinutesValue();
@@ -188,6 +189,9 @@ public class ShowReservationRegistHandler {
 		_session.setAttribute("usageEndTimeForReservationRegist", timeDtoForUsageEndTime);
 		_session.setAttribute("usableEndTimeForReservationRegist", timeDtoForUsableEndTime);
 
+		System.out.println("usableStartTimeForReservationRegist" + timeDtoForUsableStartTime);
+		System.out.println("usageEndTimeForReservationRegist"+ timeDtoForUsageEndTime);
+		System.out.println("usableEndTimeForReservationRegist"+ timeDtoForUsableEndTime);
 		return true;
 
 	}
