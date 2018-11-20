@@ -66,11 +66,11 @@ public class PushDeleteButtonOnSuspensionUseConfirmHandler implements Handler{
 			}
 
 			if(currentReservationList.size()==count){
-				session.setAttribute("reservationListForSusPensionUseConfirm",currentReservationList);
+				session.setAttribute("reservationListForSuspensionUseConfirm",currentReservationList);
 				request.setAttribute("resourceId",resourceId);
 				return SET_RESOURCE_DETAILS_SERVLET;
 			}
-			session.setAttribute("reservationListForSusPensionUseConfirm",currentReservationList);
+			session.setAttribute("reservationListForSuspensionUseConfirm",currentReservationList);
 			request.setAttribute("messageForSuspensionUseConfirm",EM41);
 			return SUSPENSION_USE_CONFIRM;
 
