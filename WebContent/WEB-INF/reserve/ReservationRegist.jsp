@@ -82,7 +82,7 @@ function hyoji(notView)
 <td class="dialog"><b>　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
 
-<input type="hidden" id ="usageStartTime"  name = "usageStartTime" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usageStartTime"  name = "usageStartTime" value="${usableStartTimeForReservationRegist.timeMinutesValue}"/>
 <input type="hidden" id ="usageEndTime" name="usageEndTime" value="${usageEndTimeForReservationRegist.timeMinutesValue}"/>
 <input type="hidden" id ="usableEndTime" name="usableEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
 <input type="hidden" id ="usageTime" name="usageTime" value="${usageTimeForResourceRegist.timeMinutesValue}"/>
