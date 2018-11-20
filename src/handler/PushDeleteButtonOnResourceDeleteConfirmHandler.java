@@ -70,6 +70,7 @@ public class PushDeleteButtonOnResourceDeleteConfirmHandler implements Handler{
 
 	}else{
 		request.setAttribute("messageForResourceDeleteConfirm",EM43);
+		request.setAttribute("resourceId",resourceId);
 		return RESOURCE_DELETE_CONFIRM;
 	}
 
