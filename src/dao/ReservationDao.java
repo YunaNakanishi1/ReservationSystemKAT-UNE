@@ -831,7 +831,11 @@ public class ReservationDao {
 			stmt.setTimestamp(1, reservation.getUsageStartTime().getTimeStamp(usageDate));
 			stmt.setTimestamp(2, reservation.getUsageEndTime().getTimeStamp(usageDate));
 			stmt.setString(3, reservation.getReservationName());
-			stmt.setString(4, reservation.getCoReservedPerson().getUserId());
+			if(reservation.getCoReservedPerson().getUserId().equals("")){
+	            stmt.setObject(4, null);
+			}else{
+			    stmt.setString(4, reservation.getCoReservedPerson().getUserId());
+			}
 			stmt.setInt(5, reservation.getNumberOfParticipants());
 
 			if (reservation.getAttendanceTypeDto().getAttendanceTypeId() != -1) {
