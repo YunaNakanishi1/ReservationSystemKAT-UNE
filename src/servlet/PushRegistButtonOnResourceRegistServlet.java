@@ -16,7 +16,7 @@ import handler.PushRegistButtonOnResourceRegistHandler;
  * サーブレット番号：37
  * Servlet implementation class PushRegistButtonOnResourceRegistServlet
  */
-@WebServlet("/PushRegistButtonOnResourceRegistServlet")
+@WebServlet("/reservesystem/PushRegistButtonOnResourceRegist")
 public class PushRegistButtonOnResourceRegistServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 

@@ -15,7 +15,7 @@ import handler.PushDeleteButtonOnResourceDeleteConfirmHandler;
 /**
  * Servlet implementation class PushDeleteButtonOnResourceDeleteConfirmServlet
  */
-@WebServlet("/reservesystem/pushDeleteButton")
+@WebServlet("/reservesystem/pushDeleteButtonOnResourcedeleteConfirm")
 public class PushDeleteButtonOnResourceDeleteConfirmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
