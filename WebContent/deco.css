@@ -163,8 +163,18 @@
 .right2{	/*リソース詳細のテーブル右側*/
 	padding-left:4em;
 	text-align:left;
+	max-width:250px;
 	/*background-color:red;*/	/*実験用*/
 }
+
+.office{
+	box-sizing: border-box;
+	background-color:red;
+
+}
+
+
+
 .right3{	/*これどこで使ってるの？*/
 	padding-left:4em;
 	text-align:left;
@@ -355,5 +365,9 @@
     border: 0px;
     background: transparent;
     font-size: 16px;
+}
+
+.back{
+	background-color:red;
 }
 

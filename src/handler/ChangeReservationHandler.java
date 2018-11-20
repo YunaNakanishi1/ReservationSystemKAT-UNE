@@ -114,6 +114,8 @@ public class ChangeReservationHandler implements Handler {
 		String usageStartMinutesStr = request.getParameter("usageStartTime");
 		//利用開始時間の分
 		String usageEndMinutesStr = request.getParameter("usageEndTime");
+		//追加
+		int endSumMin =  (int)session.getAttribute("usageEndTimeForReservationChange");
 
 		///////追加
 		TimeDto usageStartTimeForReservationChange = null;
@@ -128,8 +130,11 @@ public class ChangeReservationHandler implements Handler {
 			//取得した時間をTimeDto型に変換
 			int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
 			int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
+			int usageEndTime = usageStartMinutes + endSumMin;
+			System.out.println(usageStartMinutes + " " + endSumMin);
 			usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
-			usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
+			//usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
+			usageEndTimeForReservationChange = new TimeDto(usageEndTime);
 		}
 		////////
 

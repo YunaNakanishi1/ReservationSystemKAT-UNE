@@ -832,8 +832,11 @@ public class ReservationDao {
 			stmt.setString(3, reservation.getReservationName());
 			stmt.setString(4, reservation.getCoReservedPerson().getUserId());
 			stmt.setInt(5, reservation.getNumberOfParticipants());
+
 			if (reservation.getAttendanceTypeDto().getAttendanceTypeId() != -1) {
 				stmt.setInt(6, reservation.getAttendanceTypeDto().getAttendanceTypeId());
+			} else {
+				stmt.setObject(6, null);
 			}
 			stmt.setString(7, reservation.getSupplement());
 			stmt.setInt(8, reservation.getReservationId());

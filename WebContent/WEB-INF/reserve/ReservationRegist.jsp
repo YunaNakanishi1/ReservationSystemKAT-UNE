@@ -268,8 +268,16 @@ selected
 </div>
 <script type="text/javascript" src="/ReservationSystemKAT-UNE/Slider.js">	</script>
 <script>
-window.onload = function() {
+onload2 = function() {
 	ShowLength();
+}
+addOnloadEvent(onload2);
+function addOnloadEvent(fnc){
+  if ( typeof window.addEventListener != "undefined" )
+    window.addEventListener( "load", fnc, false );
+  else if ( typeof window.attachEvent != "undefined" ) {
+    window.attachEvent( "onload", fnc );
+  }
 }
 function ShowLength() {
 	   document.getElementById("inputlength").innerHTML = document.getElementById("supplementArea").value.length+"/500";

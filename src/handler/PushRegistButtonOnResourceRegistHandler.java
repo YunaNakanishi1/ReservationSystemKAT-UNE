@@ -27,6 +27,7 @@ import service.PushRegistButtonOnResourceRegistService;
 public class PushRegistButtonOnResourceRegistHandler implements Handler{
 
 	private HttpServletRequest _request;
+	private HttpSession _session;
 	private Resource _resource;
 	private String _type;
 	private Logger _log = LogManager.getLogger();
@@ -40,6 +41,7 @@ public class PushRegistButtonOnResourceRegistHandler implements Handler{
 		// セッションから権限を取得
 		//管理者でないもののアクセスは許可しない
 		HttpSession session = request.getSession(false);
+		_session=session;
 		int authority = (int) session.getAttribute("authorityOfLoggedIn");
 
 
@@ -89,7 +91,7 @@ public class PushRegistButtonOnResourceRegistHandler implements Handler{
 						return SET_RESOURCE_DETAILS_SERVLET;
 					}
 				}else{
-					request.setAttribute("Emessage", pushRegistButtonOnResourceRegistService.getValidationMessage());
+					session.setAttribute("Emessage", pushRegistButtonOnResourceRegistService.getValidationMessage());
 					return RESOURCE_REGIST_SERVLET;
 				}
 
@@ -120,33 +122,33 @@ public class PushRegistButtonOnResourceRegistHandler implements Handler{
 	private boolean precheck() {
 		// 登録か変更かを取得し、フィールドとリクエストにセットする
 		_type = _request.getParameter("type");
-		_request.setAttribute("type", _type);
+		_session.setAttribute("type", _type);
 
 		// 入力内容を取得し、再表示用にsetAttributeしなおす
 		String resourceId = _request.getParameter("resourceId");
-		_request.setAttribute("resourceId", resourceId);
+		_session.setAttribute("resourceId", resourceId);
 		String resourceName = _request.getParameter("resourceName");
-		_request.setAttribute("resourceName", resourceName);
+		_session.setAttribute("resourceName", resourceName);
 		String category = _request.getParameter("category");
-		_request.setAttribute("category", category);
+		_session.setAttribute("category", category);
 		String capacity = _request.getParameter("capacity");
-		_request.setAttribute("capacity", capacity);
+		_session.setAttribute("capacity", capacity);
 		String officeName = _request.getParameter("officeName");
-		_request.setAttribute("officeName", officeName);
+		_session.setAttribute("officeName", officeName);
 		String stopStartDay = _request.getParameter("stopStartDay");
-		_request.setAttribute("stopStartDay", stopStartDay);
+		_session.setAttribute("stopStartDay", stopStartDay);
 		String stopStartHour = _request.getParameter("stopStartHour");
-		_request.setAttribute("stopStartHour", stopStartHour);
+		_session.setAttribute("stopStartHour", stopStartHour);
 		String stopStartMinute = _request.getParameter("stopStartMinute");
-		_request.setAttribute("stopStartMinute", stopStartMinute);
+		_session.setAttribute("stopStartMinute", stopStartMinute);
 		String stopEndDay = _request.getParameter("stopEndDay");
-		_request.setAttribute("stopEndDay", stopEndDay);
+		_session.setAttribute("stopEndDay", stopEndDay);
 		String stopEndHour = _request.getParameter("stopEndHour");
-		_request.setAttribute("stopEndHour", stopEndHour);
+		_session.setAttribute("stopEndHour", stopEndHour);
 		String stopEndMinute = _request.getParameter("stopEndMinute");
-		_request.setAttribute("stopEndMinute", stopEndMinute);
+		_session.setAttribute("stopEndMinute", stopEndMinute);
 		String supplement = _request.getParameter("supplement");
-		_request.setAttribute("supplement", supplement);
+		_session.setAttribute("supplement", supplement);
 
 		// リソース特性をリストとしてセット
 		List<String> facility = new ArrayList<String>();
@@ -154,35 +156,35 @@ public class PushRegistButtonOnResourceRegistHandler implements Handler{
 		if (facilityArray != null) {
 			facility = new ArrayList<String>(Arrays.asList(facilityArray));
 		}
-		_request.setAttribute("facility", facility);
+		_session.setAttribute("facility", facility);
 
 		CommonValidator commonValidator = new CommonValidator();
 
 		// リソース名が入力されているか調べる
 		if (commonValidator.notSetOn(resourceName)) {
-			_request.setAttribute("Emessage", EM27);
+			_session.setAttribute("Emessage", EM27);
 			return false;
 		}
 		// カテゴリ情報があるか調べる
 		if (commonValidator.notSetOn(category)) {
-			_request.setAttribute("Emessage", EM37);
+			_session.setAttribute("Emessage", EM37);
 			return false;
 		}
 		// 定員が入力されているか調べる
 		if (commonValidator.notSetOn(capacity)) {
-			_request.setAttribute("Emessage", EM30);
+			_session.setAttribute("Emessage", EM30);
 			return false;
 		}
 		// 定員が数字になっているか調べる
 		if (commonValidator.notNumericOn(capacity)) {
-			_request.setAttribute("Emessage", EM31);
+			_session.setAttribute("Emessage", EM31);
 			return false;
 		}
 		// 数字に変換した定員を取得する
 		int capacityNumber = commonValidator.getNumber();
 		// 事業所情報があるか調べる
 		if (commonValidator.notSetOn(officeName)) {
-			_request.setAttribute("Emessage", EM33);
+			_session.setAttribute("Emessage", EM33);
 			return false;
 		}
 		// 利用停止開始日時が設定されているか調べる
@@ -190,7 +192,7 @@ public class PushRegistButtonOnResourceRegistHandler implements Handler{
 		if (!commonValidator.notSetOn(stopStartDay)) {
 			// 日付のフォーマットが正しいか調べる
 			if (commonValidator.notDateOn(stopStartDay, stopStartHour, stopStartMinute)) {
-				_request.setAttribute("Emessage", EM38);
+				_session.setAttribute("Emessage", EM38);
 				return false;
 			}
 			stopStartDate = commonValidator.getDate();
@@ -200,7 +202,7 @@ public class PushRegistButtonOnResourceRegistHandler implements Handler{
 		if (!commonValidator.notSetOn(stopEndDay)) {
 			// 日付のフォーマットが正しいか調べる
 			if (commonValidator.notDateOn(stopEndDay, stopEndHour, stopEndMinute)) {
-				_request.setAttribute("Emessage", EM38);
+				_session.setAttribute("Emessage", EM38);
 				return false;
 			}
 			stopEndDate = commonValidator.getDate();
@@ -208,6 +210,7 @@ public class PushRegistButtonOnResourceRegistHandler implements Handler{
 		// 全てのチェックが通るなら、リソースのDTOを作成する
 		_resource = new Resource(resourceId, resourceName, officeName, category, capacityNumber, supplement, 0,
 				facility, stopStartDate, stopEndDate);
+		_session.setAttribute("resource", _resource);
 		return true;
 	}
 }

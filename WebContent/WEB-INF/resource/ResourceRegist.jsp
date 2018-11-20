@@ -44,7 +44,7 @@
 
 <table class="table2">
 <tbody>
-<form action="setresource" method="post">
+<form action="PushRegistButtonOnResourceRegist" method="post">
 
 <tr>
 <td class="one" class="dialog"><b>リソース名</b><a class="red">　※</a></td>
