@@ -41,7 +41,6 @@ public class PushDeleteButtonOnResourceDeleteConfirmHandler implements Handler{
 		try{
 			getReservationListFromResourceIdService.execute();
 			currentReservationList=getReservationListFromResourceIdService.getList();
-
 		}catch(SQLException e){
 			_log.error("SQLException");
 			return ERROR_PAGE;
@@ -51,7 +50,7 @@ public class PushDeleteButtonOnResourceDeleteConfirmHandler implements Handler{
 		for(ReservationDto current : currentReservationList){
 			//sessionから取得したリストの各要素について
 			for(ReservationDto previous :previousReservationList){
-				if(current.equals(previous)){
+				if(current.getReservationId()==previous.getReservationId()){
 					count++;
 				}
 
@@ -60,10 +59,11 @@ public class PushDeleteButtonOnResourceDeleteConfirmHandler implements Handler{
 
 		if(currentReservationList.size()==count){
 			session.setAttribute("reservationListForResourceDeleteConfirm",currentReservationList);
+			request.setAttribute("resourceId",resourceId);
 			return DELETE_RESOURCE;
 		}
 		session.setAttribute("reservationListForResourceDeleteConfirm",currentReservationList);
-		request.setAttribute("messageForResourceDeleteConfirm",EM43);
+		request.setAttribute("messageForResourceDeleteConfirm",EM41);
 		return RESOURCE_DELETE_CONFIRM;
 
 
