@@ -63,13 +63,13 @@ public class PushDeleteButtonOnResourceDetailsHandler implements Handler{
 			return ERROR_PAGE;
 		}
 
-		System.out.println(reservationList.size());
+	session.setAttribute("reservationListForResourceDeleteConfirm",reservationList);
+
 		if(reservationList.size()==0){
 			return DELETE_RESOURCE;
 
 		}
 
-		session.setAttribute("reservationListForResourceDeleteConfirm",reservationList);
 		return RESOURCE_DELETE_CONFIRM;
 	}
 }
