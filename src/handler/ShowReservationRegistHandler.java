@@ -180,8 +180,8 @@ public class ShowReservationRegistHandler {
 		_session.setAttribute("usableStartTimeForReservationRegist", timeDtoForUsableStartTime);
 
 		if(_session.getAttribute("usageStartTimeForResourceSelect")!=null){
-		TimeDto usageStartTime=(TimeDto) _session.getAttribute("usageStartTimeForResourceSelect");
-		_session.setAttribute("usageStartTimeForReservationRegist", usageStartTime);
+			TimeDto usageStartTime=(TimeDto) _session.getAttribute("usageStartTimeForResourceSelect");
+			_session.setAttribute("usageStartTimeForReservationRegist", usageStartTime);
 		}
 
 		int usageTimeForGetTimeMinutesValue = usageTimeDto.getTimeMinutesValue();
