@@ -5,8 +5,10 @@
 package service;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import dao.ResourceDao;
+import dto.ReservationDto;
 import dto.Resource;
 
 /**
@@ -19,14 +21,16 @@ public class ChangeResourceService implements Service{
 	private Resource _resultResource;
 	//resourceDaoのdisplayDetails(String)メソッド実行で返ってくるResourceのDTOを格納するフィールド
 
+	private List<ReservationDto> _reservationList;
 	private int _result;
 	/*executeUpdate()の結果、返ってくる数値を格納するフィールド   */
 
 
 	//コンストラクタ
-	public ChangeResourceService(Resource resource) {
+	public ChangeResourceService(Resource resource, List<ReservationDto> reservationList) {
 		super();
 		_inputResource = resource;
+		_reservationList=reservationList;
 	}
 
 
@@ -59,7 +63,7 @@ public class ChangeResourceService implements Service{
 	@Override
 	public void execute() throws SQLException {
 		ResourceDao resourceDao = new ResourceDao();
-		_result = resourceDao.change(_inputResource);
+		_result = resourceDao.change(_inputResource,_reservationList);
 		_resultResource=resourceDao.displayDetails(_inputResource.getResourceId());
 
 	}

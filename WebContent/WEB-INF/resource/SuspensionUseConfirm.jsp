@@ -31,7 +31,7 @@ Javascriptを有効にしてください
 
 <div class="contents">
 <h2>利用停止該当予約確認</h2>
-<p><font color="red"><c:out value="${Emessage}"/></font></p>
+<p><font color="red"><c:out value="${messageForSuspensionUseConfirm}"/></font></p>
 
 <div class="dialog">
 <p>利用停止期間を適用しようとしているリソースは既に予約されています</p>
@@ -58,7 +58,7 @@ Javascriptを有効にしてください
 <br>
 <br>
 <br>
-<form action = "pushDeleteButton" method = "post">
+<form action = "PushDeleteButtonOnSuspensionUseConfirm" method = "post">
 <input type="checkbox" name="checkedConfirm" value="checkedConfirm"/>確認しました
 <br>
 <br>
