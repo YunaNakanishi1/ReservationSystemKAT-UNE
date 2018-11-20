@@ -178,17 +178,20 @@ public class ResourceDao {
      * @return 変更した件数
      * @throws SQLException 変更に失敗した場合
      */
-    public int change(Resource resource) throws SQLException{
+    public int change(Resource resource,List<ReservationDto> reservationList) throws SQLException{
         int result = 0;
+        int result2=0;
         DBHelper dbHelper = new DBHelper();
         _con = dbHelper.connectDb(); // データベースに接続
         PreparedStatement stmt1 = null;
         PreparedStatement stmt2 = null;
         PreparedStatement stmt3 = null;
+        PreparedStatement stmt4 = null;
 
         String sql1 = "UPDATE resources SET resource_name=?,category_id=(SELECT category_id FROM categories WHERE category_name=?),office_id=(SELECT office_id FROM offices WHERE office_name=?),capacity=?,supplement=?,usage_stop_start_date=?,usage_stop_end_date=? WHERE resource_id=? and deleted=0;";
         String sql2 = "DELETE FROM resource_features WHERE resource_id=?;";
         String sql3 = "INSERT INTO resource_features VALUES ((SELECT resource_characteristic_id FROM resource_characteristics WHERE resource_characteristic_name=?),?);";
+        String sql4 = "UPDATE reservations SET deleted = 1 WHERE reserve_id = ?";
         //引数がnullの場合、SQLを実行できないので、変更した件数0を返す
         if(resource == null){
             _log.error("resource is null");
@@ -202,6 +205,17 @@ public class ResourceDao {
         try{
 
             _con.setAutoCommit(false);
+
+            int reserveId;
+            for(ReservationDto reservation:reservationList){
+            	reserveId=reservation.getReservationId();
+                stmt4 = _con.prepareStatement(sql4);
+                stmt4.setInt(1,reserveId);
+                result2 = stmt4.executeUpdate();
+                if(result2!=1){
+                	throw new SQLException();
+                }
+            }
             //リソーステーブルの変更
             stmt1=_con.prepareStatement(sql1);
             stmt1.setString(8, resource.getResourceId());
@@ -252,6 +266,12 @@ public class ResourceDao {
             }
             try{
                 dbHelper.closeResource(stmt3);
+            }catch(Exception e){
+                e.printStackTrace();
+                _log.error("regist() Exception e");
+            }
+            try{
+                dbHelper.closeResource(stmt4);
             }catch(Exception e){
                 e.printStackTrace();
                 _log.error("regist() Exception e");
