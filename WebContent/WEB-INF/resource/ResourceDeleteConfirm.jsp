@@ -53,20 +53,18 @@ Javascriptを有効にしてください
 
 </div>
 </div>
-<form>
-<input type="checkbox" name = "checkedConfirm" value = "checkedConfirm" />確認しました
-</form>
+
 <br>
 <br>
 
  <td><form action = "/deleteresource" method = "post">
+<input type="checkbox" name = "checkedConfirm" value = "checkedConfirm" />確認しました
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit" type = "submit" value = "削除する"></form>
 </td>
 <td><form action = "resourcedetails" method = "get">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit" type = "submit" value = "戻る"></form></td>
-
 
 </div>
 <br>
