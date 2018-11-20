@@ -108,17 +108,20 @@ window.onload= function() {
         <div id="slider-box">
         <div id="slider"></div>
         </div>
-        <div style="float:left;width:100px;margin-left:0px;">
-        <input class="btn" type = "submit" value = "-15分">
+        <div id="minus15" style="float:left;width:100px;margin-left:0px;">
+        <input class="btn" type = "button" value = "-15分">
 		</div>
 
         <div style="width:270px;float:left;text-align:center;">
         <input type="text" id="slider-timelabel" class="timelabel" readonly="readonly" />
         </div>
-        <div style="float:right;width:100px;margin-right:25px;">
-			<input class="btn" type = "submit" value = "+15分">
+        <div id="plus15" style="float:right;width:100px;margin-right:25px;">
+			<input class="btn" type = "button" value = "+15分">
         </div>
 </div>
+
+    <input type = "hidden" name = "usageStartTimeIn" id = "usageStartTimeIn" value = "">
+    <input type = "hidden" name = "usageEndTimeIn" id = "usageEndTimeIn" value = "">
 
 
 </td>
