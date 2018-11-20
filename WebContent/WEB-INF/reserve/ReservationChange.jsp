@@ -93,6 +93,7 @@ window.onload= function() {
 <input type="hidden" id ="usableStartTime" value="${usageStartTimeForReservationChange.timeMinutesValue}"/>
 
 
+
 <div id="slider-area">
         <div style="float:left;width:100px;margin-left:0px;">
             <input type="text" id="slider-left-timelabel" class="timelabel"  readonly="readonly" style="text-align: left;width:100%"/>
@@ -118,10 +119,18 @@ window.onload= function() {
 			<input class="btn" type = "button" value = "+15分">
         </div>
 </div>
+<<<<<<< HEAD
 <!--
     <input type = "hidden" name = "usageStartTime" id = "usageStartTime" value = "">
     <input type = "hidden" name = "usageEndTime" id = "usageEndTime" value = "">
  -->
+=======
+
+    <input type = "hidden" name = "usageStartTimeIn" id = "usageStartTimeIn" value = "">
+    <input type = "hidden" name = "usageEndTimeIn" id = "usageEndTimeIn" value = "">
+
+
+>>>>>>> refs/remotes/origin/develop
 </td>
 </tr>
 <tr>
