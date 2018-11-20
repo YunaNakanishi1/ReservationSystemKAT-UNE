@@ -39,19 +39,20 @@ Javascriptを有効にしてください
 <p><font color="red">この操作は取り消せません。</font></p>
 <br>
 <div class="scroll3" style="width:800px;height:200px;margin:0 auto;">
+<table>
 <tbody>
 					<c:forEach var="obj" items="${reservationListForSuspensionUseConfirm}" varStatus="status">
 					<tr>
 					<td><c:out value="${obj.usageDate }"/></td>
 					<td><c:out value="${obj.usageStartTime }"/>～<c:out value="${obj.usageEndTime }"/></td>
-					<td><c:out value="${obj.reservedPerson.familyName}"/></td>
-					<td><c:out value="${obj.reservedPerson.firstName}"/></td>
-					<td><c:out value="${obj.reservedPerson.mailAddress}"/></td>
-					<td><c:out value="${obj.reservedPerson.phoneNumber }"/></td>
+					<td>予約者：<c:out value="${obj.reservedPerson.familyName}"/></td>
+					<td>&npsp;<c:out value="${obj.reservedPerson.firstName}"/></td>
+					<td>(<c:out value="${obj.reservedPerson.mailAddress}"/></td>
+					<td><c:out value="${obj.reservedPerson.phoneNumber }"/>)</td>
 					</tr>
 					</c:forEach>
 					</tbody>
-
+</table>
 </div>
 </div>
 
