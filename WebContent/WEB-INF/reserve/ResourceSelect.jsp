@@ -250,6 +250,7 @@ selected
 	</c:forEach>
 </select>
 ／
+
 <select class="category" name ="category">
 <option value="">全て
 </option>
