@@ -250,7 +250,7 @@ selected
 	</c:forEach>
 </select>
 ／
-<select name ="category">
+<select class="category" name ="category">
 <option value="">全て
 </option>
 
@@ -284,7 +284,7 @@ selected
 (※定員がないものは0人で登録されています)
 
 <div class="dialog2">
-<input type="text" name="capacity"
+<input type="text" name="capacity" class="capacity"
 value = "<c:out value="${displayCapacityForResourceSelect}" />"
 >人以上
 </div>

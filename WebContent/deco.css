@@ -164,13 +164,26 @@
 	padding-left:4em;
 	text-align:left;
 	max-width:250px;
+	min-width:250px;
+	box-sizing: border-box;
+	word-break : break-all;
 	/*background-color:red;*/	/*実験用*/
 }
 
 .office{
 	box-sizing: border-box;
-	background-color:red;
+	max-width:100px;
+	min-width:100px;
+}
+.category{
+	box-sizing: border-box;
+	max-width:100px;
+	min-width:100px;
+}
 
+.capacity{
+	max-width:100px;
+	min-width:100px;
 }
 
 

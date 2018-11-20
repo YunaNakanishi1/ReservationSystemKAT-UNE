@@ -83,7 +83,7 @@ public class ReservationDao {
 			Timestamp usageEndDate = null; //利用終了日時
 			String reservationName = null;	//予約名称
 			String reservedPersonId; //予約者ID
-			String coReservedPersonId;//共同予約者ID
+			String coReservedPersonId=null;//共同予約者ID
 			int numberOfParticipants = 0;	//利用人数
 			int attendanceTypeId = 0;	//参加者種別ID
 			String reserveSupplement=null; //補足
@@ -213,7 +213,7 @@ public class ReservationDao {
 			//「共同予約者」のDTOを作る
 			User coReservedPerson;
 
-			if(coUserId != null){
+			if(coReservedPersonId != null){
 			coReservedPerson = new User(coUserId, coPassword, coAuthority,
 					coFamilyName, coFirstName, coFhoneNumber, coMailAddress);
 			}else{
