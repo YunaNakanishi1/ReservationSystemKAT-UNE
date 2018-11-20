@@ -22,7 +22,7 @@ public class PushDeleteButtonOnResourceDeleteConfirmHandler implements Handler{
 
 	@Override
 	public String handleService(HttpServletRequest request) {
-		HttpSession session =request.getSession(true);
+		HttpSession session =request.getSession(false);
 
 	//リクエストからresourceIdをString型で受け取る
 	String resourceId = request.getParameter("resourceId");
