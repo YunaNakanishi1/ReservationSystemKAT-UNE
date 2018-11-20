@@ -86,13 +86,13 @@ window.onload= function() {
 <tr>
 <td class="dialog"><b>　　　　　　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
-
+<!--
 <input type="hidden" id ="usageStartTime" value="${usableStartTimeForReservationChange.timeMinutesValue}"/>
 <input type="hidden" id ="usableEndTime" value="${usableEndTimeForReservationChange.timeMinutesValue}"/>
 <input type="hidden" id ="usageTime" value="${usageEndTimeForReservationChange}"/>
 <input type="hidden" id ="usableStartTime" value="${usageStartTimeForReservationChange.timeMinutesValue}"/>
 
-
+ -->
 <div id="slider-area">
         <div style="float:left;width:100px;margin-left:0px;">
             <input type="text" id="slider-left-timelabel" class="timelabel"  readonly="readonly" style="text-align: left;width:100%"/>
