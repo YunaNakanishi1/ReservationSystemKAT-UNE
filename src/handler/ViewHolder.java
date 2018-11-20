@@ -36,4 +36,6 @@ public class ViewHolder {
     public static final String RESOURCE_DETAILS_TAB="/WEB-INF/resource/ResourceDetailsTab.jsp";
     public static final String RESOURCE_DELETE_CONFIRM="/WEB-INF/resource/ResourceDeleteConfirm.jsp";
     public static final String DELETE_RESOURCE = "deleteresource";
+    public static final String  PUSH_DELETE_BUTTON_ON_RESOURCE_DELETE_CONFIRM_SERVLET  = "/reservesystem/pushDeleteButton";
+
 }
