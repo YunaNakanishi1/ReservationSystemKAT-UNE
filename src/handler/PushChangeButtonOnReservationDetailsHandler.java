@@ -59,7 +59,7 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		//スライダー初期位置
 		session.setAttribute("usageStartTimeForReservationChange", reservation.getUsageStartTime());
 
-		System.out.println(reservation.getUsageStartTime().getTimeMinutesValue());
+		//System.out.println(reservation.getUsageStartTime().getTimeMinutesValue());
 
 		//利用可能終了時間
 		//session.setAttribute("usageEndTimeForReservationChange", reservation.getUsageEndTime());

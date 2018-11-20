@@ -52,9 +52,6 @@ function hyoji(notView)
     document.getElementById("reserve_pare").style.display="";
   }
 }
-window.onload= function() {
-	  hyoji(true);
-}
 </script>
 
 <div class="contents">
@@ -165,13 +162,13 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 <input type="text" value="${coReservedPersonNameForReservationChange}" id="co-reserved-person-name" readonly="readonly"/>
 </span>
 <input class="button" type = "button" onclick="hyoji(false)" value = "変更">
-<input class="button" type = "button" onclick="selectClearButton()" value = "クリア">
+<input class="button" type = "button" onclick="selectClearButton();hyoji(true)" value = "クリア">
 <input type="hidden" id ="coReservedPersonId" value="${coReservedPersonNameForReservationChange}"/>
 
  </td>
 </tr>
 
-<tr id="reserve_pare">
+<tr id="reserve_pare" style="display:none;">
 <td class="one" class="dialog"></td>
     <td class="right2">
     <hr>

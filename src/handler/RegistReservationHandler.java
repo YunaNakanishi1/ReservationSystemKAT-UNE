@@ -35,6 +35,11 @@ public class RegistReservationHandler implements Handler {
 	public String handleService(HttpServletRequest request) {
 		_session = request.getSession(false);
 		_request=request;
+
+//		if(_request == null){
+//		System.out.println("nullだお");
+//		}
+
 		try {
 			if(!validate()){
 				return SHOW_RESERVATION_REGIST_SERVLET;
@@ -64,6 +69,10 @@ public class RegistReservationHandler implements Handler {
 		CommonValidator commonValidator = new CommonValidator();
 		String usageStartTimeStr = _request.getParameter("usageStartTime");
 		String usageEndTimeStr = _request.getParameter("usageEndTime");
+
+//		System.out.println(usageStartTimeStr);
+//		System.out.println(usageEndTimeStr);
+
 		String reservationName = _request.getParameter("reservationName");
 		String displayNumberOfParticipants = _request.getParameter("numberOfParticipants");
 		String coReservedPersonId = _request.getParameter("coReservedPersonId");
