@@ -70,8 +70,8 @@ public class RegistReservationHandler implements Handler {
 		String usageStartTimeStr = _request.getParameter("usageStartTime");
 		String usageEndTimeStr = _request.getParameter("usageEndTime");
 
-		System.out.println(usageStartTimeStr);
-		System.out.println(usageEndTimeStr);
+//		System.out.println(usageStartTimeStr);
+//		System.out.println(usageEndTimeStr);
 
 		String reservationName = _request.getParameter("reservationName");
 		String displayNumberOfParticipants = _request.getParameter("numberOfParticipants");

@@ -35,6 +35,9 @@ public class PushRegistButtonOnResourceRegistService implements Service{
 	public void execute() throws SQLException {
 	}
 
+	public String getValidationMessage(){
+		return validationMessage;
+	}
 
 
 }
