@@ -163,8 +163,31 @@
 .right2{	/*リソース詳細のテーブル右側*/
 	padding-left:4em;
 	text-align:left;
+	max-width:250px;
+	min-width:250px;
+	box-sizing: border-box;
+	word-break : break-all;
 	/*background-color:red;*/	/*実験用*/
 }
+
+.office{
+	box-sizing: border-box;
+	max-width:100px;
+	min-width:100px;
+}
+.category{
+	box-sizing: border-box;
+	max-width:100px;
+	min-width:100px;
+}
+
+.capacity{
+	max-width:100px;
+	min-width:100px;
+}
+
+
+
 .right3{	/*これどこで使ってるの？*/
 	padding-left:4em;
 	text-align:left;
@@ -355,5 +378,9 @@
     border: 0px;
     background: transparent;
     font-size: 16px;
+}
+
+.back{
+	background-color:red;
 }
 
