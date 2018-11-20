@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import dto.ReservationDto;
 import dto.Resource;
 import service.ChangeResourceService;
 import service.RegistResourceService;
@@ -34,6 +35,7 @@ import service.RegistResourceService;
  */
 public class SetResourceDetailsHandler implements Handler {
 	private HttpServletRequest _request;
+	private HttpSession _session;
 	private Resource _resource;
 	private String _type;
 	private Logger _log = LogManager.getLogger();
@@ -50,17 +52,21 @@ public class SetResourceDetailsHandler implements Handler {
 		// セッションから権限を取得
 		//管理者でないもののアクセスは許可しない
 		HttpSession session = request.getSession(false);
+		_session = session;
+		_resource = (Resource) session.getAttribute("resource");
 		int authority = (int) session.getAttribute("authorityOfLoggedIn");
 
 
 		if (authority == 0) {//0:管理者 1:一般利用者
 
 			// 入力に不備があった際、入力欄に再表示する内容があることを示す
-			request.setAttribute("hasResourceData", true);
+			session.setAttribute("hasResourceData", true);
+
+			_type = (String) _session.getAttribute("type");
+
 
 			//入力の不備をチェック
 			// 新規登録処理と変更処理のどちらも同じバリデーションチェックを行う。
-			if (precheck()) {
 				// typeの値に応じて登録、変更を行う
 			    //遷移先の文字列は各々のメソッドから取得し返却する。
 				if ("regist".equals(_type)) {
@@ -72,10 +78,7 @@ public class SetResourceDetailsHandler implements Handler {
 					_log.error("wrong type");
 					return ERROR_PAGE;
 				}
-			} else {
-				// 入力に不備があればリソース入力ページに戻す
-				return RESOURCE_REGIST_SERVLET;
-			}
+
 
 		} else {
 			_log.error("no authority");
@@ -258,7 +261,8 @@ public class SetResourceDetailsHandler implements Handler {
      * @return 遷移先のアドレス
      */
 	private String change() {
-		ChangeResourceService changeResourceService = new ChangeResourceService(_resource);
+		List<ReservationDto> reservationList = (List<ReservationDto>) _session.getAttribute("reservationListForSuspensionUseConfirm");
+		ChangeResourceService changeResourceService = new ChangeResourceService(_resource,reservationList);
 
 		// バリデーションチェック
 		if (changeResourceService.validate()) {
