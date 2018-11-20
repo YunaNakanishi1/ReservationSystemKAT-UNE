@@ -87,7 +87,6 @@ window.onload= function() {
 <td class="dialog"><b>　　　　　　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
 
-
 <input type="hidden" id ="usageStartTime" value="${usableStartTimeForReservationChange.timeMinutesValue}"/>
 <input type="hidden" id ="usableEndTime" value="${usableEndTimeForReservationChange.timeMinutesValue}"/>
 <input type="hidden" id ="usageTime" value="${usageEndTimeForReservationChange}"/>
