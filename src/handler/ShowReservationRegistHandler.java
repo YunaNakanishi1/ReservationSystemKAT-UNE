@@ -174,6 +174,7 @@ public class ShowReservationRegistHandler {
 		if(_session.getAttribute("usageStartTimeForResourceSelect")!=null){
 		TimeDto usageStartTime=(TimeDto) _session.getAttribute("usageStartTimeForResourceSelect");
 		_session.setAttribute("usageStartTimeForReservationRegist", usageStartTime);
+
 		}
 
 		int usageTimeForGetTimeMinutesValue = usageTimeDto.getTimeMinutesValue();
@@ -184,8 +185,6 @@ public class ShowReservationRegistHandler {
 		//利用可能終了時間をセッションに保存
 		_session.setAttribute("usageEndTimeForReservationRegist", timeDtoForUsageEndTime);
 		_session.setAttribute("usableEndTimeForReservationRegist", timeDtoForUsableEndTime);
-
-
 
 		return true;
 
