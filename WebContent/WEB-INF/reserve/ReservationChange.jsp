@@ -245,7 +245,7 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 <td class="dialog"><b>　　　　　　補足</b></td>
 
 <td class="right2">
-<textarea class="scroll2" name="reserveSupplement"><c:out value="${reserveSupplementForReservationChange}"/></textarea>
+<textarea id="supplementArea" class="scroll2" name="supplement"onkeyup="ShowLength();" <c:out value="${reserveSupplementForReservationRegist }"/> ><c:out value="${reserveSupplementForReservationRegist }"/></textarea><span id="inputlength">0/500</span>
 </td>
 </tr>
 
