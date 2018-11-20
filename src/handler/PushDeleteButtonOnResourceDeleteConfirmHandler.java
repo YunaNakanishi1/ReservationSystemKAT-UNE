@@ -3,6 +3,7 @@ package handler;
 import static handler.MessageHolder.*;
 import static handler.ViewHolder.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +38,14 @@ public class PushDeleteButtonOnResourceDeleteConfirmHandler implements Handler{
 
 		List<ReservationDto> currentReservationList =new ArrayList<ReservationDto>();
 		GetReservationListFromResourceIdService getReservationListFromResourceIdService=new GetReservationListFromResourceIdService(resourceId);
-		currentReservationList=getReservationListFromResourceIdService.getList();
+		try{
+			getReservationListFromResourceIdService.execute();
+			currentReservationList=getReservationListFromResourceIdService.getList();
+
+		}catch(SQLException e){
+			_log.error("SQLException");
+			return ERROR_PAGE;
+		}
 
 		//結果のリストの各要素について
 		for(ReservationDto current : currentReservationList){
