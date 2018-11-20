@@ -82,6 +82,14 @@ function hyoji(notView)
 <td class="dialog"><b>　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
 
+<!--
+<input type="hidden" id ="usageStartTime"  name = "usageStartTime" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usageEndTime" name="usageEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usableEndTime" name="usableEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usageTime" name="usageTime" value="${usageTimeForResourceRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usableStartTime" name="usableStartTime" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
+ -->
+
 <input type="hidden" id ="usageStartTime"  name = "usageStartTime" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
 <input type="hidden" id ="usageEndTime" name="usageEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
 <input type="hidden" id ="usableEndTime" name="usableEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
@@ -231,7 +239,9 @@ selected
 <td class="dialog"><b>補足</b></td>
 
 <td class="right2">
+
 <textarea id="supplementArea" class="scroll2" name="supplement"onkeyup="ShowLength();" <c:out value="${reserveSupplementForReservationRegist }"/> ><c:out value="${reserveSupplementForReservationRegist }"/></textarea><span id="inputlength">0/500</span>
+
 </td>
 </tr>
 
