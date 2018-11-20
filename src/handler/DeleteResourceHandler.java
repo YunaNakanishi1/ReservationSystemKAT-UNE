@@ -31,7 +31,8 @@ public class DeleteResourceHandler implements Handler {
       HttpSession httpSession = request.getSession(false);
       //セッションは存在する
       int authority = (int) httpSession.getAttribute("authorityOfLoggedIn");
-      String deleteId = request.getParameter("resourceId");
+      String deleteId = (String) request.getAttribute("resourceId");
+
 
       CommonValidator commonValidator = new CommonValidator();
 
