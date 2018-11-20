@@ -64,8 +64,24 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		String usageStartTimeStr = request.getParameter("usageStartTime");
 		String usageEndTimeStr = request.getParameter("usageEndTime");
 
-		int usageStartTime = Integer.parseInt(usageStartTimeStr);
-		int usageEndTime = Integer.parseInt(usageEndTimeStr);
+		//追加した
+		int usageStartTime = 0;
+		int usageEndTime = 0;
+		if (("NaN").equals(usageStartTimeStr)) {
+			TimeDto usageStartTimeForReservationChange = (TimeDto)session.getAttribute("usageStartTimeForReservationChange");
+			ReservationDto test =  (ReservationDto)session.getAttribute("reservationDTOForReservationDetails");
+			int testEnd = test.getUsageEndTime().getTimeMinutesValue();
+			usageStartTime = usageStartTimeForReservationChange.getTimeMinutesValue();
+			usageEndTime = testEnd;
+			System.out.println(usageStartTime + " " + usageEndTime);
+		} else {
+			usageStartTime = Integer.parseInt(usageStartTimeStr);
+			usageEndTime = Integer.parseInt(usageEndTimeStr);
+		}
+		//
+
+		//int usageStartTime = Integer.parseInt(usageStartTimeStr);
+		//int usageEndTime = Integer.parseInt(usageEndTimeStr);
 
 		//実利用時間
 		session.setAttribute("usageEndTimeForReservationChange", usageEndTime-usageStartTime);

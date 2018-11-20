@@ -115,7 +115,23 @@ public class ChangeReservationHandler implements Handler {
 		//利用開始時間の分
 		String usageEndMinutesStr = request.getParameter("usageEndTime");
 
+		///////追加
+		TimeDto usageStartTimeForReservationChange = null;
+		TimeDto usageEndTimeForReservationChange = null;
 
+		if (("NaN").equals(usageStartMinutesStr)) {
+			usageStartTimeForReservationChange = (TimeDto)session.getAttribute("usageStartTimeForReservationChange");
+			int usageEndTime = usageStartTimeForReservationChange.getTimeMinutesValue() + (int)session.getAttribute("usageEndTimeForReservationChange");
+
+			usageEndTimeForReservationChange = new TimeDto(usageEndTime);
+		} else {
+			//取得した時間をTimeDto型に変換
+			int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
+			int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
+			usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
+			usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
+		}
+		////////
 
 		String reservationNameForReservationChange = request.getParameter("reservationName");
 		String numberOfParticipantsForReservationChange = request.getParameter("numberOfParticipants");
@@ -127,12 +143,12 @@ public class ChangeReservationHandler implements Handler {
 		String reserveSupplementForReservationChange = request.getParameter("reserveSupplement");
 
 		//System.out.println(usageStartMinutesStr);
-
-		//取得した時間をTimeDto型に変換
-		int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
-		int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
-		TimeDto usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
-		TimeDto usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
+//
+//		//取得した時間をTimeDto型に変換
+//		int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
+//		int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
+//		TimeDto usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
+//		TimeDto usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
 
 		//セッションに再セット
 		session.setAttribute("usageStartTimeForReservationChange", usageStartTimeForReservationChange);
@@ -155,9 +171,20 @@ public class ChangeReservationHandler implements Handler {
 		}
 
 		//reservationDto作成準備
-		int attendanceTypeId = Integer.parseInt(attendanceTypeIdForReservationChange);
+		int attendanceTypeId = -1;
+		System.out.println(attendanceTypeIdForReservationChange);
+		if(attendanceTypeIdForReservationChange != ""){
+			attendanceTypeId = Integer.parseInt(attendanceTypeIdForReservationChange);
+		}
+
 		User coReservedPerson = new User(coReservedPersonIdForReservationChange, null, 0, null, null, null, null);
 		AttendanceTypeDto attendanceTypeDto = new AttendanceTypeDto(attendanceTypeId, null);
+
+//
+//		//reservationDto作成準備
+//		int attendanceTypeId = Integer.parseInt(attendanceTypeIdForReservationChange);
+//		User coReservedPerson = new User(coReservedPersonIdForReservationChange, null, 0, null, null, null, null);
+//		AttendanceTypeDto attendanceTypeDto = new AttendanceTypeDto(attendanceTypeId, null);
 
 		_reservation = new ReservationDto(reservationDTOForReservationChange.getReservationId(), reservationDTOForReservationChange.getResource(), reservationDTOForReservationChange.getUsageDate(), usageStartTimeForReservationChange, usageEndTimeForReservationChange, reservationNameForReservationChange, reservationDTOForReservationChange.getReservedPerson(), coReservedPerson, numberOfParticipants, attendanceTypeDto, reserveSupplementForReservationChange, reservationDTOForReservationChange.getDeleted());
 
@@ -194,7 +221,7 @@ public class ChangeReservationHandler implements Handler {
 		GetReservationListBetweenDateService getReservationListBetweenDateService = new GetReservationListBetweenDateService(_reservation.getResource().getResourceId(), _usageStartTimestamp, _usageEndTimestamp);
 
 		if (getReservationListBetweenDateService.validate()) {
-			//System.out.println("到達");
+
 			try {
 				getReservationListBetweenDateService.execute();
 				_reservationList = getReservationListBetweenDateService.getReservationList();
@@ -202,7 +229,7 @@ public class ChangeReservationHandler implements Handler {
 				//System.out.println(_reservationList.size());
 
 			} catch(SQLException e) {
-				_log.error("SQLException");
+				_log.error("SQLException_check");
 				throw new MyException();
 			}
 		} else {
@@ -249,7 +276,8 @@ public class ChangeReservationHandler implements Handler {
 			try {
 				changeReservationService.execute();
 			} catch (SQLException e) {
-				_log.error("SQLException");
+				e.printStackTrace();
+				_log.error("SQLException_change");
 				throw new MyException();
 			}
 

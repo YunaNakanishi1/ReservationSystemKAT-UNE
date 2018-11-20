@@ -821,6 +821,7 @@ public class ReservationDao {
 			throw new SQLException();	//エラー処理はハンドラーに任せる
         }
 
+
 		try{
 			_con.setAutoCommit(false);
 			String usageDate = reservation.getUsageDate();
