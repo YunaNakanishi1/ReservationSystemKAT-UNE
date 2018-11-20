@@ -105,8 +105,11 @@ public class RegistReservationHandler implements Handler {
 		int usageStartTimeInt = 0;
 
 		if (commonValidator.notNumericOn(usageStartTimeStr)) {
-			_log.error("usageStartTime not number");
-			throw new MyException();
+			TimeDto startDto = (TimeDto)_session.getAttribute("usableStartTimeForReservationRegist");
+			usageStartTimeInt = startDto.getTimeMinutesValue();
+
+//			_log.error("usageStartTime not number");
+//			throw new MyException();
 		} else {
 			usageStartTimeInt = commonValidator.getNumber();
 		}
@@ -115,8 +118,12 @@ public class RegistReservationHandler implements Handler {
 		int usageEndTimeInt = 0;
 
 		if (commonValidator.notNumericOn(usageEndTimeStr)) {
-			_log.error("usageEndTime not number");
-			throw new MyException();
+			TimeDto startDto = (TimeDto)_session.getAttribute("usableStartTimeForReservationRegist");
+			TimeDto duaringDto = (TimeDto)_session.getAttribute("usageTimeForResourceRegist");
+			usageEndTimeInt = startDto.getTimeMinutesValue() + duaringDto.getTimeMinutesValue();
+
+//			_log.error("usageEndTime not number");
+//			throw new MyException();
 		} else {
 			usageEndTimeInt = commonValidator.getNumber();
 		}

@@ -66,7 +66,7 @@ Javascriptを有効にしてください
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit" type = "submit" value = "削除する"></form>
 
-<form action = "resourcedetails" method = "get">
+<form action = "resourceregist" method = "get">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit" type = "submit" value = "戻る"></form></td>
 
