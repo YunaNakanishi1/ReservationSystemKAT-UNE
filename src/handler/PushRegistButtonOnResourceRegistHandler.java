@@ -71,11 +71,12 @@ public class PushRegistButtonOnResourceRegistHandler implements Handler{
 							try {
 								getReservationListBetweenDateService.execute();
 								List<ReservationDto> reservationList = getReservationListBetweenDateService.getReservationList();
+								session.setAttribute("reservationListForSuspensionUseConfirm", reservationList);
 
 								if(reservationList.size() == 0){
 									return SET_RESOURCE_DETAILS_SERVLET;
 								}else{
-									session.setAttribute("reservationListForSuspensionUseConfirm", reservationList);
+
 								}
 								return SUSPENSION_USE_CONFIRM;
 
