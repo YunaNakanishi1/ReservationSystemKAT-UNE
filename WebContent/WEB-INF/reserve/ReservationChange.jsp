@@ -84,10 +84,11 @@ function hyoji(notView)
 <td class="dialog"><b>　　　　　　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
 
-<input type="hidden" id ="usageStartTime" value="${usableStartTimeForReservationChange.timeMinutesValue}"/>
-<input type="hidden" id ="usableEndTime" value="${usableEndTimeForReservationChange.timeMinutesValue}"/>
+<input type="hidden" name="usageStartTime" id ="usageStartTime" value="${usableStartTimeForReservationChange.timeMinutesValue}"/>
+<input type="hidden" name="usageEndTime" id ="usableEndTime" value="${usableEndTimeForReservationChange.timeMinutesValue}"/>
 <input type="hidden" id ="usageTime" value="${usageEndTimeForReservationChange}"/>
 <input type="hidden" id ="usableStartTime" value="${usageStartTimeForReservationChange.timeMinutesValue}"/>
+
 
 
 <div id="slider-area">
@@ -115,8 +116,11 @@ function hyoji(notView)
 			<input class="btn" type = "button" value = "+15分">
         </div>
 </div>
+
+<!--
     <input type = "hidden" name = "usageStartTime" id = "usageStartTime" value = "">
     <input type = "hidden" name = "usageEndTime" id = "usageEndTime" value = "">
+ -->
 
 </td>
 </tr>
