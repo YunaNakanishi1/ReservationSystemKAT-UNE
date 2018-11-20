@@ -62,7 +62,7 @@ function hyoji(notView)
 <tbody>
 <form action="/ReservationSystemKAT-UNE/reservesystem/registreserve" method="post">
 <tr>
-<td class="one" class="dialog"><b>　　　　　　リソース名</b></td>
+<td class="one"  class="dialog"><b>リソース名</b></td>
 <td class="right2">
 <a href="/ReservationSystemKAT-UNE/reservesystem/showresourcedetailstab?resourceId=${resourceIdForReservationRegist}" target="_blank">
 <c:out value="${resourceNameForReservationRegist}"></c:out></a></td>
@@ -70,7 +70,7 @@ function hyoji(notView)
 </tr>
 
 <tr>
-<td class="dialog"><b>　　　　　　利用日</b></td>
+<td class="dialog"><b>利用日</b></td>
 <td class="right2">
 <fmt:parseDate var="date" value="${usageDateForReservationRegist }" type="DATE" dateStyle="LONG" />
 <fmt:formatDate value="${date}" type="DATE" dateStyle="FULL" />
@@ -79,7 +79,7 @@ function hyoji(notView)
 </tr>
 
 <tr>
-<td class="dialog"><b>　　　　　　利用時間<b><a class="red">※</a></b></td>
+<td class="dialog"><b>　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
 
 <input type="hidden" id ="usageStartTime"  name = "usageStartTime" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
@@ -117,14 +117,14 @@ function hyoji(notView)
 </td>
 </tr>
 <tr>
-<td class="dialog"><b>　　　　　　予約名称</b></td>
+<td class="dialog"><b>予約名称</b></td>
 <td class="right2">
 <input type="text" name="reservationName" placeholder="名称なし" value="<c:out value="${reservationNameForReservationRegist }" />"> (30文字以内)
  </td>
 </tr>
 
 <tr>
-<td class="dialog"><b>　　　　　　利用人数</b></td>
+<td class="dialog"><b>利用人数</b></td>
 <td class="right2">
 <input type="text" name="numberOfParticipants" placeholder="半角数字のみ" value="<c:out value="${displayNumberOfParticipantsForReservationRegist }"/>" > 名
 
@@ -132,7 +132,7 @@ function hyoji(notView)
 </tr>
 
 <tr>
-<td class="dialog"><b>　　　　　　予約者</b></td>
+<td class="dialog"><b>予約者</b></td>
 
 <td class="right2">
 <span class="reserve_name"><c:out value="${familyNameOfLoggedIn }"/> <c:out value="${firstNameOfLoggedIn }"/></span>
@@ -143,7 +143,7 @@ function hyoji(notView)
 </tr>
 
 <tr>
-<td class="dialog"><b>　　　　　　共同予約者</b></td>
+<td class="dialog"><b>共同予約者</b></td>
 
 <td class="right2">
 <span class="reserve_name">
@@ -210,7 +210,7 @@ function hyoji(notView)
 
 </script>
 <tr>
-<td class="dialog"><b>　　　　　　参加者種別</b></td>
+<td class="dialog"><b>参加者種別</b></td>
 
 <td class="right2">
 <select name ="attendanceTypeId">
@@ -228,7 +228,7 @@ selected
 </tr>
 
 <tr>
-<td class="dialog"><b>　　　　　　補足</b></td>
+<td class="dialog"><b>補足</b></td>
 
 <td class="right2">
 <textarea id="supplementArea" class="scroll2" name="supplement"onkeyup="ShowLength();" <c:out value="${reserveSupplementForReservationRegist }"/> ><c:out value="${reserveSupplementForReservationRegist }"/></textarea><span id="inputlength">0/500</span>
