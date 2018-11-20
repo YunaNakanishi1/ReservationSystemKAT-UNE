@@ -94,8 +94,13 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 		session.setAttribute("reservationNameForReservationChange", reservation.getReservationName());
 		session.setAttribute("numberOfParticipantsForReservationChange", reservation.getNumberOfParticipants());
-		session.setAttribute("coReservedPersonIdForReservationChange", reservation.getCoReservedPerson().getUserId());
-		session.setAttribute("coReservedPersonNameForReservationChange", reservation.getCoReservedPerson().getFamilyName() + "　" + reservation.getCoReservedPerson().getFirstName() );
+		if(reservation.getCoReservedPerson() != null){
+		    session.setAttribute("coReservedPersonIdForReservationChange", reservation.getCoReservedPerson().getUserId());
+		    session.setAttribute("coReservedPersonNameForReservationChange", reservation.getCoReservedPerson().getFamilyName() + "　" + reservation.getCoReservedPerson().getFirstName() );
+		}else{
+	        session.setAttribute("coReservedPersonIdForReservationChange", "");
+	           session.setAttribute("coReservedPersonNameForReservationChange", "-----");
+		}
 
 
 		AttendanceTypeDto attendanceType=reservation.getAttendanceTypeDto();

@@ -236,7 +236,7 @@ selected
 <tr>
 <td class="dialog"><b>事業所／カテゴリ</b></td>
 <td class="right2">
-<select name ="office">
+<select class="office" name ="office">
 	<option value="">全て
 	</option>
 
@@ -250,7 +250,7 @@ selected
 	</c:forEach>
 </select>
 ／
-<select name ="category">
+<select class="category" name ="category">
 <option value="">全て
 </option>
 
@@ -275,23 +275,23 @@ selected
 <!--
 </form> -->
 <br>
-<div id="disp" style="display:block;">
+<div id="disp" style="display:block;" >
 <table class="table4">
 <tbody>
 <tr>
-<td class="one" class="dialog"><b>定員</b></td>
+<td class="dialog"><b>定員</b></td>
 <td class="right2">
 (※定員がないものは0人で登録されています)
 
 <div class="dialog2">
-<input type="text" name="capacity"
+<input type="text" name="capacity" class="capacity"
 value = "<c:out value="${displayCapacityForResourceSelect}" />"
 >人以上
 </div>
 </td>
 </tr>
 <tr>
-<td class="dialog"><b>リソース名</b></td>
+<td class="one" class="dialog"><b>リソース名</b></td>
 <td class="right2">
 <input type="text" name="resourceName"
 <c:if test ="${resourceNameForResourceSelect!= null}">
