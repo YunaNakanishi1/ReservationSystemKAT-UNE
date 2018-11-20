@@ -111,26 +111,26 @@ public class ChangeReservationHandler implements Handler {
 		ReservationDto reservationDTOForReservationChange = (ReservationDto)session.getAttribute("reservationDTOForReservationChange");
 
 		//入力されたセッション情報を取得
-		String usageStartMinutesStr = request.getParameter("usageStartTimeIn");
+		String usageStartMinutesStr = request.getParameter("usageStartTime");
 		//利用開始時間の分
-		String usageEndMinutesStr = request.getParameter("usageEndTimeIn");
+		String usageEndMinutesStr = request.getParameter("usageEndTime");
 
 		///////追加
-//		TimeDto usageStartTimeForReservationChange = null;
-//		TimeDto usageEndTimeForReservationChange = null;
-//
-//		if (("NaN").equals(usageStartMinutesStr)) {
-//			usageStartTimeForReservationChange = (TimeDto)session.getAttribute("usageStartTimeForReservationChange");
-//			int usageEndTime = usageStartTimeForReservationChange.getTimeMinutesValue() + (int)session.getAttribute("usageEndTimeForReservationChange");
-//
-//			usageEndTimeForReservationChange = new TimeDto(usageEndTime);
-//		} else {
-//			//取得した時間をTimeDto型に変換
-//			int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
-//			int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
-//			usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
-//			usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
-//		}
+		TimeDto usageStartTimeForReservationChange = null;
+		TimeDto usageEndTimeForReservationChange = null;
+
+		if (("NaN").equals(usageStartMinutesStr)) {
+			usageStartTimeForReservationChange = (TimeDto)session.getAttribute("usageStartTimeForReservationChange");
+			int usageEndTime = usageStartTimeForReservationChange.getTimeMinutesValue() + (int)session.getAttribute("usageEndTimeForReservationChange");
+
+			usageEndTimeForReservationChange = new TimeDto(usageEndTime);
+		} else {
+			//取得した時間をTimeDto型に変換
+			int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
+			int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
+			usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
+			usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
+		}
 		////////
 
 		String reservationNameForReservationChange = request.getParameter("reservationName");
@@ -145,10 +145,10 @@ public class ChangeReservationHandler implements Handler {
 		//System.out.println(usageStartMinutesStr);
 
 		//取得した時間をTimeDto型に変換
-		int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
-		int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
-		TimeDto usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
-		TimeDto usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
+//		int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
+//		int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
+//		TimeDto usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
+//		TimeDto usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
 
 		//セッションに再セット
 		session.setAttribute("usageStartTimeForReservationChange", usageStartTimeForReservationChange);
