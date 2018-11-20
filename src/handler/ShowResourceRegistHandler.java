@@ -43,15 +43,15 @@ public class ShowResourceRegistHandler implements Handler {
 
 			//登録か、変更かtypeを取得
 			String type = request.getParameter("type");
-			request.setAttribute("type", type);
+			session.setAttribute("type", type);
 
 			//再表示するデータがあるかチェック
 			//登録ボタン押下時には必ずnullで、falseをセット
 			//入力エラーがあった際は、再表示のためにSetRestrueDetailsHandlerでtrueがセットされている
-			Boolean hasResourceData = (Boolean) request.getAttribute("hasResourceData");
+			Boolean hasResourceData = (Boolean) session.getAttribute("hasResourceData");
 			if (hasResourceData == null) {
 				hasResourceData = false;
-				request.setAttribute("hasResourceData", hasResourceData);
+				session.setAttribute("hasResourceData", hasResourceData);
 			}
 
 			ShowResourceRegistService showResourceRegistService = new ShowResourceRegistService();
@@ -65,9 +65,9 @@ public class ShowResourceRegistHandler implements Handler {
 
 					//ユーザーの選択したものが削除されていないかチェックする
 					if (hasResourceData) {
-						String category = (String) request.getAttribute("category");
-						String officeName = (String) request.getAttribute("officeName");
-						List<String> facility = (List<String>) request.getAttribute("facility");
+						String category = (String) session.getAttribute("category");
+						String officeName = (String) session.getAttribute("officeName");
+						List<String> facility = (List<String>) session.getAttribute("facility");
 						CommonValidator commonValidator = new CommonValidator();
 
 						//カテゴリがあるかチェック
@@ -100,21 +100,21 @@ public class ShowResourceRegistHandler implements Handler {
 							selectedFacility.add(facility.contains(facilityElement));
 						}
 
-						request.setAttribute("selectedFacility", selectedFacility);
+						session.setAttribute("selectedFacility", selectedFacility);
 					}
 
 					// jspで表示する「戻る」ボタンのリンク先をリソース登録・リソース変更時で分ける処理
 					// 登録時で「戻る」が押された場合→リソース一覧画面に遷移
 					// 変更時で「戻る」が押された場合→リソース詳細画面に遷移
 					if ("regist".equals(type)) {
-						request.setAttribute("returnPage", SHOW_RESOURCE_LIST_SERVLET);
+						session.setAttribute("returnPage", SHOW_RESOURCE_LIST_SERVLET);
 					} else {
-						request.setAttribute("returnPage", RESOURCE_DETAILS_SERVLET);
+						session.setAttribute("returnPage", RESOURCE_DETAILS_SERVLET);
 					}
 					// それぞれのリストをセットして入力画面に遷移する
-					request.setAttribute("categoryList", categoryList);
-					request.setAttribute("officeList", officeList);
-					request.setAttribute("facilityList", facilityList);
+					session.setAttribute("categoryList", categoryList);
+					session.setAttribute("officeList", officeList);
+					session.setAttribute("facilityList", facilityList);
 					return RESOURCE_REGIST;
 
 				} catch (SQLException e) {
