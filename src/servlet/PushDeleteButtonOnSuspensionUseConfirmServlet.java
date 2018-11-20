@@ -15,7 +15,7 @@ import handler.PushDeleteButtonOnSuspensionUseConfirmHandler;
 /**
  * Servlet implementation class PushDeleteButtonOnSuspensionUseConfirmServlet
  */
-@WebServlet("/PushDeleteButtonOnSuspensionUseConfirm")
+@WebServlet("/reservesystem/PushDeleteButtonOnSuspensionUseConfirm")
 public class PushDeleteButtonOnSuspensionUseConfirmServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
