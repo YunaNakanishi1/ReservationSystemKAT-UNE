@@ -4,6 +4,8 @@ import static java.util.Comparator.*;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -59,15 +61,22 @@ public class MakeAvailableListService implements Service{
         TimeDto reserveStartTimeDto = _usageStartTime;//予約可能な時間帯の左端
         int reserveStartMinutes = reserveStartTimeDto.getTimeMinutesValue();//予約可能な時間帯の左端
 
-        //現在時刻が利用停止期間より後なら、そっちを優先する
-        //現在時刻TimeDto取得
-        TimeDto nowTimeDto = new TimeDto(new Date());
-        //15分刻みで、現在時刻からひとつ前のものを取得
-        TimeDto nowTimeDtoDevided = new TimeDto(nowTimeDto.getTimeMinutesValue() - (nowTimeDto.getTimeMinutesValue()%15));
+        //利用日が本日のとき、利用時間と現在時刻を比べる
+        //当日の日付取得, セット
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        LocalDateTime usageDate = LocalDateTime.now();
+        String usageDateStr = usageDate.format(formatter);
+        if(_usageDate.equals(usageDateStr)){
+            //現在時刻が利用停止期間より後なら、そっちを優先する
+            //現在時刻TimeDto取得
+            TimeDto nowTimeDto = new TimeDto(new Date());
+            //15分刻みで、現在時刻からひとつ前のものを取得
+            TimeDto nowTimeDtoDevided = new TimeDto(nowTimeDto.getTimeMinutesValue() - (nowTimeDto.getTimeMinutesValue()%15));
 
-        if(reserveStartMinutes < nowTimeDtoDevided.getTimeMinutesValue()){
-            reserveStartMinutes = nowTimeDtoDevided.getTimeMinutesValue();
-            reserveStartTimeDto = nowTimeDtoDevided;
+            if(reserveStartMinutes < nowTimeDtoDevided.getTimeMinutesValue()){
+                reserveStartMinutes = nowTimeDtoDevided.getTimeMinutesValue();
+                reserveStartTimeDto = nowTimeDtoDevided;
+            }
         }
         int reserveEndMinutes = _usageEndTime.getTimeMinutesValue();//予約可能な時間帯の右端
 
