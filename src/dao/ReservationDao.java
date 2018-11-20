@@ -67,6 +67,7 @@ public class ReservationDao {
 			        +"and resources.office_id = offices.office_id "
 			        +"and resources.category_id = categories.category_id "
 			        +"and users.user_id = reservations.reserved_person_id "
+			        +"and (co_reserved_person_id = cousers.user_id or co_reserved_person_id is NULL)"
 			        +"and reserve_id = ?; ";
 
 

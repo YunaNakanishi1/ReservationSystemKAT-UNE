@@ -82,6 +82,14 @@ function hyoji(notView)
 <td class="dialog"><b>　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
 
+<!--
+<input type="hidden" id ="usageStartTime"  name = "usageStartTime" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usageEndTime" name="usageEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usableEndTime" name="usableEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usageTime" name="usageTime" value="${usageTimeForResourceRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usableStartTime" name="usableStartTime" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
+ -->
+
 <input type="hidden" id ="usageStartTime"  name = "usageStartTime" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
 <input type="hidden" id ="usageEndTime" name="usageEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
 <input type="hidden" id ="usableEndTime" name="usableEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
@@ -151,7 +159,7 @@ function hyoji(notView)
 </span>
 <input class="button" type = "button" onclick="hyoji(false)" value = "変更">
 <input class="button" type = "button" onclick="selectClearButton();hyoji(true)" value = "クリア">
-<input type="hidden" id ="coReservedPersonId" value="${coReservedPersonNameForReservationRegist}"/>
+<input type="hidden" name="coReservedPersonId" id ="coReservedPersonId" value="${coReservedPersonNameForReservationRegist}"/>
 </td>
 </tr>
 
