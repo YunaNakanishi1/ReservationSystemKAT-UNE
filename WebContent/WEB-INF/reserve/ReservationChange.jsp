@@ -52,9 +52,6 @@ function hyoji(notView)
     document.getElementById("reserve_pare").style.display="";
   }
 }
-window.onload= function() {
-	  hyoji(true);
-}
 </script>
 
 <div class="contents">
@@ -87,10 +84,11 @@ window.onload= function() {
 <td class="dialog"><b>　　　　　　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
 
-<input type="hidden" id ="usageStartTime" value="${usableStartTimeForReservationChange.timeMinutesValue}"/>
-<input type="hidden" id ="usableEndTime" value="${usableEndTimeForReservationChange.timeMinutesValue}"/>
+<input type="hidden" name="usageStartTime" id ="usageStartTime" value="${usableStartTimeForReservationChange.timeMinutesValue}"/>
+<input type="hidden" name="usageEndTime" id ="usableEndTime" value="${usableEndTimeForReservationChange.timeMinutesValue}"/>
 <input type="hidden" id ="usageTime" value="${usageEndTimeForReservationChange}"/>
 <input type="hidden" id ="usableStartTime" value="${usageStartTimeForReservationChange.timeMinutesValue}"/>
+
 
 
 <div id="slider-area">
@@ -107,19 +105,22 @@ window.onload= function() {
         <div id="slider-box">
         <div id="slider"></div>
         </div>
-        <div style="float:left;width:100px;margin-left:0px;">
-        <input class="btn" type = "submit" value = "-15分">
+        <div id="minus15" style="float:left;width:100px;margin-left:0px;">
+        <input class="btn" type = "button" value = "-15分">
 		</div>
 
         <div style="width:270px;float:left;text-align:center;">
         <input type="text" id="slider-timelabel" class="timelabel" readonly="readonly" />
         </div>
-        <div style="float:right;width:100px;margin-right:25px;">
-			<input class="btn" type = "submit" value = "+15分">
+        <div id="plus15" style="float:right;width:100px;margin-right:25px;">
+			<input class="btn" type = "button" value = "+15分">
         </div>
 </div>
+
+<!--
     <input type = "hidden" name = "usageStartTime" id = "usageStartTime" value = "">
     <input type = "hidden" name = "usageEndTime" id = "usageEndTime" value = "">
+ -->
 
 </td>
 </tr>
@@ -161,13 +162,13 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 <input type="text" value="${coReservedPersonNameForReservationChange}" id="co-reserved-person-name" readonly="readonly"/>
 </span>
 <input class="button" type = "button" onclick="hyoji(false)" value = "変更">
-<input class="button" type = "button" onclick="selectClearButton()" value = "クリア">
+<input class="button" type = "button" onclick="selectClearButton();hyoji(true)" value = "クリア">
 <input type="hidden" id ="coReservedPersonId" value="${coReservedPersonNameForReservationChange}"/>
 
  </td>
 </tr>
 
-<tr id="reserve_pare">
+<tr id="reserve_pare" style="display:none;">
 <td class="one" class="dialog"></td>
     <td class="right2">
     <hr>

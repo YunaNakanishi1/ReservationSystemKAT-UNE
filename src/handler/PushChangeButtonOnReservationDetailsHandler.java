@@ -43,6 +43,7 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		int reserveId=0;
 		try{
 		reserveId=Integer.parseInt(reserveIdStr);
+		//System.out.println("到達");
 
 		}catch (NumberFormatException e) {
 			_log.error("reserveId is not number");
@@ -57,6 +58,9 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 		//スライダー初期位置
 		session.setAttribute("usageStartTimeForReservationChange", reservation.getUsageStartTime());
+
+		//System.out.println(reservation.getUsageStartTime().getTimeMinutesValue());
+
 		//利用可能終了時間
 		//session.setAttribute("usageEndTimeForReservationChange", reservation.getUsageEndTime());
 
@@ -65,23 +69,23 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		String usageEndTimeStr = request.getParameter("usageEndTime");
 
 		//追加した
-//		int usageStartTime = 0;
-//		int usageEndTime = 0;
-//		if (("NaN").equals(usageStartTimeStr)) {
-//			TimeDto usageStartTimeForReservationChange = (TimeDto)session.getAttribute("usageStartTimeForReservationChange");
-//			ReservationDto test =  (ReservationDto)session.getAttribute("reservationDTOForReservationDetails");
-//			int testEnd = test.getUsageEndTime().getTimeMinutesValue();
-//			usageStartTime = usageStartTimeForReservationChange.getTimeMinutesValue();
-//			usageEndTime = testEnd;
-//			System.out.println(usageStartTime + " " + usageEndTime);
-//		} else {
-//			usageStartTime = Integer.parseInt(usageStartTimeStr);
-//			usageEndTime = Integer.parseInt(usageEndTimeStr);
-//		}
+		int usageStartTime = 0;
+		int usageEndTime = 0;
+		if (("NaN").equals(usageStartTimeStr)) {
+			TimeDto usageStartTimeForReservationChange = (TimeDto)session.getAttribute("usageStartTimeForReservationChange");
+			ReservationDto test =  (ReservationDto)session.getAttribute("reservationDTOForReservationDetails");
+			int testEnd = test.getUsageEndTime().getTimeMinutesValue();
+			usageStartTime = usageStartTimeForReservationChange.getTimeMinutesValue();
+			usageEndTime = testEnd;
+			System.out.println(usageStartTime + " " + usageEndTime);
+		} else {
+			usageStartTime = Integer.parseInt(usageStartTimeStr);
+			usageEndTime = Integer.parseInt(usageEndTimeStr);
+		}
 //		//
 
-		int usageStartTime = Integer.parseInt(usageStartTimeStr);
-		int usageEndTime = Integer.parseInt(usageEndTimeStr);
+//		int usageStartTime = Integer.parseInt(usageStartTimeStr);
+//		int usageEndTime = Integer.parseInt(usageEndTimeStr);
 
 		//実利用時間
 		session.setAttribute("usageEndTimeForReservationChange", usageEndTime-usageStartTime);
@@ -167,7 +171,6 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 				getReservationListBetweenDateService.execute();
 
 				List<ReservationDto> reservationList=getReservationListBetweenDateService.getReservationList();
-
 
 				if(reservationList.size()==1){
 					if(reservationList.get(0).getReservationId()!=reservation.getReservationId()){

@@ -41,9 +41,11 @@ public class CheckReservationInputService implements Service {
 		}
 
 		//補足の長さチェック
-		if (_reservation.getSupplement().length() > 500) {
-			_validationMessage = EM22;
-			return false;
+		if (_reservation.getSupplement() != null) {
+			if (_reservation.getSupplement().length() > 500) {
+				_validationMessage = EM22;
+				return false;
+			}
 		}
 
 

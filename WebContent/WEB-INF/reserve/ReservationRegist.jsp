@@ -1,3 +1,5 @@
+<%@page import="dto.User"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
      pageEncoding="UTF-8"%>
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -37,6 +39,21 @@ Javascriptを有効にしてください
 <script type="text/javascript" src="/ReservationSystemKAT-UNE/script/JavascriptErrorLabel.js">	</script>
 <!-- javascript警告ラベル終わり -->
 
+<script>
+
+function hyoji(notView)
+{
+  if (notView)
+  {
+    document.getElementById("reserve_pare").style.display="none";
+  }
+  else
+  {
+    document.getElementById("reserve_pare").style.display="";
+  }
+}
+</script>
+
 <div class="contents">
 <h2>予約登録</h2>
 <p><font color = "red"><!-- メッセージ --></font></p>
@@ -65,10 +82,11 @@ Javascriptを有効にしてください
 <td class="dialog"><b>　　　　　　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
 
-<input type="hidden" id ="usageStartTime" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
-<input type="hidden" id ="usableEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
-<input type="hidden" id ="usageTime" value="${usageTimeForResourceRegist.timeMinutesValue}"/>
-<input type="hidden" id ="usableStartTime" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usageStartTime"  name = "usageStartTime" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usageEndTime" name="usageEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usableEndTime" name="usableEndTime" value="${usableEndTimeForReservationRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usageTime" name="usageTime" value="${usageTimeForResourceRegist.timeMinutesValue}"/>
+<input type="hidden" id ="usableStartTime" name="usableStartTime" value="${usageStartTimeForReservationRegist.timeMinutesValue}"/>
 
 
 <div id="slider-area">
@@ -128,13 +146,69 @@ Javascriptを有効にしてください
 <td class="dialog"><b>　　　　　　共同予約者</b></td>
 
 <td class="right2">
-<span class="reserve_name">----</span> <input class="button" type = "submit" onclick="addSearch('reserve_pare')" value = "変更"> <input class="button" type = "submit" value = "クリア">
+<span class="reserve_name">
+<input type="text" value="${coReservedPersonNameForReservationRegist}" id="co-reserved-person-name" readonly="readonly"/>
+</span>
+<input class="button" type = "button" onclick="hyoji(false)" value = "変更">
+<input class="button" type = "button" onclick="selectClearButton();hyoji(true)" value = "クリア">
+<input type="hidden" id ="coReservedPersonId" value="${coReservedPersonNameForReservationRegist}"/>
 </td>
 </tr>
 
-<tr id="reserve_pare">
-</tr>
+<tr id="reserve_pare" style="display:none;">
+<td class="one" class="dialog"></td>
+    <td class="right2">
+    <hr>
+    <input type="text" name=""> <input class="button" type = "button" value = "検索">
+    <br>
+    <select id="userList" size="5" style="width:200px">
+    </select>
 
+    <br>
+    <input class="button" type = "button" onclick="selectUserButton();hyoji(true)" value = "選択">
+    <input class="button" type = "button" onclick="hyoji(true)" value = "閉じる">
+    <hr>
+     </td>
+</tr>
+<script type="text/javascript">
+		var selectColumn = document.getElementById('userList');
+
+		<%
+		List<User> userList = (List<User>)request.getAttribute("userListForReservationRegist");
+		int userListLength = userList.size();
+		String output = "";
+
+
+		for(int i=0;i<userListLength;i++){
+		    User user = userList.get(i);
+		    output += "<option value='"+user.getUserId()+"'>"+user.getFamilyName()+"　"+user.getFirstName()+"("+user.getUserId()+")</option>";
+		    }
+		%>
+    	selectColumn.innerHTML ="<%=output%>";
+
+    	function selectUserButton(){
+    		var coUserName = document.getElementById('co-reserved-person-name');
+    		var coUserId = document.getElementById('coReservedPersonId');
+
+    		var selectedUser = document.getElementById('userList');
+
+    		var idx = selectedUser.selectedIndex;       //インデックス番号を取得
+    		var val = selectedUser.options[idx].value;  //value値を取得
+    		var txt  = selectedUser.options[idx].text;  //ラベルを取得
+
+			coUserName.value =txt.split("(")[0];
+			coUserId.value = val;
+    	}
+
+    	function selectClearButton(){
+    		var coUserName = document.getElementById('co-reserved-person-name');
+    		var coUserId = document.getElementById('coReservedPersonId');
+
+			coUserName.value ="-----";
+			coUserId.value = "";
+    	}
+
+</script>
 <tr>
 <td class="dialog"><b>　　　　　　参加者種別</b></td>
 
