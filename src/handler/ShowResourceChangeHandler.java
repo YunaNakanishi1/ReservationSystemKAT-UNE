@@ -47,7 +47,7 @@ public class ShowResourceChangeHandler implements Handler {
 
 			//typeの値をattributeで入れなおす
 			String type = request.getParameter("type");
-			request.setAttribute("type", type);
+			session.setAttribute("type", type);
 
 			//再取得するリソースのIDを取得する
 			String resourceId = request.getParameter("resourceId");
