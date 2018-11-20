@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -23,12 +24,12 @@
 Javascriptを有効にしてください
 </div>
 </div>
-<script type="text/javascript" src="JavascriptErrorLabel.js">	</script>
+<script type="text/javascript" src="/ReservationSystemKAT-UNE/script/JavascriptErrorLabel.js">	</script>
 <!-- javascript警告ラベル終わり -->
 
 <div class="contents">
 <h2>リソース削除確認</h2>
-<p><font color="red">$<messageForResourceDeleteConfirm></font></p>
+<p><font color="red"><c:out value="${messageForResourceDeleteConfirm}"/></font></p>
 
 <div class="dialog">
 <p>削除しようとしているリソースは既に予約されています</p>
@@ -40,11 +41,12 @@ Javascriptを有効にしてください
 <tbody>
 					<c:forEach var="obj" items="${reservationListForResourceDeleteConfirm}" varStatus="status">
 					<tr>
+					<td><c:out value="${obj.usageDate }"/></td>
 					<td><c:out value="${obj.usageStartTime }"/>～<c:out value="${obj.usageEndTime }"/></td>
 					<td><c:out value="${obj.reservedPerson.familyName}"/></td>
 					<td><c:out value="${obj.reservedPerson.firstName}"/></td>
-					<td><c:out value="${obj.reserved}"/></td>
-					<td><c:out value="${obj.reservedPerson.familyName }"/><c:out value="${obj.reservedPerson.firstName }"/></td>
+					<td><c:out value="${obj.reservedPerson.mailAddress}"/></td>
+					<td><c:out value="${obj.reservedPerson.phoneNumber }"/></td>
 					</tr>
 					</c:forEach>
 					</tbody>
