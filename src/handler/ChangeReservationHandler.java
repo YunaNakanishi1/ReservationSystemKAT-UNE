@@ -65,7 +65,7 @@ public class ChangeReservationHandler implements Handler {
 				String reserveIdStr = request.getParameter("reserveId");
 				request.setAttribute("reserveId", reserveIdStr);
 
-				System.out.println("ChangeReservationHandler2");
+				//System.out.println("ChangeReservationHandler2");
 
 				return PUSH_CHANGE_BUTTON_ON_RESERVATION_DETAILS_SERVLET;
 			}
