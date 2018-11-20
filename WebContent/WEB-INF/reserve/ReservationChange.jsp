@@ -87,7 +87,6 @@ window.onload= function() {
 <td class="dialog"><b>　　　　　　利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
 
-
 <input type="hidden" id ="usageStartTime" value="${usableStartTimeForReservationChange.timeMinutesValue}"/>
 <input type="hidden" id ="usableEndTime" value="${usableEndTimeForReservationChange.timeMinutesValue}"/>
 <input type="hidden" id ="usageTime" value="${usageEndTimeForReservationChange}"/>
@@ -245,7 +244,7 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 <td class="dialog"><b>　　　　　　補足</b></td>
 
 <td class="right2">
-<textarea class="scroll2" name="reserveSupplement"><c:out value="${reserveSupplementForReservationChange}"/></textarea>
+<textarea id="supplementArea" class="scroll2" name="supplement"onkeyup="ShowLength();" <c:out value="${reserveSupplementForReservationRegist }"/> ><c:out value="${reserveSupplementForReservationRegist }"/></textarea><span id="inputlength">0/500</span>
 </td>
 </tr>
 

@@ -61,8 +61,7 @@ public class CommonValidator {
 
 		if(!notNumeric){
 		try {
-			System.out.println(val);
-			_number = Integer.parseInt(val + "です");
+			_number = Integer.parseInt(val);
 		} catch (NumberFormatException e) {
 			return true;
 		}
