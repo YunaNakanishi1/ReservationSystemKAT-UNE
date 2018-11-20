@@ -60,7 +60,7 @@ function hyoji1()
 <div class="contents">
 <h2>予約変更</h2>
 
-
+<p><font color="red"><c:out value = "${messageForReservationChange}"/></font></p>
 <form action = "/ReservationSystemKAT-UNE/reservesystem/changereservation" method = "post">
 
 
@@ -88,9 +88,9 @@ function hyoji1()
 <td class="right2">
 
 
-<input type="hidden" id ="usageStartTimeForReservationRegist" value="${usableStartTimeForReservationChange.timeMinutesValue}"/>
-<input type="hidden" id ="usableEndTimeForReservationRegist" value="${usableEndTimeForReservationChange.timeMinutesValue}"/>
-<input type="hidden" id ="usageTimeForReservationSelect" value="${usageEndTimeForReservationChange}"/>
+<input type="hidden" id ="usageStartTime" value="${usableStartTimeForReservationChange.timeMinutesValue}"/>
+<input type="hidden" id ="usableEndTime" value="${usableEndTimeForReservationChange.timeMinutesValue}"/>
+<input type="hidden" id ="usageTime" value="${usageEndTimeForReservationChange}"/>
 <input type="hidden" id ="usableStartTime" value="${usageStartTimeForReservationChange.timeMinutesValue}"/>
 
 
@@ -222,7 +222,7 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 
 <br>
 <td>
-
+<input type="hidden" name="reserveId" value="${reservationDTOForReservationChange.reservationId}">
 <input class="submit" class="dialog" type = "submit" value = "変更">
 </td>
 <td>

@@ -60,6 +60,13 @@ public class ChangeReservationHandler implements Handler {
 		try {
 			if(!reservableCheck()) {
 				request.setAttribute("messageForReservationChange", EM24);
+
+				//PushChangeButtonReservationDetailsHandler用
+				String reserveIdStr = request.getParameter("reserveId");
+				request.setAttribute("reserveId", reserveIdStr);
+
+				//System.out.println("ChangeReservationHandler2");
+
 				return PUSH_CHANGE_BUTTON_ON_RESERVATION_DETAILS_SERVLET;
 			}
 		} catch (MyException e) {
@@ -83,6 +90,7 @@ public class ChangeReservationHandler implements Handler {
 			if (changeSucceed) {
 				HandlerHelper.initializeAttributeForReservationRegist(session);
 				session.setAttribute("reservationIdForReservationDetails", _reservation.getReservationId());
+				request.setAttribute("messageForReservationChange", PM02);
 				return SHOW_RESERVATION_DETAILS_SERVLET;
 
 			} else {
@@ -102,25 +110,28 @@ public class ChangeReservationHandler implements Handler {
 	private boolean validate(HttpServletRequest request) {
 		ReservationDto reservationDTOForReservationChange = (ReservationDto)session.getAttribute("reservationDTOForReservationChange");
 
-		//入力された情報を取得
+		//入力されたセッション情報を取得
 		String usageStartMinutesStr = request.getParameter("usageStartTime");
 		//利用開始時間の分
 		String usageEndMinutesStr = request.getParameter("usageEndTime");
 
-		TimeDto usageStartTimeForReservationChange = null;
-		TimeDto usageEndTimeForReservationChange = null;
-
-		if (("NaN").equals(usageStartMinutesStr)) {
-			usageStartTimeForReservationChange = (TimeDto)session.getAttribute("usageStartTimeForReservationChange");
-			int usageEndTime = usageStartTimeForReservationChange.getTimeMinutesValue() + (int)session.getAttribute("usageEndTimeForReservationChange");
-			usageEndTimeForReservationChange = new TimeDto(usageEndTime);
-		} else {
-			//取得した時間をTimeDto型に変換
-			int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
-			int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
-			usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
-			usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
-		}
+		///////追加
+//		TimeDto usageStartTimeForReservationChange = null;
+//		TimeDto usageEndTimeForReservationChange = null;
+//
+//		if (("NaN").equals(usageStartMinutesStr)) {
+//			usageStartTimeForReservationChange = (TimeDto)session.getAttribute("usageStartTimeForReservationChange");
+//			int usageEndTime = usageStartTimeForReservationChange.getTimeMinutesValue() + (int)session.getAttribute("usageEndTimeForReservationChange");
+//
+//			usageEndTimeForReservationChange = new TimeDto(usageEndTime);
+//		} else {
+//			//取得した時間をTimeDto型に変換
+//			int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
+//			int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
+//			usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
+//			usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
+//		}
+		////////
 
 		String reservationNameForReservationChange = request.getParameter("reservationName");
 		String numberOfParticipantsForReservationChange = request.getParameter("numberOfParticipants");
@@ -130,13 +141,15 @@ public class ChangeReservationHandler implements Handler {
 
 		String attendanceTypeIdForReservationChange = request.getParameter("attendanceTypeId");
 		String reserveSupplementForReservationChange = request.getParameter("reserveSupplement");
-//
-//		//取得した時間をTimeDto型に変換
-//		int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
-//		int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
-//		TimeDto usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
-//		TimeDto usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
-		System.out.println(usageStartTimeForReservationChange + " " + usageEndTimeForReservationChange);
+
+		//System.out.println(usageStartMinutesStr);
+
+		//取得した時間をTimeDto型に変換
+		int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
+		int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
+		TimeDto usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
+		TimeDto usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
+
 		//セッションに再セット
 		session.setAttribute("usageStartTimeForReservationChange", usageStartTimeForReservationChange);
 		session.setAttribute("usageEndTimeForReservationChange", usageEndTimeForReservationChange);
@@ -164,10 +177,14 @@ public class ChangeReservationHandler implements Handler {
 			attendanceTypeId = Integer.parseInt(attendanceTypeIdForReservationChange);
 		}
 
-		//int attendanceTypeId = Integer.parseInt(attendanceTypeIdForReservationChange);
 		User coReservedPerson = new User(coReservedPersonIdForReservationChange, null, 0, null, null, null, null);
 		AttendanceTypeDto attendanceTypeDto = new AttendanceTypeDto(attendanceTypeId, null);
 
+//
+//		//reservationDto作成準備
+//		int attendanceTypeId = Integer.parseInt(attendanceTypeIdForReservationChange);
+//		User coReservedPerson = new User(coReservedPersonIdForReservationChange, null, 0, null, null, null, null);
+//		AttendanceTypeDto attendanceTypeDto = new AttendanceTypeDto(attendanceTypeId, null);
 
 		_reservation = new ReservationDto(reservationDTOForReservationChange.getReservationId(), reservationDTOForReservationChange.getResource(), reservationDTOForReservationChange.getUsageDate(), usageStartTimeForReservationChange, usageEndTimeForReservationChange, reservationNameForReservationChange, reservationDTOForReservationChange.getReservedPerson(), coReservedPerson, numberOfParticipants, attendanceTypeDto, reserveSupplementForReservationChange, reservationDTOForReservationChange.getDeleted());
 
@@ -198,21 +215,28 @@ public class ChangeReservationHandler implements Handler {
 		TimeDto endTime = _reservation.getUsageEndTime();
 		_usageEndTimestamp = endTime.getTimeStamp(usageDate);
 
+
+
 		//予約があったらリストで返却
 		GetReservationListBetweenDateService getReservationListBetweenDateService = new GetReservationListBetweenDateService(_reservation.getResource().getResourceId(), _usageStartTimestamp, _usageEndTimestamp);
 
 		if (getReservationListBetweenDateService.validate()) {
+
 			try {
 				getReservationListBetweenDateService.execute();
 				_reservationList = getReservationListBetweenDateService.getReservationList();
 
+				//System.out.println(_reservationList.size());
+
 			} catch(SQLException e) {
-				_log.error("SQLException");
+				_log.error("SQLException_check");
 				throw new MyException();
 			}
 		} else {
 			throw new MyException();
 		}
+
+		//System.out.println(_reservationList.size() + "ChangeReservationHandler");
 
 		//自分以外に予約が無ければtrue
 		IsNotOverlapInReservationListService isNotOverlapInReservationListService = new IsNotOverlapInReservationListService(_reservationList, _reservation);
@@ -252,7 +276,8 @@ public class ChangeReservationHandler implements Handler {
 			try {
 				changeReservationService.execute();
 			} catch (SQLException e) {
-				_log.error("SQLException");
+				e.printStackTrace();
+				_log.error("SQLException_change");
 				throw new MyException();
 			}
 

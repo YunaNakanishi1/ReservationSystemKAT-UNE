@@ -19,6 +19,7 @@ public class GetReservationListBetweenDateService implements Service{
 		super();
 
 		if(resourceId==null||startTime==null||endTime==null){
+
 			throw new MyException();
 		}else if(startTime.after(endTime)){
 			throw new MyException();
@@ -41,6 +42,7 @@ public class GetReservationListBetweenDateService implements Service{
 		ReservationDao reservationDao = new ReservationDao();
 
 		_reservationList=reservationDao.queryBetweenDate(_resourceId, _startTime, _endTime);
+		//System.out.println("getReservationListBetween " + _reservationList.size());
 	}
 
 	public List<ReservationDto> getReservationList(){
