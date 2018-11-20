@@ -63,9 +63,14 @@ public class ShowReservationRegistHandler {
 
 		String coReservedPersonId
 		= (String) _session.getAttribute("coReservedPersonIdForReservationRegist");//共同予約者ID
+
+
 		if(coReservedPersonId == null){
-			_session.setAttribute("coReservedPersonNameForReservationRegistForNull", "-----");
+			_session.setAttribute("coReservedPersonNameForReservationRegist", "-----");
 		}
+
+
+
 		int attendanceTypeIdInt=-1;
 		if(_session.getAttribute("attendanceTypeIdForReservationRegist")!=null){
 		attendanceTypeIdInt= (int) _session.getAttribute("attendanceTypeIdForReservationRegist");//参加者種別ID
