@@ -43,6 +43,7 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 		int reserveId=0;
 		try{
 		reserveId=Integer.parseInt(reserveIdStr);
+		//System.out.println("到達");
 
 		}catch (NumberFormatException e) {
 			_log.error("reserveId is not number");
@@ -57,6 +58,9 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 		//スライダー初期位置
 		session.setAttribute("usageStartTimeForReservationChange", reservation.getUsageStartTime());
+
+		System.out.println(reservation.getUsageStartTime().getTimeMinutesValue());
+
 		//利用可能終了時間
 		//session.setAttribute("usageEndTimeForReservationChange", reservation.getUsageEndTime());
 
