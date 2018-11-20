@@ -151,7 +151,7 @@ function hyoji(notView)
 </span>
 <input class="button" type = "button" onclick="hyoji(false)" value = "変更">
 <input class="button" type = "button" onclick="selectClearButton();hyoji(true)" value = "クリア">
-<input type="hidden" id ="coReservedPersonId" value="${coReservedPersonNameForReservationRegist}"/>
+<input type="hidden" name="coReservedPersonId" id ="coReservedPersonId" value="${coReservedPersonNameForReservationRegist}"/>
 </td>
 </tr>
 
