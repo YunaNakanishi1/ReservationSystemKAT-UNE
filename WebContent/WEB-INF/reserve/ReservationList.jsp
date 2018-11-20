@@ -213,7 +213,7 @@ selected
 <tr>
 <td class="dialog"><b>事業所</b></td>
 <td class="right2">
-<select name ="officeId">
+<select name ="officeId" class="office">
 <option value="" >全て</option>
 <c:forEach var="obj" items="${officeListForReservationList}" varStatus="status">
 <option value="<c:out value ="${obj.officeId}"/>"
@@ -229,7 +229,7 @@ selected
 <tr>
 <td class="dialog"><b>カテゴリ</b></td>
 <td class="right2">
-<select name ="categoryId">
+<select name ="categoryId" class="category">
 <option value="" selected>全て</option>
 <c:forEach var="obj" items="${categoryListForReservationList}" varStatus="status">
 <option value="<c:out value ="${obj.categoryId}"/>"
@@ -258,7 +258,7 @@ checked
 checked
 </c:if>
 >削除済み予約も表示　
-<br><br>
+<br>
 <table class="table3">
 <tr>
 <br/>
