@@ -65,14 +65,14 @@ function hyoji(notView)
 <tbody>
 
 <tr>
-<td class="one" class="dialog"><b>　　　　　　リソース名</b></td>
+<td class="one" class="dialog"><b>リソース名</b></td>
 <td class="right2">
 <c:out value =  "${reservationDTOForReservationChange.resource.resourceName}"/>
  </td>
 </tr>
 
 <tr>
-<td class="dialog"><b>　　　　　　利用日</b></td>
+<td class="dialog"><b>利用日</b></td>
 <td class="right2">
 <fmt:parseDate var="date" value="${reservationDTOForReservationChange.usageDate }" type="DATE" dateStyle="LONG" />
 <fmt:formatDate value="${date}" type="DATE" dateStyle="FULL" />
@@ -81,7 +81,7 @@ function hyoji(notView)
 </tr>
 
 <tr>
-<td class="dialog"><b>　　　　　　利用時間<b><a class="red">※</a></b></td>
+<td class="dialog"><b>利用時間<b><a class="red">※</a></b></td>
 <td class="right2">
 
 <input type="hidden" name="usageStartTime" id ="usageStartTime" value="${usableStartTimeForReservationChange.timeMinutesValue}"/>
@@ -125,7 +125,7 @@ function hyoji(notView)
 </td>
 </tr>
 <tr>
-<td class="dialog"><b>　　　　　　予約名称</b></td>
+<td class="dialog"><b>予約名称</b></td>
 <td class="right2">
 <input type="text" name="reservationName" placeholder="名称なし"
 value = "<c:out value="${reservationNameForReservationChange}" />"
@@ -134,7 +134,7 @@ value = "<c:out value="${reservationNameForReservationChange}" />"
 </tr>
 
 <tr>
-<td class="dialog"><b>　　　　　　利用人数</b></td>
+<td class="dialog"><b>利用人数</b></td>
 <td class="right2">
 <input type="text" name="numberOfParticipants" placeholder="半角数字のみ"
 value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
@@ -143,7 +143,7 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 </tr>
 
 <tr>
-<td 　　　　　　class="dialog"><b>　　　　　　予約者</b></td>
+<td class="dialog"><b>予約者</b></td>
 
 <td class="right2">
 <span class="reserve_name"><c:out value =  "${reservationDTOForReservationChange.reservedPerson.familyName}"/>　<c:out value =  "${reservationDTOForReservationChange.reservedPerson.firstName}"/></span>
@@ -154,7 +154,7 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 </tr>
 
 <tr>
-<td class="dialog"><b>　　　　　　共同予約者</b></td>
+<td class="dialog"><b>共同予約者</b></td>
 
 <td class="right2">
 <!-- IDしか持ってこれないよー -->
@@ -225,7 +225,7 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 </script>
 
 <tr>
-<td class="dialog"><b>　　　　　　参加者種別</b></td>
+<td class="dialog"><b>参加者種別</b></td>
 
 <td class="right2">
 <select name ="attendanceTypeId">
@@ -242,7 +242,7 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 </tr>
 
 <tr>
-<td class="dialog"><b>　　　　　　補足</b></td>
+<td class="dialog"><b>補足</b></td>
 
 <td class="right2">
 <textarea id="supplementArea" class="scroll2" name="supplement"onkeyup="ShowLength();" <c:out value="${reserveSupplementForReservationRegist }"/> ><c:out value="${reserveSupplementForReservationRegist }"/></textarea><span id="inputlength">0/500</span>

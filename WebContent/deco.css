@@ -165,7 +165,6 @@
 	text-align:left;
 	max-width:250px;
 	min-width:250px;
-	box-sizing: border-box;
 	word-break : break-all;
 	/*background-color:red;*/	/*実験用*/
 }
