@@ -60,7 +60,7 @@ public class PushSearchButtonOnResourceSelectHandler implements Handler {
         }
 
         //再表示用にセット
-        session.setAttribute("usageDateForReservationRegist", dateStr);
+        session.setAttribute("usageDateForResourceSelect", dateStr);
         session.setAttribute("categoryIdForResourceSelect", categoryStr);
         session.setAttribute("officeIdForResourceSelect", officeStr);
         session.setAttribute("displayCapacityForResourceSelect",capacityStr);
