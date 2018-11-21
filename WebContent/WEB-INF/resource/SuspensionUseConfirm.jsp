@@ -40,7 +40,7 @@ Javascriptを有効にしてください
 <br>
 <div class="scroll3" style="width:800px;height:200px;margin:0 auto;">
 <table>
-<tbody>
+			<tbody>
 					<c:forEach var="obj" items="${reservationListForSuspensionUseConfirm}" varStatus="status">
 					<tr>
 					<td><c:out value="${obj.usageDate }"/></td>
@@ -51,7 +51,7 @@ Javascriptを有効にしてください
 					<td><c:out value="${obj.reservedPerson.phoneNumber }"/>)</td>
 					</tr>
 					</c:forEach>
-					</tbody>
+			</tbody>
 </table>
 </div>
 </div>
