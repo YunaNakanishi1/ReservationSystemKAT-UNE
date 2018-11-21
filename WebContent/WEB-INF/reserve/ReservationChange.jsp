@@ -67,6 +67,7 @@ function hyoji(notView)
 <tr>
 <td class="one" class="dialog"><b>リソース名</b></td>
 <td class="right2">
+
 <c:out value =  "${reservationDTOForReservationChange.resource.resourceName}"/>
  </td>
 </tr>
