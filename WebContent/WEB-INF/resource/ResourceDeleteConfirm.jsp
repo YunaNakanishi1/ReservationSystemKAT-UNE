@@ -32,7 +32,7 @@ Javascriptを有効にしてください
 <p><font color="red"><c:out value="${messageForResourceDeleteConfirm}"/></font></p>
 
 <div class="dialog">
-<p>削除しようとしているリソースは既に予約されています</p>
+<p>削除しようとしているリソースは既に予約されています。</p>
 <p>リソースの削除を進めると以下の予約は強制的に削除されます。</p>
 <p><font color="red">この操作は取り消せません。</font></p>
 <br>
