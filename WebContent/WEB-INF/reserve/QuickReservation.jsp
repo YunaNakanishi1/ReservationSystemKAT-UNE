@@ -181,7 +181,19 @@ selected
 			<footer class="fotter2">copyright🄫KAT-UNE</footer>
 		</div>
 	</div>
-
+<script>
+onload2 = function() {
+	initChange();
+}
+addOnloadEvent(onload2);
+function addOnloadEvent(fnc){
+  if ( typeof window.addEventListener != "undefined" )
+    window.addEventListener( "load", fnc, false );
+  else if ( typeof window.attachEvent != "undefined" ) {
+    window.attachEvent( "onload", fnc );
+  }
+}
+</script>
 </body>
 </html>
 

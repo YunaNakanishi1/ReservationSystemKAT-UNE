@@ -1,6 +1,7 @@
 /**
  *
  */
+
 function initChange(){
 	hourChange('usageStartHour','usageStartMinute');
 	hourChange('usageEndHour','usageEndMinute');

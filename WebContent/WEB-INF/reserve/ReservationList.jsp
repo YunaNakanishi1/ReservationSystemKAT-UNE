@@ -73,7 +73,7 @@ function hyoji1()
 
 
 </head>
-<body class="body"  onload="initChange();">
+<body class="body">
 <div class="div">
 
 <header class="header"><p>会議室・備品予約システム</p>
@@ -329,5 +329,18 @@ checked
 
 
 </div>
+<script>
+onload2 = function() {
+	initChange();
+}
+addOnloadEvent(onload2);
+function addOnloadEvent(fnc){
+  if ( typeof window.addEventListener != "undefined" )
+    window.addEventListener( "load", fnc, false );
+  else if ( typeof window.attachEvent != "undefined" ) {
+    window.attachEvent( "onload", fnc );
+  }
+}
+</script>
 </body>
 </html>
