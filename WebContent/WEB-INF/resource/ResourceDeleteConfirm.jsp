@@ -51,7 +51,6 @@ Javascriptを有効にしてください
 					</tr>
 					</c:forEach>
 					</tbody>
-					</table>
 
 </div>
 </div>
