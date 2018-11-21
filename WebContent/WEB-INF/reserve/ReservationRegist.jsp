@@ -276,7 +276,7 @@ selected
 <input class="submit" class="dialog" type = "submit" value = " 　　　登録　　　 ">
 </td>
 </form>
-<td>　</td>
+<td>　　　</td>
 
 <td>
 <form action = "/ReservationSystemKAT-UNE/reservesystem/searchResourceList" method = "post">
