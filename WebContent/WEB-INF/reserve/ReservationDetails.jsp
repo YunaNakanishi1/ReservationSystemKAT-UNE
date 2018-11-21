@@ -136,9 +136,7 @@ Javascriptを有効にしてください
  </tr>
  <tr>
  <td class="dialog"><b>詳細</b></td>
- <td class="right2"><div class="scroll2">
- <c:out value="${reservationDTOForReservationDetails.supplement}"/>
- </div></td>
+ <td class="right2"><div class="scroll2"> <c:out value="${reservationDTOForReservationDetails.supplement}"/> </div></td>
  </tr>
  </tbody>
  </table>
