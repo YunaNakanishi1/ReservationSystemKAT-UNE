@@ -269,7 +269,7 @@ value = "<c:out value="${numberOfParticipantsForReservationChange}" />"
 <td class="right2">
 
 
-<textarea id="supplementArea" class="scroll2" name="reserveSupplement"onkeyup="ShowLength();"><c:out value = "${reserveSupplementForReservationChange}"/></textarea><span id="inputlength">0/500</span>
+<textarea id="supplementArea" class="scroll5" name="reserveSupplement"onkeyup="ShowLength();"><c:out value = "${reserveSupplementForReservationChange}"/></textarea><span id="inputlength">0/500</span>
 </td>
 </tr>
 

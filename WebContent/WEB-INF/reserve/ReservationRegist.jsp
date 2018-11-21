@@ -260,7 +260,7 @@ selected
 
 <td class="right2">
 
-<textarea id="supplementArea" class="scroll2" name="supplement"onkeyup="ShowLength();" ><c:out value="${reserveSupplementForReservationRegist }"/></textarea><span id="inputlength">0/500</span>
+<textarea id="supplementArea" class="scroll5" name="supplement"onkeyup="ShowLength();" ><c:out value="${reserveSupplementForReservationRegist }"/></textarea><span id="inputlength">0/500</span>
 
 </td>
 </tr>
