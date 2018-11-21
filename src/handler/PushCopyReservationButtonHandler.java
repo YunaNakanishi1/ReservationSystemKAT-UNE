@@ -62,7 +62,6 @@ public class PushCopyReservationButtonHandler implements Handler{
 			session.setAttribute("reservationIdForReservationDetails", reservationIdForReservationDetails);
 
 			session.setAttribute("usageDateForResourceSelect",reservationDto.getUsageDate());
-			System.out.println(reservationDto.getUsageDate());
 			session.setAttribute("usageStartTimeForResourceSelect",reservationDto.getUsageStartTime());
 			session.setAttribute("usageEndTimeForResourceSelect",reservationDto.getUsageEndTime());
 			session.setAttribute("resourceNameForResourceSelect",reservationDto.getResource().getResourceName());
