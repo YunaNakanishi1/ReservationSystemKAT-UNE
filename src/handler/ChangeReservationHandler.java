@@ -116,24 +116,27 @@ public class ChangeReservationHandler implements Handler {
 		String usageStartMinutesStr = request.getParameter("usageStartTime");
 		//利用開始時間の分
 		String usageEndMinutesStr = request.getParameter("usageEndTime");
+
+
 		//追加
 		int endSumMin =  (int)session.getAttribute("usageEndTimeForReservationChange");
 
 		///////追加
 		TimeDto usageStartTimeForReservationChange = null;
 		TimeDto usageEndTimeForReservationChange = null;
-
+		int usageEndTime = 0;
 		if (("NaN").equals(usageStartMinutesStr)) {
 			usageStartTimeForReservationChange = (TimeDto)session.getAttribute("usageStartTimeForReservationChange");
-			int usageEndTime = usageStartTimeForReservationChange.getTimeMinutesValue() + (int)session.getAttribute("usageEndTimeForReservationChange");
+			//int usageEndTime = usageStartTimeForReservationChange.getTimeMinutesValue() + (int)session.getAttribute("usageEndTimeForReservationChange");
+			usageEndTime = usageStartTimeForReservationChange.getTimeMinutesValue() + endSumMin;
 
 			usageEndTimeForReservationChange = new TimeDto(usageEndTime);
+
 		} else {
 			//取得した時間をTimeDto型に変換
 			int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
 			int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
-			int usageEndTime = usageStartMinutes + endSumMin;
-
+			usageEndTime = usageStartMinutes + endSumMin;
 			usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
 			usageEndTimeForReservationChange = new TimeDto(usageEndTime);
 		}
@@ -148,7 +151,6 @@ public class ChangeReservationHandler implements Handler {
 		String attendanceTypeIdForReservationChange = request.getParameter("attendanceTypeId");
 		String reserveSupplementForReservationChange = request.getParameter("reserveSupplement");
 
-		//System.out.println(usageStartMinutesStr);
 
 		//取得した時間をTimeDto型に変換
 //		int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
@@ -158,7 +160,8 @@ public class ChangeReservationHandler implements Handler {
 
 		//セッションに再セット
 		session.setAttribute("usageStartTimeForReservationChange", usageStartTimeForReservationChange);
-		session.setAttribute("usageEndTimeForReservationChange", usageEndTimeForReservationChange);
+		//session.setAttribute("usageEndTimeForReservationChange", usageEndTimeForReservationChange);
+		session.setAttribute("usageEndTimeForReservationChange", endSumMin);
 		session.setAttribute("reservationNameForReservationChange", reservationNameForReservationChange);
 		session.setAttribute("numberOfParticipantsForReservationChange", numberOfParticipantsForReservationChange);
 		session.setAttribute("coReservedPersonIdForReservationChange", coReservedPersonIdForReservationChange);
@@ -177,7 +180,7 @@ public class ChangeReservationHandler implements Handler {
 	        Matcher m = p.matcher(numberOfParticipantsForReservationChange);
 			if(m.find()){	//数値のみの時
 				request.setAttribute("messageForReservationChange", EM21);
-			}else{	//数値のみだが、22222222222222など値が大きすぎる時
+			}else{	//数値のみだが、22222222222222など値が大きすぎる
 				request.setAttribute("messageForReservationChange", EM20);
 			}
 			return false;
@@ -185,7 +188,7 @@ public class ChangeReservationHandler implements Handler {
 
 		//reservationDto作成準備
 		int attendanceTypeId = -1;
-		System.out.println(attendanceTypeIdForReservationChange);
+		//System.out.println(attendanceTypeIdForReservationChange);
 		if(attendanceTypeIdForReservationChange != ""){
 			attendanceTypeId = Integer.parseInt(attendanceTypeIdForReservationChange);
 		}
@@ -253,7 +256,6 @@ public class ChangeReservationHandler implements Handler {
 			throw new MyException();
 		}
 
-		//System.out.println(_reservationList.size() + "ChangeReservationHandler");
 
 		//自分以外に予約が無ければtrue
 		IsNotOverlapInReservationListService isNotOverlapInReservationListService = new IsNotOverlapInReservationListService(_reservationList, _reservation);
