@@ -71,6 +71,7 @@ public class PushCopyReservationButtonHandler implements Handler{
 			session.setAttribute("numberOfParticipantsForReservationRegist",reservationDto.getNumberOfParticipants());
 			if(reservationDto.getCoReservedPerson()!=null){
 			session.setAttribute("coReservedPersonIdForReservationRegist",reservationDto.getCoReservedPerson().getUserId());
+			session.setAttribute("coReservedPersonNameForReservationRegist", reservationDto.getCoReservedPerson().getFamilyName()+"　"+reservationDto.getCoReservedPerson().getFirstName());
 			}else{
 				session.setAttribute("coReservedPersonIdForReservationRegist",null);
 			}

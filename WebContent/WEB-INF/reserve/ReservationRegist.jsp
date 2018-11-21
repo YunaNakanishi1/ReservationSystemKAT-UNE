@@ -149,13 +149,13 @@ function hyoji(notView)
 <td class="right2">
 <span class="reserve_name">
 <input type="text" value="${coReservedPersonNameForReservationRegist}" id="co-reserved-person-name" readonly="readonly"/>
-<% if(session.getAttribute("coReservedPersonNameForReservationRegist").equals("-----")) {
+<% if(("-----").equals(session.getAttribute("coReservedPersonNameForReservationRegist"))) {
 	session.setAttribute("coReservedPersonNameForReservationRegist", null);
 }%>
 </span>
 <input class="button" type = "button" onclick="hyoji(false)" value = "変更">
 <input class="button" type = "button" onclick="selectClearButton();hyoji(true)" value = "クリア">
-<input type="hidden" name="coReservedPersonId" id ="coReservedPersonId" value="${coReservedPersonNameForReservationRegist}"/>
+<input type="hidden" name="coReservedPersonId" id ="coReservedPersonId" value="${coReservedPersonIdForReservationRegist}"/>
 </td>
 </tr>
 

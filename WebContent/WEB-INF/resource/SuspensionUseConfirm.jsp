@@ -38,9 +38,10 @@ Javascriptを有効にしてください
 <p>リソースの利用停止期間を適用すると以下の予約は強制的に削除されます。</p>
 <p><font color="red">この操作は取り消せません。</font></p>
 <br>
+<p>【リソースを使用している予約】</p>
 <div class="scroll3" style="width:800px;height:200px;margin:0 auto;">
 <table>
-<tbody>
+			<tbody>
 					<c:forEach var="obj" items="${reservationListForSuspensionUseConfirm}" varStatus="status">
 					<tr>
 					<td><c:out value="${obj.usageDate }"/></td>
@@ -51,7 +52,7 @@ Javascriptを有効にしてください
 					<td><c:out value="${obj.reservedPerson.phoneNumber }"/>)</td>
 					</tr>
 					</c:forEach>
-					</tbody>
+			</tbody>
 </table>
 </div>
 </div>
@@ -64,15 +65,18 @@ Javascriptを有効にしてください
 <br>
 <br>
 <table class="table3">
-<tr>
-<td>
-<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
-<input class="submit" type = "submit" value = "削除する"></form>
-</td>
-<td>
-<form action = "resourceregist" method = "get">
-<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
-<input class="submit" type = "submit" value = "戻る"></form></td>
+	<tr>
+	<td>
+		<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
+		<input class="submit" type = "submit" value = "削除する"></form>
+	</td>
+	<td>　</td>
+	<td>
+		<form action = "resourceregist" method = "get">
+		<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
+		<input class="submit" type = "submit" value = "　戻る　">
+		</form>
+	</td>
 </tr>
 </table>
 </div>
