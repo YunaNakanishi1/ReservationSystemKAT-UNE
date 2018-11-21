@@ -273,7 +273,7 @@ selected
 <tr>
 
 <td>
-<input class="submit" class="dialog" type = "submit" value = " 　　　登録　　　 ">
+<input class="submit" class="dialog" type = "submit" value = "登録">
 </td>
 </form>
 <td>　　　</td>

@@ -213,7 +213,7 @@ public class ChangeReservationHandler implements Handler {
 		//結果が正しくなかった場合
 		if (!checkReservationInputService.validate()) {
 			String message = checkReservationInputService.getValidationMessage();
-			session.setAttribute("messageForReservationChange", message);
+			request.setAttribute("messageForReservationChange", message);
 			return false;
 		}
 
