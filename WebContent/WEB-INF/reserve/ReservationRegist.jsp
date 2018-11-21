@@ -101,7 +101,7 @@ function hyoji(notView)
             <input type="text" id="slider-right-timelabel"  class="timelabel" readonly="readonly" style="text-align: right;width:100%"/>
         </div>
         <br>
-        <div id="slider-box">
+        <div id="slider-box" style="padding-left: 0px;">
         <div id="slider"></div>
         </div>
         <div id="minus15" style="float:left;width:100px;margin-left:0px;">
@@ -260,7 +260,7 @@ selected
 
 <td class="right2">
 
-<textarea id="supplementArea" class="scroll2" name="supplement"onkeyup="ShowLength();" ><c:out value="${reserveSupplementForReservationRegist }"/></textarea><span id="inputlength">0/500</span>
+<textarea id="supplementArea" class="scroll5" name="supplement"onkeyup="ShowLength();" ><c:out value="${reserveSupplementForReservationRegist }"/></textarea><span id="inputlength">0/500</span>
 
 </td>
 </tr>
