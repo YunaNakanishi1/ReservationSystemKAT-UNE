@@ -43,10 +43,10 @@ Javascriptを有効にしてください
 					<tr>
 					<td><c:out value="${obj.usageDate }"/></td>
 					<td><c:out value="${obj.usageStartTime }"/>～<c:out value="${obj.usageEndTime }"/></td>
-					<td><c:out value="${obj.reservedPerson.familyName}"/></td>
-					<td><c:out value="${obj.reservedPerson.firstName}"/></td>
-					<td><c:out value="${obj.reservedPerson.mailAddress}"/></td>
-					<td><c:out value="${obj.reservedPerson.phoneNumber }"/></td>
+					<td>予約者：<c:out value="${obj.reservedPerson.familyName}"/></td>
+					<td>&nbsp;<c:out value="${obj.reservedPerson.firstName}"/></td>
+					<td>(<c:out value="${obj.reservedPerson.mailAddress}"/></td>
+					<td><c:out value="${obj.reservedPerson.phoneNumber }"/>)</td>
 					</tr>
 					</c:forEach>
 					</tbody>
@@ -61,15 +61,18 @@ Javascriptを有効にしてください
 <input type="checkbox" name="checkedConfirm" value="checkedConfirm"/>確認しました
 <br>
 <br>
- <td>
-
+ <table class="table3">
+<tr>
+<td>
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit" type = "submit" value = "削除する"></form>
-
+</td>
+<td>
 <form action = "resourcedetails" method = "get">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit" type = "submit" value = "戻る"></form></td>
-
+</tr>
+</table>
 </div>
 <br>
 <br>
