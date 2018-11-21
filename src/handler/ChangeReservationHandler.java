@@ -133,7 +133,6 @@ public class ChangeReservationHandler implements Handler {
 			int usageEndTime = usageStartMinutes + endSumMin;
 
 			usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
-			//usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
 			usageEndTimeForReservationChange = new TimeDto(usageEndTime);
 		}
 		////////
