@@ -50,7 +50,7 @@ public class RegistReservationHandler implements Handler {
 
 		try {
 			if(!reservable()){
-				_session.setAttribute("messageForResourceSelectUpper", EM24);
+				_request.setAttribute("messageForResourceSelectUpper", EM24);
 				return SEARCH_RESOURCE_LIST_SERVLET;
 			}
 		} catch (MyException e) {
@@ -60,7 +60,7 @@ public class RegistReservationHandler implements Handler {
 			return ERROR_PAGE;
 		}
 
-		_session.setAttribute("messageForReservationRegist", PM02);
+		_request.setAttribute("messageForReservationRegist", PM02);
 
 		return SHOW_RESERVATION_DETAILS_SERVLET;
 	}
@@ -135,7 +135,7 @@ public class RegistReservationHandler implements Handler {
 		try {
 			numberOfParticipants = commonValidator.getCapacityValue(displayNumberOfParticipants);
 		} catch (MyException e) {
-			_session.setAttribute("messageForReservationRegist", EM20);
+			_request.setAttribute("messageForReservationRegist", EM20);
 			return false;
 		}
 		String usageDate = (String) _session.getAttribute("usageDateForReservationRegist");
@@ -156,7 +156,7 @@ public class RegistReservationHandler implements Handler {
 
 		CheckReservationInputService checkReservationInputService = new CheckReservationInputService(_reservation);
 		if (!checkReservationInputService.validate()) {
-			_session.setAttribute("messageForReservationRegist", checkReservationInputService.getValidationMessage());
+			_request.setAttribute("messageForReservationRegist", checkReservationInputService.getValidationMessage());
 			return false;
 		}
 
