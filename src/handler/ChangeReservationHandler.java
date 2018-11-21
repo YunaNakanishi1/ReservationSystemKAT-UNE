@@ -200,6 +200,10 @@ public class ChangeReservationHandler implements Handler {
 //		User coReservedPerson = new User(coReservedPersonIdForReservationChange, null, 0, null, null, null, null);
 //		AttendanceTypeDto attendanceTypeDto = new AttendanceTypeDto(attendanceTypeId, null);
 
+		if(commonValidator.notSetOn(reservationNameForReservationChange)){
+			reservationNameForReservationChange="名称なし";
+		}
+
 		_reservation = new ReservationDto(reservationDTOForReservationChange.getReservationId(), reservationDTOForReservationChange.getResource(), reservationDTOForReservationChange.getUsageDate(), usageStartTimeForReservationChange, usageEndTimeForReservationChange, reservationNameForReservationChange, reservationDTOForReservationChange.getReservedPerson(), coReservedPerson, numberOfParticipants, attendanceTypeDto, reserveSupplementForReservationChange, reservationDTOForReservationChange.getDeleted());
 
 		//入力内容チェック
