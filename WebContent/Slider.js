@@ -87,8 +87,8 @@ function getTimeFormatHHMM(minits){
 }
 function initLabel(){
 	 $( "#slider-timelabel" ).val( getSliderTimeStr( $( "#slider" ).slider( "value" )) );
-	  $( "#usageStartTime" ).val( start + $( "#slider" ).slider( "value" ).value );
-	  $( "#usageEndTime" ).val( start + $( "#slider" ).slider( "value" ).value + duration );
+	  $( "#usageStartTime" ).val( start + $( "#slider" ).slider( "value" ) );
+	  $( "#usageEndTime" ).val( start + $( "#slider" ).slider( "value" ) + duration );
 	  $( "#slider-left-timelabel" ).val( getTimeFormatHHMM( start ));
 	  $( "#slider-right-timelabel" ).val( getTimeFormatHHMM( end ));
 	  $( "#slider-center-timelabel" ).val( getTimeFormatHM( duration ));
