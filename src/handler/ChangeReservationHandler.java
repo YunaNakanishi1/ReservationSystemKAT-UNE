@@ -188,7 +188,7 @@ public class ChangeReservationHandler implements Handler {
 
 		//reservationDto作成準備
 		int attendanceTypeId = -1;
-		System.out.println(attendanceTypeIdForReservationChange);
+		//System.out.println(attendanceTypeIdForReservationChange);
 		if(attendanceTypeIdForReservationChange != ""){
 			attendanceTypeId = Integer.parseInt(attendanceTypeIdForReservationChange);
 		}
