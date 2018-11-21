@@ -83,7 +83,7 @@
 	margin:0 auto;
 	/*background-color:red;*/
 	width:100%;
-	min-width:450px;
+	min-width:400px;
 	border-collapse:separate;
 	border-spacing: 10px 5px;
 }
@@ -208,7 +208,7 @@
     background: white;
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.22);
     max-width: 800px;
-    min-width:500px;
+    min-width:550px;
     margin: 0 auto;
     min-height:100%;
 	border-left:solid;
@@ -383,5 +383,5 @@
 	font-size: 13px;
 }
 .date{
-	background-color:red;
+	width:100px;
 }

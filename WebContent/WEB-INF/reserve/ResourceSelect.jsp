@@ -108,7 +108,7 @@ Javascriptを有効にしてください
 <tr>
 <td class="one" class="dialog" ><b>　利用日</b><a class="red"> ※</a></td>
 <td class="right2" >
-<input  type="text" placeholder="2018/1/1（年は省略可）" id="usageDate" name="date"
+<input  type="text" placeholder="2018/1/1（年は省略可）" id="usageDate" name="date" class="date"
 <c:if test ="${usageDateForResourceSelect!= null}">
 	value = "<c:out value="${usageDateForResourceSelect}" />"
 </c:if>
