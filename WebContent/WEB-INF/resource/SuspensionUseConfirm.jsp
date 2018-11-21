@@ -58,8 +58,7 @@ Javascriptを有効にしてください
 </div>
 
 <br>
-<br>
-<br>
+
 <form action = "PushDeleteButtonOnSuspensionUseConfirm" method = "post">
 <input type="checkbox" name="checkedConfirm" value="checkedConfirm"/>確認しました
 <br>
@@ -80,7 +79,6 @@ Javascriptを有効にしてください
 </tr>
 </table>
 </div>
-<br>
 <br>
 <br>
 <div class="footer1" class=><footer class="fotter2">copyright🄫KAT-UNE</footer></div>
