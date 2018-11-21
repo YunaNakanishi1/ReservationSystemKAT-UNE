@@ -38,7 +38,8 @@ Javascriptを有効にしてください
 <br>
 <p>【リソースを使用している予約】</p>
 <div class="scroll3" style="width:800px;height:200px;margin:0 auto;">
-<tbody>
+				<table>
+					<tbody>
 					<c:forEach var="obj" items="${reservationListForResourceDeleteConfirm}" varStatus="status">
 					<tr>
 					<td><c:out value="${obj.usageDate }"/></td>
@@ -50,28 +51,27 @@ Javascriptを有効にしてください
 					</tr>
 					</c:forEach>
 					</tbody>
-
+				</table>
 </div>
 </div>
 
-<br>
-<br>
 <br>
 <form action = "pushDeleteButtonOnResourcedeleteConfirm" method = "post">
 <input type="checkbox" name="checkedConfirm" value="checkedConfirm"/>確認しました
 <br>
 <br>
- <table class="table3">
-<tr>
-<td>
-<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
-<input class="submit" type = "submit" value = "削除する"></form>
-</td>
-<td>
-<form action = "resourcedetails" method = "get">
-<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
-<input class="submit" type = "submit" value = "戻る"></form></td>
-</tr>
+<table class="table3">
+	<tr>
+		<td>
+		<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
+		<input class="submit" type = "submit" value = "削除する"></form>
+		</td>
+		<td>　</td>
+		<td>
+		<form action = "resourcedetails" method = "get">
+		<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
+		<input class="submit" type = "submit" value = "　戻る　"></form></td>
+	</tr>
 </table>
 </div>
 <br>
