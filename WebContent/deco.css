@@ -83,7 +83,7 @@
 	margin:0 auto;
 	/*background-color:red;*/
 	width:100%;
-	min-width:400px;
+	min-width:450px;
 	border-collapse:separate;
 	border-spacing: 10px 5px;
 }
@@ -207,7 +207,7 @@
     margin: 2em 0;
     background: white;
     box-shadow: 0 3px 7px rgba(0, 0, 0, 0.22);
-    width: 60%;
+    max-width: 800px;
     min-width:500px;
     margin: 0 auto;
     min-height:100%;
@@ -381,4 +381,7 @@
 
 .chu{
 	font-size: 13px;
+}
+.date{
+	background-color:red;
 }
