@@ -124,10 +124,11 @@ public class ChangeReservationHandler implements Handler {
 		///////追加
 		TimeDto usageStartTimeForReservationChange = null;
 		TimeDto usageEndTimeForReservationChange = null;
-
+		int usageEndTime = 0;
 		if (("NaN").equals(usageStartMinutesStr)) {
 			usageStartTimeForReservationChange = (TimeDto)session.getAttribute("usageStartTimeForReservationChange");
-			int usageEndTime = usageStartTimeForReservationChange.getTimeMinutesValue() + (int)session.getAttribute("usageEndTimeForReservationChange");
+			//int usageEndTime = usageStartTimeForReservationChange.getTimeMinutesValue() + (int)session.getAttribute("usageEndTimeForReservationChange");
+			usageEndTime = usageStartTimeForReservationChange.getTimeMinutesValue() + endSumMin;
 
 			usageEndTimeForReservationChange = new TimeDto(usageEndTime);
 
@@ -135,10 +136,8 @@ public class ChangeReservationHandler implements Handler {
 			//取得した時間をTimeDto型に変換
 			int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
 			int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
-			int usageEndTime = usageStartMinutes + endSumMin;
-
+			usageEndTime = usageStartMinutes + endSumMin;
 			usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
-			//usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
 			usageEndTimeForReservationChange = new TimeDto(usageEndTime);
 		}
 		////////
@@ -161,7 +160,8 @@ public class ChangeReservationHandler implements Handler {
 
 		//セッションに再セット
 		session.setAttribute("usageStartTimeForReservationChange", usageStartTimeForReservationChange);
-		session.setAttribute("usageEndTimeForReservationChange", usageEndTimeForReservationChange);
+		//session.setAttribute("usageEndTimeForReservationChange", usageEndTimeForReservationChange);
+		session.setAttribute("usageEndTimeForReservationChange", endSumMin);
 		session.setAttribute("reservationNameForReservationChange", reservationNameForReservationChange);
 		session.setAttribute("numberOfParticipantsForReservationChange", numberOfParticipantsForReservationChange);
 		session.setAttribute("coReservedPersonIdForReservationChange", coReservedPersonIdForReservationChange);
@@ -201,6 +201,10 @@ public class ChangeReservationHandler implements Handler {
 //		int attendanceTypeId = Integer.parseInt(attendanceTypeIdForReservationChange);
 //		User coReservedPerson = new User(coReservedPersonIdForReservationChange, null, 0, null, null, null, null);
 //		AttendanceTypeDto attendanceTypeDto = new AttendanceTypeDto(attendanceTypeId, null);
+
+		if(commonValidator.notSetOn(reservationNameForReservationChange)){
+			reservationNameForReservationChange="名称なし";
+		}
 
 		_reservation = new ReservationDto(reservationDTOForReservationChange.getReservationId(), reservationDTOForReservationChange.getResource(), reservationDTOForReservationChange.getUsageDate(), usageStartTimeForReservationChange, usageEndTimeForReservationChange, reservationNameForReservationChange, reservationDTOForReservationChange.getReservedPerson(), coReservedPerson, numberOfParticipants, attendanceTypeDto, reserveSupplementForReservationChange, reservationDTOForReservationChange.getDeleted());
 

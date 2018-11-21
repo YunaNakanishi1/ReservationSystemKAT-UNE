@@ -64,7 +64,7 @@ $(document).ready(function(){
 				<font color="red">${Emessage}</font>
 			</p>
 			<p>
-				<a href="reserveList" method="post">予約一覧に戻る</a>
+				<a href="showfirstreservationlist" method="post">予約一覧に戻る</a>
 			</p>
 
 			<c:if test="${authorityOfLoggedIn == 0}">

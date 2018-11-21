@@ -77,7 +77,7 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 			int testEnd = test.getUsageEndTime().getTimeMinutesValue();
 			usageStartTime = usageStartTimeForReservationChange.getTimeMinutesValue();
 			usageEndTime = testEnd;
-			System.out.println(usageStartTime + " " + usageEndTime);
+			//System.out.println(usageStartTime + " " + usageEndTime);
 		} else {
 			usageStartTime = Integer.parseInt(usageStartTimeStr);
 			usageEndTime = Integer.parseInt(usageEndTimeStr);
@@ -89,6 +89,7 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 		//実利用時間
 		session.setAttribute("usageEndTimeForReservationChange", usageEndTime-usageStartTime);
+		//session.setAttribute("usageEndTimeForReservationChange", usageEndTime);
 
 
 
@@ -126,9 +127,6 @@ public class PushChangeButtonOnReservationDetailsHandler implements Handler {
 
 		//利用可能終了時間
 		session.setAttribute("usableEndTimeForReservationChange", _endTimeSliderValue);
-
-
-
 
 		return SHOW_RESERVATION_CHANGE_SERVLET;
 	}
