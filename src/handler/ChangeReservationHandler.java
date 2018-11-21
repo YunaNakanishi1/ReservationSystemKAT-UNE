@@ -116,6 +116,8 @@ public class ChangeReservationHandler implements Handler {
 		String usageStartMinutesStr = request.getParameter("usageStartTime");
 		//利用開始時間の分
 		String usageEndMinutesStr = request.getParameter("usageEndTime");
+
+
 		//追加
 		int endSumMin =  (int)session.getAttribute("usageEndTimeForReservationChange");
 
@@ -128,6 +130,7 @@ public class ChangeReservationHandler implements Handler {
 			int usageEndTime = usageStartTimeForReservationChange.getTimeMinutesValue() + (int)session.getAttribute("usageEndTimeForReservationChange");
 
 			usageEndTimeForReservationChange = new TimeDto(usageEndTime);
+
 		} else {
 			//取得した時間をTimeDto型に変換
 			int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
@@ -149,7 +152,6 @@ public class ChangeReservationHandler implements Handler {
 		String attendanceTypeIdForReservationChange = request.getParameter("attendanceTypeId");
 		String reserveSupplementForReservationChange = request.getParameter("reserveSupplement");
 
-		//System.out.println(usageStartMinutesStr);
 
 		//取得した時間をTimeDto型に変換
 //		int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
@@ -178,7 +180,7 @@ public class ChangeReservationHandler implements Handler {
 	        Matcher m = p.matcher(numberOfParticipantsForReservationChange);
 			if(m.find()){	//数値のみの時
 				request.setAttribute("messageForReservationChange", EM21);
-			}else{	//数値のみだが、22222222222222など値が大きすぎる時
+			}else{	//数値のみだが、22222222222222など値が大きすぎる
 				request.setAttribute("messageForReservationChange", EM20);
 			}
 			return false;
@@ -250,7 +252,6 @@ public class ChangeReservationHandler implements Handler {
 			throw new MyException();
 		}
 
-		//System.out.println(_reservationList.size() + "ChangeReservationHandler");
 
 		//自分以外に予約が無ければtrue
 		IsNotOverlapInReservationListService isNotOverlapInReservationListService = new IsNotOverlapInReservationListService(_reservationList, _reservation);
