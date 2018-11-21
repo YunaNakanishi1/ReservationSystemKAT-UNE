@@ -61,7 +61,7 @@ public class PushCopyReservationButtonHandler implements Handler{
 			session.setAttribute("returnPageForResourceSelect", "/ReservationSystemKAT-UNE"+SHOW_RESERVATION_DETAILS_SERVLET);
 			session.setAttribute("reservationIdForReservationDetails", reservationIdForReservationDetails);
 
-			session.setAttribute("usageDateForReservationRegist",reservationDto.getUsageDate());
+			session.setAttribute("usageDateForResourceSelect",reservationDto.getUsageDate());
 			System.out.println(reservationDto.getUsageDate());
 			session.setAttribute("usageStartTimeForResourceSelect",reservationDto.getUsageStartTime());
 			session.setAttribute("usageEndTimeForResourceSelect",reservationDto.getUsageEndTime());

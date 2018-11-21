@@ -78,7 +78,7 @@ public class PushSearchButtonOnQuickReservationHandler implements Handler {
 			 //利用日
 		     SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/M/d");
 		     String usageDate = sdFormat.format(new Date() );
-             session.setAttribute("usageDateForReservationRegist", usageDate);
+             session.setAttribute("usageDateForResourceSelect", usageDate);
 
 		 } else {
 			 String message = pushSearchButtonOnQuickReservationService.getValidationMessage();
