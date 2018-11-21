@@ -101,7 +101,7 @@ function hyoji(notView)
             <input type="text" id="slider-right-timelabel"  class="timelabel" readonly="readonly" style="text-align: right;width:100%"/>
         </div>
         <br>
-        <div id="slider-box" style="padding-left: 0px;">
+        <div id="slider-box" style="padding-left: 0px; padding-bottom:0px; padding-top:1px;">
         <div id="slider"></div>
         </div>
         <div id="minus15" style="float:left;width:100px;margin-left:0px;">
