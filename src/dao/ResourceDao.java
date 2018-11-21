@@ -297,7 +297,7 @@ public class ResourceDao {
         PreparedStatement stmt2 = null;
 
         String sql = "UPDATE resources SET deleted = 1 WHERE resource_id = ?";
-        String sql2 = "UPDATE reservations SET deleted = 1 WHERE reserve_id = ?";
+        String sql2 = "UPDATE reservations SET deleted = 1 WHERE resource_id = ?";
 
         try {
             if (_con == null) {
@@ -307,15 +307,10 @@ public class ResourceDao {
             _con.setAutoCommit(false);
 
             int reserveId;
-            for(ReservationDto reservation:reservationList){
-            	reserveId=reservation.getReservationId();
                 stmt2 = _con.prepareStatement(sql2);
-                stmt2.setInt(1,reserveId);
+                stmt2.setString(1,resourceId);
                 result2 = stmt2.executeUpdate();
-                if(result2!=1){
-                	throw new SQLException();
-                }
-            }
+
             stmt = _con.prepareStatement(sql);
             stmt.setString(1, resourceId);
             result = stmt.executeUpdate();
@@ -329,6 +324,12 @@ public class ResourceDao {
             // Statementのクローズ
             try {
                 dbHelper.closeResource(stmt);
+            } catch (Exception e1) {
+                e1.printStackTrace();
+                _log.error("displayAll() Exception e1");
+            }
+            try {
+                dbHelper.closeResource(stmt2);
             } catch (Exception e1) {
                 e1.printStackTrace();
                 _log.error("displayAll() Exception e1");
