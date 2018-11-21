@@ -302,7 +302,7 @@ public class ReservationDao {
 				after30Timestamp=new Timestamp(calendar.getTime().getTime());
 			}
 
-			sqlBuilder.append("AND (EXTRACT(hour FROM usage_start_date)*60 + EXTRACT(minute FROM usage_start_date)) >= p3_usage_start_minute_value AND (EXTRACT(hour FROM usage_end_date)*60 + EXTRACT(minute FROM usage_end_date)) <= p4_usage_end_minute_value ");
+			sqlBuilder.append("AND (EXTRACT(hour FROM usage_start_date)*60 + EXTRACT(minute FROM usage_start_date)) >= p3_usage_start_minute_value AND ((EXTRACT(hour FROM usage_end_date)*60 + EXTRACT(minute FROM usage_end_date)+1439)::integer %1440 )+1 <= p4_usage_end_minute_value ");
 
 			if(officeId!=null){
 				sqlBuilder.append("AND resources.office_id=p5_office_id ");
@@ -400,8 +400,8 @@ public class ReservationDao {
                     +"from reservations,resources,offices,categories,users "
                     +"where reservations.resource_id=resources.resource_id AND resources.office_id=offices.office_id AND resources.category_id=categories.category_id AND reserved_person_id=user_id "
                     +"and reservations.deleted=0 "
-                    +"and usage_start_date >= ? "
-                    +"and usage_end_date <= ? "
+                    +"and usage_start_date < ? "
+                    +"and usage_end_date > ? "
                     +"and reservations.resource_id in ('NOTMUCHRESOURCEID' ";
 
         //リソースIDの要素
@@ -415,8 +415,8 @@ public class ReservationDao {
 
             //パラメータの設定
             int StatementCount = 1;
-            preparedStatement.setTimestamp(StatementCount++,startTime);
             preparedStatement.setTimestamp(StatementCount++,endTime);
+            preparedStatement.setTimestamp(StatementCount++,startTime);
             for(int i=0;i<resourceIdList.size();i++){
                 preparedStatement.setString(StatementCount++,resourceIdList.get(i).getResourceId());
             }
