@@ -46,7 +46,7 @@ Javascriptを有効にしてください
 					<td><c:out value="${obj.usageDate }"/></td>
 					<td><c:out value="${obj.usageStartTime }"/>～<c:out value="${obj.usageEndTime }"/></td>
 					<td>予約者：<c:out value="${obj.reservedPerson.familyName}"/></td>
-					<td>&npsp;<c:out value="${obj.reservedPerson.firstName}"/></td>
+					<td>&nbsp;<c:out value="${obj.reservedPerson.firstName}"/></td>
 					<td>(<c:out value="${obj.reservedPerson.mailAddress}"/></td>
 					<td><c:out value="${obj.reservedPerson.phoneNumber }"/>)</td>
 					</tr>
