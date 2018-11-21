@@ -32,7 +32,7 @@ Javascriptを有効にしてください
 <p><font color="red"><c:out value="${messageForResourceDeleteConfirm}"/></font></p>
 
 <div class="dialog">
-<p>削除しようとしているリソースは既に予約されています</p>
+<p>削除しようとしているリソースは既に予約されています。</p>
 <p>リソースの削除を進めると以下の予約は強制的に削除されます。</p>
 <p><font color="red">この操作は取り消せません。</font></p>
 <br>
@@ -43,10 +43,10 @@ Javascriptを有効にしてください
 					<tr>
 					<td><c:out value="${obj.usageDate }"/></td>
 					<td><c:out value="${obj.usageStartTime }"/>～<c:out value="${obj.usageEndTime }"/></td>
-					<td><c:out value="${obj.reservedPerson.familyName}"/></td>
-					<td><c:out value="${obj.reservedPerson.firstName}"/></td>
-					<td><c:out value="${obj.reservedPerson.mailAddress}"/></td>
-					<td><c:out value="${obj.reservedPerson.phoneNumber }"/></td>
+					<td>予約者：<c:out value="${obj.reservedPerson.familyName}"/></td>
+					<td>&nbsp;<c:out value="${obj.reservedPerson.firstName}"/></td>
+					<td>(<c:out value="${obj.reservedPerson.mailAddress}"/></td>
+					<td><c:out value="${obj.reservedPerson.phoneNumber }"/>)</td>
 					</tr>
 					</c:forEach>
 					</tbody>
@@ -61,15 +61,18 @@ Javascriptを有効にしてください
 <input type="checkbox" name="checkedConfirm" value="checkedConfirm"/>確認しました
 <br>
 <br>
- <td>
-
+ <table class="table3">
+<tr>
+<td>
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit" type = "submit" value = "削除する"></form>
-
+</td>
+<td>
 <form action = "resourcedetails" method = "get">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit" type = "submit" value = "戻る"></form></td>
-
+</tr>
+</table>
 </div>
 <br>
 <br>
