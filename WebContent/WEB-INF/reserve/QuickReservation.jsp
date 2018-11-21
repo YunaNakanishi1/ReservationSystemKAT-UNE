@@ -43,14 +43,14 @@ Javascriptを有効にしてください
 				</p>
 			</div>
 <form action="/ReservationSystemKAT-UNE/reservesystem/pushSearchButtonOnQuickReservation" method="post">
-			<table class="table2" style="width:790px">
+			<table class="table2">
 				<tbody>
 
 					<tr>
 					<!-- nullの時全てってやつ -->
-						<td class="one" class="dialog"><b>　　　事業所</b></td>
+						<td class="one" class="dialog"><b>事業所</b></td>
 						<td class="right2">
-						<select name ="officeIdForResourceSelect">
+						<select name ="officeIdForResourceSelect" class ="office">
 							<option value = "">全て
 							</option>
 
@@ -65,8 +65,8 @@ Javascriptを有効にしてください
 					</td>
 					</tr>
 					<tr>
-						<td class="dialog"><b>　　　カテゴリ</b></td>
-						<td class="right2"><select name ="categoryIdForResourceSelect">
+						<td class="dialog"><b>カテゴリ</b></td>
+						<td class="right2"><select name ="categoryIdForResourceSelect" class ="category">
 							<option value = "">全て
 							</option>
 
@@ -80,8 +80,8 @@ Javascriptを有効にしてください
 						</select></td>
 					</tr>
 					<tr>
-						<td class="dialog"><b>　　　定員</b></td>
-						<td class="right2">(※定員がないものは0人で登録されています)<br> <input
+						<td class="dialog"><b>定員</b></td>
+						<td class="right2"><a class="chu">(※定員がないものは0人で登録されています)</a><br> <input
 							type="text" name="capacityForResourceSelect" placeholder="半角数字のみ"
  								value="<c:out value="${displayCapacityForResourceSelect}" />"
 						>人以上
@@ -89,7 +89,7 @@ Javascriptを有効にしてください
 					</tr>
 
 					<tr>
-						<td class="dialog"><b>　　　利用時間</b></td>
+						<td class="dialog"><b>利用時間</b></td>
 						<td class="right2">
 						<c:if test="${usageStartTimeForResourceSelect.hour < 10}">
 							0<c:out value = "${usageStartTimeForResourceSelect.hour}"/>
@@ -166,7 +166,7 @@ selected
 
 					</form>
 					</td>
-					<td></td>
+					<td>　</td>
 					<td><form action="/ReservationSystemKAT-UNE/reservesystem/showfirstreservationlist" method="post">
 							<input class="submit" type="submit" value="戻る">
 						</form></td>

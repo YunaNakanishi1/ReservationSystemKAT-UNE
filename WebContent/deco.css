@@ -246,7 +246,7 @@
 }
 .one{	/*テーブルを中央そろえにするために使用*/
 	width:50%;
-	min-width:200px;
+	min-width:250px;
 
 }
 .scroll2{	/*リソース詳細・入力の詳細ボックス*/
@@ -379,7 +379,6 @@
     font-size: 16px;
 }
 
-.back{
-	background-color:red;
+.chu{
+	font-size: 13px;
 }
-
