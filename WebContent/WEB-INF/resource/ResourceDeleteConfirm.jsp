@@ -38,6 +38,7 @@ Javascriptを有効にしてください
 <br>
 <p>【リソースを使用している予約】</p>
 <div class="scroll3" style="width:800px;height:200px;margin:0 auto;">
+<table>
 <tbody>
 					<c:forEach var="obj" items="${reservationListForResourceDeleteConfirm}" varStatus="status">
 					<tr>
@@ -49,8 +50,8 @@ Javascriptを有効にしてください
 					<td><c:out value="${obj.reservedPerson.phoneNumber }"/>)</td>
 					</tr>
 					</c:forEach>
-					</tbody>
-
+</tbody>
+</table>
 </div>
 </div>
 
