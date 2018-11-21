@@ -9,6 +9,8 @@ import static handler.ViewHolder.*;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -170,7 +172,14 @@ public class ChangeReservationHandler implements Handler {
 		try {
 			numberOfParticipants = commonValidator.getCapacityValue(numberOfParticipantsForReservationChange);
 		} catch(MyException e) {
-			request.setAttribute("messageForReservationChange", EM20);
+	        // 正規表現のパターンを作成
+	        Pattern p = Pattern.compile("^[0-9]+$");
+	        Matcher m = p.matcher(numberOfParticipantsForReservationChange);
+			if(m.find()){	//数値のみの時
+				request.setAttribute("messageForReservationChange", EM21);
+			}else{	//数値のみだが、22222222222222など値が大きすぎる時
+				request.setAttribute("messageForReservationChange", EM20);
+			}
 			return false;
 		}
 
