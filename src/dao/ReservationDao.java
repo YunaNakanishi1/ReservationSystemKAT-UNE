@@ -302,7 +302,7 @@ public class ReservationDao {
 				after30Timestamp=new Timestamp(calendar.getTime().getTime());
 			}
 
-			sqlBuilder.append("AND (EXTRACT(hour FROM usage_start_date)*60 + EXTRACT(minute FROM usage_start_date)) >= p3_usage_start_minute_value AND (EXTRACT(hour FROM usage_end_date)*60 + EXTRACT(minute FROM usage_end_date)) <= p4_usage_end_minute_value ");
+			sqlBuilder.append("AND (EXTRACT(hour FROM usage_start_date)*60 + EXTRACT(minute FROM usage_start_date)) >= p3_usage_start_minute_value AND ((EXTRACT(hour FROM usage_end_date)*60 + EXTRACT(minute FROM usage_end_date)+1439)::integer %1440 )+1 <= p4_usage_end_minute_value ");
 
 			if(officeId!=null){
 				sqlBuilder.append("AND resources.office_id=p5_office_id ");
