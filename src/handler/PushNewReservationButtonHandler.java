@@ -41,7 +41,7 @@ public class PushNewReservationButtonHandler implements Handler {
 		String usageDateForReservationRegist = usageDate.format(formatter);
 
 		//リソース選択画面の検索フォームをデフォルト値でセットする
-		session.setAttribute("usageDateForReservationRegist", usageDateForReservationRegist);
+		session.setAttribute("usageDateForResourceSelect", usageDateForReservationRegist);
 		session.setAttribute("usageStartTimeForResourceSelect",new TimeDto(ZERO,ZERO));
 		session.setAttribute("usageEndTimeForResourceSelect", new TimeDto(TWENTY_FOUR,ZERO));
 		session.setAttribute("usageTimeForResourceSelect", new TimeDto(ZERO,FIFTEEN));
