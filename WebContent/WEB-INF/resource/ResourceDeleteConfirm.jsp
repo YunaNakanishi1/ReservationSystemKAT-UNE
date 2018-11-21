@@ -63,17 +63,18 @@ Javascriptを有効にしてください
  <table class="table3">
 <tr>
 <td>
-<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
-<input class="submit" type = "submit" value = "削除する"></form>　　　
+	<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
+	<input class="submit" type = "submit" value = "削除する"></form>
 </td>
+<td>　</td>
 <td>
-<form action = "resourcedetails" method = "get">
-<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
-<input class="submit" type = "submit" value = "戻る"></form></td>
+	<form action = "resourcedetails" method = "get">
+	<input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
+	<input class="submit" type = "submit" value = "戻る"></form>
+</td>
 </tr>
 </table>
 </div>
-<br>
 <br>
 <br>
 <div class="footer1" class=><footer class="fotter2">copyright🄫KAT-UNE</footer></div>
