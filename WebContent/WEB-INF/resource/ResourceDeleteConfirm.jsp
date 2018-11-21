@@ -50,7 +50,7 @@ Javascriptを有効にしてください
 					<td><c:out value="${obj.reservedPerson.phoneNumber }"/>)</td>
 					</tr>
 					</c:forEach>
-					</tbody>
+					</tbody></table>
 
 </div>
 </div>
@@ -64,7 +64,7 @@ Javascriptを有効にしてください
 <tr>
 <td>
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
-<input class="submit" type = "submit" value = "削除する"></form>
+<input class="submit" type = "submit" value = "削除する"></form>　　　
 </td>
 <td>
 <form action = "resourcedetails" method = "get">
