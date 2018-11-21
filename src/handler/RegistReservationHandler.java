@@ -65,6 +65,10 @@ public class RegistReservationHandler implements Handler {
 		return SHOW_RESERVATION_DETAILS_SERVLET;
 	}
 
+	/**
+	 * 登録のバリデーションチェックを行うメソッド
+	 * @return 正しく入力されていた場合true
+	 */
 	private boolean validate() {
 		CommonValidator commonValidator = new CommonValidator();
 		String usageStartTimeStr = _request.getParameter("usageStartTime");
@@ -163,6 +167,10 @@ public class RegistReservationHandler implements Handler {
 		return true;
 	}
 
+	/**
+	 * 登録可能かチェックするメソッド
+	 * @return 登録可能な場合trueを返却
+	 */
 	private boolean reservable() {
 		String usageDate = _reservation.getUsageDate();
 		TimeDto usageStartTime = _reservation.getUsageStartTime();
@@ -230,6 +238,10 @@ public class RegistReservationHandler implements Handler {
 		return true;
 	}
 
+	/**
+	 * 登録処理を行うメソッド
+	 * @return 正常に登録できた場合true
+	 */
 	private boolean regist(){
 		try{
 		RegistReservationService registReservationService = new RegistReservationService(_reservation);

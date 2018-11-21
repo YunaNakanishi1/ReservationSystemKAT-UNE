@@ -107,7 +107,6 @@ public class ShowResourceListHandler implements Handler{
         List<String> statusList = new ArrayList<>();
         //現在時刻取得
         Date now = Calendar.getInstance().getTime();
-        System.out.println("now"+now);
 
 
         for (Resource resource : resourceList) {

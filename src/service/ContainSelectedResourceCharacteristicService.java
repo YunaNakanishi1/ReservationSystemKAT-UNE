@@ -41,7 +41,6 @@ public class ContainSelectedResourceCharacteristicService implements Service{
 
 			for (String facilityId : _facilityIdList) {
 				for (FacilityDto facility : _facilityList) {
-					System.out.println(facilityId);
 					if (facilityId.equals(facility.getFacilityId())) {
 						count++;
 						break;

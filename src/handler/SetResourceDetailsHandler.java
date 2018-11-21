@@ -76,7 +76,6 @@ public class SetResourceDetailsHandler implements Handler {
 				}else{
 				    //_typeに異常な値を検知
 					_log.error("wrong type");
-					System.out.println(_type+"a");
 					return ERROR_PAGE;
 				}
 
