@@ -163,7 +163,7 @@ function hyoji(notView)
 <td class="one" class="dialog"></td>
     <td class="right2">
     <hr>
-    <input type="text" name=""> <input class="button" type = "button" value = "検索">
+    <input type="text" id="SearchText" name=""> <input class="button" type = "button" onclick="selectSearchButton()" value = "検索">
     <br>
     <select id="userList" size="5" style="width:200px">
     </select>
@@ -211,6 +211,30 @@ function hyoji(notView)
 			coUserName.value ="-----";
 			coUserId.value = "";
     	}
+    	function selectSearchButton(){
+    		var selectBox = document.getElementById("userList");
+    	      var items = selectBox.children;
+    	      var value = document.getElementById("SearchText").value;
+
+    	      if (value === "") {
+    	         for(var i=items.length-1; i>=0; i--){
+    	            items[i].style.display = "";
+    	            items[i].selected = false;
+    	         }
+    	         return;
+    	      }
+
+    	      var reg = new RegExp(".*"+value+".*","i");
+    	      for(var i=items.length-1; i>=0; i--){
+    	         if ( items[i].textContent.match(reg) ){
+    	            items[i].style.display = "";
+    	         } else {
+    	            items[i].style.display = "none";
+    	         }
+    	         items[i].selected = false;
+    	      }
+    	}
+
 
 </script>
 <tr>
