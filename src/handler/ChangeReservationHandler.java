@@ -131,7 +131,7 @@ public class ChangeReservationHandler implements Handler {
 			int usageStartMinutes = Integer.parseInt(usageStartMinutesStr);
 			int usageEndMinutes = Integer.parseInt(usageEndMinutesStr);
 			int usageEndTime = usageStartMinutes + endSumMin;
-			System.out.println(usageStartMinutes + " " + endSumMin);
+
 			usageStartTimeForReservationChange = new TimeDto(usageStartMinutes);
 			//usageEndTimeForReservationChange = new TimeDto(usageEndMinutes);
 			usageEndTimeForReservationChange = new TimeDto(usageEndTime);
