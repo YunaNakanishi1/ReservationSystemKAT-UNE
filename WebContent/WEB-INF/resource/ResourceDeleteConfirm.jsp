@@ -56,8 +56,6 @@ Javascriptを有効にしてください
 </div>
 
 <br>
-<br>
-<br>
 <form action = "pushDeleteButtonOnResourcedeleteConfirm" method = "post">
 <input type="checkbox" name="checkedConfirm" value="checkedConfirm"/>確認しました
 <br>
