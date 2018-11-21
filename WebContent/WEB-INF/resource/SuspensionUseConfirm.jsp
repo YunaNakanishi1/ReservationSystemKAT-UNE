@@ -63,14 +63,18 @@ Javascriptを有効にしてください
 <input type="checkbox" name="checkedConfirm" value="checkedConfirm"/>確認しました
 <br>
 <br>
+<table class="table3">
+<tr>
 <td>
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit" type = "submit" value = "削除する"></form>
-
+</td>
+<td>
 <form action = "resourceregist" method = "get">
 <input type="hidden" name="resourceId" value = "<c:out value = "${resourceId}"/>" >
 <input class="submit" type = "submit" value = "戻る"></form></td>
-
+</tr>
+</table>
 </div>
 <br>
 <br>
