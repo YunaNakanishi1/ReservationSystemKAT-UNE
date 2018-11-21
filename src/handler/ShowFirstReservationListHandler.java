@@ -34,7 +34,7 @@ public class ShowFirstReservationListHandler implements Handler {
 		String usageDateForReservationList = new SimpleDateFormat("yyyy/MM/dd").format(Calendar.getInstance().getTime());
 
 		session.setAttribute("reservationListForReservationList", new ArrayList<ReservationDto>());
-		session.setAttribute("usageDateForResourceSelect", usageDateForReservationList);
+		session.setAttribute("usageDateForReservationList", usageDateForReservationList);
 		session.setAttribute("usageStartTimeForReservationList", new TimeDto(0, 0));
 		session.setAttribute("usageEndTimeForReservationList", new TimeDto(24, 0));
 		session.setAttribute("displayOnlyMyReservation", true);
