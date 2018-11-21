@@ -38,6 +38,7 @@ Javascriptを有効にしてください
 <p>リソースの利用停止期間を適用すると以下の予約は強制的に削除されます。</p>
 <p><font color="red">この操作は取り消せません。</font></p>
 <br>
+<p>【リソースを使用している予約】</p>
 <div class="scroll3" style="width:800px;height:200px;margin:0 auto;">
 <table>
 			<tbody>
